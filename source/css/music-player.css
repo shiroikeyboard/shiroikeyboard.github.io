@@ -1,0 +1,261 @@
+/* 音乐播放器容器 */
+.music-player {
+  position: fixed;
+  right: 20px;
+  bottom: 20px;
+  width: 300px;
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  z-index: 999;
+  transition: all 0.3s ease;
+  overflow: hidden;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", sans-serif;
+}
+
+/* 暗色模式适配 */
+[data-user-color-scheme='dark'] .music-player {
+  background: rgba(30, 30, 30, 0.95);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+}
+
+/* 播放器头部 */
+.player-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 16px;
+  background: rgba(0, 0, 0, 0.05);
+  cursor: pointer;
+}
+
+[data-user-color-scheme='dark'] .player-header {
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.player-title {
+  font-weight: 600;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.player-title i {
+  font-size: 16px;
+}
+
+.player-actions {
+  display: flex;
+  gap: 8px;
+}
+
+.player-btn {
+  background: none;
+  border: none;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: inherit;
+  transition: all 0.2s;
+}
+
+.player-btn:hover {
+  background: rgba(0, 0, 0, 0.1);
+}
+
+[data-user-color-scheme='dark'] .player-btn:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+/* 播放器内容 */
+.player-content {
+  padding: 16px;
+}
+
+.now-playing {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.album-cover {
+  width: 60px;
+  height: 60px;
+  border-radius: 8px;
+  object-fit: cover;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.track-info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.track-name {
+  font-weight: 600;
+  font-size: 15px;
+  margin-bottom: 4px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.track-artist {
+  font-size: 13px;
+  color: #666;
+}
+
+[data-user-color-scheme='dark'] .track-artist {
+  color: #aaa;
+}
+
+/* 进度条 */
+.progress-container {
+  margin: 12px 0;
+}
+
+.progress-bar {
+  height: 4px;
+  background: rgba(0, 0, 0, 0.1);
+  border-radius: 2px;
+  margin-bottom: 4px;
+  cursor: pointer;
+}
+
+[data-user-color-scheme='dark'] .progress-bar {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.progress {
+  height: 100%;
+  background: #3b82f6;
+  border-radius: 2px;
+  width: 0%;
+  transition: width 0.1s;
+}
+
+.time-display {
+  display: flex;
+  justify-content: space-between;
+  font-size: 11px;
+  color: #888;
+}
+
+/* 控制按钮 */
+.controls {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 12px;
+}
+
+.control-btn {
+  background: none;
+  border: none;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: inherit;
+  transition: all 0.2s;
+}
+
+.control-btn:hover {
+  background: rgba(0, 0, 0, 0.1);
+}
+
+[data-user-color-scheme='dark'] .control-btn:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.play-pause-btn {
+  width: 40px;
+  height: 40px;
+  background: #3b82f6;
+  color: white;
+}
+
+.play-pause-btn:hover {
+  background: #2563eb;
+}
+
+/* 播放列表 */
+.playlist {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.3s ease;
+  margin-top: 0;
+}
+
+.playlist.show {
+  max-height: 300px;
+  margin-top: 12px;
+}
+
+.playlist-item {
+  display: flex;
+  align-items: center;
+  padding: 8px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.2s;
+  gap: 10px;
+}
+
+.playlist-item:hover {
+  background: rgba(0, 0, 0, 0.05);
+}
+
+[data-user-color-scheme='dark'] .playlist-item:hover {
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.playlist-item.active {
+  background: rgba(59, 130, 246, 0.1);
+}
+
+.playlist-item-cover {
+  width: 40px;
+  height: 40px;
+  border-radius: 4px;
+  object-fit: cover;
+}
+
+.playlist-item-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.playlist-item-name {
+  font-size: 13px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.playlist-item-artist {
+  font-size: 11px;
+  color: #888;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+  .music-player {
+    width: calc(100% - 40px);
+    right: 20px;
+    left: 20px;
+  }
+}

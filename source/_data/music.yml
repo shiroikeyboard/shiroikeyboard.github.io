@@ -1,0 +1,11 @@
+music_player:
+  enable: true
+  playlist:
+    - name: "起风了"
+      artist: "买辣椒也用券"
+      url: "https://music.163.com/song/media/outer/url?id=1330348068.mp3"
+      cover: "https://p2.music.126.net/diGAyEmpymX8G7JcnElncQ==/109951163699673355.jpg"
+    - name: "晴天"
+      artist: "周杰伦"
+      url: "https://music.163.com/song/media/outer/url?id=386538.mp3"
+      cover: "https://p1.music.126.net/3hqcQrXZ39kDCCzV7QbZjA==/34084860473122.jpg"
