@@ -19,12 +19,12 @@
   <meta name="author" content="Hailin Zheng">
   <meta name="keywords" content="r1ng0rez wenling r00tk1t Solkatt p4y1oad">
   
-    <meta name="description" content="C++计算烷烃同分异构体数量(一) 引子 事出有因，吾今为高一学子，昨日于化学课习及有机物，恰留意到 烷烃 之 癸烷，以变幻无端之结构组合，竟得七十五种同分异构体，吾觉甚牛而逼之，然转念思之，彼言七十五种，果如是乎？”然吾性懒，弗能以草稿纸列诸般品类而逐个数之。忽又转念，可借算法以行计算，遂成此文。 smalltalk: 此文因吾水平尚浅（方入 OI 约两月且资质驽钝），故于其中借助 DeepSe">
+    <meta name="description" content="C++计算烷烃同分异构体数量(一)引子事出有因，吾今为高一学子，昨日于化学课习及有机物，恰留意到 烷烃 之 癸烷，以变幻无端之结构组合，竟得七十五种同分异构体，吾觉甚牛而逼之，然转念思之，彼言七十五种，果如是乎？”然吾性懒，弗能以草稿纸列诸般品类而逐个数之。忽又转念，可借算法以行计算，遂成此文。 smalltalk: 此文因吾水平尚浅（方入 OI 约两月且资质驽钝），故于其中借助 DeepSeek">
 <meta property="og:type" content="article">
 <meta property="og:title" content="C++计算烷烃同分异构体数量(一)">
 <meta property="og:url" content="https://p4y1oad.github.io/2025/05/10/%E9%80%9A%E8%BF%87C++%E5%AE%9E%E7%8E%B0%E8%AE%A1%E7%AE%97%E7%83%B7%E7%83%83%E5%90%8C%E5%88%86%E5%BC%82%E6%9E%84%E4%BD%93%E6%95%B0%E9%87%8F/index.html">
 <meta property="og:site_name" content="P4y1oad&#39;s Blog">
-<meta property="og:description" content="C++计算烷烃同分异构体数量(一) 引子 事出有因，吾今为高一学子，昨日于化学课习及有机物，恰留意到 烷烃 之 癸烷，以变幻无端之结构组合，竟得七十五种同分异构体，吾觉甚牛而逼之，然转念思之，彼言七十五种，果如是乎？”然吾性懒，弗能以草稿纸列诸般品类而逐个数之。忽又转念，可借算法以行计算，遂成此文。 smalltalk: 此文因吾水平尚浅（方入 OI 约两月且资质驽钝），故于其中借助 DeepSe">
+<meta property="og:description" content="C++计算烷烃同分异构体数量(一)引子事出有因，吾今为高一学子，昨日于化学课习及有机物，恰留意到 烷烃 之 癸烷，以变幻无端之结构组合，竟得七十五种同分异构体，吾觉甚牛而逼之，然转念思之，彼言七十五种，果如是乎？”然吾性懒，弗能以草稿纸列诸般品类而逐个数之。忽又转念，可借算法以行计算，遂成此文。 smalltalk: 此文因吾水平尚浅（方入 OI 约两月且资质驽钝），故于其中借助 DeepSeek">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2025-05-10T09:42:49.000Z">
 <meta property="article:modified_time" content="2025-05-16T11:29:22.835Z">
@@ -298,12 +298,9 @@
             
               <div class="markdown-body">
                 
-                <h2 id="C-计算烷烃同分异构体数量-一">C++计算烷烃同分异构体数量(一)</h2>
-<h3 id="引子">引子</h3>
-<p>事出有因，吾今为高一学子，昨日于化学课习及有机物，恰留意到 <code>烷烃</code> 之 <code>癸烷</code>，以变幻无端之结构组合，竟得七十五种同分异构体，吾觉甚牛而逼之，然转念思之，彼言七十五种，果如是乎？”然吾性懒，弗能以草稿纸列诸般品类而逐个数之。忽又转念，可借算法以行计算，遂成此文。</p>
-<h6 id="smalltalk-此文因吾水平尚浅（方入-OI-约两月且资质驽钝），故于其中借助-DeepSeek-以辅助算法之设计。">smalltalk: 此文因吾水平尚浅（方入 OI 约两月且资质驽钝），故于其中借助 DeepSeek 以辅助算法之设计。</h6>
-<h3 id="初步思考">初步思考</h3>
-<p>首先来看看我们要通过算法实现计算烷烃同分异构体数量需要哪些基础知识(部分参考来源于DeepSeek)</p>
+                <h2 id="C-计算烷烃同分异构体数量-一"><a href="#C-计算烷烃同分异构体数量-一" class="headerlink" title="C++计算烷烃同分异构体数量(一)"></a>C++计算烷烃同分异构体数量(一)</h2><h3 id="引子"><a href="#引子" class="headerlink" title="引子"></a>引子</h3><p>事出有因，吾今为高一学子，昨日于化学课习及有机物，恰留意到 <code>烷烃</code> 之 <code>癸烷</code>，以变幻无端之结构组合，竟得七十五种同分异构体，吾觉甚牛而逼之，然转念思之，彼言七十五种，果如是乎？”然吾性懒，弗能以草稿纸列诸般品类而逐个数之。忽又转念，可借算法以行计算，遂成此文。</p>
+<h6 id="smalltalk-此文因吾水平尚浅（方入-OI-约两月且资质驽钝），故于其中借助-DeepSeek-以辅助算法之设计。"><a href="#smalltalk-此文因吾水平尚浅（方入-OI-约两月且资质驽钝），故于其中借助-DeepSeek-以辅助算法之设计。" class="headerlink" title="smalltalk: 此文因吾水平尚浅（方入 OI 约两月且资质驽钝），故于其中借助 DeepSeek 以辅助算法之设计。"></a>smalltalk: 此文因吾水平尚浅（方入 OI 约两月且资质驽钝），故于其中借助 DeepSeek 以辅助算法之设计。</h6><h3 id="初步思考"><a href="#初步思考" class="headerlink" title="初步思考"></a>初步思考</h3><p>首先来看看我们要通过算法实现计算烷烃同分异构体数量需要哪些基础知识(部分参考来源于DeepSeek)</p>
+<div class="table-container">
 <table>
 <thead>
 <tr>
@@ -330,55 +327,46 @@
 </tr>
 </tbody>
 </table>
+</div>
 <p>进行进一步分析，得出的利用思路如下</p>
-<h4 id="1-化学知识利用"><strong>1. 化学知识利用</strong></h4>
-<ul>
+<h4 id="1-化学知识利用"><a href="#1-化学知识利用" class="headerlink" title="1. 化学知识利用"></a><strong>1. 化学知识利用</strong></h4><ul>
 <li><strong>烷烃通式</strong>：C<strong>n</strong>H<strong>2n+2</strong></li>
-<li><strong>碳骨架规则</strong>：
-<ul>
+<li><strong>碳骨架规则</strong>：<ul>
 <li>每个碳原子（C）必须形成 <strong>4 个共价键</strong>（与其他 C 或 H 原子连接）</li>
 <li>氢原子（H）只能形成 <strong>1 个键</strong>，且不参与骨架构建</li>
 </ul>
 </li>
 </ul>
-<h4 id="2-简化问题"><strong>2. 简化问题</strong></h4>
-<ul>
+<h4 id="2-简化问题"><a href="#2-简化问题" class="headerlink" title="2. 简化问题"></a><strong>2. 简化问题</strong></h4><ul>
 <li>仅计算 <strong>碳骨架的非环状结构</strong>（不考虑立体异构或复杂对称性）</li>
 <li>手动预存小规模 <strong>n</strong> 的异构体数量（n≤10），避免复杂算法</li>
 </ul>
-<h4 id="3-编程实现"><strong>3. 编程实现</strong></h4>
-<ul>
+<h4 id="3-编程实现"><a href="#3-编程实现" class="headerlink" title="3. 编程实现"></a><strong>3. 编程实现</strong></h4><ul>
 <li><strong>输入验证</strong>：检查 <em>H</em> 是否等于 2C+2</li>
 <li><strong>查表法</strong>：直接返回预计算的异构体数量（适用于 C≤10）</li>
 <li><strong>逐步扩展</strong>：未来可升级到递归生成碳骨架</li>
 </ul>
-<h3 id="具体分析">具体分析</h3>
-<ol>
-<li>
-<p><strong>输入验证</strong></p>
+<h3 id="具体分析"><a href="#具体分析" class="headerlink" title="具体分析"></a>具体分析</h3><ol>
+<li><p><strong>输入验证</strong></p>
 <p>我们先检查输入的<code>H</code>的数量是否满足<code>2C+2</code>，否则进行错误回显</p>
 </li>
-<li>
-<p>查表法</p>
+<li><p>查表法</p>
 <ul>
 <li>使用 <code>map</code> 存储 n=1∼10<em>n</em>=1∼10 的异构体数量（刚好到癸烷）</li>
-<li>例如：
-<ul>
+<li>例如：<ul>
 <li><strong>n=4</strong> -&gt; 2种异构体（正丁烷、异丁烷）</li>
 <li><strong>n=5</strong> -&gt; 3种异构体</li>
 </ul>
 </li>
 </ul>
 </li>
-<li>
-<p>输出结果</p>
+<li><p>输出结果</p>
 <ul>
 <li>直接返回表中对应的异构体数量，若 n&gt;10 则提示不支持</li>
 </ul>
 </li>
 </ol>
-<p>现在是最终优化过的代码</p>
-<div class="code-wrapper"><pre><code class="hljs C++"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;iostream&gt;</span></span>
+<p>现在是最终优化过的代码<br><div class="code-wrapper"><pre><code class="hljs C++"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;iostream&gt;</span></span>
 <span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;bits/stdc++.h&gt;</span></span>
 <span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;map&gt;</span></span>
 <span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> std;
@@ -420,7 +408,7 @@
         <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;Error: Carbon count must be 1~10 (this program is for beginners).\n&quot;</span>);
   &#125;
   <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
-&#125;</code></pre></div>
+&#125;</code></pre></div></p>
 <p>当然，我们只能计算碳原子数量为10的烷烃，表现出我们的功能完全不够强大，我也思考了关于后续补充的一些其他想法，诸如升级递归算法、引入图论(马上把基础打完滚去学树)甚至是结合动态规划或生成函数优化计算(需学习组合数学)，后续我还会更新的 敬请期待！</p>
 <script src="https://giscus.app/client.js" data-repo="p4y1oad/p4y1oad.github.io" data-repo-id="R_kgDONzaTTQ" data-category="Announcements" data-category-id="DIC_kwDONzaTTc4Cpqn7" data-mapping="pathname" data-strict="0" data-reactions-enabled="1" data-emit-metadata="0" data-input-position="bottom" data-theme="preferred_color_scheme" data-lang="zh-CN" crossorigin="anonymous" async>
 </script>
@@ -523,8 +511,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2025/05/10/Learning-Note-on-Attention-is-All-You-Need/" title="Learning Note on Attention is All You Need">
-                        <span class="hidden-mobile">Learning Note on Attention is All You Need</span>
+                      <a href="/2025/04/19/Basic-ROP-Learning/" title="Basic ROP Learning">
+                        <span class="hidden-mobile">Basic ROP Learning</span>
                         <span class="visible-mobile">Next</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>

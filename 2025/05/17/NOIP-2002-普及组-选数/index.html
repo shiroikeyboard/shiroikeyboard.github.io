@@ -19,12 +19,12 @@
   <meta name="author" content="Hailin Zheng">
   <meta name="keywords" content="r1ng0rez wenling r00tk1t Solkatt p4y1oad">
   
-    <meta name="description" content="[NOIP 2002 普及组] 选数 感觉过于标题的意思了，其实是由这道题来引出深度优先搜索(DFS) 首先看看题目描述： 题目描述 已知 $\large n$ 个整数 $x_1,x_2,\cdots,x_n$，以及$1$个整数$k$($k&lt;n$)。从$n$ 个整数中任选 $k$个整数相加，可分别得到一系列的和。例如当$n&#x3D;4$，$k&#x3D;3$，$4$ 个整数分别为 $3,7,12,19$ 时，">
+    <meta name="description" content="[NOIP 2002 普及组] 选数感觉过于标题的意思了，其实是由这道题来引出深度优先搜索(DFS) 首先看看题目描述：题目描述已知 $\large n$ 个整数 $x_1,x_2,\cdots,x_n$，以及$1$个整数$k$($k&lt;n$)。从$n$ 个整数中任选 $k$个整数相加，可分别得到一系列的和。例如当$n&#x3D;4$，$k&#x3D;3$，$4$ 个整数分别为 $3,7,12,19$ 时，可得全">
 <meta property="og:type" content="article">
 <meta property="og:title" content="由一道题引发对DFS的思考">
 <meta property="og:url" content="https://p4y1oad.github.io/2025/05/17/NOIP-2002-%E6%99%AE%E5%8F%8A%E7%BB%84-%E9%80%89%E6%95%B0/index.html">
 <meta property="og:site_name" content="P4y1oad&#39;s Blog">
-<meta property="og:description" content="[NOIP 2002 普及组] 选数 感觉过于标题的意思了，其实是由这道题来引出深度优先搜索(DFS) 首先看看题目描述： 题目描述 已知 $\large n$ 个整数 $x_1,x_2,\cdots,x_n$，以及$1$个整数$k$($k&lt;n$)。从$n$ 个整数中任选 $k$个整数相加，可分别得到一系列的和。例如当$n&#x3D;4$，$k&#x3D;3$，$4$ 个整数分别为 $3,7,12,19$ 时，">
+<meta property="og:description" content="[NOIP 2002 普及组] 选数感觉过于标题的意思了，其实是由这道题来引出深度优先搜索(DFS) 首先看看题目描述：题目描述已知 $\large n$ 个整数 $x_1,x_2,\cdots,x_n$，以及$1$个整数$k$($k&lt;n$)。从$n$ 个整数中任选 $k$个整数相加，可分别得到一系列的和。例如当$n&#x3D;4$，$k&#x3D;3$，$4$ 个整数分别为 $3,7,12,19$ 时，可得全">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2025-05-17T01:47:45.000Z">
 <meta property="article:modified_time" content="2025-05-17T05:31:13.881Z">
@@ -298,82 +298,60 @@
             
               <div class="markdown-body">
                 
-                <h2 id="NOIP-2002-普及组-选数">[NOIP 2002 普及组] 选数</h2>
-<p>感觉过于标题的意思了，其实是由这道题来引出深度优先搜索(DFS)</p>
-<h2 id="首先看看题目描述：">首先看看题目描述：</h2>
-<h3 id="题目描述">题目描述</h3>
-<p>已知 $\large n$ 个整数 $x_1,x_2,\cdots,x_n$，以及$1$个整数$k$($k&lt;n$)。从$n$ 个整数中任选 $k$个整数相加，可分别得到一系列的和。例如当$n=4$，$k=3$，$4$ 个整数分别为 $3,7,12,19$ 时，可得全部的组合与它们的和为：</p>
+                <h2 id="NOIP-2002-普及组-选数"><a href="#NOIP-2002-普及组-选数" class="headerlink" title="[NOIP 2002 普及组] 选数"></a>[NOIP 2002 普及组] 选数</h2><p>感觉过于标题的意思了，其实是由这道题来引出深度优先搜索(DFS)</p>
+<h2 id="首先看看题目描述："><a href="#首先看看题目描述：" class="headerlink" title="首先看看题目描述："></a>首先看看题目描述：</h2><h3 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h3><p>已知 $\large n$ 个整数 $x_1,x_2,\cdots,x_n$，以及$1$个整数$k$($k&lt;n$)。从$n$ 个整数中任选 $k$个整数相加，可分别得到一系列的和。例如当$n=4$，$k=3$，$4$ 个整数分别为 $3,7,12,19$ 时，可得全部的组合与它们的和为：</p>
 <p>$3+7+12=22$</p>
 <p>$3+7+19=29$</p>
 <p>$7+12+19=38$</p>
 <p>$3+12+19=34$</p>
 <p>现在，要求你计算出和为素数共有多少种。</p>
 <p>例如上例，只有一种的和为素数：$3+7+19=29$。</p>
-<h3 id="输入格式">输入格式</h3>
-<p>第一行两个空格隔开的整数 $n,k$（$1 \le n \le 20$，$k&lt;n$）。</p>
+<h3 id="输入格式"><a href="#输入格式" class="headerlink" title="输入格式"></a>输入格式</h3><p>第一行两个空格隔开的整数 $n,k$（$1 \le n \le 20$，$k&lt;n$）。</p>
 <p>第二行 $n$ 个整数，分别为 $x_1,x_2,\cdots,x_n$（$1 \le x_i \le 5\times 10^6$）。</p>
-<h3 id="输出格式">输出格式</h3>
-<p>输出一个整数，表示种类数。</p>
-<h3 id="输入输出样例-1">输入输出样例 #1</h3>
-<h4 id="输入-1">输入 #1</h4>
-<div class="code-wrapper"><pre><code class="hljs basic"><span class="hljs-symbol">4 </span><span class="hljs-number">3</span>
+<h3 id="输出格式"><a href="#输出格式" class="headerlink" title="输出格式"></a>输出格式</h3><p>输出一个整数，表示种类数。</p>
+<h3 id="输入输出样例-1"><a href="#输入输出样例-1" class="headerlink" title="输入输出样例 #1"></a>输入输出样例 #1</h3><h4 id="输入-1"><a href="#输入-1" class="headerlink" title="输入 #1"></a>输入 #1</h4><div class="code-wrapper"><pre><code class="hljs basic"><span class="hljs-symbol">4 </span><span class="hljs-number">3</span>
 <span class="hljs-symbol">3 </span><span class="hljs-number">7</span> <span class="hljs-number">12</span> <span class="hljs-number">19</span></code></pre></div>
-<h4 id="输出-1">输出 #1</h4>
-<div class="code-wrapper"><pre><code class="hljs">1</code></pre></div>
-<h3 id="说明-提示">说明/提示</h3>
-<p><strong>【题目来源】</strong></p>
+<h4 id="输出-1"><a href="#输出-1" class="headerlink" title="输出 #1"></a>输出 #1</h4><div class="code-wrapper"><pre><code class="hljs">1</code></pre></div>
+<h3 id="说明-提示"><a href="#说明-提示" class="headerlink" title="说明/提示"></a>说明/提示</h3><p><strong>【题目来源】</strong></p>
 <p>NOIP 2002 普及组第二题</p>
 <hr>
-<h2 id="具体分析：">具体分析：</h2>
-<p>主要：是从给定的 <em>n</em> 个整数中任选 <em>k</em> 个整数进行相加，然后统计这些和中为素数的组合的数量。</p>
-<h3 id="输入输出分析">输入输出分析</h3>
-<ul>
-<li>
-<p><strong>输入</strong></p>
+<h2 id="具体分析："><a href="#具体分析：" class="headerlink" title="具体分析："></a>具体分析：</h2><p>主要：是从给定的 <em>n</em> 个整数中任选 <em>k</em> 个整数进行相加，然后统计这些和中为素数的组合的数量。</p>
+<h3 id="输入输出分析"><a href="#输入输出分析" class="headerlink" title="输入输出分析"></a>输入输出分析</h3><ul>
+<li><p><strong>输入</strong></p>
 <ul>
 <li>第一行包含两个用空格隔开的整数 <em>n</em> 和 <em>k</em>，其中 1≤<em>n</em>≤20 且 <em>k</em>&lt;<em>n</em>。<em>n</em> 表示整数的总数，<em>k</em> 表示需要选取的整数个数。</li>
 <li>第二行包含 <em>n</em> 个整数 <em>x</em>1,<em>x</em>2,⋯,<em>x**n</em>，每个整数的范围是 1≤<em>x**i</em>≤5×106。</li>
 </ul>
 </li>
-<li>
-<p><strong>输出</strong></p>
+<li><p><strong>输出</strong></p>
 </li>
-<li>
-<p>输出一个整数，表示和为素数的组合的种类数。</p>
-</li>
+<li>输出一个整数，表示和为素数的组合的种类数。</li>
 </ul>
-<h3 id="问题求解思路：">问题求解思路：</h3>
-<p>要解决这个问题，主要分为以下两个关键按步骤：</p>
+<h3 id="问题求解思路："><a href="#问题求解思路：" class="headerlink" title="问题求解思路："></a>问题求解思路：</h3><p>要解决这个问题，主要分为以下两个关键按步骤：</p>
 <ul>
 <li>找出n个整数中选取的k个整数的所有组合并求和</li>
 <li>判断每个组合的和是否是素数</li>
 </ul>
 <ol>
-<li>
-<h4 id="组合选取">组合选取</h4>
-<p>对于n的范围较小 (1≤<em>n</em>≤20)，我们可以使用深度优先搜索算法来枚举所有可能的组合。在此笔者阐述以下什么是深度优先搜素(DFS)算法</p>
-<h6 id="tips-佬们如果已经了解相关内容可用右侧的那个什么栏进行跳过">tips: 佬们如果已经了解相关内容可用右侧的那个什么栏进行跳过</h6>
-<p>深度优先搜索是一种通过递归的方式遍历所有可能状态或搜索树/图的算法，非常适合解决组合问题，其核心思想是 <strong>尽可能深地探索当前路径，直到无法继续前进时才回溯</strong>。深度优先搜索具有以下三个特点：</p>
+<li><h4 id="组合选取"><a href="#组合选取" class="headerlink" title="组合选取"></a>组合选取</h4><p>对于n的范围较小 (1≤<em>n</em>≤20)，我们可以使用深度优先搜索算法来枚举所有可能的组合。在此笔者阐述以下什么是深度优先搜素(DFS)算法</p>
+<h6 id="tips-佬们如果已经了解相关内容可用右侧的那个什么栏进行跳过"><a href="#tips-佬们如果已经了解相关内容可用右侧的那个什么栏进行跳过" class="headerlink" title="tips: 佬们如果已经了解相关内容可用右侧的那个什么栏进行跳过"></a>tips: 佬们如果已经了解相关内容可用右侧的那个什么栏进行跳过</h6><p>深度优先搜索是一种通过递归的方式遍历所有可能状态或搜索树/图的算法，非常适合解决组合问题，其核心思想是 <strong>尽可能深地探索当前路径，直到无法继续前进时才回溯</strong>。深度优先搜索具有以下三个特点：</p>
 <ul>
 <li>递归实现：纯天然适合递归（函数调用栈自动处理回溯）</li>
 <li>回溯机制：当一条路走到尽头时，返回上一个分叉点</li>
 <li>时间复杂度：通常为$O(b**d)$ ，b 是分支因子，d是最大深度</li>
 </ul>
-<p><em><strong>结合例题：在全排列问题中的应用</strong></em><br>
-<a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P1706">P1706 全排列问题</a></p>
+<p><strong><em>结合例题：在全排列问题中的应用</em></strong><br><a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P1706">P1706 全排列问题</a></p>
 </li>
 </ol>
 <ul>
-<li>
-<p><strong>问题分析</strong></p>
+<li><p><strong>问题分析</strong></p>
 <ul>
 <li>目标：生成1到n的所有排列（共n!种）</li>
 <li>关键约束：每个字只能使用一次</li>
 <li>输出要求：按字典顺序排列</li>
 </ul>
 </li>
-<li>
-<p><strong>DFS解决思路：</strong></p>
+<li><p><strong>DFS解决思路：</strong></p>
 <p>(1) <strong>状态标识</strong>：</p>
 <ul>
 <li>当前已选择的数字序列<code>path</code></li>
@@ -387,8 +365,7 @@
 </ul>
 </li>
 </ul>
-<p>以下是我的代码实现，但是写了太垃圾用AI优化了以下</p>
-<div class="code-wrapper"><pre><code class="hljs C++"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;cstdio&gt;</span></span>
+<p>以下是我的代码实现，但是写了太垃圾用AI优化了以下<br><div class="code-wrapper"><pre><code class="hljs C++"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;cstdio&gt;</span></span>
 <span class="hljs-type">int</span> used[<span class="hljs-number">15</span>];      <span class="hljs-comment">// 标记数字是否使用过</span>
 <span class="hljs-type">int</span> perm[<span class="hljs-number">15</span>];      <span class="hljs-comment">// 当前排列</span>
 <span class="hljs-type">int</span> n;
@@ -422,8 +399,8 @@
     <span class="hljs-built_in">scanf</span>(<span class="hljs-string">&quot;%d&quot;</span>, &amp;n);
     <span class="hljs-built_in">dfs</span>(<span class="hljs-number">1</span>); <span class="hljs-comment">// 从第1个位置开始生成</span>
     <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
-&#125;</code></pre></div>
-<p><strong>这里我给出一个DFS执行流程图（以n=3为例）</strong></p>
+&#125;</code></pre></div></p>
+<p>   <strong>这里我给出一个DFS执行流程图（以n=3为例）</strong></p>
 <pre><code class=" mermaid">graph TD
     A[开始] --&gt; B[选择1]
     B --&gt; C[选择2]
@@ -442,27 +419,20 @@
     Q --&gt; U[选择2] --&gt; V[输出3,2,1]</code></pre>
 <p><strong>然后对其复杂度进行分析</strong></p>
 <ul>
-<li>
-<p>时间复杂度：$O(b**d)$</p>
+<li><p>时间复杂度：$O(b**d)$ </p>
 <p>(共有n!种排列方案，每种排列生成都需要花费O(n)的时间)</p>
 </li>
-<li>
-<p>同时我们又引入了<strong>空间复杂度</strong>的概念：O(n) =&gt; 递归栈最大深度为n</p>
+<li><p>同时我们又引入了<strong>空间复杂度</strong>的概念：O(n) =&gt; 递归栈最大深度为n</p>
 </li>
 </ul>
 <hr>
-<ol start="2">
-<li>
-<h4 id="素数判断">素数判断</h4>
-</li>
+<ol>
+<li><h4 id="素数判断"><a href="#素数判断" class="headerlink" title="素数判断"></a>素数判断</h4></li>
 </ol>
 <p>了解了DFS之后，现在我们就来思考如何去处理素数判断逻辑，根据我几乎忘得差不多的小学数学来看，素数是指大于1且只能被1和自生整除的正整数，因此要设计判断一个数是否为素数，我们可以从2开始到 <strong>$\sqrt[2]{n}$</strong> 进行遍历，如果该数字能被其中任何一个整除，则这个数不是素数，反之同理</p>
-<h2 id="代码实现思路">代码实现思路</h2>
-<p>根据上文我们得知，代码主要有三个部分组成：素数判断函数、深度优先搜索函数和主函数组成</p>
-<h4 id="各部分代码实现与解读">各部分代码实现与解读</h4>
-<ol>
-<li>
-<p><strong>素数判断函数</strong></p>
+<h2 id="代码实现思路"><a href="#代码实现思路" class="headerlink" title="代码实现思路"></a>代码实现思路</h2><p>根据上文我们得知，代码主要有三个部分组成：素数判断函数、深度优先搜索函数和主函数组成</p>
+<h4 id="各部分代码实现与解读"><a href="#各部分代码实现与解读" class="headerlink" title="各部分代码实现与解读"></a>各部分代码实现与解读</h4><ol>
+<li><p><strong>素数判断函数</strong></p>
 <ul>
 <li>首先，我们需要判断接受的数字n是否小于2，如果小于2就直接<code>false</code>（因为我们是从2遍历到 $\sqrt[2]{n}$ ）且定义上其大小要求大于1</li>
 <li>其次从2开始到$\sqrt[2]{n}$进行遍历，如果<code>n</code>能被其中任意一个整数整除，则返回<code>false</code>表示该数不是素数</li>
@@ -477,8 +447,7 @@
  <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;
 &#125;</code></pre></div>
 </li>
-<li>
-<p><strong>深度优先搜索函数<code>dfs</code></strong></p>
+<li><p><strong>深度优先搜索函数<code>dfs</code></strong> </p>
 <ul>
 <li><code>start</code> 表示当前搜索的起始位置，<code>cnt</code> 表示已经选取的数的个数，<code>sum</code> 表示当前选取的数的和。</li>
 <li>当 <code>cnt</code> 等于 <em>k</em> 时，说明已经选取了 <em>k</em> 个数，此时调用 <code>isPrime</code> 函数判断 <code>sum</code> 是否为素数，如果是则将结果 <code>ans</code> 加 1。</li>
@@ -486,8 +455,7 @@
 </ul>
 </li>
 </ol>
-<p>实现代码</p>
-<div class="code-wrapper"><pre><code class="hljs C++"><span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">dfs</span><span class="hljs-params">(<span class="hljs-type">int</span> start, <span class="hljs-type">int</span> cnt, <span class="hljs-type">int</span> sum)</span> </span>&#123;
+<p>实现代码<br><div class="code-wrapper"><pre><code class="hljs C++"><span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">dfs</span><span class="hljs-params">(<span class="hljs-type">int</span> start, <span class="hljs-type">int</span> cnt, <span class="hljs-type">int</span> sum)</span> </span>&#123;
     <span class="hljs-keyword">if</span> (cnt == k) &#123;
         <span class="hljs-keyword">if</span> (<span class="hljs-built_in">isPrime</span>(sum)) &#123;
             ans++;
@@ -497,18 +465,12 @@
     <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = start; i &lt; n; i++) &#123;
         <span class="hljs-built_in">dfs</span>(i + <span class="hljs-number">1</span>, cnt + <span class="hljs-number">1</span>, sum + nums[i]);
     &#125;
-&#125;</code></pre></div>
-<ol start="3">
-<li><strong>主函数<code>main</code></strong>
-<ul>
+&#125;</code></pre></div></p>
+<ol>
+<li><strong>主函数<code>main</code></strong> <ul>
 <li>首先读取输入的<code>k</code>和<code>n</code>，以及<code>n</code>个整数</li>
 <li>调用<code>dfs</code>函数开始搜索，将<code>start</code>、<code>cnt</code>和<code>sum</code>都初始化为0</li>
-<li>最后输出结果<code>ans</code><br>
-实现代码</li>
-</ul>
-</li>
-</ol>
-<div class="code-wrapper"><pre><code class="hljs C++"><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span> </span>&#123;
+<li>最后输出结果<code>ans</code><br>实现代码<div class="code-wrapper"><pre><code class="hljs C++"><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span> </span>&#123;
     cin &gt;&gt; n &gt;&gt; k;
     <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">0</span>; i &lt; n; i++) &#123;
         cin &gt;&gt; nums[i];
@@ -517,6 +479,10 @@
     cout &lt;&lt; ans &lt;&lt; endl;
     <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
 &#125;</code></pre></div>
+</li>
+</ul>
+</li>
+</ol>
 <p>综上，以下是汇总后的完整代码</p>
 <div class="code-wrapper"><pre><code class="hljs C++"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;iostream&gt;</span></span>
 <span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;cmath&gt;</span></span>
@@ -565,13 +531,10 @@
     <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;%d\n&quot;</span>,ans);
     <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
 &#125;</code></pre></div>
-<p>All in One：<br>
-因此我们得出，在需要使用DFS进行解题时，针对数据范围必须要进行复杂度分析来防止产生<code>程序超时TLE - Time Limit Exceeded</code>、<code>内存溢出MLE - Meomory Limit Exceeded</code>还有导致错误选择算法(使用了过于简单或复杂的算法)从而导致出现代码在小数据测试通过，但无法判断能否处理最大规模数据或者误用高复杂度算法解决本可用更优方法的问题！</p>
+<p>All in One：<br>因此我们得出，在需要使用DFS进行解题时，针对数据范围必须要进行复杂度分析来防止产生<code>程序超时TLE - Time Limit Exceeded</code>、<code>内存溢出MLE - Meomory Limit Exceeded</code>还有导致错误选择算法(使用了过于简单或复杂的算法)从而导致出现代码在小数据测试通过，但无法判断能否处理最大规模数据或者误用高复杂度算法解决本可用更优方法的问题！</p>
 <hr>
-<h3 id="复杂度分析">复杂度分析</h3>
-<p>实在是因水平有限，在此摘抄LLM所给出的的时间和空间复杂度分析，仅供参考，若有误欢迎指正！</p>
-<h4 id="DFS解法的时间复杂度分析">DFS解法的时间复杂度分析</h4>
-<p><strong>1. 组合生成复杂度</strong></p>
+<h3 id="复杂度分析"><a href="#复杂度分析" class="headerlink" title="复杂度分析"></a>复杂度分析</h3><p>实在是因水平有限，在此摘抄LLM所给出的的时间和空间复杂度分析，仅供参考，若有误欢迎指正！</p>
+<h4 id="DFS解法的时间复杂度分析"><a href="#DFS解法的时间复杂度分析" class="headerlink" title="DFS解法的时间复杂度分析"></a>DFS解法的时间复杂度分析</h4><p><strong>1. 组合生成复杂度</strong></p>
 <ul>
 <li><strong>核心操作</strong>：DFS需要枚举所有C(n,k)种组合</li>
 <li><strong>组合数计算</strong>：C(n,k) = n!/(k!(n-k)!)</li>
@@ -597,30 +560,27 @@
 <hr>
 <p><strong>优化验证（针对题目约束）</strong></p>
 <ol>
-<li>
-<p><strong>n≤20的可行性</strong>：</p>
+<li><p><strong>n≤20的可行性</strong>：</p>
 <ul>
 <li>C(20,10)=184756是最大的组合数</li>
 <li>每个和的素数判断约7000次操作</li>
 <li>总操作量在可接受范围内</li>
 </ul>
 </li>
-<li>
-<p><strong>剪枝效果</strong>：</p>
+<li><p><strong>剪枝效果</strong>：</p>
 <div class="code-wrapper"><pre><code class="hljs C++"><span class="hljs-keyword">if</span> (n - start &lt; k - cnt) <span class="hljs-keyword">return</span>; <span class="hljs-comment">// 提前终止无效分支</span></code></pre></div>
 <ul>
 <li>可减少约50%的递归调用（实测）</li>
 </ul>
 </li>
-<li>
-<p><strong>素数判断优化</strong>：</p>
+<li><p><strong>素数判断优化</strong>：</p>
 <ul>
 <li>使用6k±1法可减少约2/3的判断次数</li>
 </ul>
 </li>
 </ol>
 <hr>
-<h3 id="复杂度对比表"><strong>复杂度对比表</strong></h3>
+<h3 id="复杂度对比表"><a href="#复杂度对比表" class="headerlink" title="复杂度对比表"></a><strong>复杂度对比表</strong></h3><div class="table-container">
 <table>
 <thead>
 <tr>
@@ -647,11 +607,10 @@
 </tr>
 </tbody>
 </table>
+</div>
 <hr>
-<h3 id="实际测试数据示例"><strong>实际测试数据示例</strong></h3>
-<p><strong>输入</strong>：</p>
-<div class="code-wrapper"><pre><code class="hljs apache"><span class="hljs-attribute">20</span> <span class="hljs-number">10</span><span class="hljs-meta"></span>
-<span class="hljs-meta">[20个5×10⁶的数]</span></code></pre></div>
+<h3 id="实际测试数据示例"><a href="#实际测试数据示例" class="headerlink" title="实际测试数据示例"></a><strong>实际测试数据示例</strong></h3><p><strong>输入</strong>：<br><div class="code-wrapper"><pre><code class="hljs apache"><span class="hljs-attribute">20</span> <span class="hljs-number">10</span><span class="hljs-meta"></span>
+<span class="hljs-meta">[20个5×10⁶的数]</span></code></pre></div></p>
 <p><strong>计算过程</strong>：</p>
 <ol>
 <li>生成C(20,10)=184756种组合</li>
@@ -659,8 +618,7 @@
 <li>总操作量≈1.3×10⁹（现代CPU约1-2秒完成）</li>
 </ol>
 <hr>
-<h3 id="结论"><strong>结论</strong></h3>
-<ul>
+<h3 id="结论"><a href="#结论" class="headerlink" title="结论"></a><strong>结论</strong></h3><ul>
 <li><strong>时间复杂度</strong>：O(C(n,k)×√m)（组合数×素数判断）</li>
 <li><strong>空间复杂度</strong>：O(n)（递归栈深度）</li>
 <li><strong>可行性</strong>：完全满足题目约束（n≤20时，C(n,k)最大约2×10⁵）</li>

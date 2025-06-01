@@ -19,12 +19,12 @@
   <meta name="author" content="Hailin Zheng">
   <meta name="keywords" content="r1ng0rez wenling r00tk1t Solkatt p4y1oad">
   
-    <meta name="description" content="Basic-ROP-Learning ROP(Return-Oriented Programming)概述 ROP(Return-Oriented Programming)是一种高级的代码复用攻击技术，主要用于绕过现代操作系统的安全防护机制（如DEP&#x2F;NX）。其核心思想是在栈缓冲区溢出的基础上，利用程序中已有的小片段 (gadgets) 来改变某些寄存器或者变量的值，从而控制程序的执行流程。 1.">
+    <meta name="description" content="Basic-ROP-LearningROP(Return-Oriented Programming)概述ROP(Return-Oriented Programming)是一种高级的代码复用攻击技术，主要用于绕过现代操作系统的安全防护机制（如DEP&#x2F;NX）。其核心思想是在栈缓冲区溢出的基础上，利用程序中已有的小片段 (gadgets) 来改变某些寄存器或者变量的值，从而控制程序的执行流程。 1. 基">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Basic ROP Learning">
 <meta property="og:url" content="https://p4y1oad.github.io/2025/04/19/Basic-ROP-Learning/index.html">
 <meta property="og:site_name" content="P4y1oad&#39;s Blog">
-<meta property="og:description" content="Basic-ROP-Learning ROP(Return-Oriented Programming)概述 ROP(Return-Oriented Programming)是一种高级的代码复用攻击技术，主要用于绕过现代操作系统的安全防护机制（如DEP&#x2F;NX）。其核心思想是在栈缓冲区溢出的基础上，利用程序中已有的小片段 (gadgets) 来改变某些寄存器或者变量的值，从而控制程序的执行流程。 1.">
+<meta property="og:description" content="Basic-ROP-LearningROP(Return-Oriented Programming)概述ROP(Return-Oriented Programming)是一种高级的代码复用攻击技术，主要用于绕过现代操作系统的安全防护机制（如DEP&#x2F;NX）。其核心思想是在栈缓冲区溢出的基础上，利用程序中已有的小片段 (gadgets) 来改变某些寄存器或者变量的值，从而控制程序的执行流程。 1. 基">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2025-04-19T05:55:32.000Z">
 <meta property="article:modified_time" content="2025-05-31T23:15:10.375Z">
@@ -298,33 +298,23 @@
             
               <div class="markdown-body">
                 
-                <h2 id="Basic-ROP-Learning">Basic-ROP-Learning</h2>
-<h2 id="ROP-Return-Oriented-Programming-概述">ROP(Return-Oriented Programming)概述</h2>
-<p>ROP(Return-Oriented Programming)是一种高级的<strong>代码复用攻击技术</strong>，主要用于绕过现代操作系统的安全防护机制（如DEP/NX）。其核心思想是在<strong>栈缓冲区溢出的基础上，利用程序中已有的小片段 (gadgets) 来改变某些寄存器或者变量的值，从而控制程序的执行流程。</strong></p>
-<h3 id="1-基本概念">1. <strong>基本概念</strong></h3>
-<h4 id="（1）产生背景">（1）产生背景</h4>
-<ul>
-<li>
-<p><strong>DEP/NX防护</strong>：现代系统禁止执行栈/堆上的代码（数据执行保护）。</p>
+                <h2 id="Basic-ROP-Learning"><a href="#Basic-ROP-Learning" class="headerlink" title="Basic-ROP-Learning"></a>Basic-ROP-Learning</h2><h2 id="ROP-Return-Oriented-Programming-概述"><a href="#ROP-Return-Oriented-Programming-概述" class="headerlink" title="ROP(Return-Oriented Programming)概述"></a>ROP(Return-Oriented Programming)概述</h2><p>ROP(Return-Oriented Programming)是一种高级的<strong>代码复用攻击技术</strong>，主要用于绕过现代操作系统的安全防护机制（如DEP/NX）。其核心思想是在<strong>栈缓冲区溢出的基础上，利用程序中已有的小片段 (gadgets) 来改变某些寄存器或者变量的值，从而控制程序的执行流程。</strong></p>
+<h3 id="1-基本概念"><a href="#1-基本概念" class="headerlink" title="1. 基本概念"></a>1. <strong>基本概念</strong></h3><h4 id="（1）产生背景"><a href="#（1）产生背景" class="headerlink" title="（1）产生背景"></a>（1）产生背景</h4><ul>
+<li><p><strong>DEP/NX防护</strong>：现代系统禁止执行栈/堆上的代码（数据执行保护）。</p>
 </li>
-<li>
-<p><strong>ASLR防护</strong>：随机化内存布局，增加预测难度。</p>
+<li><p><strong>ASLR防护</strong>：随机化内存布局，增加预测难度。</p>
 </li>
-<li>
-<p><strong>ROP应对方案</strong>：复用已有代码（<code>.text</code>段），避免直接注入shellcode。</p>
+<li><p><strong>ROP应对方案</strong>：复用已有代码（<code>.text</code>段），避免直接注入shellcode。</p>
 </li>
 </ul>
-<h4 id="（2）核心原理">（2）核心原理</h4>
-<ul>
-<li>
-<p><strong>Gadget</strong>：以<code>ret</code>指令结尾的短指令序列（如<code>pop eax; ret</code>）。</p>
+<h4 id="（2）核心原理"><a href="#（2）核心原理" class="headerlink" title="（2）核心原理"></a>（2）核心原理</h4><ul>
+<li><p><strong>Gadget</strong>：以<code>ret</code>指令结尾的短指令序列（如<code>pop eax; ret</code>）。</p>
 </li>
-<li>
-<p><strong>链式调用</strong>：通过精心构造栈帧，使<code>ret</code>指令跳转到下一个gadget，形成&quot;代码链&quot;。</p>
+<li><p><strong>链式调用</strong>：通过精心构造栈帧，使<code>ret</code>指令跳转到下一个gadget，形成”代码链”。</p>
 </li>
 </ul>
 <hr>
-<h3 id="2-关键组件">2. <strong>关键组件</strong></h3>
+<h3 id="2-关键组件"><a href="#2-关键组件" class="headerlink" title="2. 关键组件"></a>2. <strong>关键组件</strong></h3><div class="table-container">
 <table>
 <thead>
 <tr>
@@ -347,36 +337,32 @@
 </tr>
 </tbody>
 </table>
+</div>
 <hr>
-<h3 id="3-攻击步骤">3. <strong>攻击步骤</strong></h3>
-<ol>
-<li>
-<p><strong>信息泄露</strong></p>
+<h3 id="3-攻击步骤"><a href="#3-攻击步骤" class="headerlink" title="3. 攻击步骤"></a>3. <strong>攻击步骤</strong></h3><ol>
+<li><p><strong>信息泄露</strong></p>
 <ul>
 <li>获取内存地址（绕过ASLR），如通过格式化字符串漏洞泄露libc基址。</li>
 </ul>
 </li>
-<li>
-<p><strong>寻找Gadgets</strong></p>
+<li><p><strong>寻找Gadgets</strong></p>
 <ul>
 <li>使用工具（如<code>ROPgadget</code>、<code>ropper</code>）扫描二进制文件，收集可用gadgets。</li>
 </ul>
 </li>
-<li>
-<p><strong>构造ROP Chain</strong></p>
+<li><p><strong>构造ROP Chain</strong></p>
 <ul>
 <li>组合gadgets实现目标功能（如调用<code>system(&quot;/bin/sh&quot;)</code>）。</li>
 </ul>
 </li>
-<li>
-<p><strong>触发漏洞</strong></p>
+<li><p><strong>触发漏洞</strong></p>
 <ul>
 <li>通过栈溢出等漏洞覆盖返回地址，跳转到第一个gadget。</li>
 </ul>
 </li>
 </ol>
 <hr>
-<h3 id="4-防御措施">4. <strong>防御措施</strong></h3>
+<h3 id="4-防御措施"><a href="#4-防御措施" class="headerlink" title="4. 防御措施"></a>4. <strong>防御措施</strong></h3><div class="table-container">
 <table>
 <thead>
 <tr>
@@ -403,12 +389,9 @@
 </tr>
 </tbody>
 </table>
-<h3 id="5-实例-Linux-x86-ROP-Exploit">5.实例 Linux x86 ROP Exploit</h3>
-<h5 id="1-ret2text">(1) ret2text</h5>
-<ul>
-<li>
-<h4 id="基本分析"><strong>基本分析</strong></h4>
-</li>
+</div>
+<h3 id="5-实例-Linux-x86-ROP-Exploit"><a href="#5-实例-Linux-x86-ROP-Exploit" class="headerlink" title="5.实例 Linux x86 ROP Exploit"></a>5.实例 Linux x86 ROP Exploit</h3><h5 id="1-ret2text"><a href="#1-ret2text" class="headerlink" title="(1) ret2text"></a>(1) ret2text</h5><ul>
+<li><h4 id="基本分析"><a href="#基本分析" class="headerlink" title="基本分析"></a><strong>基本分析</strong></h4></li>
 </ul>
 <p><a target="_blank" rel="noopener" href="https://github.com/ctf-wiki/ctf-challenges/raw/master/pwn/stackoverflow/ret2text/bamboofox-ret2text/ret2text">点击下载: ret2text</a></p>
 <p>先看看程序的保护机制</p>
@@ -490,15 +473,11 @@
 <span class="hljs-function">$eflags: [ZERO carry PARITY adjust sign trap INTERRUPT direction overflow resume virtualx86 identification]</span>
 <span class="hljs-function">$cs: <span class="hljs-number">0x23</span> $ss: <span class="hljs-number">0x2b</span> $ds: <span class="hljs-number">0x2b</span> $es: <span class="hljs-number">0x2b</span> $fs: <span class="hljs-number">0x00</span> $gs: <span class="hljs-number">0x63</span></span></code></pre></div>
 <ul>
-<li>
-<h4 id="栈内存布局分析"><strong>栈内存布局分析</strong></h4>
-</li>
+<li><h4 id="栈内存布局分析"><a href="#栈内存布局分析" class="headerlink" title="栈内存布局分析"></a><strong>栈内存布局分析</strong></h4></li>
 </ul>
-<p><code>buf</code>地址：<code>0xffffcd5c</code>(因为它是由 <code>eax</code> 和 <code>esp</code> 指向)，<code>ebp</code> 是 <code>0xffffcdc8</code>，而 <code>buf</code> 在 <code>0xffffcd5c</code>，两者距离为：0xffffcdc8 - 0xffffcd5c = 0x6c (108 字节), 因此，输入 108 字节后即可覆盖返回地址。</p>
+<p><code>buf</code>地址：<code>0xffffcd5c</code>(因为它是由 <code>eax</code> 和 <code>esp</code> 指向)，<code>ebp</code> 是 <code>0xffffcdc8</code>，而 <code>buf</code> 在 <code>0xffffcd5c</code>，两者距离为：0xffffcdc8 - 0xffffcd5c = 0x6c (108 字节), 因此，输入 108 字节后即可覆盖返回地址。</p>
 <ul>
-<li>
-<h4 id="验证猜想"><strong>验证猜想</strong></h4>
-<p>通过我们上面的分析可以构造以下payload:</p>
+<li><h4 id="验证猜想"><a href="#验证猜想" class="headerlink" title="验证猜想"></a><strong>验证猜想</strong></h4><p>通过我们上面的分析可以构造以下payload:</p>
 </li>
 </ul>
 <div class="code-wrapper"><pre><code class="hljs Python"><span class="hljs-comment">##!/usr/bin/env python</span>
@@ -633,9 +612,9 @@ $
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2025/05/10/Learning-Note-on-Attention-is-All-You-Need/" title="Learning Note on Attention is All You Need">
+                      <a href="/2025/05/10/%E9%80%9A%E8%BF%87C++%E5%AE%9E%E7%8E%B0%E8%AE%A1%E7%AE%97%E7%83%B7%E7%83%83%E5%90%8C%E5%88%86%E5%BC%82%E6%9E%84%E4%BD%93%E6%95%B0%E9%87%8F/" title="C++计算烷烃同分异构体数量(一)">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">Learning Note on Attention is All You Need</span>
+                        <span class="hidden-mobile">C++计算烷烃同分异构体数量(一)</span>
                         <span class="visible-mobile">Previous</span>
                       </a>
                     
