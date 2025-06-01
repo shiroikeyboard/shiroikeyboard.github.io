@@ -1,0 +1,945 @@
+
+
+<!DOCTYPE html>
+<html lang="en" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/SecureNexusLab.png">
+  <link rel="icon" href="/img/SecureNexusLab.png">
+  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="Hailin Zheng">
+  <meta name="keywords" content="r1ng0rez wenling r00tk1t Solkatt p4y1oad">
+  
+    <meta name="description" content="记一次与Fibonacci斗智斗勇 楔子： 事必有因。近时方备战粤港澳信息学竞赛，适值主办方有其平台，故欲以其平台练题。然用之颇觉不堪，譬如一题所予提示甚少，题目分类未明，且大多无题解。此题吾亦屡试方解出，遂作此文，以便后学及自我温习。 那首先来看看这题目和出题人究竟时何方神圣 题目描述： LQ1005:入门训练Fibonacci数列 知识点:简单递归 C+±运算符和表达式概念 Fibonacci">
+<meta property="og:type" content="article">
+<meta property="og:title" content="记一次与Fibonacci斗智斗勇">
+<meta property="og:url" content="https://p4y1oad.github.io/2025/05/17/%E8%AE%B0%E4%B8%80%E6%AC%A1%E4%B8%8EFibonacci%E6%96%97%E6%99%BA%E6%96%97%E5%8B%87/index.html">
+<meta property="og:site_name" content="P4y1oad&#39;s Blog">
+<meta property="og:description" content="记一次与Fibonacci斗智斗勇 楔子： 事必有因。近时方备战粤港澳信息学竞赛，适值主办方有其平台，故欲以其平台练题。然用之颇觉不堪，譬如一题所予提示甚少，题目分类未明，且大多无题解。此题吾亦屡试方解出，遂作此文，以便后学及自我温习。 那首先来看看这题目和出题人究竟时何方神圣 题目描述： LQ1005:入门训练Fibonacci数列 知识点:简单递归 C+±运算符和表达式概念 Fibonacci">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2025-05-17T07:29:48.000Z">
+<meta property="article:modified_time" content="2025-05-17T08:39:16.368Z">
+<meta property="article:author" content="Hailin Zheng">
+<meta property="article:tag" content="算法">
+<meta name="twitter:card" content="summary_large_image">
+  
+  
+  
+  <title>记一次与Fibonacci斗智斗勇 - P4y1oad&#39;s Blog</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1749284_5i9bdhy70f8.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1736178_k526ubmyhba.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+  
+<link rel="stylesheet" href="https://cdn.staticfile.org/lxgw-wenkai-screen-webfont/1.7.0/style.min.css">
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"p4y1oad.github.io","root":"/","version":"1.9.8","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+  <script src="/js/sakura.js"></script>
+  <script src="/js/love.js"></script>
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 7.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Hailin Zheng</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/" target="_self">
+                <i class="iconfont icon-home-fill"></i>
+                <span>Home</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/" target="_self">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>Archives</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/" target="_self">
+                <i class="iconfont icon-category-fill"></i>
+                <span>Categories</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/" target="_self">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>Tags</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/" target="_self">
+                <i class="iconfont icon-user-fill"></i>
+                <span>About</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/" target="_self">
+                <i class="iconfont icon-link-fill"></i>
+                <span>Links</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/background.PNG') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="记一次与Fibonacci斗智斗勇"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2025-05-17 15:29" pubdate>
+          May 17, 2025 pm
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          1.7k words
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          15 mins
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">记一次与Fibonacci斗智斗勇</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h1>记一次与Fibonacci斗智斗勇</h1>
+<h2 id="楔子：">楔子：</h2>
+<p>事必有因。近时方备战粤港澳信息学竞赛，适值主办方有其平台，故欲以其平台练题。然用之颇觉不堪，譬如一题所予提示甚少，题目分类未明，且大多无题解。此题吾亦屡试方解出，遂作此文，以便后学及自我温习。</p>
+<p>那首先来看看这题目和出题人究竟时何方神圣</p>
+<h2 id="题目描述：">题目描述：</h2>
+<h3 id="LQ1005-入门训练Fibonacci数列">LQ1005:入门训练Fibonacci数列</h3>
+<p>知识点:简单递归 C+±运算符和表达式概念</p>
+<p>Fibonacci数列的递推公式为:Fn=Fn-1+Fn-2,其中F1=F2=1。<br>
+当n比较大时,Fn也非常大,现在我们想知道,Fn除以10007的余数是多少。</p>
+<h4 id="输入格式">输入格式</h4>
+<p><strong>输入描述:</strong><br>
+输入包含一个整数<code>n</code>。<br>
+输入样例:</p>
+<div class="code-wrapper"><pre><code class="hljs">10</code></pre></div>
+<h4 id="输出格式">输出格式</h4>
+<p><strong>输出描述:</strong><br>
+输出一行,包含一个整数,表示<code>Fn</code>除以10007的余数。</p>
+<p>说明:在本题中,答案是要求<code>Fn</code>除以10007的余数,因此我们只要能算出这个余数即可,<u>而不需要先计算出<code>Fn</code>的准确值,再将计算的结果除以10007取余</u> （记住这里后面要考）<br>
+数,直接计算余数往往比先算出原数再取余简单。<br>
+输出样例:</p>
+<div class="code-wrapper"><pre><code class="hljs">55</code></pre></div>
+<p>【提升】<br>
+HINT:时间限制:1.0s 内存限制:256.0MB<br>
+1≤n ≤ 1,000,000.</p>
+<h2 id="分析">分析</h2>
+<h3 id="初步分析">初步分析</h3>
+<p>我们从题目中可以得知，这道题要求我们实现以下两个部分</p>
+<ul>
+<li>先实现求出斐波那契数列</li>
+<li>再用所求出的数进行模10007后输出值</li>
+</ul>
+<p>那这样的话，我们的思路一般都是<s>一眼丁真</s> 一眼递归，那么我们可以写出如下代码：</p>
+<div class="code-wrapper"><pre><code class="hljs C++"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;iostream&gt;</span></span>
+<span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> std;
+
+<span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">Fib</span><span class="hljs-params">(<span class="hljs-type">int</span> n)</span> </span>&#123;
+    <span class="hljs-keyword">if</span>(n == <span class="hljs-number">0</span>) <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+    <span class="hljs-keyword">if</span>(n == <span class="hljs-number">1</span>) <span class="hljs-keyword">return</span> <span class="hljs-number">1</span>;
+    <span class="hljs-keyword">else</span> <span class="hljs-keyword">return</span> <span class="hljs-built_in">Fib</span>(n<span class="hljs-number">-1</span>)+<span class="hljs-built_in">Fib</span>(n<span class="hljs-number">-2</span>);
+&#125;
+
+<span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span> </span>&#123;
+    <span class="hljs-type">int</span> n;
+    cin &gt;&gt; n;
+    cout &lt;&lt; <span class="hljs-built_in">Fib</span>(n) &lt;&lt; endl;
+    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+&#125;</code></pre></div>
+<p>之后我们对其进行补充，加上让它模掉<code>10007</code>就可以了，prefect~</p>
+<p>like this（在这里水一波字数）</p>
+<div class="code-wrapper"><pre><code class="hljs C++"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;iostream&gt;</span></span>
+<span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> std;
+
+<span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">Fib</span><span class="hljs-params">(<span class="hljs-type">int</span> n)</span> </span>&#123;
+    <span class="hljs-keyword">if</span>(n == <span class="hljs-number">0</span>) <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+    <span class="hljs-keyword">if</span>(n == <span class="hljs-number">1</span>) <span class="hljs-keyword">return</span> <span class="hljs-number">1</span>;
+    <span class="hljs-keyword">else</span> <span class="hljs-keyword">return</span> <span class="hljs-built_in">Fib</span>(n<span class="hljs-number">-1</span>)+<span class="hljs-built_in">Fib</span>(n<span class="hljs-number">-2</span>);
+&#125;
+
+<span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span> </span>&#123;
+    <span class="hljs-type">int</span> n;
+    cin &gt;&gt; n;
+    <span class="hljs-type">int</span> ans = <span class="hljs-built_in">Fib</span>(n)%<span class="hljs-number">10007</span>;
+    cout &lt;&lt; ans &lt;&lt; endl;
+    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+&#125;</code></pre></div>
+<p>根据我们的值这道题没有问题，不用2分钟就AC了，然而事情真就如此吗？</p>
+<p>恰恰相反 实则不然 人之常情(bushi)</p>
+<p>当我把题解放上去满心憧憬的时候</p>
+<p>爆零了</p>
+<p>！？</p>
+<h2 id="解剖开始">解剖开始</h2>
+<p>我们重新回到题目描述中，可以看到它的数据范围为1≤n ≤ 1,000,000，那如果我们直接输入1,000,000那就会。。。</p>
+<div class="code-wrapper"><pre><code class="hljs zsh">➜  p1706 git:(master) ✗ ./a.out
+1000000
+[1]    59990 segmentation fault (core dumped)  ./a.out</code></pre></div>
+<p>就会趋势</p>
+<p>那既然超出了数值范围，那我们改成longlong试试</p>
+<p>我们只得了300分。。。</p>
+<p>也就是说我们是没有完全AC的，看了扣分点提示我们TLE了，根据目前的代码想想是哪里出了问题呢？</p>
+<div class="code-wrapper"><pre><code class="hljs C++"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;iostream&gt;</span></span>
+<span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> std;
+
+<span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span> </span>&#123;
+    <span class="hljs-type">int</span> n;
+    cin &gt;&gt; n;
+    <span class="hljs-type">long</span> <span class="hljs-type">long</span> a = <span class="hljs-number">1</span>, b = <span class="hljs-number">1</span>, c;  
+    <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">3</span>; i &lt;= n; i++) &#123;
+        c = a + b; 
+        a = b;
+        b = c;
+    &#125;
+    cout &lt;&lt; b % <span class="hljs-number">10007</span> &lt;&lt; endl;
+    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+&#125;</code></pre></div>
+<p>输出内容是这样的</p>
+<div class="code-wrapper"><pre><code class="hljs zsh">➜  p1706 git:(master) ✗ ./a.out     
+1000000
+-1044</code></pre></div>
+<p>我们能明显的意识到它发生整数溢出了，是计算机中整数存储的典型表现：当数值超过数据类型能表示的最大正值时，会&quot;环绕&quot;到负值范围。但是明明我们都用上了<code>long long</code>了，但是为什么还发生了溢出？</p>
+<p>那我们加大剂量</p>
+<div class="code-wrapper"><pre><code class="hljs C++"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;iostream&gt;</span></span>
+<span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> std;
+<span class="hljs-type">const</span> <span class="hljs-type">int</span> MOD = <span class="hljs-number">1e9</span> <span class="hljs-number">+7</span>; <span class="hljs-comment">// 防止数值溢出</span>
+
+<span class="hljs-keyword">struct</span> <span class="hljs-title class_">Matrix</span> &#123;
+    <span class="hljs-type">long</span> <span class="hljs-type">long</span> mat[<span class="hljs-number">2</span>][<span class="hljs-number">2</span>];
+    <span class="hljs-built_in">Matrix</span>() &#123; mat[<span class="hljs-number">0</span>][<span class="hljs-number">0</span>]=mat[<span class="hljs-number">0</span>][<span class="hljs-number">1</span>]=mat[<span class="hljs-number">1</span>][<span class="hljs-number">0</span>]=<span class="hljs-number">1</span>; mat[<span class="hljs-number">1</span>][<span class="hljs-number">1</span>]=<span class="hljs-number">0</span>; &#125;
+&#125;;
+
+<span class="hljs-function">Matrix <span class="hljs-title">multiply</span><span class="hljs-params">(<span class="hljs-type">const</span> Matrix&amp; a, <span class="hljs-type">const</span> Matrix&amp; b)</span> </span>&#123;
+    Matrix res;
+    res.mat[<span class="hljs-number">0</span>][<span class="hljs-number">0</span>] = (a.mat[<span class="hljs-number">0</span>][<span class="hljs-number">0</span>]*b.mat[<span class="hljs-number">0</span>][<span class="hljs-number">0</span>] + a.mat[<span class="hljs-number">0</span>][<span class="hljs-number">1</span>]*b.mat[<span class="hljs-number">1</span>][<span class="hljs-number">0</span>]) % MOD;
+    res.mat[<span class="hljs-number">0</span>][<span class="hljs-number">1</span>] = (a.mat[<span class="hljs-number">0</span>][<span class="hljs-number">0</span>]*b.mat[<span class="hljs-number">0</span>][<span class="hljs-number">1</span>] + a.mat[<span class="hljs-number">0</span>][<span class="hljs-number">1</span>]*b.mat[<span class="hljs-number">1</span>][<span class="hljs-number">1</span>]) % MOD;
+    res.mat[<span class="hljs-number">1</span>][<span class="hljs-number">0</span>] = (a.mat[<span class="hljs-number">1</span>][<span class="hljs-number">0</span>]*b.mat[<span class="hljs-number">0</span>][<span class="hljs-number">0</span>] + a.mat[<span class="hljs-number">1</span>][<span class="hljs-number">1</span>]*b.mat[<span class="hljs-number">1</span>][<span class="hljs-number">0</span>]) % MOD;
+    res.mat[<span class="hljs-number">1</span>][<span class="hljs-number">1</span>] = (a.mat[<span class="hljs-number">1</span>][<span class="hljs-number">0</span>]*b.mat[<span class="hljs-number">0</span>][<span class="hljs-number">1</span>] + a.mat[<span class="hljs-number">1</span>][<span class="hljs-number">1</span>]*b.mat[<span class="hljs-number">1</span>][<span class="hljs-number">1</span>]) % MOD;
+    <span class="hljs-keyword">return</span> res;
+&#125;
+
+<span class="hljs-function">Matrix <span class="hljs-title">matrix_pow</span><span class="hljs-params">(Matrix a, <span class="hljs-type">int</span> n)</span> </span>&#123;
+    Matrix res;
+    res.mat[<span class="hljs-number">0</span>][<span class="hljs-number">0</span>] = res.mat[<span class="hljs-number">1</span>][<span class="hljs-number">1</span>] = <span class="hljs-number">1</span>; <span class="hljs-comment">// 初始化为单位矩阵</span>
+    res.mat[<span class="hljs-number">0</span>][<span class="hljs-number">1</span>] = res.mat[<span class="hljs-number">1</span>][<span class="hljs-number">0</span>] = <span class="hljs-number">0</span>;
+    
+    <span class="hljs-keyword">while</span>(n &gt; <span class="hljs-number">0</span>) &#123;
+        <span class="hljs-keyword">if</span>(n &amp; <span class="hljs-number">1</span>) res = <span class="hljs-built_in">multiply</span>(res, a);
+        a = <span class="hljs-built_in">multiply</span>(a, a);
+        n &gt;&gt;= <span class="hljs-number">1</span>;
+    &#125;
+    <span class="hljs-keyword">return</span> res;
+&#125;
+
+<span class="hljs-function"><span class="hljs-type">long</span> <span class="hljs-type">long</span> <span class="hljs-title">fib</span><span class="hljs-params">(<span class="hljs-type">int</span> n)</span> </span>&#123;
+    <span class="hljs-keyword">if</span>(n == <span class="hljs-number">0</span>) <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+    Matrix m;
+    m = <span class="hljs-built_in">matrix_pow</span>(m, n<span class="hljs-number">-1</span>);
+    <span class="hljs-keyword">return</span> m.mat[<span class="hljs-number">0</span>][<span class="hljs-number">0</span>];
+&#125;
+
+<span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span> </span>&#123;
+    <span class="hljs-type">int</span> n;
+    cin &gt;&gt; n;
+    cout &lt;&lt; <span class="hljs-built_in">fib</span>(n)%<span class="hljs-number">10007</span> &lt;&lt; endl;
+    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+&#125;</code></pre></div>
+<p>然后还是300分，原因。。。<code> 0Wrong AnswerRead 3057, expect 2091.</code></p>
+<p>那我们再改改</p>
+<div class="code-wrapper"><pre><code class="hljs c++"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;iostream&gt;</span></span>
+<span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> std;
+
+<span class="hljs-function"><span class="hljs-type">long</span> <span class="hljs-type">long</span> <span class="hljs-title">fib</span><span class="hljs-params">(<span class="hljs-type">int</span> n)</span> </span>&#123;
+    <span class="hljs-keyword">if</span> (n == <span class="hljs-number">0</span>) <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+    <span class="hljs-type">long</span> <span class="hljs-type">long</span> a = <span class="hljs-number">0</span>, b = <span class="hljs-number">1</span>, c;
+    <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">2</span>; i &lt;= n; i++) &#123;
+        c = a + b;
+        a = b;
+        b = c;
+    &#125;
+    <span class="hljs-keyword">return</span> b;
+&#125;
+
+<span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span> </span>&#123;
+    <span class="hljs-type">int</span> n;
+    cin &gt;&gt; n;
+    <span class="hljs-type">int</span> ans = <span class="hljs-built_in">fib</span>(n)%<span class="hljs-number">10007</span>;
+    cout &lt;&lt; ans &lt;&lt; endl;
+    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+&#125;</code></pre></div>
+<p>好了，这次多了100分，看一眼报错<code>0Wrong Answer Read 4432, expect 6545.</code></p>
+<h2 id="再看看题目描述呢？">再看看题目描述呢？</h2>
+<h3 id="摘要">摘要</h3>
+<p><strong>输出描述:</strong><br>
+输出一行,包含一个整数,表示<code>Fn</code>除以10007的余数。</p>
+<p><u>说明:在本题中,答案是要求<code>Fn</code>除以10007的余数,因此我们只要能算出这个余数即可,而不需要先计算出<code>Fn</code>的准确值,再将计算的结果除以10007取余数,直接计算余数往往比先算出原数再取余简单。</u></p>
+<p>在根据我们前面的尝试，得出这道题的AK思路应该是：</p>
+<ol>
+<li>使用迭代而非递归（O(n)时间）</li>
+<li>每次加法后立即取模（防止溢出）</li>
+</ol>
+<p><strong>《每次加法后立即取模》</strong></p>
+<p>也就是说一开始我们的分析中就错了一步，斐波那契数列增长速度极快，也就是说无论我们如何去补救，如果始终采取先求数再取模的话就会导致TLE！</p>
+<p>所以真正的思路是这样的：</p>
+<ol>
+<li><strong>递归方法的问题</strong>：直接使用递归计算Fibonacci数列会导致指数级的时间复杂度（O(2^n)），当n较大时（如n=50），甚至不需要等到1000000就会使计算非常缓慢甚至栈溢出。</li>
+<li><strong>迭代方法</strong>：使用循环从F1和F2逐步计算到Fn，时间复杂度为O(n)，适用于较大的n值。</li>
+<li><strong>模运算性质</strong>：由于我们只需要结果对10007的余数，可以在每一步计算时都对10007取模，利用模运算的性质（(a + b) mod m = (a mod m + b mod m) mod m）防止数值溢出。</li>
+</ol>
+<p>那既然思路清楚了，我们可以给出真正的AC代码了！</p>
+<div class="code-wrapper"><pre><code class="hljs C++"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;iostream&gt;</span></span>
+<span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> std;
+
+<span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">fibMod</span><span class="hljs-params">(<span class="hljs-type">int</span> n)</span> </span>&#123;
+    <span class="hljs-type">const</span> <span class="hljs-type">int</span> MOD = <span class="hljs-number">10007</span>;
+    <span class="hljs-keyword">if</span> (n == <span class="hljs-number">0</span>) <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+    <span class="hljs-keyword">if</span> (n == <span class="hljs-number">1</span>) <span class="hljs-keyword">return</span> <span class="hljs-number">1</span>;
+    
+    <span class="hljs-type">int</span> a = <span class="hljs-number">0</span>, b = <span class="hljs-number">1</span>, c;
+    <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">2</span>; i &lt;= n; ++i) &#123;
+        c = (a + b) % MOD;  <span class="hljs-comment">// 每一步计算都取模防止溢出</span>
+        a = b;
+        b = c;
+    &#125;
+    <span class="hljs-keyword">return</span> b;
+&#125;
+
+<span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span> </span>&#123;
+    <span class="hljs-type">int</span> n;
+    cin &gt;&gt; n;
+    cout &lt;&lt; <span class="hljs-built_in">fibMod</span>(n)%<span class="hljs-number">10007</span> &lt;&lt; endl;
+    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+&#125;</code></pre></div>
+<h2 id="总结">总结</h2>
+<ul>
+<li>看清数据范围</li>
+<li>用迭代而不是递归</li>
+<li>无需求出对应数而是每一步都进行取模</li>
+<li>有一颗宁静的心</li>
+</ul>
+<script src="https://giscus.app/client.js" data-repo="solkatt-cn/solkatt-cn.github.io" data-repo-id="R_kgDONzaTTQ" data-category="Announcements" data-category-id="DIC_kwDONzaTTc4Cpqn7" data-mapping="pathname" data-strict="0" data-reactions-enabled="1" data-emit-metadata="0" data-input-position="top" data-theme="preferred_color_scheme" data-lang="zh-CN" crossorigin="anonymous" async>
+</script>
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E7%AE%97%E6%B3%95/" class="category-chain-item">算法</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/%E7%AE%97%E6%B3%95/" class="print-no-link">#算法</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>记一次与Fibonacci斗智斗勇</div>
+      <div>https://p4y1oad.github.io/2025/05/17/记一次与Fibonacci斗智斗勇/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>Author</div>
+          <div>Hailin Zheng</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>Posted on</div>
+          <div>May 17, 2025</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>Licensed under</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - Attribution">
+                    <i class="iconfont icon-cc-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2025/05/17/%E6%A8%A1%E5%9E%8B%E4%B8%8A%E4%B8%8B%E6%96%87%E5%8D%8F%E8%AE%AE-MCP%E7%9A%84%E5%AE%89%E5%85%A8%E6%8C%91%E6%88%98%E5%AD%A6%E4%B9%A0%E5%8F%8A%E6%8A%9B%E7%A0%96%E5%BC%95%E7%8E%89/" title="模型上下文协议-MCP的安全挑战学习及抛砖引玉">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">模型上下文协议-MCP的安全挑战学习及抛砖引玉</span>
+                        <span class="visible-mobile">Previous</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2025/05/17/NOIP-2002-%E6%99%AE%E5%8F%8A%E7%BB%84-%E9%80%89%E6%95%B0/" title="由一道题引发对DFS的思考">
+                        <span class="hidden-mobile">由一道题引发对DFS的思考</span>
+                        <span class="visible-mobile">Next</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+  
+  
+    <article id="comments" lazyload>
+      
+
+    </article>
+  
+
+
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>Table of Contents</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+  
+  
+
+
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">Keyword</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/5.0.0/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  
+      <script>
+        if (!window.MathJax) {
+          window.MathJax = {
+            tex    : {
+              inlineMath: { '[+]': [['$', '$']] }
+            },
+            loader : {
+              load: ['ui/lazy']
+            },
+            options: {
+              renderActions: {
+                insertedScript: [200, () => {
+                  document.querySelectorAll('mjx-container').forEach(node => {
+                    let target = node.parentNode;
+                    if (target.nodeName.toLowerCase() === 'li') {
+                      target.parentNode.classList.add('has-jax');
+                    }
+                  });
+                }, '', false]
+              }
+            }
+          };
+        } else {
+          MathJax.startup.document.state(0);
+          MathJax.texReset();
+          MathJax.typeset();
+          MathJax.typesetPromise();
+        }
+
+        Fluid.events.registerRefreshCallback(function() {
+          if ('MathJax' in window && MathJax.startup.document && typeof MathJax.startup.document.state === 'function') {
+            MathJax.startup.document.state(0);
+            MathJax.texReset();
+            MathJax.typeset();
+            MathJax.typesetPromise();
+          }
+        });
+      </script>
+    
+
+  <script  src="https://lib.baomitu.com/mathjax/3.2.2/es5/tex-mml-chtml.js" ></script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">Blog works best with JavaScript enabled</div>
+  </noscript>
+</body>
+</html>

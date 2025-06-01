@@ -767,7 +767,7 @@ sup > a::before,
 }
 html {
   font-size: 16px;
-  letter-spacing: 0.03em;
+  letter-spacing: 0.05em;
 }
 html,
 body {
