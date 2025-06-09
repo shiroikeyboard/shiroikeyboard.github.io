@@ -1,7 +1,7 @@
 
 
 <!DOCTYPE html>
-<html lang="en" data-default-color-scheme=auto>
+<html lang="zh-CN" data-default-color-scheme=auto>
 
 
 
@@ -16,30 +16,30 @@
   <meta http-equiv="x-ua-compatible" content="ie=edge">
   
   <meta name="theme-color" content="#2f4154">
-  <meta name="author" content="Hailin Zheng">
-  <meta name="keywords" content="r1ng0rez wenling r00tk1t Solkatt p4y1oad">
+  <meta name="author" content="白色键盘">
+  <meta name="keywords" content="r1ng0rez wenling r00tk1t Solkatt p4y1oad 白色键盘">
   
     <meta name="description" content="Web安全条件竞争漏洞学习0x00 概述​        条件竞争漏洞发生在多个线程同时访问同一个共享代码、变量、文件等，，由于多个不同线程同时与相同的数据进行交互，从而导致碰撞冲突（例如，后端多个线程同时修改数据库中的某一个字段值）。攻击者通过精心定制请求到达后端的时间故意制造冲突，并由此实现恶意目的。这个漏洞存在于操作系统、数据库、web等多个层面，由于大多服务端框架在处理不同用户的请求时是并">
 <meta property="og:type" content="article">
 <meta property="og:title" content="条件竞争漏洞学习">
-<meta property="og:url" content="https://p4y1oad.github.io/2025/02/08/%E6%9D%A1%E4%BB%B6%E7%AB%9E%E4%BA%89%E6%BC%8F%E6%B4%9E%E5%AD%A6%E4%B9%A0/index.html">
-<meta property="og:site_name" content="P4y1oad&#39;s Blog">
+<meta property="og:url" content="https://shiroikeyboard.github.io/2025/02/08/%E6%9D%A1%E4%BB%B6%E7%AB%9E%E4%BA%89%E6%BC%8F%E6%B4%9E%E5%AD%A6%E4%B9%A0/index.html">
+<meta property="og:site_name" content="白いキーボードの Blog">
 <meta property="og:description" content="Web安全条件竞争漏洞学习0x00 概述​        条件竞争漏洞发生在多个线程同时访问同一个共享代码、变量、文件等，，由于多个不同线程同时与相同的数据进行交互，从而导致碰撞冲突（例如，后端多个线程同时修改数据库中的某一个字段值）。攻击者通过精心定制请求到达后端的时间故意制造冲突，并由此实现恶意目的。这个漏洞存在于操作系统、数据库、web等多个层面，由于大多服务端框架在处理不同用户的请求时是并">
-<meta property="og:locale" content="en_US">
+<meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://pic2.zhimg.com/80/v2-ffffaa1fb957682cebb626a0482344b3_720w.webp">
 <meta property="og:image" content="https://pica.zhimg.com/80/v2-b3ccc0bc7165f6bd90fcf6769c591786_720w.webp">
 <meta property="og:image" content="https://pic4.zhimg.com/80/v2-936e0bec041297e3b7f8b1f0d9f568d1_720w.webp">
 <meta property="og:image" content="https://pic2.zhimg.com/80/v2-98252be57cdc6ace37d120354c2b5da1_720w.webp">
 <meta property="article:published_time" content="2025-02-08T09:02:24.000Z">
 <meta property="article:modified_time" content="2025-05-16T11:25:22.037Z">
-<meta property="article:author" content="Hailin Zheng">
+<meta property="article:author" content="白色键盘">
 <meta property="article:tag" content="Web安全">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://pic2.zhimg.com/80/v2-ffffaa1fb957682cebb626a0482344b3_720w.webp">
   
   
   
-  <title>条件竞争漏洞学习 - P4y1oad&#39;s Blog</title>
+  <title>条件竞争漏洞学习 - 白いキーボードの Blog</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -81,7 +81,7 @@
   <script id="fluid-configs">
     var Fluid = window.Fluid || {};
     Fluid.ctx = Object.assign({}, Fluid.ctx)
-    var CONFIG = {"hostname":"p4y1oad.github.io","root":"/","version":"1.9.8","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null}},"search_path":"/local-search.xml","include_content_in_search":true};
+    var CONFIG = {"hostname":"shiroikeyboard.github.io","root":"/","version":"1.9.8","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null}},"search_path":"/local-search.xml","include_content_in_search":true};
 
     if (CONFIG.web_analytics.follow_dnt) {
       var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
@@ -113,7 +113,7 @@
   <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
   <div class="container">
     <a class="navbar-brand" href="/">
-      <strong>Hailin Zheng</strong>
+      <strong>白いキーボードのBlog</strong>
     </a>
 
     <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
@@ -133,7 +133,7 @@
             <li class="nav-item">
               <a class="nav-link" href="/" target="_self">
                 <i class="iconfont icon-home-fill"></i>
-                <span>Home</span>
+                <span>首页</span>
               </a>
             </li>
           
@@ -145,7 +145,7 @@
             <li class="nav-item">
               <a class="nav-link" href="/archives/" target="_self">
                 <i class="iconfont icon-archive-fill"></i>
-                <span>Archives</span>
+                <span>归档</span>
               </a>
             </li>
           
@@ -157,7 +157,7 @@
             <li class="nav-item">
               <a class="nav-link" href="/categories/" target="_self">
                 <i class="iconfont icon-category-fill"></i>
-                <span>Categories</span>
+                <span>分类</span>
               </a>
             </li>
           
@@ -169,7 +169,7 @@
             <li class="nav-item">
               <a class="nav-link" href="/tags/" target="_self">
                 <i class="iconfont icon-tags-fill"></i>
-                <span>Tags</span>
+                <span>标签</span>
               </a>
             </li>
           
@@ -181,7 +181,7 @@
             <li class="nav-item">
               <a class="nav-link" href="/about/" target="_self">
                 <i class="iconfont icon-user-fill"></i>
-                <span>About</span>
+                <span>关于</span>
               </a>
             </li>
           
@@ -193,7 +193,7 @@
             <li class="nav-item">
               <a class="nav-link" href="/links/" target="_self">
                 <i class="iconfont icon-link-fill"></i>
-                <span>Links</span>
+                <span>友链</span>
               </a>
             </li>
           
@@ -239,7 +239,7 @@
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
         <time datetime="2025-02-08 17:02" pubdate>
-          February 8, 2025 pm
+          2025年2月8日 下午
         </time>
       </span>
     
@@ -250,7 +250,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          2k words
+          2k 字
         
       </span>
     
@@ -261,7 +261,7 @@
         
         
         
-          17 mins
+          17 分钟
         
       </span>
     
@@ -468,31 +468,31 @@ Connection: close</code></pre></div>
   <div class="license-box my-3">
     <div class="license-title">
       <div>条件竞争漏洞学习</div>
-      <div>https://p4y1oad.github.io/2025/02/08/条件竞争漏洞学习/</div>
+      <div>https://shiroikeyboard.github.io/2025/02/08/条件竞争漏洞学习/</div>
     </div>
     <div class="license-meta">
       
         <div class="license-meta-item">
-          <div>Author</div>
-          <div>Hailin Zheng</div>
+          <div>作者</div>
+          <div>白色键盘</div>
         </div>
       
       
         <div class="license-meta-item license-meta-date">
-          <div>Posted on</div>
-          <div>February 8, 2025</div>
+          <div>发布于</div>
+          <div>2025年2月8日</div>
         </div>
       
       
       
         <div class="license-meta-item">
-          <div>Licensed under</div>
+          <div>许可协议</div>
           <div>
             
               
               
                 <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
-                  <span class="hint--top hint--rounded" aria-label="BY - Attribution">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
                     <i class="iconfont icon-cc-by"></i>
                   </span>
                 </a>
@@ -515,7 +515,7 @@ Connection: close</code></pre></div>
                       <a href="/2025/02/22/upload-lab%E9%9D%B6%E5%9C%BA%E5%B0%8F%E8%AE%A1/" title="upload-lab靶场小计">
                         <i class="iconfont icon-arrowleft"></i>
                         <span class="hidden-mobile">upload-lab靶场小计</span>
-                        <span class="visible-mobile">Previous</span>
+                        <span class="visible-mobile">上一篇</span>
                       </a>
                     
                   </article>
@@ -524,7 +524,7 @@ Connection: close</code></pre></div>
                     
                       <a href="/2025/02/06/%E6%94%BB%E9%98%B2%E4%B8%96%E7%95%8C-pwnstack%E9%A2%98%E8%A7%A3/" title="攻防世界-pwnstack题解">
                         <span class="hidden-mobile">攻防世界-pwnstack题解</span>
-                        <span class="visible-mobile">Next</span>
+                        <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
                     
@@ -554,7 +554,7 @@ Connection: close</code></pre></div>
     <div id="toc">
   <p class="toc-header">
     <i class="iconfont icon-list"></i>
-    <span>Table of Contents</span>
+    <span>目录</span>
   </p>
   <div class="toc-body" id="toc-body"></div>
 </div>
@@ -616,7 +616,7 @@ Connection: close</code></pre></div>
   <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
     <div class="modal-content">
       <div class="modal-header text-center">
-        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
         <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -624,7 +624,7 @@ Connection: close</code></pre></div>
       <div class="modal-body mx-3">
         <div class="md-form mb-5">
           <input type="text" id="local-search-input" class="form-control validate">
-          <label data-error="x" data-success="v" for="local-search-input">Keyword</label>
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
         </div>
         <div class="list-group" id="local-search-result"></div>
       </div>
@@ -845,7 +845,7 @@ Connection: close</code></pre></div>
   
 
   <noscript>
-    <div class="noscript-warning">Blog works best with JavaScript enabled</div>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
   </noscript>
 </body>
 </html>
