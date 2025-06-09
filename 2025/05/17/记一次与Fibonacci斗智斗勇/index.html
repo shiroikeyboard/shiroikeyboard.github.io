@@ -19,12 +19,12 @@
   <meta name="author" content="白色键盘">
   <meta name="keywords" content="r1ng0rez wenling r00tk1t Solkatt p4y1oad 白色键盘">
   
-    <meta name="description" content="记一次与Fibonacci斗智斗勇楔子：事必有因。近时方备战粤港澳信息学竞赛，适值主办方有其平台，故欲以其平台练题。然用之颇觉不堪，譬如一题所予提示甚少，题目分类未明，且大多无题解。此题吾亦屡试方解出，遂作此文，以便后学及自我温习。 那首先来看看这题目和出题人究竟时何方神圣 题目描述：LQ1005:入门训练Fibonacci数列知识点:简单递归 C++-运算符和表达式概念 Fibonacci数列的">
+    <meta name="description" content="记一次与Fibonacci斗智斗勇 楔子： 事必有因。近时方备战粤港澳信息学竞赛，适值主办方有其平台，故欲以其平台练题。然用之颇觉不堪，譬如一题所予提示甚少，题目分类未明，且大多无题解。此题吾亦屡试方解出，遂作此文，以便后学及自我温习。 那首先来看看这题目和出题人究竟时何方神圣 题目描述： LQ1005:入门训练Fibonacci数列 知识点:简单递归 C+±运算符和表达式概念 Fibonacci">
 <meta property="og:type" content="article">
 <meta property="og:title" content="记一次与Fibonacci斗智斗勇">
 <meta property="og:url" content="https://shiroikeyboard.github.io/2025/05/17/%E8%AE%B0%E4%B8%80%E6%AC%A1%E4%B8%8EFibonacci%E6%96%97%E6%99%BA%E6%96%97%E5%8B%87/index.html">
 <meta property="og:site_name" content="白いキーボードの Blog">
-<meta property="og:description" content="记一次与Fibonacci斗智斗勇楔子：事必有因。近时方备战粤港澳信息学竞赛，适值主办方有其平台，故欲以其平台练题。然用之颇觉不堪，譬如一题所予提示甚少，题目分类未明，且大多无题解。此题吾亦屡试方解出，遂作此文，以便后学及自我温习。 那首先来看看这题目和出题人究竟时何方神圣 题目描述：LQ1005:入门训练Fibonacci数列知识点:简单递归 C++-运算符和表达式概念 Fibonacci数列的">
+<meta property="og:description" content="记一次与Fibonacci斗智斗勇 楔子： 事必有因。近时方备战粤港澳信息学竞赛，适值主办方有其平台，故欲以其平台练题。然用之颇觉不堪，譬如一题所予提示甚少，题目分类未明，且大多无题解。此题吾亦屡试方解出，遂作此文，以便后学及自我温习。 那首先来看看这题目和出题人究竟时何方神圣 题目描述： LQ1005:入门训练Fibonacci数列 知识点:简单递归 C+±运算符和表达式概念 Fibonacci">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2025-05-17T07:29:48.000Z">
 <meta property="article:modified_time" content="2025-05-17T08:39:16.368Z">
@@ -298,21 +298,38 @@
             
               <div class="markdown-body">
                 
-                <h1 id="记一次与Fibonacci斗智斗勇"><a href="#记一次与Fibonacci斗智斗勇" class="headerlink" title="记一次与Fibonacci斗智斗勇"></a>记一次与Fibonacci斗智斗勇</h1><h2 id="楔子："><a href="#楔子：" class="headerlink" title="楔子："></a>楔子：</h2><p>事必有因。近时方备战粤港澳信息学竞赛，适值主办方有其平台，故欲以其平台练题。然用之颇觉不堪，譬如一题所予提示甚少，题目分类未明，且大多无题解。此题吾亦屡试方解出，遂作此文，以便后学及自我温习。</p>
+                <h1>记一次与Fibonacci斗智斗勇</h1>
+<h2 id="楔子：">楔子：</h2>
+<p>事必有因。近时方备战粤港澳信息学竞赛，适值主办方有其平台，故欲以其平台练题。然用之颇觉不堪，譬如一题所予提示甚少，题目分类未明，且大多无题解。此题吾亦屡试方解出，遂作此文，以便后学及自我温习。</p>
 <p>那首先来看看这题目和出题人究竟时何方神圣</p>
-<h2 id="题目描述："><a href="#题目描述：" class="headerlink" title="题目描述："></a>题目描述：</h2><h3 id="LQ1005-入门训练Fibonacci数列"><a href="#LQ1005-入门训练Fibonacci数列" class="headerlink" title="LQ1005:入门训练Fibonacci数列"></a>LQ1005:入门训练Fibonacci数列</h3><p>知识点:简单递归 C++-运算符和表达式概念</p>
-<p>Fibonacci数列的递推公式为:Fn=Fn-1+Fn-2,其中F1=F2=1。<br>当n比较大时,Fn也非常大,现在我们想知道,Fn除以10007的余数是多少。</p>
-<h4 id="输入格式"><a href="#输入格式" class="headerlink" title="输入格式"></a>输入格式</h4><p><strong>输入描述:</strong><br>输入包含一个整数<code>n</code>。<br>输入样例:<br><div class="code-wrapper"><pre><code class="hljs">10</code></pre></div></p>
-<h4 id="输出格式"><a href="#输出格式" class="headerlink" title="输出格式"></a>输出格式</h4><p><strong>输出描述:</strong><br>输出一行,包含一个整数,表示<code>Fn</code>除以10007的余数。</p>
-<p>说明:在本题中,答案是要求<code>Fn</code>除以10007的余数,因此我们只要能算出这个余数即可,<u>而不需要先计算出<code>Fn</code>的准确值,再将计算的结果除以10007取余</u> （记住这里后面要考）<br>数,直接计算余数往往比先算出原数再取余简单。<br>输出样例:</p>
+<h2 id="题目描述：">题目描述：</h2>
+<h3 id="LQ1005-入门训练Fibonacci数列">LQ1005:入门训练Fibonacci数列</h3>
+<p>知识点:简单递归 C+±运算符和表达式概念</p>
+<p>Fibonacci数列的递推公式为:Fn=Fn-1+Fn-2,其中F1=F2=1。<br>
+当n比较大时,Fn也非常大,现在我们想知道,Fn除以10007的余数是多少。</p>
+<h4 id="输入格式">输入格式</h4>
+<p><strong>输入描述:</strong><br>
+输入包含一个整数<code>n</code>。<br>
+输入样例:</p>
+<div class="code-wrapper"><pre><code class="hljs">10</code></pre></div>
+<h4 id="输出格式">输出格式</h4>
+<p><strong>输出描述:</strong><br>
+输出一行,包含一个整数,表示<code>Fn</code>除以10007的余数。</p>
+<p>说明:在本题中,答案是要求<code>Fn</code>除以10007的余数,因此我们只要能算出这个余数即可,<u>而不需要先计算出<code>Fn</code>的准确值,再将计算的结果除以10007取余</u> （记住这里后面要考）<br>
+数,直接计算余数往往比先算出原数再取余简单。<br>
+输出样例:</p>
 <div class="code-wrapper"><pre><code class="hljs">55</code></pre></div>
-<p>【提升】<br>HINT:时间限制:1.0s 内存限制:256.0MB<br>1≤n ≤ 1,000,000.</p>
-<h2 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h2><h3 id="初步分析"><a href="#初步分析" class="headerlink" title="初步分析"></a>初步分析</h3><p>我们从题目中可以得知，这道题要求我们实现以下两个部分</p>
+<p>【提升】<br>
+HINT:时间限制:1.0s 内存限制:256.0MB<br>
+1≤n ≤ 1,000,000.</p>
+<h2 id="分析">分析</h2>
+<h3 id="初步分析">初步分析</h3>
+<p>我们从题目中可以得知，这道题要求我们实现以下两个部分</p>
 <ul>
 <li>先实现求出斐波那契数列</li>
 <li>再用所求出的数进行模10007后输出值</li>
 </ul>
-<p>那这样的话，我们的思路一般都是<del>一眼丁真</del> 一眼递归，那么我们可以写出如下代码：</p>
+<p>那这样的话，我们的思路一般都是<s>一眼丁真</s> 一眼递归，那么我们可以写出如下代码：</p>
 <div class="code-wrapper"><pre><code class="hljs C++"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;iostream&gt;</span></span>
 <span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> std;
 
@@ -351,14 +368,16 @@
 <p>当我把题解放上去满心憧憬的时候</p>
 <p>爆零了</p>
 <p>！？</p>
-<h2 id="解剖开始"><a href="#解剖开始" class="headerlink" title="解剖开始"></a>解剖开始</h2><p>我们重新回到题目描述中，可以看到它的数据范围为1≤n ≤ 1,000,000，那如果我们直接输入1,000,000那就会。。。</p>
+<h2 id="解剖开始">解剖开始</h2>
+<p>我们重新回到题目描述中，可以看到它的数据范围为1≤n ≤ 1,000,000，那如果我们直接输入1,000,000那就会。。。</p>
 <div class="code-wrapper"><pre><code class="hljs zsh">➜  p1706 git:(master) ✗ ./a.out
 1000000
 [1]    59990 segmentation fault (core dumped)  ./a.out</code></pre></div>
 <p>就会趋势</p>
 <p>那既然超出了数值范围，那我们改成longlong试试</p>
 <p>我们只得了300分。。。</p>
-<p>也就是说我们是没有完全AC的，看了扣分点提示我们TLE了，根据目前的代码想想是哪里出了问题呢？<br><div class="code-wrapper"><pre><code class="hljs C++"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;iostream&gt;</span></span>
+<p>也就是说我们是没有完全AC的，看了扣分点提示我们TLE了，根据目前的代码想想是哪里出了问题呢？</p>
+<div class="code-wrapper"><pre><code class="hljs C++"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;iostream&gt;</span></span>
 <span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> std;
 
 <span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span> </span>&#123;
@@ -372,12 +391,12 @@
     &#125;
     cout &lt;&lt; b % <span class="hljs-number">10007</span> &lt;&lt; endl;
     <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
-&#125;</code></pre></div></p>
+&#125;</code></pre></div>
 <p>输出内容是这样的</p>
 <div class="code-wrapper"><pre><code class="hljs zsh">➜  p1706 git:(master) ✗ ./a.out     
 1000000
 -1044</code></pre></div>
-<p>我们能明显的意识到它发生整数溢出了，是计算机中整数存储的典型表现：当数值超过数据类型能表示的最大正值时，会”环绕”到负值范围。但是明明我们都用上了<code>long long</code>了，但是为什么还发生了溢出？</p>
+<p>我们能明显的意识到它发生整数溢出了，是计算机中整数存储的典型表现：当数值超过数据类型能表示的最大正值时，会&quot;环绕&quot;到负值范围。但是明明我们都用上了<code>long long</code>了，但是为什么还发生了溢出？</p>
 <p>那我们加大剂量</p>
 <div class="code-wrapper"><pre><code class="hljs C++"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;iostream&gt;</span></span>
 <span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> std;
@@ -423,7 +442,7 @@
     cout &lt;&lt; <span class="hljs-built_in">fib</span>(n)%<span class="hljs-number">10007</span> &lt;&lt; endl;
     <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
 &#125;</code></pre></div>
-<p>然后还是300分，原因。。。<code>0Wrong AnswerRead 3057, expect 2091.</code></p>
+<p>然后还是300分，原因。。。<code> 0Wrong AnswerRead 3057, expect 2091.</code></p>
 <p>那我们再改改</p>
 <div class="code-wrapper"><pre><code class="hljs c++"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;iostream&gt;</span></span>
 <span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> std;
@@ -447,7 +466,10 @@
     <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
 &#125;</code></pre></div>
 <p>好了，这次多了100分，看一眼报错<code>0Wrong Answer Read 4432, expect 6545.</code></p>
-<h2 id="再看看题目描述呢？"><a href="#再看看题目描述呢？" class="headerlink" title="再看看题目描述呢？"></a>再看看题目描述呢？</h2><h3 id="摘要"><a href="#摘要" class="headerlink" title="摘要"></a>摘要</h3><p><strong>输出描述:</strong><br>输出一行,包含一个整数,表示<code>Fn</code>除以10007的余数。</p>
+<h2 id="再看看题目描述呢？">再看看题目描述呢？</h2>
+<h3 id="摘要">摘要</h3>
+<p><strong>输出描述:</strong><br>
+输出一行,包含一个整数,表示<code>Fn</code>除以10007的余数。</p>
 <p><u>说明:在本题中,答案是要求<code>Fn</code>除以10007的余数,因此我们只要能算出这个余数即可,而不需要先计算出<code>Fn</code>的准确值,再将计算的结果除以10007取余数,直接计算余数往往比先算出原数再取余简单。</u></p>
 <p>在根据我们前面的尝试，得出这道题的AK思路应该是：</p>
 <ol>
@@ -486,7 +508,8 @@
     cout &lt;&lt; <span class="hljs-built_in">fibMod</span>(n)%<span class="hljs-number">10007</span> &lt;&lt; endl;
     <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
 &#125;</code></pre></div>
-<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><ul>
+<h2 id="总结">总结</h2>
+<ul>
 <li>看清数据范围</li>
 <li>用迭代而不是递归</li>
 <li>无需求出对应数而是每一步都进行取模</li>
