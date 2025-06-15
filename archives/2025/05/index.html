@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="description" content="Welcome to the secure world of r1ng0rez!  This blog is mainly used to record my research notes and thoughts on Software-Security and other fields. Feel free to leave me a message for talks.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="r1ng0rez&#39;s Security World">
+<meta property="og:url" content="htps://r1ng0rez.github.io/archives/2025/05/index.html">
+<meta property="og:site_name" content="r1ng0rez&#39;s Security World">
+<meta property="og:description" content="Welcome to the secure world of r1ng0rez!  This blog is mainly used to record my research notes and thoughts on Software-Security and other fields. Feel free to leave me a message for talks.">
+<meta property="og:locale" content="en_US">
+<meta property="article:author" content="Hailin Zheng">
+<meta name="twitter:card" content="summary">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="/images/favicon.ico">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+        
+      
+    
+    <!-- title -->
+    <title>Writing: 2025/5</title>
+    <!-- async scripts -->
+    <!-- Google Analytics -->
+
+
+    <!-- Umami Analytics -->
+
+
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+	<!-- mathjax -->
+	、
+  <!--Loader-->
+<style>
+  /* 基础样式 */
+  #hacker-loader {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #111;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+    font-family: 'Courier New', monospace;
+    overflow: hidden;
+  }
+  
+  .hacker-container {
+    text-align: center;
+    position: relative;
+    z-index: 2;
+  }
+  
+  .hacker-text {
+    color: #fff;
+    font-size: 3rem;
+    letter-spacing: 0.5rem;
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.7);
+    margin-bottom: 2rem;
+  }
+  
+  .hacker-progress {
+    color: #fff;
+    font-size: 0.8rem;
+    letter-spacing: 0.2rem;
+    margin-top: 1rem;
+    opacity: 0.8;
+  }
+  
+  .hacker-progress-bar {
+    width: 200px;
+    height: 2px;
+    background: rgba(255, 255, 255, 0.2);
+    margin: 10px auto;
+    overflow: hidden;
+  }
+  
+  .hacker-progress-bar:after {
+    content: '';
+    display: block;
+    height: 100%;
+    width: 100%;
+    background: linear-gradient(90deg, transparent, #fff, transparent);
+    animation: progress 2s linear infinite;
+    transform: translateX(-100%);
+  }
+  
+  @keyframes progress {
+    0% { transform: translateX(-100%); }
+    100% { transform: translateX(100%); }
+  }
+  
+  /* 终端光标效果 */
+  .cursor {
+    display: inline-block;
+    width: 10px;
+    height: 1.2rem;
+    background: #fff;
+    margin-left: 5px;
+    vertical-align: middle;
+    animation: blink 0.7s infinite;
+  }
+  
+  @keyframes blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0; }
+  }
+  
+  /* 完成后的效果 */
+  .complete .hacker-text {
+    animation: glitch 0.5s linear 2;
+  }
+  
+  @keyframes glitch {
+    0% { transform: translate(0); }
+    20% { transform: translate(-2px, 2px); }
+    40% { transform: translate(-2px, -2px); }
+    60% { transform: translate(2px, 2px); }
+    80% { transform: translate(2px, -2px); }
+    100% { transform: translate(0); }
+  }
+  
+  /* 滑动切屏动画 */
+  .slide-transition {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #fff;
+    z-index: 9998;
+    transform: translateX(100%);
+    pointer-events: none;
+  }
+  
+  /* 主内容初始状态 */
+  main {
+    opacity: 0;
+    transform: translateX(-30px);
+    transition: all 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+</style>
+
+<div id="hacker-loader">
+  <!-- 滑动转场元素 -->
+  <div class="slide-transition" id="slide-transition"></div>
+  
+  <div class="hacker-container">
+    <div class="hacker-text" id="hacker-display"></div>
+    <div class="hacker-progress"></div>
+    <div class="hacker-progress-bar"></div>
+  </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/gsap.min.js"></script>
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const targetText = "r1ng0rez";
+    const display = document.getElementById('hacker-display');
+    const loader = document.getElementById('hacker-loader');
+    const slideTransition = document.getElementById('slide-transition');
+    const chars = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz!@#$%^&*()";
+    let currentPosition = 0;
+    let iterations = 0;
+    const maxIterations = 3;
+    
+    function randomChar() {
+      return chars[Math.floor(Math.random() * chars.length)];
+    }
+    
+    function animateText() {
+      let result = "";
+      let completed = true;
+      
+      for (let i = 0; i < targetText.length; i++) {
+        if (i < currentPosition) {
+          result += targetText[i];
+        } else if (i === currentPosition && iterations < maxIterations) {
+          result += randomChar();
+          completed = false;
+        } else {
+          result += " ";
+        }
+      }
+      
+      display.innerHTML = result + '<span class="cursor"></span>';
+      
+      if (completed) {
+        currentPosition++;
+        iterations = 0;
+        
+        if (currentPosition >= targetText.length) {
+          display.innerHTML = targetText;
+          loader.classList.add('complete');
+          
+          // 启动滑动转场动画
+          startTransition();
+          return;
+        }
+      } else {
+        iterations++;
+      }
+      
+      const speed = currentPosition < 3 ? 80 : 50 + Math.random() * 50;
+      setTimeout(animateText, speed);
+    }
+    
+    function startTransition() {
+      // 滑动动画
+      gsap.to(slideTransition, {
+        x: "0%",
+        duration: 0.8,
+        ease: "power2.in",
+        onComplete: function() {
+          // 隐藏加载器
+          loader.style.display = 'none';
+          
+          // 显示主内容
+          gsap.to("main", {
+            opacity: 1,
+            x: 0,
+            duration: 0.8,
+            ease: "power2.out",
+            delay: 0.2
+          });
+          
+          // 滑出转场面板
+          gsap.to(slideTransition, {
+            x: "-100%",
+            duration: 0.8,
+            ease: "power2.out",
+            delay: 0.3
+          });
+        }
+      });
+    }
+    
+    // 确保页面内容已加载
+    function checkPageLoaded() {
+      if (document.readyState === 'complete') {
+        setTimeout(animateText, 500);
+      } else {
+        window.addEventListener('load', function() {
+          setTimeout(animateText, 500);
+        });
+      }
+    }
+    
+    checkPageLoaded();
+  });
+</script>
+<!--More Dark-->
+<style>
+  /* 强制覆盖主题背景色为纯黑 */
+  body {
+    background-color: #000 !important;
+  }
+
+  /* 内容区域背景（文章卡片、侧边栏等） */
+  .main-container,
+  .sidebar,
+  .post-card,
+  .footer {
+    background-color: #111 !important;
+  }
+
+  /* 确保文字可读性 */
+  body,
+  .post-title a,
+  .post-content,
+  .sidebar-nav a {
+    color: #e0e0e0 !important;
+  }
+
+  /* 链接悬停效果 */
+  a:hover {
+    color: #fff !important;
+    text-shadow: 0 0 5px rgba(255, 255, 255, 0.3);
+  }
+
+  /* 代码块适配 */
+  pre, code {
+    background-color: #1a1a1a !important;
+    color: #f0f0f0 !important;
+  }
+</style>
+<!--Green2White-->
+<style>
+  /* 强制覆盖所有背景色为黑色 */
+  body {
+    background-color: #000 !important;
+  }
+
+  /* 覆盖所有文字颜色为白色 */
+  body,
+  .post-title a,
+  .post-content,
+  .post-content a,
+  .sidebar,
+  .sidebar-nav a,
+  .footer,
+  .footer a,
+  .post-meta,
+  .post-tags a,
+  .pagination a,
+  .archive-item a,
+  .tag-title,
+  .category-title {
+    color: #fff !important;
+  }
+
+  /* 链接悬停效果（保留但改为亮灰色） */
+  a:hover {
+    color: #ccc !important;
+    text-decoration: none;
+  }
+
+  /* 代码块样式（保持深灰背景+白色文字） */
+  pre, code {
+    background-color: #1a1a1a !important;
+    color: #fff !important;
+  }
+
+  /* 覆盖按钮和特殊元素的绿色 */
+  .btn,
+  .pagination .current,
+  .tag-cloud a:hover {
+    background-color: #333 !important;
+    color: #fff !important;
+    border-color: #555 !important;
+  }
+
+  /* 表格边框适配 */
+  table td, table th {
+    border-color: #444 !important;
+  }
+
+  /* 分隔线颜色 */
+  hr {
+    border-color: #333 !important;
+  }
+</style>
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+    <div class="content index py4 ">
+        
+          <header id="header">
+  <a class="u-url u-uid" href="/">
+  
+    
+      <img id="logo" alt class="u-logo" src="/images/logo.png" />
+    
+  
+    <div id="title">
+      <h1 class="p-name">r1ng0rez&#39;s Security World</h1>
+    </div>
+  </a>
+  <div id="nav">
+    <ul>
+      <li class="icon">
+        <a href="#" aria-label="Menu"><i class="fa-solid fa-bars fa-2x"></i></a>
+      </li>
+      <!--
+     --><li><a href="/">Home</a></li><!--
+   --><!--
+     --><li><a href="/about/">About</a></li><!--
+   --><!--
+     --><li><a href="/archives/">Writing</a></li><!--
+   --><!--
+     --><li><a target="_blank" rel="noopener" href="http://github.com/r1ng0rez">Projects</a></li><!--
+   --><!--
+     --><li><a href="/links/">links</a></li><!--
+   -->
+    </ul>
+  </div>
+</header>
+
+        
+        <div id="archive">
+  <ul class="post-list">
+    
+    
+    
+    
+      
+      
+      
+      
+        <li class="post-year"><h2>2025</h2></li>
+      
+      <li class="post-item">
+        
+    <div class="meta">
+      
+        
+          <time datetime="2025-05-10T00:38:58.000Z" class="dt-published" itemprop="datePublished">2025-05-10</time>
+        
+      
+    </div>
+
+
+        <span>
+    
+        <a class="" href="/2025/05/10/Learning-Note-on-Attention-is-All-You-Need/">Learning Note on Attention is All You Need</a>
+    
+
+
+</span>
+      </li>
+    
+  </ul>
+  
+
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2016-2025
+    Hailin Zheng
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/about/">About</a></li><!--
+     --><!--
+       --><li><a href="/archives/">Writing</a></li><!--
+     --><!--
+       --><li><a target="_blank" rel="noopener" href="http://github.com/r1ng0rez">Projects</a></li><!--
+     --><!--
+       --><li><a href="/links/">links</a></li><!--
+     -->
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+
+
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
+
+
+    <!-- jquery -->
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script>
+
+
+
+
+<!-- clipboard -->
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Baidu Analytics -->
+
+<!-- Cloudflare Analytics -->
+
+<!-- Disqus Comments -->
+
+<!-- utterances Comments -->
+
+</body>
+</html>
