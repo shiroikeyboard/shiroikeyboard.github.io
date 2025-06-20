@@ -16,15 +16,15 @@
   <meta http-equiv="x-ua-compatible" content="ie=edge">
   
   <meta name="theme-color" content="#2f4154">
-  <meta name="author" content="白色键盘">
+  <meta name="author" content="r1ng0rez">
   <meta name="keywords" content="r1ng0rez wenling r00tk1t Solkatt p4y1oad 白色键盘">
   
-    <meta name="description" content="Web安全条件竞争漏洞学习 0x00 概述 ​		条件竞争漏洞发生在多个线程同时访问同一个共享代码、变量、文件等，，由于多个不同线程同时与相同的数据进行交互，从而导致碰撞冲突（例如，后端多个线程同时修改数据库中的某一个字段值）。攻击者通过精心定制请求到达后端的时间故意制造冲突，并由此实现恶意目的。这个漏洞存在于操作系统、数据库、web等多个层面，由于大多服务端框架在处理不同用户的请求时是并发进行的">
+    <meta name="description" content="Web安全条件竞争漏洞学习0x00 概述​        条件竞争漏洞发生在多个线程同时访问同一个共享代码、变量、文件等，，由于多个不同线程同时与相同的数据进行交互，从而导致碰撞冲突（例如，后端多个线程同时修改数据库中的某一个字段值）。攻击者通过精心定制请求到达后端的时间故意制造冲突，并由此实现恶意目的。这个漏洞存在于操作系统、数据库、web等多个层面，由于大多服务端框架在处理不同用户的请求时是并">
 <meta property="og:type" content="article">
 <meta property="og:title" content="条件竞争漏洞学习">
-<meta property="og:url" content="https://shiroikeyboard.github.io/2025/02/08/%E6%9D%A1%E4%BB%B6%E7%AB%9E%E4%BA%89%E6%BC%8F%E6%B4%9E%E5%AD%A6%E4%B9%A0/index.html">
-<meta property="og:site_name" content="白いキーボードの Blog">
-<meta property="og:description" content="Web安全条件竞争漏洞学习 0x00 概述 ​		条件竞争漏洞发生在多个线程同时访问同一个共享代码、变量、文件等，，由于多个不同线程同时与相同的数据进行交互，从而导致碰撞冲突（例如，后端多个线程同时修改数据库中的某一个字段值）。攻击者通过精心定制请求到达后端的时间故意制造冲突，并由此实现恶意目的。这个漏洞存在于操作系统、数据库、web等多个层面，由于大多服务端框架在处理不同用户的请求时是并发进行的">
+<meta property="og:url" content="https://r1ng0rez.github.io/2025/02/08/%E6%9D%A1%E4%BB%B6%E7%AB%9E%E4%BA%89%E6%BC%8F%E6%B4%9E%E5%AD%A6%E4%B9%A0/index.html">
+<meta property="og:site_name" content="r1ng0rez&#39;s Blog">
+<meta property="og:description" content="Web安全条件竞争漏洞学习0x00 概述​        条件竞争漏洞发生在多个线程同时访问同一个共享代码、变量、文件等，，由于多个不同线程同时与相同的数据进行交互，从而导致碰撞冲突（例如，后端多个线程同时修改数据库中的某一个字段值）。攻击者通过精心定制请求到达后端的时间故意制造冲突，并由此实现恶意目的。这个漏洞存在于操作系统、数据库、web等多个层面，由于大多服务端框架在处理不同用户的请求时是并">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://pic2.zhimg.com/80/v2-ffffaa1fb957682cebb626a0482344b3_720w.webp">
 <meta property="og:image" content="https://pica.zhimg.com/80/v2-b3ccc0bc7165f6bd90fcf6769c591786_720w.webp">
@@ -32,14 +32,14 @@
 <meta property="og:image" content="https://pic2.zhimg.com/80/v2-98252be57cdc6ace37d120354c2b5da1_720w.webp">
 <meta property="article:published_time" content="2025-02-08T09:02:24.000Z">
 <meta property="article:modified_time" content="2025-05-16T11:25:22.037Z">
-<meta property="article:author" content="白色键盘">
+<meta property="article:author" content="r1ng0rez">
 <meta property="article:tag" content="Web安全">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://pic2.zhimg.com/80/v2-ffffaa1fb957682cebb626a0482344b3_720w.webp">
   
   
   
-  <title>条件竞争漏洞学习 - 白いキーボードの Blog</title>
+  <title>条件竞争漏洞学习 - r1ng0rez&#39;s Blog</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -81,7 +81,7 @@
   <script id="fluid-configs">
     var Fluid = window.Fluid || {};
     Fluid.ctx = Object.assign({}, Fluid.ctx)
-    var CONFIG = {"hostname":"shiroikeyboard.github.io","root":"/","version":"1.9.8","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null}},"search_path":"/local-search.xml","include_content_in_search":true};
+    var CONFIG = {"hostname":"r1ng0rez.github.io","root":"/","version":"1.9.8","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null}},"search_path":"/local-search.xml","include_content_in_search":true};
 
     if (CONFIG.web_analytics.follow_dnt) {
       var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
@@ -303,12 +303,8 @@
             
               <div class="markdown-body">
                 
-                <h2 id="Web安全条件竞争漏洞学习">Web安全条件竞争漏洞学习</h2>
-<h4 id="0x00-概述">0x00 概述</h4>
-<p>​		条件竞争漏洞发生在多个线程同时访问同一个共享代码、变量、文件等，，由于多个不同线程同时与相同的数据进行交互，从而导致碰撞冲突（例如，后端多个线程同时修改数据库中的某一个字段值）。攻击者通过精心定制请求到达后端的时间故意制造冲突，并由此实现恶意目的。这个漏洞存在于操作系统、数据库、web等多个层面，由于大多服务端框架在处理不同用户的请求时是并发进行的，而开发者在进行代码开发时常常倾向于认为代码会以线性的方式执行，而忽视了并行服务器会并发执行多个线程，这就会导致意想不到的结果。</p>
-<h6 id="简单来说，就是多线程同时操作一个对象，而没有对对象进行加锁等保证一致性的操作">简单来说，就是多线程同时操作一个对象，而没有对对象进行加锁等保证一致性的操作</h6>
-<h4 id="0x01-简单分析">0x01 简单分析</h4>
-<p>我们来设计一个简答的业务逻辑：商城系统中，用户提交折扣码，后端会检测用户是否已经使用过折扣码。若未使用过，则使用该折扣码，并记录折扣码使用状态为True。若已使用折扣码，用户再次使用折扣码时，后端程序读取折扣码使用状态为True，拒绝用户再次使用折扣码。</p>
+                <h2 id="Web安全条件竞争漏洞学习"><a href="#Web安全条件竞争漏洞学习" class="headerlink" title="Web安全条件竞争漏洞学习"></a>Web安全条件竞争漏洞学习</h2><h4 id="0x00-概述"><a href="#0x00-概述" class="headerlink" title="0x00 概述"></a>0x00 概述</h4><p>​        条件竞争漏洞发生在多个线程同时访问同一个共享代码、变量、文件等，，由于多个不同线程同时与相同的数据进行交互，从而导致碰撞冲突（例如，后端多个线程同时修改数据库中的某一个字段值）。攻击者通过精心定制请求到达后端的时间故意制造冲突，并由此实现恶意目的。这个漏洞存在于操作系统、数据库、web等多个层面，由于大多服务端框架在处理不同用户的请求时是并发进行的，而开发者在进行代码开发时常常倾向于认为代码会以线性的方式执行，而忽视了并行服务器会并发执行多个线程，这就会导致意想不到的结果。</p>
+<h6 id="简单来说，就是多线程同时操作一个对象，而没有对对象进行加锁等保证一致性的操作"><a href="#简单来说，就是多线程同时操作一个对象，而没有对对象进行加锁等保证一致性的操作" class="headerlink" title="简单来说，就是多线程同时操作一个对象，而没有对对象进行加锁等保证一致性的操作"></a>简单来说，就是多线程同时操作一个对象，而没有对对象进行加锁等保证一致性的操作</h6><h4 id="0x01-简单分析"><a href="#0x01-简单分析" class="headerlink" title="0x01 简单分析"></a>0x01 简单分析</h4><p>我们来设计一个简答的业务逻辑：商城系统中，用户提交折扣码，后端会检测用户是否已经使用过折扣码。若未使用过，则使用该折扣码，并记录折扣码使用状态为True。若已使用折扣码，用户再次使用折扣码时，后端程序读取折扣码使用状态为True，拒绝用户再次使用折扣码。</p>
 <p><img src="https://pic2.zhimg.com/80/v2-ffffaa1fb957682cebb626a0482344b3_720w.webp" srcset="/img/loading.gif" lazyload alt="Lesson-eb3846115f6b8"></p>
 <p>我们在这里用一段简单的python代码来模拟后端逻辑，处理请求的<code>handle_req()</code>函数是并发（多线程/多进程）执行的：</p>
 <div class="code-wrapper"><pre><code class="hljs python"><span class="hljs-keyword">def</span> **handle_req**():
@@ -319,14 +315,11 @@
         reject_use_code()      	  <span class="hljs-comment"># 拒绝再次使用折扣码</span></code></pre></div>
 <p>但是这个过程可能会存在条件竞争漏洞，因为我们第一次请求判断的状态为false即未使用折扣码，但是第一个请求执行到第四行时准备更新数据库内容而第二个请求又开始执行并将折扣码使用状态再一次地标记为false，从而造成了使用了两次折扣码，触发了条件竞争漏洞，如下图所示：后端将记录折扣码使用状态为True之前，可能存在条件竞争，上述第2、3行代码执行的时间就是<code>竞争窗口</code>。</p>
 <p><img src="https://pica.zhimg.com/80/v2-b3ccc0bc7165f6bd90fcf6769c591786_720w.webp" srcset="/img/loading.gif" lazyload alt="Lesson-eb3846115f6b8"></p>
-<p>竞争窗口一般是一段很短的时间段（几毫秒甚至更短），用户通过并行发送多个数据包，使得服务端竞争窗口内执行多次特定的功能。</p>
+<p>　竞争窗口一般是一段很短的时间段（几毫秒甚至更短），用户通过并行发送多个数据包，使得服务端竞争窗口内执行多次特定的功能。</p>
 <p><img src="https://pic4.zhimg.com/80/v2-936e0bec041297e3b7f8b1f0d9f568d1_720w.webp" srcset="/img/loading.gif" lazyload alt="Lesson-eb3846115f6b8"></p>
-<h4 id="0x02-CTF中的条件竞争">0x02 CTF中的条件竞争</h4>
-<p>我们来看这样的一道题目</p>
-<p>【题型】<a href>Web</a><br>
-【题目】<code>wzsc_文件上传</code><br>
-【来源】（[攻防世界](<a target="_blank" rel="noopener" href="https://adworld.xctf.org.cn/challenges/list%EF%BC%89">https://adworld.xctf.org.cn/challenges/list）</a><br>
-【思路】<a href>条件竞争</a></p>
+<h4 id="0x02-CTF中的条件竞争"><a href="#0x02-CTF中的条件竞争" class="headerlink" title="0x02 CTF中的条件竞争"></a>0x02 CTF中的条件竞争</h4><p>我们来看这样的一道题目</p>
+<p>【题型】<a href>Web</a><br>【题目】<code>wzsc_文件上传</code><br>【来源】（<a target="_blank" rel="noopener" href="https://adworld.xctf.org.cn/challenges/list）
+【思路】[条件竞争](">攻防世界</a></p>
 <p>我们先上传一个一句话木马并把包拦截下来进行分析测试</p>
 <div class="code-wrapper"><pre><code class="hljs bash">POST /upload.php HTTP/1.1
 Host: Host:Port
@@ -373,42 +366,9 @@ Connection: close</code></pre></div>
 <p><img src="https://pic2.zhimg.com/80/v2-98252be57cdc6ace37d120354c2b5da1_720w.webp" srcset="/img/loading.gif" lazyload alt="4"></p>
 <p>Success to upload！</p>
 <p>成功拿到flag：<code>cyberpeace&#123;This_is_a_sample_flag&#125;</code></p>
-<h4 id="0x03-如何防御？">0x03 如何防御？</h4>
-<p>以下总结了一些防御方法和常见条件竞争漏洞示例及防御</p>
-<p>(1) 使用同步机制<br>
-锁（Lock）：通过加锁确保同一时间只有一个线程或进程可以访问共享资源。<br>
-信号量（Semaphore）：限制同时访问资源的线程或进程数量。<br>
-互斥量（Mutex）：类似于锁，用于多线程环境。<br>
-(2) 原子操作<br>
-使用原子操作确保操作的不可分割性。<br>
-示例：<br>
-数据库中的事务（Transaction）。<br>
-编程语言中的原子类型（如 atomic 在 C++ 或 Java 中）。<br>
-(3) 避免共享资源<br>
-尽量减少共享资源的使用，采用线程本地存储（Thread Local Storage, TLS）或进程隔离。<br>
-示例：<br>
-使用线程本地变量代替全局变量。<br>
-(4) 文件操作防御<br>
-使用文件锁（File Lock）确保同一时间只有一个进程可以访问文件。<br>
-(5) 数据库操作防御<br>
-使用事务（Transaction）和锁机制（如行锁、表锁）确保数据一致性。<br>
-(6) 时间窗口最小化<br>
-减少竞争条件的发生概率，尽量缩短共享资源的访问时间。<br>
-示例：<br>
-在文件操作中，尽快释放文件锁。<br>
-(7) 使用不可变对象<br>
-使用不可变对象（Immutable Objects）避免共享资源被修改。<br>
-示例：<br>
-在函数式编程中，尽量使用不可变数据结构。<br>
-(8) 输入验证和边界检查<br>
-对用户输入进行严格验证，避免恶意输入触发竞争条件。<br>
-示例：<br>
-检查文件路径、用户权限等。<br>
-(9) 代码审查和测试<br>
-通过代码审查发现潜在的竞争条件。<br>
-使用压力测试和并发测试工具（如 JMeter、Locust）模拟高并发场景。</p>
-<p>常见条件竞争漏洞示例及防御<br>
-(1) TOCTOU（Time-of-Check to Time-of-Use）</p>
+<h4 id="0x03-如何防御？"><a href="#0x03-如何防御？" class="headerlink" title="0x03 如何防御？"></a>0x03 如何防御？</h4><p>以下总结了一些防御方法和常见条件竞争漏洞示例及防御</p>
+<p>(1) 使用同步机制<br>    锁（Lock）：通过加锁确保同一时间只有一个线程或进程可以访问共享资源。<br>    信号量（Semaphore）：限制同时访问资源的线程或进程数量。<br>    互斥量（Mutex）：类似于锁，用于多线程环境。<br>(2) 原子操作<br>    使用原子操作确保操作的不可分割性。<br>    示例：<br>        数据库中的事务（Transaction）。<br>        编程语言中的原子类型（如 atomic 在 C++ 或 Java 中）。<br>(3) 避免共享资源<br>    尽量减少共享资源的使用，采用线程本地存储（Thread Local Storage, TLS）或进程隔离。<br>    示例：<br>        使用线程本地变量代替全局变量。<br>(4) 文件操作防御<br>    使用文件锁（File Lock）确保同一时间只有一个进程可以访问文件。<br>(5) 数据库操作防御<br>    使用事务（Transaction）和锁机制（如行锁、表锁）确保数据一致性。<br>(6) 时间窗口最小化<br>    减少竞争条件的发生概率，尽量缩短共享资源的访问时间。<br>    示例：<br>        在文件操作中，尽快释放文件锁。<br>(7) 使用不可变对象<br>    使用不可变对象（Immutable Objects）避免共享资源被修改。<br>    示例：<br>        在函数式编程中，尽量使用不可变数据结构。<br>(8) 输入验证和边界检查<br>    对用户输入进行严格验证，避免恶意输入触发竞争条件。<br>    示例：<br>        检查文件路径、用户权限等。<br>(9) 代码审查和测试<br>    通过代码审查发现潜在的竞争条件。<br>    使用压力测试和并发测试工具（如 JMeter、Locust）模拟高并发场景。</p>
+<p>常见条件竞争漏洞示例及防御<br>(1) TOCTOU（Time-of-Check to Time-of-Use）</p>
 <div class="code-wrapper"><pre><code class="hljs c">漏洞描述：在检查资源状态和使用资源之间存在时间窗口，攻击者可以利用这个时间窗口修改资源状态。
 
 防御方法：
@@ -460,8 +420,7 @@ Connection: close</code></pre></div>
     <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">updateResource</span><span class="hljs-params">()</span> &#123;
         sharedResource.incrementAndGet();
     &#125;</code></pre></div>
-<h6 id="一些素材来源：">一些素材来源：</h6>
-<p><a target="_blank" rel="noopener" href="https://noa.pages.dev/posts/web_security/race_conditions/">Noah’s Blog</a></p>
+<h6 id="一些素材来源："><a href="#一些素材来源：" class="headerlink" title="一些素材来源："></a>一些素材来源：</h6><p><a target="_blank" rel="noopener" href="https://noa.pages.dev/posts/web_security/race_conditions/">Noah’s Blog</a></p>
 <p><a target="_blank" rel="noopener" href="https://chat.deepseek.com/">DeepSeek</a></p>
 
                 
@@ -509,13 +468,13 @@ Connection: close</code></pre></div>
   <div class="license-box my-3">
     <div class="license-title">
       <div>条件竞争漏洞学习</div>
-      <div>https://shiroikeyboard.github.io/2025/02/08/条件竞争漏洞学习/</div>
+      <div>https://r1ng0rez.github.io/2025/02/08/条件竞争漏洞学习/</div>
     </div>
     <div class="license-meta">
       
         <div class="license-meta-item">
           <div>作者</div>
-          <div>白色键盘</div>
+          <div>r1ng0rez</div>
         </div>
       
       
@@ -553,9 +512,9 @@ Connection: close</code></pre></div>
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2025/02/22/upload-lab%E9%9D%B6%E5%9C%BA%E5%B0%8F%E8%AE%A1/" title="upload-lab靶场小计">
+                      <a href="/2025/04/19/Basic-ROP-Learning/" title="Basic ROP Learning">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">upload-lab靶场小计</span>
+                        <span class="hidden-mobile">Basic ROP Learning</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
