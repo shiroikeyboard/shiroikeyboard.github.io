@@ -16,26 +16,26 @@
   <meta http-equiv="x-ua-compatible" content="ie=edge">
   
   <meta name="theme-color" content="#2f4154">
-  <meta name="author" content="r1ng0rez">
-  <meta name="keywords" content="r1ng0rez wenling r00tk1t Solkatt p4y1oad 白色键盘">
+  <meta name="author" content="Zheng Hailin">
+  <meta name="keywords" content="r1ng0rez wenling r00tk1t Solkatt p4y1oad 白色键盘 Zheng Hailin">
   
-    <meta name="description" content="攻防世界-pwnstack题解这是新博客的第一篇文章，感觉空荡荡的就当一次随笔 一、简述【题型】PWN【题目】pwnstack【来源】攻防世界 二、思路及过程Step.1：先使用checksec和file了解有关这个文件的一些信息 # zer0-r1ng @ ring0rez-Laptop in ~&#x2F;Challenge&#x2F;Adworld&#x2F;pwnstack&#x2F;[16:27:17] $ checksec">
+    <meta name="description" content="攻防世界-pwnstack题解 这是新博客的第一篇文章，感觉空荡荡的就当一次随笔 一、简述 【题型】PWN 【题目】pwnstack 【来源】[攻防世界](https:&#x2F;&#x2F;adworld.xctf.org.cn&#x2F;challenges&#x2F;list） 【思路】栈溢出 二、思路及过程 Step.1：先使用checksec和file了解有关这个文件的一些信息 # zer0-r1ng @ ring0rez-L">
 <meta property="og:type" content="article">
 <meta property="og:title" content="攻防世界-pwnstack题解">
-<meta property="og:url" content="https://r1ng0rez.github.io/2025/02/06/%E6%94%BB%E9%98%B2%E4%B8%96%E7%95%8C-pwnstack%E9%A2%98%E8%A7%A3/index.html">
-<meta property="og:site_name" content="r1ng0rez&#39;s Blog">
-<meta property="og:description" content="攻防世界-pwnstack题解这是新博客的第一篇文章，感觉空荡荡的就当一次随笔 一、简述【题型】PWN【题目】pwnstack【来源】攻防世界 二、思路及过程Step.1：先使用checksec和file了解有关这个文件的一些信息 # zer0-r1ng @ ring0rez-Laptop in ~&#x2F;Challenge&#x2F;Adworld&#x2F;pwnstack&#x2F;[16:27:17] $ checksec">
+<meta property="og:url" content="https://iszhenghailin.github.io/2025/02/06/%E6%94%BB%E9%98%B2%E4%B8%96%E7%95%8C-pwnstack%E9%A2%98%E8%A7%A3/index.html">
+<meta property="og:site_name" content="Zheng Hailin - r1ng0rez">
+<meta property="og:description" content="攻防世界-pwnstack题解 这是新博客的第一篇文章，感觉空荡荡的就当一次随笔 一、简述 【题型】PWN 【题目】pwnstack 【来源】[攻防世界](https:&#x2F;&#x2F;adworld.xctf.org.cn&#x2F;challenges&#x2F;list） 【思路】栈溢出 二、思路及过程 Step.1：先使用checksec和file了解有关这个文件的一些信息 # zer0-r1ng @ ring0rez-L">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2025-02-06T08:55:35.000Z">
 <meta property="article:modified_time" content="2025-05-17T01:49:38.772Z">
-<meta property="article:author" content="r1ng0rez">
+<meta property="article:author" content="Zheng Hailin">
 <meta property="article:tag" content="Pwn">
 <meta property="article:tag" content="CTF">
 <meta name="twitter:card" content="summary_large_image">
   
   
   
-  <title>攻防世界-pwnstack题解 - r1ng0rez&#39;s Blog</title>
+  <title>攻防世界-pwnstack题解 - Zheng Hailin - r1ng0rez</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -77,7 +77,7 @@
   <script id="fluid-configs">
     var Fluid = window.Fluid || {};
     Fluid.ctx = Object.assign({}, Fluid.ctx)
-    var CONFIG = {"hostname":"r1ng0rez.github.io","root":"/","version":"1.9.8","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null}},"search_path":"/local-search.xml","include_content_in_search":true};
+    var CONFIG = {"hostname":"iszhenghailin.github.io","root":"/","version":"1.9.8","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null}},"search_path":"/local-search.xml","include_content_in_search":true};
 
     if (CONFIG.web_analytics.follow_dnt) {
       var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
@@ -109,7 +109,7 @@
   <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
   <div class="container">
     <a class="navbar-brand" href="/">
-      <strong>白いキーボードのBlog</strong>
+      <strong>Zheng Hailin</strong>
     </a>
 
     <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
@@ -246,7 +246,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          513 字
+          525 字
         
       </span>
     
@@ -299,10 +299,15 @@
             
               <div class="markdown-body">
                 
-                <h2 id="攻防世界-pwnstack题解"><a href="#攻防世界-pwnstack题解" class="headerlink" title="攻防世界-pwnstack题解"></a>攻防世界-pwnstack题解</h2><p>这是新博客的第一篇文章，感觉空荡荡的就当一次随笔</p>
-<h4 id="一、简述"><a href="#一、简述" class="headerlink" title="一、简述"></a>一、简述</h4><p>【题型】<a href>PWN</a><br>【题目】<code>pwnstack</code><br>【来源】<a target="_blank" rel="noopener" href="https://adworld.xctf.org.cn/challenges/list）
-【思路】[栈溢出](">攻防世界</a></p>
-<h4 id="二、思路及过程"><a href="#二、思路及过程" class="headerlink" title="二、思路及过程"></a>二、思路及过程</h4><p>Step.1：先使用<code>checksec</code>和<code>file</code>了解有关这个文件的一些信息</p>
+                <h2 id="攻防世界-pwnstack题解">攻防世界-pwnstack题解</h2>
+<p>这是新博客的第一篇文章，感觉空荡荡的就当一次随笔</p>
+<h4 id="一、简述">一、简述</h4>
+<p>【题型】<a href>PWN</a><br>
+【题目】<code>pwnstack</code><br>
+【来源】[攻防世界](<a target="_blank" rel="noopener" href="https://adworld.xctf.org.cn/challenges/list%EF%BC%89">https://adworld.xctf.org.cn/challenges/list）</a><br>
+【思路】<a href>栈溢出</a></p>
+<h4 id="二、思路及过程">二、思路及过程</h4>
+<p>Step.1：先使用<code>checksec</code>和<code>file</code>了解有关这个文件的一些信息</p>
 <div class="code-wrapper"><pre><code class="hljs bash"><span class="hljs-comment"># zer0-r1ng @ ring0rez-Laptop in ~/Challenge/Adworld/pwnstack/[16:27:17]</span>
 $ checksec pwn2
 [*] <span class="hljs-string">&#x27;/Challenge/Adworld/pwnstack/pwn2&#x27;</span>
@@ -421,13 +426,13 @@ cyberpeace&#123;9d0526386a432e6fcf65858cd1ee804d&#125;</code></pre></div>
   <div class="license-box my-3">
     <div class="license-title">
       <div>攻防世界-pwnstack题解</div>
-      <div>https://r1ng0rez.github.io/2025/02/06/攻防世界-pwnstack题解/</div>
+      <div>https://iszhenghailin.github.io/2025/02/06/攻防世界-pwnstack题解/</div>
     </div>
     <div class="license-meta">
       
         <div class="license-meta-item">
           <div>作者</div>
-          <div>r1ng0rez</div>
+          <div>Zheng Hailin</div>
         </div>
       
       

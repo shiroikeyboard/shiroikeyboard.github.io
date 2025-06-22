@@ -19,22 +19,23 @@
   <meta name="author" content="Zheng Hailin">
   <meta name="keywords" content="r1ng0rez wenling r00tk1t Solkatt p4y1oad 白色键盘 Zheng Hailin">
   
-    <meta name="description" content="C++计算烷烃同分异构体数量(一) 引子 事出有因，吾今为高一学子，昨日于化学课习及有机物，恰留意到 烷烃 之 癸烷，以变幻无端之结构组合，竟得七十五种同分异构体，吾觉甚牛而逼之，然转念思之，彼言七十五种，果如是乎？”然吾性懒，弗能以草稿纸列诸般品类而逐个数之。忽又转念，可借算法以行计算，遂成此文。 smalltalk: 此文因吾水平尚浅（方入 OI 约两月且资质驽钝），故于其中借助 DeepSe">
+    <meta name="description" content="1.cat’s gift Description: 如图所示，下面这只好心的猫猫给你送来了跨年礼物。由于礼物不好拿，所以猫猫把礼物平均分成了四份，但是其中一份不小心掉在地上散落成了无数片，变成了 1 - 1&#x2F;3 + 1&#x2F;5 - 1&#x2F;7 + … 聪明的你能算出或猜出猫猫的礼物是什么吗？   flag示例: CatCTF&#123;apple&#125; CatCTF&#123;banana&amp;#125">
 <meta property="og:type" content="article">
-<meta property="og:title" content="C++计算烷烃同分异构体数量(一)">
-<meta property="og:url" content="https://iszhenghailin.github.io/2025/05/10/%E9%80%9A%E8%BF%87C++%E5%AE%9E%E7%8E%B0%E8%AE%A1%E7%AE%97%E7%83%B7%E7%83%83%E5%90%8C%E5%88%86%E5%BC%82%E6%9E%84%E4%BD%93%E6%95%B0%E9%87%8F/index.html">
+<meta property="og:title" content="攻防世界Crypto刷题合集">
+<meta property="og:url" content="https://iszhenghailin.github.io/2025/06/22/%E6%94%BB%E9%98%B2%E4%B8%96%E7%95%8CCrypto%E5%88%B7%E9%A2%98%E5%90%88%E9%9B%86/index.html">
 <meta property="og:site_name" content="Zheng Hailin - r1ng0rez">
-<meta property="og:description" content="C++计算烷烃同分异构体数量(一) 引子 事出有因，吾今为高一学子，昨日于化学课习及有机物，恰留意到 烷烃 之 癸烷，以变幻无端之结构组合，竟得七十五种同分异构体，吾觉甚牛而逼之，然转念思之，彼言七十五种，果如是乎？”然吾性懒，弗能以草稿纸列诸般品类而逐个数之。忽又转念，可借算法以行计算，遂成此文。 smalltalk: 此文因吾水平尚浅（方入 OI 约两月且资质驽钝），故于其中借助 DeepSe">
+<meta property="og:description" content="1.cat’s gift Description: 如图所示，下面这只好心的猫猫给你送来了跨年礼物。由于礼物不好拿，所以猫猫把礼物平均分成了四份，但是其中一份不小心掉在地上散落成了无数片，变成了 1 - 1&#x2F;3 + 1&#x2F;5 - 1&#x2F;7 + … 聪明的你能算出或猜出猫猫的礼物是什么吗？   flag示例: CatCTF&#123;apple&#125; CatCTF&#123;banana&amp;#125">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2025-05-10T09:42:49.000Z">
-<meta property="article:modified_time" content="2025-05-16T11:29:22.835Z">
+<meta property="article:published_time" content="2025-06-22T03:07:07.000Z">
+<meta property="article:modified_time" content="2025-06-22T03:38:11.667Z">
 <meta property="article:author" content="Zheng Hailin">
-<meta property="article:tag" content="算法">
+<meta property="article:tag" content="CTF">
+<meta property="article:tag" content="Crypto">
 <meta name="twitter:card" content="summary_large_image">
   
   
   
-  <title>C++计算烷烃同分异构体数量(一) - Zheng Hailin - r1ng0rez</title>
+  <title>攻防世界Crypto刷题合集 - Zheng Hailin - r1ng0rez</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -222,7 +223,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="C++计算烷烃同分异构体数量(一)"></span>
+            <span id="subtitle" data-typed-text="攻防世界Crypto刷题合集"></span>
           
         </div>
 
@@ -233,8 +234,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2025-05-10 17:42" pubdate>
-          2025年5月10日 下午
+        <time datetime="2025-06-22 11:07" pubdate>
+          2025年6月22日 上午
         </time>
       </span>
     
@@ -245,7 +246,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          907 字
+          626 字
         
       </span>
     
@@ -256,7 +257,7 @@
         
         
         
-          8 分钟
+          6 分钟
         
       </span>
     
@@ -293,137 +294,65 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">C++计算烷烃同分异构体数量(一)</h1>
+            <h1 id="seo-header">攻防世界Crypto刷题合集</h1>
             
             
               <div class="markdown-body">
                 
-                <h2 id="C-计算烷烃同分异构体数量-一">C++计算烷烃同分异构体数量(一)</h2>
-<h3 id="引子">引子</h3>
-<p>事出有因，吾今为高一学子，昨日于化学课习及有机物，恰留意到 <code>烷烃</code> 之 <code>癸烷</code>，以变幻无端之结构组合，竟得七十五种同分异构体，吾觉甚牛而逼之，然转念思之，彼言七十五种，果如是乎？”然吾性懒，弗能以草稿纸列诸般品类而逐个数之。忽又转念，可借算法以行计算，遂成此文。</p>
-<h6 id="smalltalk-此文因吾水平尚浅（方入-OI-约两月且资质驽钝），故于其中借助-DeepSeek-以辅助算法之设计。">smalltalk: 此文因吾水平尚浅（方入 OI 约两月且资质驽钝），故于其中借助 DeepSeek 以辅助算法之设计。</h6>
-<h3 id="初步思考">初步思考</h3>
-<p>首先来看看我们要通过算法实现计算烷烃同分异构体数量需要哪些基础知识(部分参考来源于DeepSeek)</p>
-<table>
-<thead>
-<tr>
-<th style="text-align:left">领域</th>
-<th style="text-align:left">具体知识点</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left"><strong>化学</strong></td>
-<td style="text-align:left">烷烃通式、碳四价键规则、同分异构体概念。</td>
-</tr>
-<tr>
-<td style="text-align:left"><strong>编程</strong></td>
-<td style="text-align:left">输入输出、<code>map</code> 存储键值对、条件语句（<code>if-else</code>）。</td>
-</tr>
-<tr>
-<td style="text-align:left"><strong>数学</strong></td>
-<td style="text-align:left">查表法（避免复杂计算，直接引用已知结果）。</td>
-</tr>
-<tr>
-<td style="text-align:left"><strong>问题分解</strong></td>
-<td style="text-align:left">先验证输入合法性，再通过预存数据快速返回结果。</td>
-</tr>
-</tbody>
-</table>
-<p>进行进一步分析，得出的利用思路如下</p>
-<h4 id="1-化学知识利用"><strong>1. 化学知识利用</strong></h4>
-<ul>
-<li><strong>烷烃通式</strong>：C<strong>n</strong>H<strong>2n+2</strong></li>
-<li><strong>碳骨架规则</strong>：
-<ul>
-<li>每个碳原子（C）必须形成 <strong>4 个共价键</strong>（与其他 C 或 H 原子连接）</li>
-<li>氢原子（H）只能形成 <strong>1 个键</strong>，且不参与骨架构建</li>
-</ul>
-</li>
-</ul>
-<h4 id="2-简化问题"><strong>2. 简化问题</strong></h4>
-<ul>
-<li>仅计算 <strong>碳骨架的非环状结构</strong>（不考虑立体异构或复杂对称性）</li>
-<li>手动预存小规模 <strong>n</strong> 的异构体数量（n≤10），避免复杂算法</li>
-</ul>
-<h4 id="3-编程实现"><strong>3. 编程实现</strong></h4>
-<ul>
-<li><strong>输入验证</strong>：检查 <em>H</em> 是否等于 2C+2</li>
-<li><strong>查表法</strong>：直接返回预计算的异构体数量（适用于 C≤10）</li>
-<li><strong>逐步扩展</strong>：未来可升级到递归生成碳骨架</li>
-</ul>
-<h3 id="具体分析">具体分析</h3>
-<ol>
-<li>
-<p><strong>输入验证</strong></p>
-<p>我们先检查输入的<code>H</code>的数量是否满足<code>2C+2</code>，否则进行错误回显</p>
-</li>
-<li>
-<p>查表法</p>
-<ul>
-<li>使用 <code>map</code> 存储 n=1∼10<em>n</em>=1∼10 的异构体数量（刚好到癸烷）</li>
-<li>例如：
-<ul>
-<li><strong>n=4</strong> -&gt; 2种异构体（正丁烷、异丁烷）</li>
-<li><strong>n=5</strong> -&gt; 3种异构体</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>
-<p>输出结果</p>
-<ul>
-<li>直接返回表中对应的异构体数量，若 n&gt;10 则提示不支持</li>
-</ul>
-</li>
-</ol>
-<p>现在是最终优化过的代码</p>
-<div class="code-wrapper"><pre><code class="hljs C++"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;iostream&gt;</span></span>
-<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;bits/stdc++.h&gt;</span></span>
-<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;map&gt;</span></span>
-<span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> std;
+                <h2 id="1-cat’s-gift">1.cat’s gift</h2>
+<h3 id="Description">Description:</h3>
+<p>如图所示，下面这只好心的猫猫给你送来了跨年礼物。由于礼物不好拿，所以<strong>猫猫把礼物平均分成了四份，但是其中一份不小心掉在地上散落成了无数片，变成了 1 - 1/3 + 1/5 - 1/7 + …</strong></p>
+<p>聪明的你能算出或猜出猫猫的礼物是什么吗？<br>
+ <br>
+<strong>flag示例:</strong> <code>CatCTF&#123;apple&#125;</code> <code>CatCTF&#123;banana&#125;</code></p>
+<p>关键：<strong>Gregory-Leibniz 公式</strong><br>
+德国数学家莱布尼茨（Leibniz）于 1674 年曾提出 Gregory-Leibniz 公式来计算π：<br>
+$π / 4 = 1 − 1 / 3 + 1 / 5 − 1 / 7 + 1 / 9 + . . . π/4 = 1 - 1/3 +1/5 - 1/7 + 1/9+ …π/4=1−1/3+1/5−1/7+1/9+…$<br>
+得到flag：<code>CatCTF&#123;pie</code></p>
+<h2 id="2-了不起的盖茨比">2.了不起的盖茨比</h2>
+<h3 id="Description-2">Description:</h3>
+<p>小王读了盖茨比深受震撼，于是摘录本书并效仿原作者为你加密留了一段言，但他忘记给你iv了，请问你可以恢复出来原文吗<br>
+(得到的flag内容用CatCTF{}包上提交)</p>
+<p>附件内容为python源代码程序，对其进行分析：</p>
+<div class="code-wrapper"><pre><code class="hljs Python"><span class="hljs-keyword">from</span> Crypto.Cipher <span class="hljs-keyword">import</span> AES  
+<span class="hljs-keyword">from</span> Crypto.Util.strxor <span class="hljs-keyword">import</span> strxor <span class="hljs-keyword">as</span> xor  
+<span class="hljs-keyword">from</span> Crypto.Util.Padding <span class="hljs-keyword">import</span> pad  
+<span class="hljs-keyword">from</span> random <span class="hljs-keyword">import</span> *  
+<span class="hljs-keyword">from</span> base64 <span class="hljs-keyword">import</span> *  
+<span class="hljs-keyword">from</span> copy <span class="hljs-keyword">import</span> copy  
+<span class="hljs-keyword">from</span> secret <span class="hljs-keyword">import</span> data  
+  
+iv=<span class="hljs-built_in">bytes</span>([randint(<span class="hljs-number">0</span>,<span class="hljs-number">2</span>**<span class="hljs-number">8</span>-<span class="hljs-number">1</span>) <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-number">16</span>)])   
+iva=copy(iv)  
+key=<span class="hljs-built_in">bytes</span>([randint(<span class="hljs-number">0</span>,<span class="hljs-number">2</span>**<span class="hljs-number">8</span>-<span class="hljs-number">1</span>) <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-number">16</span>)])  
+cipher=AES.new(key,mode=AES.MODE_ECB)  
+data=pad(data,<span class="hljs-number">16</span>)  
+c=<span class="hljs-string">b&quot;&quot;</span>  
+<span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-number">0</span>,<span class="hljs-built_in">len</span>(data),<span class="hljs-number">16</span>):  
+    s=data[i:i+<span class="hljs-number">16</span>].ljust(<span class="hljs-number">16</span>,<span class="hljs-string">b&quot;\n&quot;</span>)  
+    c+=cipher.encrypt(xor(s,iv))  
+    iv=xor(s,c[-<span class="hljs-number">16</span>:])  
+  
+  
+key=b64encode(key)  
+c=b64encode(c)  
+  
+<span class="hljs-built_in">print</span>(key)  
+<span class="hljs-built_in">print</span>(c)  
+  
+  
+  
+<span class="hljs-string">&quot;&quot;&quot;  </span>
+<span class="hljs-string">b&#x27;+0zkhmid1PFjVdxSP09zSw==&#x27;  </span>
+<span class="hljs-string">b&#x27;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&#x27;  </span>
+<span class="hljs-string">  </span>
+<span class="hljs-string">&quot;&quot;&quot;</span></code></pre></div>
+<p>这段代码实现了一个基于AES加密的自定义加密方案，结合了ECB模式和CBC模式的某些特性，明文按16字节分组进行加密，打印出key和密文，iv(偏移量)未知，需要还原明文。可以发现本题是多次使用同样的流密码。<br>
+所以本题其实是利用利用<a target="_blank" rel="noopener" href="https://so.csdn.net/so/search?q=MTP&amp;spm=1001.2101.3001.7020">MTP</a>攻击来求解，比较好的两篇文章可以参考<br>
+[参考一](<a target="_blank" rel="noopener" href="https://www.ruanx.net/many-time-pad/">Many-Time-Pad 攻击</a>)<br>
+<a href="%5BMTP%E6%94%BB%E5%87%BB%E8%A7%A3%E6%9E%90-CSDN%E5%8D%9A%E5%AE%A2%5D(https://blog.csdn.net/m0_63303407/article/details/127193042)">参考二</a><br>
+同时笔者也会写一篇相对基础的文章给新人解释其基本原理<a target="_blank" rel="noopener" href="https://r1ng0rez.github.io/2025/06/22/Many-Time-Pad-Attack/">Many-Time-Pad-Attack</a></p>
 
-<span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span> </span>&#123;
-    <span class="hljs-type">int</span> carbon, hydrogen;
-    <span class="hljs-comment">// 提示用户输入碳原子数</span>
-    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;Enter the number of carbon atoms (C): &quot;</span>);
-    <span class="hljs-built_in">scanf</span>(<span class="hljs-string">&quot;%d&quot;</span>,&amp;carbon);
-    
-    <span class="hljs-comment">// 提示用户输入氢原子数</span>
-    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;Enter the number of hydrogen atoms (H): &quot;</span>);
-    <span class="hljs-built_in">scanf</span>(<span class="hljs-string">&quot;%d&quot;</span>,&amp;hydrogen);
-    
-    <span class="hljs-comment">// 验证是否为烷烃（CnH2n + 2）</span>
-    <span class="hljs-keyword">if</span> (hydrogen != <span class="hljs-number">2</span> * carbon + <span class="hljs-number">2</span>) &#123;
-        <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;Error: This is not an alkane (expected H = 2C + 2).\n&quot;</span>);
-        <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
-    &#125;
-
-    <span class="hljs-comment">// 预计算的烷烃异构体数量（n = 1~10）</span>
-    map&lt;<span class="hljs-type">int</span>, <span class="hljs-type">int</span>&gt; isomerTable = &#123;
-        &#123;<span class="hljs-number">1</span>, <span class="hljs-number">1</span>&#125;,  <span class="hljs-comment">// CH4</span>
-        &#123;<span class="hljs-number">2</span>, <span class="hljs-number">1</span>&#125;,  <span class="hljs-comment">// C2H6</span>
-        &#123;<span class="hljs-number">3</span>, <span class="hljs-number">1</span>&#125;,  <span class="hljs-comment">// C3H8</span>
-        &#123;<span class="hljs-number">4</span>, <span class="hljs-number">2</span>&#125;,  <span class="hljs-comment">// C4H10（正丁烷、异丁烷）</span>
-        &#123;<span class="hljs-number">5</span>, <span class="hljs-number">3</span>&#125;,  <span class="hljs-comment">// C5H12</span>
-        &#123;<span class="hljs-number">6</span>, <span class="hljs-number">5</span>&#125;,  <span class="hljs-comment">// C6H14</span>
-        &#123;<span class="hljs-number">7</span>, <span class="hljs-number">9</span>&#125;,  <span class="hljs-comment">// C7H16</span>
-        &#123;<span class="hljs-number">8</span>, <span class="hljs-number">18</span>&#125;, <span class="hljs-comment">// C8H18</span>
-        &#123;<span class="hljs-number">9</span>, <span class="hljs-number">35</span>&#125;, <span class="hljs-comment">// C9H20</span>
-        &#123;<span class="hljs-number">10</span>, <span class="hljs-number">75</span>&#125; <span class="hljs-comment">// C10H22</span>
-    &#125;;
-
-    <span class="hljs-keyword">if</span> (carbon &gt;= <span class="hljs-number">1</span> &amp;&amp; carbon &lt;= <span class="hljs-number">10</span>) &#123;
-        <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;Number of alkane isomers for C%dH%d: %d\n&quot;</span>, carbon, hydrogen, isomerTable[carbon]);
-    &#125; 
-    <span class="hljs-keyword">else</span> &#123;
-        <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;Error: Carbon count must be 1~10 (this program is for beginners).\n&quot;</span>);
-  &#125;
-  <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
-&#125;</code></pre></div>
-<p>当然，我们只能计算碳原子数量为10的烷烃，表现出我们的功能完全不够强大，我也思考了关于后续补充的一些其他想法，诸如升级递归算法、引入图论(马上把基础打完滚去学树)甚至是结合动态规划或生成函数优化计算(需学习组合数学)，后续我还会更新的 敬请期待！</p>
-<script src="https://giscus.app/client.js" data-repo="p4y1oad/p4y1oad.github.io" data-repo-id="R_kgDONzaTTQ" data-category="Announcements" data-category-id="DIC_kwDONzaTTc4Cpqn7" data-mapping="pathname" data-strict="0" data-reactions-enabled="1" data-emit-metadata="0" data-input-position="bottom" data-theme="preferred_color_scheme" data-lang="zh-CN" crossorigin="anonymous" async>
-</script>
                 
               </div>
             
@@ -441,7 +370,7 @@
     
       <span class="category-chain">
         
-  <a href="/categories/%E7%AE%97%E6%B3%95/" class="category-chain-item">算法</a>
+  <a href="/categories/CTF/" class="category-chain-item">CTF</a>
   
   
 
@@ -456,7 +385,9 @@
     <div class="post-meta">
       <i class="iconfont icon-tags"></i>
       
-        <a href="/tags/%E7%AE%97%E6%B3%95/" class="print-no-link">#算法</a>
+        <a href="/tags/CTF/" class="print-no-link">#CTF</a>
+      
+        <a href="/tags/Crypto/" class="print-no-link">#Crypto</a>
       
     </div>
   
@@ -468,8 +399,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>C++计算烷烃同分异构体数量(一)</div>
-      <div>https://iszhenghailin.github.io/2025/05/10/通过C++实现计算烷烃同分异构体数量/</div>
+      <div>攻防世界Crypto刷题合集</div>
+      <div>https://iszhenghailin.github.io/2025/06/22/攻防世界Crypto刷题合集/</div>
     </div>
     <div class="license-meta">
       
@@ -481,7 +412,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2025年5月10日</div>
+          <div>2025年6月22日</div>
         </div>
       
       
@@ -513,9 +444,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2025/05/17/NOIP-2002-%E6%99%AE%E5%8F%8A%E7%BB%84-%E9%80%89%E6%95%B0/" title="由一道题引发对DFS的思考">
+                      <a href="/2025/06/22/Gregory-Leibniz%20%E5%85%AC%E5%BC%8F/" title="">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">由一道题引发对DFS的思考</span>
+                        <span class="hidden-mobile"></span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -523,8 +454,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2025/04/19/Basic-ROP-Learning/" title="Basic ROP Learning">
-                        <span class="hidden-mobile">Basic ROP Learning</span>
+                      <a href="/2025/06/21/Crypto%E5%9F%BA%E7%A1%80%E6%95%B0%E5%AD%A6%E7%9F%A5%E8%AF%86-%E6%95%B0%E8%AE%BA/" title="Crypto基础数学知识-数论">
+                        <span class="hidden-mobile">Crypto基础数学知识-数论</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
