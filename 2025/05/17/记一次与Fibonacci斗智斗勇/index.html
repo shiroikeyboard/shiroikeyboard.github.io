@@ -16,25 +16,25 @@
   <meta http-equiv="x-ua-compatible" content="ie=edge">
   
   <meta name="theme-color" content="#2f4154">
-  <meta name="author" content="Keyboard">
-  <meta name="keywords" content="白色键盘 Zheng Hailin">
+  <meta name="author" content="r1ng0rez">
+  <meta name="keywords" content="r1ng0rez">
   
     <meta name="description" content="楔子： 事必有因。近时方备战粤港澳信息学竞赛，适值主办方有其平台，故欲以其平台练题。然用之颇觉不堪，譬如一题所予提示甚少，题目分类未明，且大多无题解。此题吾亦屡试方解出，遂作此文，以便后学及自我温习。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="记一次与Fibonacci斗智斗勇">
-<meta property="og:url" content="https://keyboard-x.github.io/2025/05/17/%E8%AE%B0%E4%B8%80%E6%AC%A1%E4%B8%8EFibonacci%E6%96%97%E6%99%BA%E6%96%97%E5%8B%87/index.html">
-<meta property="og:site_name" content="白色键盘">
+<meta property="og:url" content="https://r1ng0rez.github.io/2025/05/17/%E8%AE%B0%E4%B8%80%E6%AC%A1%E4%B8%8EFibonacci%E6%96%97%E6%99%BA%E6%96%97%E5%8B%87/index.html">
+<meta property="og:site_name" content="r1ng0rez">
 <meta property="og:description" content="楔子： 事必有因。近时方备战粤港澳信息学竞赛，适值主办方有其平台，故欲以其平台练题。然用之颇觉不堪，譬如一题所予提示甚少，题目分类未明，且大多无题解。此题吾亦屡试方解出，遂作此文，以便后学及自我温习。">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2025-05-17T07:29:48.000Z">
 <meta property="article:modified_time" content="2025-06-27T12:29:05.326Z">
-<meta property="article:author" content="Keyboard">
+<meta property="article:author" content="r1ng0rez">
 <meta property="article:tag" content="算法">
 <meta name="twitter:card" content="summary_large_image">
   
   
   
-  <title>记一次与Fibonacci斗智斗勇 - 白色键盘</title>
+  <title>记一次与Fibonacci斗智斗勇 - r1ng0rez</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -76,7 +76,7 @@
   <script id="fluid-configs">
     var Fluid = window.Fluid || {};
     Fluid.ctx = Object.assign({}, Fluid.ctx)
-    var CONFIG = {"hostname":"keyboard-x.github.io","root":"/","version":"1.9.8","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null}},"search_path":"/local-search.xml","include_content_in_search":true};
+    var CONFIG = {"hostname":"r1ng0rez.github.io","root":"/","version":"1.9.8","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null}},"search_path":"/local-search.xml","include_content_in_search":true};
 
     if (CONFIG.web_analytics.follow_dnt) {
       var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
@@ -562,13 +562,13 @@ HINT:时间限制:1.0s 内存限制:256.0MB<br>
   <div class="license-box my-3">
     <div class="license-title">
       <div>记一次与Fibonacci斗智斗勇</div>
-      <div>https://keyboard-x.github.io/2025/05/17/记一次与Fibonacci斗智斗勇/</div>
+      <div>https://r1ng0rez.github.io/2025/05/17/记一次与Fibonacci斗智斗勇/</div>
     </div>
     <div class="license-meta">
       
         <div class="license-meta-item">
           <div>Author</div>
-          <div>Keyboard</div>
+          <div>r1ng0rez</div>
         </div>
       
       

@@ -16,25 +16,25 @@
   <meta http-equiv="x-ua-compatible" content="ie=edge">
   
   <meta name="theme-color" content="#2f4154">
-  <meta name="author" content="Keyboard">
-  <meta name="keywords" content="白色键盘 Zheng Hailin">
+  <meta name="author" content="r1ng0rez">
+  <meta name="keywords" content="r1ng0rez">
   
     <meta name="description" content="Basic-ROP-Learning ROP(Return-Oriented Programming)概述 ROP(Return-Oriented Programming)是一种高级的代码复用攻击技术，主要用于绕过现代操作系统的安全防护机制（如DEP&#x2F;NX）。其核心思想是在栈缓冲区溢出的基础上，利用程序中已有的小片段 (gadgets) 来改变某些寄存器或者变量的值，从而控制程序的执行流程。 1.">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Basic ROP Learning">
-<meta property="og:url" content="https://keyboard-x.github.io/2025/04/19/Basic-ROP-Learning/index.html">
-<meta property="og:site_name" content="白色键盘">
+<meta property="og:url" content="https://r1ng0rez.github.io/2025/04/19/Basic-ROP-Learning/index.html">
+<meta property="og:site_name" content="r1ng0rez">
 <meta property="og:description" content="Basic-ROP-Learning ROP(Return-Oriented Programming)概述 ROP(Return-Oriented Programming)是一种高级的代码复用攻击技术，主要用于绕过现代操作系统的安全防护机制（如DEP&#x2F;NX）。其核心思想是在栈缓冲区溢出的基础上，利用程序中已有的小片段 (gadgets) 来改变某些寄存器或者变量的值，从而控制程序的执行流程。 1.">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2025-04-19T05:55:32.000Z">
 <meta property="article:modified_time" content="2025-06-27T12:28:39.439Z">
-<meta property="article:author" content="Keyboard">
+<meta property="article:author" content="r1ng0rez">
 <meta property="article:tag" content="Pwn">
 <meta name="twitter:card" content="summary_large_image">
   
   
   
-  <title>Basic ROP Learning - 白色键盘</title>
+  <title>Basic ROP Learning - r1ng0rez</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -76,7 +76,7 @@
   <script id="fluid-configs">
     var Fluid = window.Fluid || {};
     Fluid.ctx = Object.assign({}, Fluid.ctx)
-    var CONFIG = {"hostname":"keyboard-x.github.io","root":"/","version":"1.9.8","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null}},"search_path":"/local-search.xml","include_content_in_search":true};
+    var CONFIG = {"hostname":"r1ng0rez.github.io","root":"/","version":"1.9.8","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null}},"search_path":"/local-search.xml","include_content_in_search":true};
 
     if (CONFIG.web_analytics.follow_dnt) {
       var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
@@ -590,13 +590,13 @@ $
   <div class="license-box my-3">
     <div class="license-title">
       <div>Basic ROP Learning</div>
-      <div>https://keyboard-x.github.io/2025/04/19/Basic-ROP-Learning/</div>
+      <div>https://r1ng0rez.github.io/2025/04/19/Basic-ROP-Learning/</div>
     </div>
     <div class="license-meta">
       
         <div class="license-meta-item">
           <div>Author</div>
-          <div>Keyboard</div>
+          <div>r1ng0rez</div>
         </div>
       
       
