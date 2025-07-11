@@ -1,0 +1,800 @@
+
+
+<!DOCTYPE html>
+<html lang="en" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/SecureNexusLab.png">
+  <link rel="icon" href="/img/SecureNexusLab.png">
+  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="fishcanf1y">
+  <meta name="keywords" content="fishcanf1y">
+  
+    <meta name="description" content="Description:小王读了盖茨比深受震撼，于是摘录本书并效仿原作者为你加密留了一段言，但他忘记给你iv了，请问你可以恢复出来原文吗(得到的flag内容用CatCTF{}包上提交) 附件内容为python源代码程序，对其进行分析：from Crypto.Cipher import AES   from Crypto.Util.strxor import strxor as xor   from">
+<meta property="og:type" content="article">
+<meta property="og:title" content="攻防世界Crypto-了不起的盖茨比">
+<meta property="og:url" content="https://fishcanf1y.github.io/2025/07/10/%E6%94%BB%E9%98%B2%E4%B8%96%E7%95%8CCrypto-%E4%BA%86%E4%B8%8D%E8%B5%B7%E7%9A%84%E7%9B%96%E8%8C%A8%E6%AF%94/index.html">
+<meta property="og:site_name" content="fishcanf1y">
+<meta property="og:description" content="Description:小王读了盖茨比深受震撼，于是摘录本书并效仿原作者为你加密留了一段言，但他忘记给你iv了，请问你可以恢复出来原文吗(得到的flag内容用CatCTF{}包上提交) 附件内容为python源代码程序，对其进行分析：from Crypto.Cipher import AES   from Crypto.Util.strxor import strxor as xor   from">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2025-07-10T12:07:14.000Z">
+<meta property="article:modified_time" content="2025-07-10T12:09:44.538Z">
+<meta property="article:author" content="fishcanf1y">
+<meta property="article:tag" content="fishcanf1y">
+<meta name="twitter:card" content="summary_large_image">
+  
+  
+  
+  <title>攻防世界Crypto-了不起的盖茨比 - fishcanf1y</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1749284_5i9bdhy70f8.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1736178_k526ubmyhba.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+  
+<link rel="stylesheet" href="https://cdn.staticfile.org/lxgw-wenkai-screen-webfont/1.7.0/style.min.css">
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"fishcanf1y.github.io","root":"/","version":"1.9.8","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+  <script src="/js/sakura.js"></script>
+  <script src="/js/love.js"></script>
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 7.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>fishcanf1y&#39;s blog</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/" target="_self">
+                <i class="iconfont icon-home-fill"></i>
+                <span>Home</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/" target="_self">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>Archives</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/" target="_self">
+                <i class="iconfont icon-category-fill"></i>
+                <span>Categories</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/" target="_self">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>Tags</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/" target="_self">
+                <i class="iconfont icon-user-fill"></i>
+                <span>About</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/" target="_self">
+                <i class="iconfont icon-link-fill"></i>
+                <span>Links</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/background.PNG') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="攻防世界Crypto-了不起的盖茨比"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2025-07-10 20:07" pubdate>
+          July 10, 2025 pm
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          770 words
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          7 mins
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">攻防世界Crypto-了不起的盖茨比</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h3 id="Description"><a href="#Description" class="headerlink" title="Description:"></a>Description:</h3><p>小王读了盖茨比深受震撼，于是摘录本书并效仿原作者为你加密留了一段言，但他忘记给你iv了，请问你可以恢复出来原文吗<br>(得到的flag内容用CatCTF{}包上提交)</p>
+<p>附件内容为python源代码程序，对其进行分析：<br><div class="code-wrapper"><pre><code class="hljs Python"><span class="hljs-keyword">from</span> Crypto.Cipher <span class="hljs-keyword">import</span> AES  
+<span class="hljs-keyword">from</span> Crypto.Util.strxor <span class="hljs-keyword">import</span> strxor <span class="hljs-keyword">as</span> xor  
+<span class="hljs-keyword">from</span> Crypto.Util.Padding <span class="hljs-keyword">import</span> pad  
+<span class="hljs-keyword">from</span> random <span class="hljs-keyword">import</span> *  
+<span class="hljs-keyword">from</span> base64 <span class="hljs-keyword">import</span> *  
+<span class="hljs-keyword">from</span> copy <span class="hljs-keyword">import</span> copy  
+<span class="hljs-keyword">from</span> secret <span class="hljs-keyword">import</span> data  
+  
+iv=<span class="hljs-built_in">bytes</span>([randint(<span class="hljs-number">0</span>,<span class="hljs-number">2</span>**<span class="hljs-number">8</span>-<span class="hljs-number">1</span>) <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-number">16</span>)])   
+iva=copy(iv)  
+key=<span class="hljs-built_in">bytes</span>([randint(<span class="hljs-number">0</span>,<span class="hljs-number">2</span>**<span class="hljs-number">8</span>-<span class="hljs-number">1</span>) <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-number">16</span>)])  
+cipher=AES.new(key,mode=AES.MODE_ECB)  
+data=pad(data,<span class="hljs-number">16</span>)  
+c=<span class="hljs-string">b&quot;&quot;</span>  
+<span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-number">0</span>,<span class="hljs-built_in">len</span>(data),<span class="hljs-number">16</span>):  
+    s=data[i:i+<span class="hljs-number">16</span>].ljust(<span class="hljs-number">16</span>,<span class="hljs-string">b&quot;\n&quot;</span>)  
+    c+=cipher.encrypt(xor(s,iv))  
+    iv=xor(s,c[-<span class="hljs-number">16</span>:])  
+  
+  
+key=b64encode(key)  
+c=b64encode(c)  
+  
+<span class="hljs-built_in">print</span>(key)  
+<span class="hljs-built_in">print</span>(c)  
+  
+  
+  
+<span class="hljs-string">&quot;&quot;&quot;  </span>
+<span class="hljs-string">b&#x27;+0zkhmid1PFjVdxSP09zSw==&#x27;  </span>
+<span class="hljs-string">b&#x27;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&#x27;  </span>
+<span class="hljs-string">  </span>
+<span class="hljs-string">&quot;&quot;&quot;</span></code></pre></div><br>这段代码实现了一个基于AES加密的自定义加密方案，结合了ECB模式和CBC模式的某些特性，明文按16字节分组进行加密，打印出key和密文，iv(偏移量)未知，需要还原明文。可以发现本题是多次使用同样的流密码。<br>所以本题其实是利用利用<a target="_blank" rel="noopener" href="https://so.csdn.net/so/search?q=MTP&amp;spm=1001.2101.3001.7020">MTP</a>攻击来求解，比较好的两篇文章可以参考<br><a href="[Many-Time-Pad 攻击](https://www.ruanx.net/many-time-pad/">参考一</a>)<br><a href="[MTP攻击解析-CSDN博客](https://blog.csdn.net/m0_63303407/article/details/127193042">参考二</a>)</p>
+<p>exp:<br><div class="code-wrapper"><pre><code class="hljs Python"><span class="hljs-comment"># Python3  </span>
+<span class="hljs-keyword">import</span> base64  
+<span class="hljs-keyword">from</span> Crypto.Cipher <span class="hljs-keyword">import</span> AES  
+<span class="hljs-keyword">from</span> Crypto.Util.strxor <span class="hljs-keyword">import</span> strxor <span class="hljs-keyword">as</span> xor  
+<span class="hljs-keyword">from</span> Crypto.Util.number <span class="hljs-keyword">import</span> *  
+<span class="hljs-keyword">import</span> Crypto.Util.strxor <span class="hljs-keyword">as</span> xo  
+<span class="hljs-keyword">import</span> libnum, codecs, numpy <span class="hljs-keyword">as</span> np  
+  
+  
+<span class="hljs-keyword">def</span> <span class="hljs-title function_">isChr</span>(<span class="hljs-params">x</span>):  
+    <span class="hljs-keyword">if</span> <span class="hljs-built_in">ord</span>(<span class="hljs-string">&#x27;a&#x27;</span>) &lt;= x <span class="hljs-keyword">and</span> x &lt;= <span class="hljs-built_in">ord</span>(<span class="hljs-string">&#x27;z&#x27;</span>): <span class="hljs-keyword">return</span> <span class="hljs-literal">True</span>  
+    <span class="hljs-keyword">if</span> <span class="hljs-built_in">ord</span>(<span class="hljs-string">&#x27;A&#x27;</span>) &lt;= x <span class="hljs-keyword">and</span> x &lt;= <span class="hljs-built_in">ord</span>(<span class="hljs-string">&#x27;Z&#x27;</span>): <span class="hljs-keyword">return</span> <span class="hljs-literal">True</span>  
+    <span class="hljs-keyword">return</span> <span class="hljs-literal">False</span>  
+  
+<span class="hljs-keyword">def</span> <span class="hljs-title function_">infer</span>(<span class="hljs-params">index, pos</span>):  
+    <span class="hljs-keyword">if</span> msg[index, pos] != <span class="hljs-number">0</span>:  
+        <span class="hljs-keyword">return</span>  
+    msg[index, pos] = <span class="hljs-built_in">ord</span>(<span class="hljs-string">&#x27; &#x27;</span>)  
+    <span class="hljs-keyword">for</span> x <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-built_in">len</span>(c)):  
+        <span class="hljs-keyword">if</span> x != index:  
+            msg[x][pos] = xo.strxor(c[x], c[index])[pos] ^ <span class="hljs-built_in">ord</span>(<span class="hljs-string">&#x27; &#x27;</span>)  
+  
+  
+<span class="hljs-keyword">def</span> <span class="hljs-title function_">know</span>(<span class="hljs-params">index, pos, ch</span>):  
+    msg[index, pos] = <span class="hljs-built_in">ord</span>(ch)  
+    <span class="hljs-keyword">for</span> x <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-built_in">len</span>(c)):  
+        <span class="hljs-keyword">if</span> x != index:  
+            msg[x][pos] = xo.strxor(c[x], c[index])[pos] ^ <span class="hljs-built_in">ord</span>(ch)  
+  
+  
+<span class="hljs-keyword">def</span> <span class="hljs-title function_">getSpace</span>():  
+    <span class="hljs-keyword">for</span> index, x <span class="hljs-keyword">in</span> <span class="hljs-built_in">enumerate</span>(c):  
+        res = [xo.strxor(x, y) <span class="hljs-keyword">for</span> y <span class="hljs-keyword">in</span> c <span class="hljs-keyword">if</span> x != y]  
+        f = <span class="hljs-keyword">lambda</span> pos: <span class="hljs-built_in">len</span>(<span class="hljs-built_in">list</span>(<span class="hljs-built_in">filter</span>(isChr, [s[pos] <span class="hljs-keyword">for</span> s <span class="hljs-keyword">in</span> res])))  
+        cnt = [f(pos) <span class="hljs-keyword">for</span> pos <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-built_in">len</span>(x))]  
+        <span class="hljs-keyword">for</span> pos <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-built_in">len</span>(x)):  
+            dat.append((f(pos), index, pos))  
+  
+  
+key = <span class="hljs-string">b&#x27;+0zkhmid1PFjVdxSP09zSw==&#x27;</span>  
+key = base64.b64decode(key)  
+c = <span class="hljs-string">b&#x27;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&#x27;</span>  
+c = base64.b64decode(c)  
+cipher = AES.new(key, mode=AES.MODE_ECB)  
+t = []  
+<span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-number">0</span>, <span class="hljs-built_in">len</span>(c), <span class="hljs-number">16</span>):  
+    <span class="hljs-keyword">if</span> i == <span class="hljs-number">0</span>:  
+        t.append(cipher.decrypt(c[i:i + <span class="hljs-number">16</span>]))  <span class="hljs-comment"># s1 ^ iv  </span>
+    <span class="hljs-keyword">else</span>:  
+        t.append(xor(cipher.decrypt(c[i:i + <span class="hljs-number">16</span>]), c[i - <span class="hljs-number">16</span>:i]))  
+tmp = []  
+tmp.append(t[<span class="hljs-number">0</span>])  
+<span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-number">1</span>, <span class="hljs-built_in">len</span>(t)):  
+    tttt = t[i]  
+    <span class="hljs-keyword">for</span> j <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-number">0</span>, i):  
+        tttt = xor(tttt, t[j])  
+    tmp.append(tttt)  <span class="hljs-comment"># si ^ iv  </span>
+<span class="hljs-comment"># MTP attack  </span>
+c = tmp  
+dat = []  
+msg = np.zeros([<span class="hljs-built_in">len</span>(c), <span class="hljs-built_in">len</span>(c[<span class="hljs-number">0</span>])], dtype=<span class="hljs-built_in">int</span>)  
+getSpace()  
+dat = <span class="hljs-built_in">sorted</span>(dat)[::-<span class="hljs-number">1</span>]  
+<span class="hljs-keyword">for</span> w, index, pos <span class="hljs-keyword">in</span> dat:  
+    infer(index, pos)  
+  
+<span class="hljs-built_in">print</span>(<span class="hljs-string">&#x27;&#x27;</span>.join([<span class="hljs-string">&#x27;&#x27;</span>.join([<span class="hljs-built_in">chr</span>(c) <span class="hljs-keyword">for</span> c <span class="hljs-keyword">in</span> x]) <span class="hljs-keyword">for</span> x <span class="hljs-keyword">in</span> msg]))</code></pre></div></p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>攻防世界Crypto-了不起的盖茨比</div>
+      <div>https://fishcanf1y.github.io/2025/07/10/攻防世界Crypto-了不起的盖茨比/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>Author</div>
+          <div>fishcanf1y</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>Posted on</div>
+          <div>July 10, 2025</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>Licensed under</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - Attribution">
+                    <i class="iconfont icon-cc-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2025/07/10/some-things-you-may-want-to-know/" title="some-things-you-may-want-to-know">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">some-things-you-may-want-to-know</span>
+                        <span class="visible-mobile">Previous</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2025/06/22/Many-Time-Pad-Attack/" title="Many-Time-Pad-Attack">
+                        <span class="hidden-mobile">Many-Time-Pad-Attack</span>
+                        <span class="visible-mobile">Next</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+  
+  
+    <article id="comments" lazyload>
+      
+
+    </article>
+  
+
+
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>Table of Contents</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+  
+  
+
+
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">Keyword</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/5.0.0/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  
+      <script>
+        if (!window.MathJax) {
+          window.MathJax = {
+            tex    : {
+              inlineMath: { '[+]': [['$', '$']] }
+            },
+            loader : {
+              load: ['ui/lazy']
+            },
+            options: {
+              renderActions: {
+                insertedScript: [200, () => {
+                  document.querySelectorAll('mjx-container').forEach(node => {
+                    let target = node.parentNode;
+                    if (target.nodeName.toLowerCase() === 'li') {
+                      target.parentNode.classList.add('has-jax');
+                    }
+                  });
+                }, '', false]
+              }
+            }
+          };
+        } else {
+          MathJax.startup.document.state(0);
+          MathJax.texReset();
+          MathJax.typeset();
+          MathJax.typesetPromise();
+        }
+
+        Fluid.events.registerRefreshCallback(function() {
+          if ('MathJax' in window && MathJax.startup.document && typeof MathJax.startup.document.state === 'function') {
+            MathJax.startup.document.state(0);
+            MathJax.texReset();
+            MathJax.typeset();
+            MathJax.typesetPromise();
+          }
+        });
+      </script>
+    
+
+  <script  src="https://lib.baomitu.com/mathjax/3.2.2/es5/tex-mml-chtml.js" ></script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">Blog works best with JavaScript enabled</div>
+  </noscript>
+</body>
+</html>
