@@ -8,8 +8,8 @@
 <head>
   <meta charset="UTF-8">
 
-  <link rel="apple-touch-icon" sizes="76x76" href="/img/SecureNexusLab.png">
-  <link rel="icon" href="/img/SecureNexusLab.png">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/avatar.jpg">
+  <link rel="icon" href="/img/avatar.jpg">
   
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
@@ -19,18 +19,21 @@
   <meta name="author" content="fishcanf1y">
   <meta name="keywords" content="fishcanf1y">
   
-    <meta name="description" content="fishcanf1y&#39;s Blog">
+    <meta name="description" content="项目地址：https:&#x2F;&#x2F;github.com&#x2F;fishcanf1y&#x2F;MD5-Checker Description: MD5 校验器用于验证数据完整性和检测数据是否被篡改，常用于文件下载、软件更新、密码存储等场景。它可以快速生成文件的“数字指纹”——MD5 值，然后将该值与原始值进行比较，以确保文件在传输或存储过程中没有发生变化。 以下是MD5 校验器的主要用途和优势：   文件完整性验证: 当">
 <meta property="og:type" content="article">
 <meta property="og:title" content="How to design an MD5 verifier">
 <meta property="og:url" content="https://fishcanf1y.github.io/2025/07/11/md5verifier-20250711/index.html">
 <meta property="og:site_name" content="fishcanf1y">
-<meta property="og:description" content="fishcanf1y&#39;s Blog">
+<meta property="og:description" content="项目地址：https:&#x2F;&#x2F;github.com&#x2F;fishcanf1y&#x2F;MD5-Checker Description: MD5 校验器用于验证数据完整性和检测数据是否被篡改，常用于文件下载、软件更新、密码存储等场景。它可以快速生成文件的“数字指纹”——MD5 值，然后将该值与原始值进行比较，以确保文件在传输或存储过程中没有发生变化。 以下是MD5 校验器的主要用途和优势：   文件完整性验证: 当">
 <meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://fishcanf1y.github.io/images/verifier_1_20250712.png">
+<meta property="og:image" content="https://fishcanf1y.github.io/images/verifier_2_20250712.png">
 <meta property="article:published_time" content="2025-07-11T07:09:03.000Z">
-<meta property="article:modified_time" content="2025-07-11T07:19:59.918Z">
+<meta property="article:modified_time" content="2025-07-12T12:12:30.050Z">
 <meta property="article:author" content="fishcanf1y">
 <meta property="article:tag" content="Coding">
 <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://fishcanf1y.github.io/images/verifier_1_20250712.png">
   
   
   
@@ -245,7 +248,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          0 words
+          2.1k words
         
       </span>
     
@@ -256,7 +259,7 @@
         
         
         
-          1 mins
+          18 mins
         
       </span>
     
@@ -298,7 +301,361 @@
             
               <div class="markdown-body">
                 
-                
+                <p>项目地址：<em><a target="_blank" rel="noopener" href="https://github.com/fishcanf1y/MD5-Checker">https://github.com/fishcanf1y/MD5-Checker</a></em></p>
+<h2 id="Description">Description:</h2>
+<p>MD5 校验器用于验证数据完整性和检测数据是否被篡改，常用于文件下载、软件更新、密码存储等场景。它可以快速生成文件的“数字指纹”——MD5 值，然后将该值与原始值进行比较，以确保文件在传输或存储过程中没有发生变化。</p>
+<p>以下是MD5 校验器的主要用途和优势：</p>
+<ul>
+<li>
+<p><strong>文件完整性验证:</strong></p>
+<p>当下载文件时，网站通常会提供文件的MD5 值。下载完成后，用户可以使用MD5 校验器计算下载文件的MD5 值，并与提供的MD5 值进行比较。如果两者一致，则表示文件没有损坏或被篡改；如果不一致，则表示文件可能损坏或被恶意修改，需要重新下载。</p>
+</li>
+<li>
+<p><strong>数据一致性验证:</strong></p>
+<p>在数据传输和存储过程中，可能会出现错误或干扰导致数据损坏。通过对数据进行MD5 校验，可以确保数据在不同节点之间的一致性，防止数据丢失或损坏。</p>
+</li>
+<li>
+<p><strong>安全性保护:</strong></p>
+<p>MD5 校验可以用于检测恶意篡改。如果文件在传输过程中被恶意篡改，其MD5 值会发生变化，从而可以及时发现并阻止恶意行为。</p>
+</li>
+<li>
+<p><strong>文件识别和重复性检测:</strong></p>
+<p>每个文件都有一个唯一的MD5 值，可以用于快速识别文件，避免存储和传输重复文件，节省存储空间和带宽。</p>
+</li>
+<li>
+<p><strong>密码存储:</strong></p>
+<p>虽然MD5 算法不再被推荐用于直接存储密码，但它仍然被广泛用于存储密码的哈希值。这样即使数据库泄露，攻击者也无法直接获取用户的明文密码。</p>
+</li>
+</ul>
+<p>总而言之，MD5 校验器在保证数据安全和完整性方面发挥着重要作用，尤其是在文件传输、数据存储和密码管理等场景中。</p>
+<h2 id="How-To-Do">How To Do?</h2>
+<p>以下我将梳理大致思路并列举一些代码片段来说明其作用</p>
+<h3 id="一、核心目标">一、核心目标</h3>
+<ol>
+<li><strong>核心功能</strong>：
+<ul>
+<li>计算文件的MD5哈希值（文件完整性指纹）</li>
+<li>验证文件是否与预期MD5匹配</li>
+<li>支持批量处理和目录递归操作</li>
+</ul>
+</li>
+<li><strong>非功能性需求</strong>：
+<ul>
+<li>内存安全（支持大文件处理）</li>
+<li>跨平台兼容性（Windows/Linux/macOS）</li>
+<li>符合标准工具行为（兼容<code>md5sum</code>格式）</li>
+</ul>
+</li>
+</ol>
+<h3 id="二、关键实现思路">二、关键实现思路</h3>
+<h4 id="1-文件哈希计算（核心算法）">1. 文件哈希计算（核心算法）</h4>
+<p><strong>设计要点</strong>：</p>
+<ul>
+<li><strong>分块处理</strong>：避免内存溢出</li>
+</ul>
+<div class="code-wrapper"><pre><code class="hljs Python"><span class="hljs-keyword">def</span> <span class="hljs-title function_">calculate_md5</span>(<span class="hljs-params">file_path, block_size=<span class="hljs-number">65536</span></span>):
+    md5 = hashlib.md5()
+    <span class="hljs-keyword">with</span> <span class="hljs-built_in">open</span>(file_path, <span class="hljs-string">&#x27;rb&#x27;</span>) <span class="hljs-keyword">as</span> f:
+        <span class="hljs-keyword">for</span> block <span class="hljs-keyword">in</span> <span class="hljs-built_in">iter</span>(<span class="hljs-keyword">lambda</span>: f.read(block_size), <span class="hljs-string">b&#x27;&#x27;</span>):
+            md5.update(block)  <span class="hljs-comment"># 增量更新哈希</span>
+    <span class="hljs-keyword">return</span> md5.hexdigest()</code></pre></div>
+<ul>
+<li>
+<p>使用生成器模式逐块读取（<code>iter+lambda</code>技巧）</p>
+</li>
+<li>
+<p>默认64KB块大小平衡I/O效率和内存占用</p>
+</li>
+<li>
+<p><strong>错误处理</strong>：</p>
+<ul>
+<li>捕获<code>IOError</code>并返回<code>None</code>统一表示失败</li>
+<li>二进制模式(<code>'rb'</code>)确保跨平台一致性</li>
+</ul>
+</li>
+</ul>
+<h4 id="2-验证机制">2. 验证机制</h4>
+<p><strong>设计要点</strong>：</p>
+<ul>
+<li><strong>大小写不敏感</strong>：<code>.lower()</code>处理用户输入</li>
+</ul>
+<div class="code-wrapper"><pre><code class="hljs Python"><span class="hljs-keyword">if</span> actual_md5.lower() == expected_md5.lower()</code></pre></div>
+<ul>
+<li>
+<p><strong>明确输出</strong>：格式化显示预期/实际值对比</p>
+</li>
+<li>
+<p><strong>返回布尔值</strong>：便于脚本化调用</p>
+</li>
+</ul>
+<h4 id="3-批量处理">3. 批量处理</h4>
+<p><strong>递归目录处理</strong>：</p>
+<div class="code-wrapper"><pre><code class="hljs Python"><span class="hljs-keyword">for</span> root, _, files <span class="hljs-keyword">in</span> os.walk(directory):
+    <span class="hljs-keyword">for</span> filename <span class="hljs-keyword">in</span> files:
+        file_path = os.path.join(root, filename)
+        relative_path = os.path.relpath(file_path, directory)</code></pre></div>
+<ul>
+<li>使用<code>os.walk</code>实现深度优先遍历</li>
+<li><code>os.path.relpath</code>生成相对路径保证校验文件可移植性</li>
+</ul>
+<h4 id="4-命令行接口">4. 命令行接口</h4>
+<p><strong>子命令模式</strong>：</p>
+<div class="code-wrapper"><pre><code class="hljs python">subparsers = parser.add_subparsers(dest=<span class="hljs-string">&#x27;command&#x27;</span>)
+calc_parser = subparsers.add_parser(<span class="hljs-string">&#x27;calc&#x27;</span>)
+verify_parser = subparsers.add_parser(<span class="hljs-string">&#x27;verify&#x27;</span>)</code></pre></div>
+<ul>
+<li>分离<code>calc</code>和<code>verify</code>逻辑</li>
+<li>自动生成帮助信息（<code>-h</code>）</li>
+</ul>
+<hr>
+<h3 id="三、典型工作流程">三、典型工作流程</h3>
+<h4 id="场景1：单文件验证">场景1：单文件验证</h4>
+<p><img src="/images/verifier_1_20250712.png" srcset="/img/loading.gif" lazyload alt="单文件验证"></p>
+<h4 id="场景2：生成验证文件">场景2：生成验证文件</h4>
+<p><img src="/images/verifier_2_20250712.png" srcset="/img/loading.gif" lazyload alt="生成验证文件"></p>
+<h3 id="四、扩展设计思路">四、扩展设计思路</h3>
+<h4 id="1-算法扩展点">1. 算法扩展点</h4>
+<div class="code-wrapper"><pre><code class="hljs Python"><span class="hljs-keyword">def</span> <span class="hljs-title function_">calculate_hash</span>(<span class="hljs-params">file_path, algorithm=<span class="hljs-string">&#x27;md5&#x27;</span>, block_size=<span class="hljs-number">65536</span></span>):
+    hasher = hashlib.new(algorithm)  <span class="hljs-comment"># 动态选择算法</span>
+    <span class="hljs-comment"># ...相同处理逻辑...</span></code></pre></div>
+<h4 id="2-性能优化方向">2. 性能优化方向</h4>
+<ul>
+<li><strong>并行计算</strong>：使用<code>concurrent.futures</code>加速批量处理</li>
+<li><strong>进度显示</strong>：添加<code>tqdm</code>进度条</li>
+</ul>
+<h4 id="3-安全增强">3. 安全增强</h4>
+<ul>
+<li><strong>签名校验</strong>：支持PGP签名验证</li>
+<li><strong>哈希链</strong>：实现类似<code>git</code>的对象哈希链</li>
+</ul>
+<h4 id="4-工程化改进">4. 工程化改进</h4>
+<ul>
+<li><strong>单元测试</strong>：针对大文件/空文件/非法路径等边界条件</li>
+<li><strong>日志记录</strong>：添加<code>logging</code>模块记录操作</li>
+</ul>
+<hr>
+<h3 id="五、设计权衡考量">五、设计权衡考量</h3>
+<ol>
+<li><strong>内存 vs 速度</strong>：
+<ul>
+<li>选择64KB块大小而非一次性读取</li>
+<li>牺牲少量速度换取内存安全性</li>
+</ul>
+</li>
+<li><strong>灵活性 vs 复杂度</strong>：
+<ul>
+<li>不默认支持多算法保持简单性</li>
+<li>但保留扩展接口</li>
+</ul>
+</li>
+<li><strong>严格模式可选</strong>：
+<ul>
+<li>当前大小写不敏感验证</li>
+<li>可添加<code>--strict</code>参数启用严格匹配</li>
+</ul>
+</li>
+</ol>
+<h3 id="六、最终代码呈现">六、最终代码呈现</h3>
+<div class="code-wrapper"><pre><code class="hljs Python"><span class="hljs-comment">#!/usr/bin/env python3</span>
+<span class="hljs-keyword">import</span> hashlib
+<span class="hljs-keyword">import</span> argparse
+<span class="hljs-keyword">import</span> os
+<span class="hljs-keyword">import</span> sys
+<span class="hljs-keyword">from</span> typing <span class="hljs-keyword">import</span> <span class="hljs-type">Dict</span>, <span class="hljs-type">List</span>, <span class="hljs-type">Optional</span>
+
+<span class="hljs-comment"># 常量定义</span>
+DEFAULT_BLOCK_SIZE = <span class="hljs-number">65536</span>  <span class="hljs-comment"># 64KB块大小</span>
+MD5_FILE_EXTENSION = <span class="hljs-string">&#x27;.md5&#x27;</span>
+
+
+<span class="hljs-keyword">def</span> <span class="hljs-title function_">calculate_md5</span>(<span class="hljs-params">file_path: <span class="hljs-built_in">str</span>, block_size: <span class="hljs-built_in">int</span> = DEFAULT_BLOCK_SIZE</span>) -&gt; <span class="hljs-type">Optional</span>[<span class="hljs-built_in">str</span>]:
+    <span class="hljs-string">&quot;&quot;&quot;</span>
+<span class="hljs-string">    计算文件的MD5哈希值</span>
+<span class="hljs-string">    :param file_path: 文件路径</span>
+<span class="hljs-string">    :param block_size: 读取块大小(字节)</span>
+<span class="hljs-string">    :return: MD5字符串(失败返回None)</span>
+<span class="hljs-string">    &quot;&quot;&quot;</span>
+    <span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> os.path.isfile(file_path):
+        <span class="hljs-built_in">print</span>(<span class="hljs-string">f&quot;错误: 文件不存在 - <span class="hljs-subst">&#123;file_path&#125;</span>&quot;</span>, file=sys.stderr)
+        <span class="hljs-keyword">return</span> <span class="hljs-literal">None</span>
+
+    md5 = hashlib.md5()
+    <span class="hljs-keyword">try</span>:
+        <span class="hljs-keyword">with</span> <span class="hljs-built_in">open</span>(file_path, <span class="hljs-string">&#x27;rb&#x27;</span>) <span class="hljs-keyword">as</span> f:
+            <span class="hljs-keyword">for</span> block <span class="hljs-keyword">in</span> <span class="hljs-built_in">iter</span>(<span class="hljs-keyword">lambda</span>: f.read(block_size), <span class="hljs-string">b&#x27;&#x27;</span>):
+                md5.update(block)
+        <span class="hljs-keyword">return</span> md5.hexdigest()
+    <span class="hljs-keyword">except</span> (IOError, PermissionError) <span class="hljs-keyword">as</span> e:
+        <span class="hljs-built_in">print</span>(<span class="hljs-string">f&quot;错误: 无法读取文件 <span class="hljs-subst">&#123;file_path&#125;</span> - <span class="hljs-subst">&#123;<span class="hljs-built_in">str</span>(e)&#125;</span>&quot;</span>, file=sys.stderr)
+        <span class="hljs-keyword">return</span> <span class="hljs-literal">None</span>
+
+
+<span class="hljs-keyword">def</span> <span class="hljs-title function_">batch_calculate_md5</span>(<span class="hljs-params">file_list: <span class="hljs-type">List</span>[<span class="hljs-built_in">str</span>]</span>) -&gt; <span class="hljs-type">Dict</span>[<span class="hljs-built_in">str</span>, <span class="hljs-type">Optional</span>[<span class="hljs-built_in">str</span>]]:
+    <span class="hljs-string">&quot;&quot;&quot;</span>
+<span class="hljs-string">    批量计算MD5值</span>
+<span class="hljs-string">    :param file_list: 文件路径列表</span>
+<span class="hljs-string">    :return: 字典&#123;文件路径: MD5值&#125;</span>
+<span class="hljs-string">    &quot;&quot;&quot;</span>
+    <span class="hljs-keyword">return</span> &#123;file_path: calculate_md5(file_path) <span class="hljs-keyword">for</span> file_path <span class="hljs-keyword">in</span> file_list&#125;
+
+
+<span class="hljs-keyword">def</span> <span class="hljs-title function_">verify_md5</span>(<span class="hljs-params">file_path: <span class="hljs-built_in">str</span>, expected_md5: <span class="hljs-built_in">str</span></span>) -&gt; <span class="hljs-built_in">bool</span>:
+    <span class="hljs-string">&quot;&quot;&quot;</span>
+<span class="hljs-string">    验证文件MD5值</span>
+<span class="hljs-string">    :param file_path: 文件路径</span>
+<span class="hljs-string">    :param expected_md5: 预期MD5值</span>
+<span class="hljs-string">    :return: 是否匹配</span>
+<span class="hljs-string">    &quot;&quot;&quot;</span>
+    actual_md5 = calculate_md5(file_path)
+    <span class="hljs-keyword">if</span> actual_md5 <span class="hljs-keyword">is</span> <span class="hljs-literal">None</span>:
+        <span class="hljs-keyword">return</span> <span class="hljs-literal">False</span>
+
+    is_match = actual_md5.lower() == expected_md5.lower()
+    <span class="hljs-built_in">print</span>(<span class="hljs-string">f&quot;文件: <span class="hljs-subst">&#123;os.path.abspath(file_path)&#125;</span>&quot;</span>)
+    <span class="hljs-built_in">print</span>(<span class="hljs-string">f&quot;预期MD5: <span class="hljs-subst">&#123;expected_md5.lower()&#125;</span>&quot;</span>)
+    <span class="hljs-built_in">print</span>(<span class="hljs-string">f&quot;实际MD5: <span class="hljs-subst">&#123;actual_md5.lower()&#125;</span>&quot;</span>)
+    <span class="hljs-built_in">print</span>(<span class="hljs-string">f&quot;验证结果: <span class="hljs-subst">&#123;<span class="hljs-string">&#x27;匹配&#x27;</span> <span class="hljs-keyword">if</span> is_match <span class="hljs-keyword">else</span> <span class="hljs-string">&#x27;不匹配&#x27;</span>&#125;</span>&quot;</span>)
+    <span class="hljs-keyword">return</span> is_match
+
+
+<span class="hljs-keyword">def</span> <span class="hljs-title function_">generate_md5_file</span>(<span class="hljs-params">directory: <span class="hljs-built_in">str</span>, output_file: <span class="hljs-built_in">str</span> = <span class="hljs-literal">None</span></span>) -&gt; <span class="hljs-built_in">bool</span>:
+    <span class="hljs-string">&quot;&quot;&quot;</span>
+<span class="hljs-string">    生成目录的MD5校验文件</span>
+<span class="hljs-string">    :param directory: 目录路径</span>
+<span class="hljs-string">    :param output_file: 输出文件路径(默认: 目录名.md5)</span>
+<span class="hljs-string">    :return: 是否成功</span>
+<span class="hljs-string">    &quot;&quot;&quot;</span>
+    <span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> os.path.isdir(directory):
+        <span class="hljs-built_in">print</span>(<span class="hljs-string">f&quot;错误: 目录不存在 - <span class="hljs-subst">&#123;directory&#125;</span>&quot;</span>, file=sys.stderr)
+        <span class="hljs-keyword">return</span> <span class="hljs-literal">False</span>
+
+    <span class="hljs-keyword">if</span> output_file <span class="hljs-keyword">is</span> <span class="hljs-literal">None</span>:
+        output_file = os.path.basename(directory.rstrip(<span class="hljs-string">&#x27;/\\&#x27;</span>)) + MD5_FILE_EXTENSION
+
+    <span class="hljs-keyword">try</span>:
+        <span class="hljs-keyword">with</span> <span class="hljs-built_in">open</span>(output_file, <span class="hljs-string">&#x27;w&#x27;</span>, encoding=<span class="hljs-string">&#x27;utf-8&#x27;</span>) <span class="hljs-keyword">as</span> f_out:
+            <span class="hljs-keyword">for</span> root, _, files <span class="hljs-keyword">in</span> os.walk(directory):
+                <span class="hljs-keyword">for</span> filename <span class="hljs-keyword">in</span> files:
+                    file_path = os.path.join(root, filename)
+                    md5 = calculate_md5(file_path)
+                    <span class="hljs-keyword">if</span> md5:
+                        relative_path = os.path.relpath(file_path, directory)
+                        f_out.write(<span class="hljs-string">f&quot;<span class="hljs-subst">&#123;md5&#125;</span> *<span class="hljs-subst">&#123;relative_path&#125;</span>\n&quot;</span>)
+        <span class="hljs-built_in">print</span>(<span class="hljs-string">f&quot;成功生成校验文件: <span class="hljs-subst">&#123;os.path.abspath(output_file)&#125;</span>&quot;</span>)
+        <span class="hljs-keyword">return</span> <span class="hljs-literal">True</span>
+    <span class="hljs-keyword">except</span> IOError <span class="hljs-keyword">as</span> e:
+        <span class="hljs-built_in">print</span>(<span class="hljs-string">f&quot;错误: 无法写入校验文件 - <span class="hljs-subst">&#123;<span class="hljs-built_in">str</span>(e)&#125;</span>&quot;</span>, file=sys.stderr)
+        <span class="hljs-keyword">return</span> <span class="hljs-literal">False</span>
+
+
+<span class="hljs-keyword">def</span> <span class="hljs-title function_">verify_md5_file</span>(<span class="hljs-params">md5_file: <span class="hljs-built_in">str</span></span>) -&gt; <span class="hljs-built_in">bool</span>:
+    <span class="hljs-string">&quot;&quot;&quot;</span>
+<span class="hljs-string">    验证MD5校验文件中的所有条目</span>
+<span class="hljs-string">    :param md5_file: 校验文件路径</span>
+<span class="hljs-string">    :return: 是否全部验证通过</span>
+<span class="hljs-string">    &quot;&quot;&quot;</span>
+    <span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> os.path.isfile(md5_file):
+        <span class="hljs-built_in">print</span>(<span class="hljs-string">f&quot;错误: 校验文件不存在 - <span class="hljs-subst">&#123;md5_file&#125;</span>&quot;</span>, file=sys.stderr)
+        <span class="hljs-keyword">return</span> <span class="hljs-literal">False</span>
+
+    all_passed = <span class="hljs-literal">True</span>
+    <span class="hljs-keyword">try</span>:
+        <span class="hljs-keyword">with</span> <span class="hljs-built_in">open</span>(md5_file, <span class="hljs-string">&#x27;r&#x27;</span>, encoding=<span class="hljs-string">&#x27;utf-8&#x27;</span>) <span class="hljs-keyword">as</span> f:
+            <span class="hljs-keyword">for</span> line_num, line <span class="hljs-keyword">in</span> <span class="hljs-built_in">enumerate</span>(f, <span class="hljs-number">1</span>):
+                line = line.strip()
+                <span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> line <span class="hljs-keyword">or</span> line.startswith(<span class="hljs-string">&#x27;#&#x27;</span>):
+                    <span class="hljs-keyword">continue</span>
+
+                <span class="hljs-comment"># 解析格式: MD5 *文件名 或 MD5 文件名</span>
+                parts = line.split(maxsplit=<span class="hljs-number">1</span>)
+                <span class="hljs-keyword">if</span> <span class="hljs-built_in">len</span>(parts) != <span class="hljs-number">2</span>:
+                    <span class="hljs-built_in">print</span>(<span class="hljs-string">f&quot;警告: 第<span class="hljs-subst">&#123;line_num&#125;</span>行格式错误 - <span class="hljs-subst">&#123;line&#125;</span>&quot;</span>, file=sys.stderr)
+                    all_passed = <span class="hljs-literal">False</span>
+                    <span class="hljs-keyword">continue</span>
+
+                expected_md5, file_path = parts
+                <span class="hljs-keyword">if</span> file_path.startswith(<span class="hljs-string">&#x27;*&#x27;</span>):
+                    file_path = file_path[<span class="hljs-number">1</span>:]
+
+                <span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> verify_md5(file_path, expected_md5):
+                    all_passed = <span class="hljs-literal">False</span>
+    <span class="hljs-keyword">except</span> IOError <span class="hljs-keyword">as</span> e:
+        <span class="hljs-built_in">print</span>(<span class="hljs-string">f&quot;错误: 读取校验文件失败 - <span class="hljs-subst">&#123;<span class="hljs-built_in">str</span>(e)&#125;</span>&quot;</span>, file=sys.stderr)
+        <span class="hljs-keyword">return</span> <span class="hljs-literal">False</span>
+
+    <span class="hljs-keyword">return</span> all_passed
+
+
+<span class="hljs-keyword">def</span> <span class="hljs-title function_">setup_argparse</span>() -&gt; argparse.ArgumentParser:
+    <span class="hljs-string">&quot;&quot;&quot;配置命令行参数解析&quot;&quot;&quot;</span>
+    parser = argparse.ArgumentParser(
+        description=<span class="hljs-string">&#x27;MD5校验工具&#x27;</span>,
+        formatter_class=argparse.RawDescriptionHelpFormatter,
+        epilog=<span class="hljs-string">&quot;&quot;&quot;使用示例:</span>
+<span class="hljs-string">  计算MD5:  %(prog)s calc file.txt</span>
+<span class="hljs-string">  验证文件: %(prog)s verify file.txt d41d8cd98f00b204e9800998ecf8427e</span>
+<span class="hljs-string">  生成校验: %(prog)s gen ./directory</span>
+<span class="hljs-string">  验证校验: %(prog)s check checksums.md5&quot;&quot;&quot;</span>
+    )
+
+    subparsers = parser.add_subparsers(dest=<span class="hljs-string">&#x27;command&#x27;</span>, required=<span class="hljs-literal">True</span>, <span class="hljs-built_in">help</span>=<span class="hljs-string">&#x27;子命令&#x27;</span>)
+
+    <span class="hljs-comment"># calc 子命令</span>
+    calc_parser = subparsers.add_parser(<span class="hljs-string">&#x27;calc&#x27;</span>, <span class="hljs-built_in">help</span>=<span class="hljs-string">&#x27;计算文件MD5值&#x27;</span>)
+    calc_parser.add_argument(<span class="hljs-string">&#x27;file&#x27;</span>, <span class="hljs-built_in">help</span>=<span class="hljs-string">&#x27;目标文件路径&#x27;</span>)
+
+    <span class="hljs-comment"># verify 子命令</span>
+    verify_parser = subparsers.add_parser(<span class="hljs-string">&#x27;verify&#x27;</span>, <span class="hljs-built_in">help</span>=<span class="hljs-string">&#x27;验证文件MD5值&#x27;</span>)
+    verify_parser.add_argument(<span class="hljs-string">&#x27;file&#x27;</span>, <span class="hljs-built_in">help</span>=<span class="hljs-string">&#x27;要验证的文件路径&#x27;</span>)
+    verify_parser.add_argument(<span class="hljs-string">&#x27;md5&#x27;</span>, <span class="hljs-built_in">help</span>=<span class="hljs-string">&#x27;预期的MD5值&#x27;</span>)
+
+    <span class="hljs-comment"># gen 子命令</span>
+    gen_parser = subparsers.add_parser(<span class="hljs-string">&#x27;gen&#x27;</span>, <span class="hljs-built_in">help</span>=<span class="hljs-string">&#x27;生成目录的MD5校验文件&#x27;</span>)
+    gen_parser.add_argument(<span class="hljs-string">&#x27;directory&#x27;</span>, <span class="hljs-built_in">help</span>=<span class="hljs-string">&#x27;目标目录路径&#x27;</span>)
+    gen_parser.add_argument(<span class="hljs-string">&#x27;-o&#x27;</span>, <span class="hljs-string">&#x27;--output&#x27;</span>, <span class="hljs-built_in">help</span>=<span class="hljs-string">&#x27;输出文件路径&#x27;</span>)
+
+    <span class="hljs-comment"># check 子命令</span>
+    check_parser = subparsers.add_parser(<span class="hljs-string">&#x27;check&#x27;</span>, <span class="hljs-built_in">help</span>=<span class="hljs-string">&#x27;验证MD5校验文件&#x27;</span>)
+    check_parser.add_argument(<span class="hljs-string">&#x27;md5_file&#x27;</span>, <span class="hljs-built_in">help</span>=<span class="hljs-string">&#x27;MD5校验文件路径&#x27;</span>)
+
+    <span class="hljs-keyword">return</span> parser
+
+
+<span class="hljs-keyword">def</span> <span class="hljs-title function_">main</span>():
+    parser = setup_argparse()
+    args = parser.parse_args()
+
+    <span class="hljs-keyword">if</span> args.command == <span class="hljs-string">&#x27;calc&#x27;</span>:
+        md5 = calculate_md5(args.file)
+        <span class="hljs-keyword">if</span> md5:
+            <span class="hljs-built_in">print</span>(md5)
+        <span class="hljs-keyword">else</span>:
+            sys.exit(<span class="hljs-number">1</span>)
+
+    <span class="hljs-keyword">elif</span> args.command == <span class="hljs-string">&#x27;verify&#x27;</span>:
+        <span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> verify_md5(args.file, args.md5):
+            sys.exit(<span class="hljs-number">1</span>)
+
+    <span class="hljs-keyword">elif</span> args.command == <span class="hljs-string">&#x27;gen&#x27;</span>:
+        <span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> generate_md5_file(args.directory, args.output):
+            sys.exit(<span class="hljs-number">1</span>)
+
+    <span class="hljs-keyword">elif</span> args.command == <span class="hljs-string">&#x27;check&#x27;</span>:
+        <span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> verify_md5_file(args.md5_file):
+            sys.exit(<span class="hljs-number">1</span>)
+
+
+<span class="hljs-keyword">if</span> __name__ == <span class="hljs-string">&#x27;__main__&#x27;</span>:
+    main()</code></pre></div>
+<p>参考文章：</p>
+<ol>
+<li><a target="_blank" rel="noopener" href="https://www.cnblogs.com/lfri/p/12257706.html">MD5校验码有什么作用</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.cnblogs.com/lfri/p/12257706.html">MD5校验 </a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_66196770/article/details/140391190">为什么文件需要校验MD5</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.sysceo.com/Article-article_info-id-1932.html">如何使用MD5进行文件验证</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/lgj123xj/article/details/134725144">使用MD5当做文件的唯一标识，这样安全么？</a></li>
+</ol>
+
                 
               </div>
             
