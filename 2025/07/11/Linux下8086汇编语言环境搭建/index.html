@@ -19,12 +19,12 @@
   <meta name="author" content="fishcanf1y">
   <meta name="keywords" content="fishcanf1y">
   
-    <meta name="description" content="Description:dosbox是一个免费开源跨平台的MS-DOS模拟器。用它可以编译运行8086汇编 sudo apt-get install dosbox 如图所示已成功安装dosbox 接下来挂载驱动器C盘并进入C盘：Z:\&gt;mount c &#x2F;home&#x2F;zhailin&#x2F;ASM-Test Z:\&gt;c:  如上图成功将linux下的路径”&#x2F;home&#x2F;ubuntu&#x2F;masm&#x2F;“这个">
+    <meta name="description" content="Description: dosbox是一个免费开源跨平台的MS-DOS模拟器。用它可以编译运行8086汇编 sudo apt-get install dosbox  如图所示已成功安装dosbox 接下来挂载驱动器C盘并进入C盘： Z:\&gt;mount c &#x2F;home&#x2F;zhailin&#x2F;ASM-Test Z:\&gt;c:  如上图成功将linux下的路径&quot;&#x2F;home&#x2F;ubuntu&#x2F;">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Linux下8086汇编语言环境搭建">
 <meta property="og:url" content="https://fishcanf1y.github.io/2025/07/11/Linux%E4%B8%8B8086%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/index.html">
 <meta property="og:site_name" content="fishcanf1y">
-<meta property="og:description" content="Description:dosbox是一个免费开源跨平台的MS-DOS模拟器。用它可以编译运行8086汇编 sudo apt-get install dosbox 如图所示已成功安装dosbox 接下来挂载驱动器C盘并进入C盘：Z:\&gt;mount c &#x2F;home&#x2F;zhailin&#x2F;ASM-Test Z:\&gt;c:  如上图成功将linux下的路径”&#x2F;home&#x2F;ubuntu&#x2F;masm&#x2F;“这个">
+<meta property="og:description" content="Description: dosbox是一个免费开源跨平台的MS-DOS模拟器。用它可以编译运行8086汇编 sudo apt-get install dosbox  如图所示已成功安装dosbox 接下来挂载驱动器C盘并进入C盘： Z:\&gt;mount c &#x2F;home&#x2F;zhailin&#x2F;ASM-Test Z:\&gt;c:  如上图成功将linux下的路径&quot;&#x2F;home&#x2F;ubuntu&#x2F;">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://fishcanf1y.github.io/images/successfully-to-install-dosbox.PNG">
 <meta property="og:image" content="https://fishcanf1y.github.io/images/diskc.PNG">
@@ -249,7 +249,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          194 words
+          196 words
         
       </span>
     
@@ -302,21 +302,23 @@
             
               <div class="markdown-body">
                 
-                <h3 id="Description"><a href="#Description" class="headerlink" title="Description:"></a>Description:</h3><p>dosbox是一个免费开源跨平台的MS-DOS模拟器。用它可以编译运行8086汇编</p>
+                <h3 id="Description">Description:</h3>
+<p>dosbox是一个免费开源跨平台的MS-DOS模拟器。用它可以编译运行8086汇编</p>
 <div class="code-wrapper"><pre><code class="hljs bash"><span class="hljs-built_in">sudo</span> apt-get install dosbox</code></pre></div>
-<p><img src="/images/successfully-to-install-dosbox.PNG" srcset="/img/loading.gif" lazyload alt="成功安装dosbox"><br>如图所示已成功安装dosbox</p>
-<p>接下来挂载驱动器C盘并进入C盘：<br><div class="code-wrapper"><pre><code class="hljs dts"><span class="hljs-symbol">Z:</span>\&gt;mount c <span class="hljs-keyword">/home/</span>zhailin/ASM-Test
-<span class="hljs-symbol">Z:</span>\&gt;c:</code></pre></div></p>
+<p><img src="/images/successfully-to-install-dosbox.PNG" srcset="/img/loading.gif" lazyload alt="成功安装dosbox"><br>
+如图所示已成功安装dosbox</p>
+<p>接下来挂载驱动器C盘并进入C盘：</p>
+<div class="code-wrapper"><pre><code class="hljs dts"><span class="hljs-symbol">Z:</span>\&gt;mount c <span class="hljs-keyword">/home/</span>zhailin/ASM-Test
+<span class="hljs-symbol">Z:</span>\&gt;c:</code></pre></div>
 <p><img src="/images/diskc.PNG" srcset="/img/loading.gif" lazyload alt="成功挂载并进入C盘"></p>
-<p>如上图成功将linux下的路径”/home/ubuntu/masm/“这个路径挂载为dosbox虚拟机的序盘，并进入到了c盘</p>
-<p><del>虚拟机安装之后，进行汇编开发学习还需要masm、link、debug三个工具；其中masm是汇编工具、link是链接工具、debug是调试工具。</del></p>
+<p>如上图成功将linux下的路径&quot;/home/ubuntu/masm/&quot;这个路径挂载为dosbox虚拟机的序盘，并进入到了c盘</p>
+<p><s>虚拟机安装之后，进行汇编开发学习还需要masm、link、debug三个工具；其中masm是汇编工具、link是链接工具、debug是调试工具。</s></p>
 <p>修正：dosbox中的虚拟机已经自带<code>Debug</code>和<code>link</code></p>
 <p><img src="/images/test.PNG" srcset="/img/loading.gif" lazyload alt="images"></p>
 <p>写一个helloworld并尝试编译</p>
 <p>在此笔者遇到了一个问题，目前尚不清楚如何在Linux下的dosbox安装masm，如有方法欢迎提出！</p>
 <script src="https://giscus.app/client.js" data-repo="fishcanf1y/fishcanf1y.github.io" data-repo-id="R_kgDONzaTTQ" data-category="Announcements" data-category-id="DIC_kwDONzaTTc4Cpqn7" data-mapping="pathname" data-strict="0" data-reactions-enabled="1" data-emit-metadata="0" data-input-position="top" data-theme="preferred_color_scheme" data-lang="zh-CN" crossorigin="anonymous" async>
 </script>
-
 
                 
               </div>

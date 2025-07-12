@@ -19,12 +19,12 @@
   <meta name="author" content="fishcanf1y">
   <meta name="keywords" content="fishcanf1y">
   
-    <meta name="description" content="项目地址：https:&#x2F;&#x2F;github.com&#x2F;fishcanf1y&#x2F;MD5-Checker Description:MD5 校验器用于验证数据完整性和检测数据是否被篡改，常用于文件下载、软件更新、密码存储等场景。它可以快速生成文件的“数字指纹”——MD5 值，然后将该值与原始值进行比较，以确保文件在传输或存储过程中没有发生变化。﻿ 以下是MD5 校验器的主要用途和优势：  文件完整性验证: 当下">
+    <meta name="description" content="项目地址：https:&#x2F;&#x2F;github.com&#x2F;fishcanf1y&#x2F;MD5-Checker Description: MD5 校验器用于验证数据完整性和检测数据是否被篡改，常用于文件下载、软件更新、密码存储等场景。它可以快速生成文件的“数字指纹”——MD5 值，然后将该值与原始值进行比较，以确保文件在传输或存储过程中没有发生变化。 以下是MD5 校验器的主要用途和优势：   文件完整性验证: 当">
 <meta property="og:type" content="article">
 <meta property="og:title" content="How to design an MD5 verifier">
 <meta property="og:url" content="https://fishcanf1y.github.io/2025/07/11/md5verifier-20250711/index.html">
 <meta property="og:site_name" content="fishcanf1y">
-<meta property="og:description" content="项目地址：https:&#x2F;&#x2F;github.com&#x2F;fishcanf1y&#x2F;MD5-Checker Description:MD5 校验器用于验证数据完整性和检测数据是否被篡改，常用于文件下载、软件更新、密码存储等场景。它可以快速生成文件的“数字指纹”——MD5 值，然后将该值与原始值进行比较，以确保文件在传输或存储过程中没有发生变化。﻿ 以下是MD5 校验器的主要用途和优势：  文件完整性验证: 当下">
+<meta property="og:description" content="项目地址：https:&#x2F;&#x2F;github.com&#x2F;fishcanf1y&#x2F;MD5-Checker Description: MD5 校验器用于验证数据完整性和检测数据是否被篡改，常用于文件下载、软件更新、密码存储等场景。它可以快速生成文件的“数字指纹”——MD5 值，然后将该值与原始值进行比较，以确保文件在传输或存储过程中没有发生变化。 以下是MD5 校验器的主要用途和优势：   文件完整性验证: 当">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://fishcanf1y.github.io/images/verifier_1_20250712.png">
 <meta property="og:image" content="https://fishcanf1y.github.io/images/verifier_2_20250712.png">
@@ -302,42 +302,54 @@
               <div class="markdown-body">
                 
                 <p>项目地址：<em><a target="_blank" rel="noopener" href="https://github.com/fishcanf1y/MD5-Checker">https://github.com/fishcanf1y/MD5-Checker</a></em></p>
-<h2 id="Description"><a href="#Description" class="headerlink" title="Description:"></a>Description:</h2><p>MD5 校验器用于验证数据完整性和检测数据是否被篡改，常用于文件下载、软件更新、密码存储等场景。它可以快速生成文件的“数字指纹”——MD5 值，然后将该值与原始值进行比较，以确保文件在传输或存储过程中没有发生变化。﻿</p>
+<h2 id="Description">Description:</h2>
+<p>MD5 校验器用于验证数据完整性和检测数据是否被篡改，常用于文件下载、软件更新、密码存储等场景。它可以快速生成文件的“数字指纹”——MD5 值，然后将该值与原始值进行比较，以确保文件在传输或存储过程中没有发生变化。</p>
 <p>以下是MD5 校验器的主要用途和优势：</p>
 <ul>
-<li><p><strong>文件完整性验证:</strong></p>
-<p>当下载文件时，网站通常会提供文件的MD5 值。下载完成后，用户可以使用MD5 校验器计算下载文件的MD5 值，并与提供的MD5 值进行比较。如果两者一致，则表示文件没有损坏或被篡改；如果不一致，则表示文件可能损坏或被恶意修改，需要重新下载。﻿</p>
+<li>
+<p><strong>文件完整性验证:</strong></p>
+<p>当下载文件时，网站通常会提供文件的MD5 值。下载完成后，用户可以使用MD5 校验器计算下载文件的MD5 值，并与提供的MD5 值进行比较。如果两者一致，则表示文件没有损坏或被篡改；如果不一致，则表示文件可能损坏或被恶意修改，需要重新下载。</p>
 </li>
-<li><p><strong>数据一致性验证:</strong></p>
-<p>在数据传输和存储过程中，可能会出现错误或干扰导致数据损坏。通过对数据进行MD5 校验，可以确保数据在不同节点之间的一致性，防止数据丢失或损坏。﻿</p>
+<li>
+<p><strong>数据一致性验证:</strong></p>
+<p>在数据传输和存储过程中，可能会出现错误或干扰导致数据损坏。通过对数据进行MD5 校验，可以确保数据在不同节点之间的一致性，防止数据丢失或损坏。</p>
 </li>
-<li><p><strong>安全性保护:</strong></p>
-<p>MD5 校验可以用于检测恶意篡改。如果文件在传输过程中被恶意篡改，其MD5 值会发生变化，从而可以及时发现并阻止恶意行为。﻿</p>
+<li>
+<p><strong>安全性保护:</strong></p>
+<p>MD5 校验可以用于检测恶意篡改。如果文件在传输过程中被恶意篡改，其MD5 值会发生变化，从而可以及时发现并阻止恶意行为。</p>
 </li>
-<li><p><strong>文件识别和重复性检测:</strong></p>
-<p>每个文件都有一个唯一的MD5 值，可以用于快速识别文件，避免存储和传输重复文件，节省存储空间和带宽。﻿</p>
+<li>
+<p><strong>文件识别和重复性检测:</strong></p>
+<p>每个文件都有一个唯一的MD5 值，可以用于快速识别文件，避免存储和传输重复文件，节省存储空间和带宽。</p>
 </li>
-<li><p><strong>密码存储:</strong></p>
-<p>虽然MD5 算法不再被推荐用于直接存储密码，但它仍然被广泛用于存储密码的哈希值。这样即使数据库泄露，攻击者也无法直接获取用户的明文密码。﻿</p>
+<li>
+<p><strong>密码存储:</strong></p>
+<p>虽然MD5 算法不再被推荐用于直接存储密码，但它仍然被广泛用于存储密码的哈希值。这样即使数据库泄露，攻击者也无法直接获取用户的明文密码。</p>
 </li>
 </ul>
-<p>总而言之，MD5 校验器在保证数据安全和完整性方面发挥着重要作用，尤其是在文件传输、数据存储和密码管理等场景中。﻿</p>
-<h2 id="How-To-Do"><a href="#How-To-Do" class="headerlink" title="How To Do?"></a>How To Do?</h2><p>以下我将梳理大致思路并列举一些代码片段来说明其作用</p>
-<h3 id="一、核心目标"><a href="#一、核心目标" class="headerlink" title="一、核心目标"></a>一、核心目标</h3><ol>
-<li><strong>核心功能</strong>：<ul>
+<p>总而言之，MD5 校验器在保证数据安全和完整性方面发挥着重要作用，尤其是在文件传输、数据存储和密码管理等场景中。</p>
+<h2 id="How-To-Do">How To Do?</h2>
+<p>以下我将梳理大致思路并列举一些代码片段来说明其作用</p>
+<h3 id="一、核心目标">一、核心目标</h3>
+<ol>
+<li><strong>核心功能</strong>：
+<ul>
 <li>计算文件的MD5哈希值（文件完整性指纹）</li>
 <li>验证文件是否与预期MD5匹配</li>
 <li>支持批量处理和目录递归操作</li>
 </ul>
 </li>
-<li><strong>非功能性需求</strong>：<ul>
+<li><strong>非功能性需求</strong>：
+<ul>
 <li>内存安全（支持大文件处理）</li>
 <li>跨平台兼容性（Windows/Linux/macOS）</li>
 <li>符合标准工具行为（兼容<code>md5sum</code>格式）</li>
 </ul>
 </li>
 </ol>
-<h3 id="二、关键实现思路"><a href="#二、关键实现思路" class="headerlink" title="二、关键实现思路"></a>二、关键实现思路</h3><h4 id="1-文件哈希计算（核心算法）"><a href="#1-文件哈希计算（核心算法）" class="headerlink" title="1. 文件哈希计算（核心算法）"></a>1. 文件哈希计算（核心算法）</h4><p><strong>设计要点</strong>：</p>
+<h3 id="二、关键实现思路">二、关键实现思路</h3>
+<h4 id="1-文件哈希计算（核心算法）">1. 文件哈希计算（核心算法）</h4>
+<p><strong>设计要点</strong>：</p>
 <ul>
 <li><strong>分块处理</strong>：避免内存溢出</li>
 </ul>
@@ -348,29 +360,36 @@
             md5.update(block)  <span class="hljs-comment"># 增量更新哈希</span>
     <span class="hljs-keyword">return</span> md5.hexdigest()</code></pre></div>
 <ul>
-<li>使用生成器模式逐块读取（<code>iter+lambda</code>技巧）</li>
-<li>默认64KB块大小平衡I/O效率和内存占用</li>
-</ul>
-<ul>
-<li><p><strong>错误处理</strong>：</p>
+<li>
+<p>使用生成器模式逐块读取（<code>iter+lambda</code>技巧）</p>
+</li>
+<li>
+<p>默认64KB块大小平衡I/O效率和内存占用</p>
+</li>
+<li>
+<p><strong>错误处理</strong>：</p>
 <ul>
 <li>捕获<code>IOError</code>并返回<code>None</code>统一表示失败</li>
-<li>二进制模式(<code>&#39;rb&#39;</code>)确保跨平台一致性</li>
+<li>二进制模式(<code>'rb'</code>)确保跨平台一致性</li>
 </ul>
 </li>
 </ul>
-<h4 id="2-验证机制"><a href="#2-验证机制" class="headerlink" title="2. 验证机制"></a>2. 验证机制</h4><p><strong>设计要点</strong>：</p>
+<h4 id="2-验证机制">2. 验证机制</h4>
+<p><strong>设计要点</strong>：</p>
 <ul>
 <li><strong>大小写不敏感</strong>：<code>.lower()</code>处理用户输入</li>
 </ul>
 <div class="code-wrapper"><pre><code class="hljs Python"><span class="hljs-keyword">if</span> actual_md5.lower() == expected_md5.lower()</code></pre></div>
 <ul>
-<li><p><strong>明确输出</strong>：格式化显示预期/实际值对比</p>
+<li>
+<p><strong>明确输出</strong>：格式化显示预期/实际值对比</p>
 </li>
-<li><p><strong>返回布尔值</strong>：便于脚本化调用</p>
+<li>
+<p><strong>返回布尔值</strong>：便于脚本化调用</p>
 </li>
 </ul>
-<h4 id="3-批量处理"><a href="#3-批量处理" class="headerlink" title="3. 批量处理"></a>3. 批量处理</h4><p><strong>递归目录处理</strong>：</p>
+<h4 id="3-批量处理">3. 批量处理</h4>
+<p><strong>递归目录处理</strong>：</p>
 <div class="code-wrapper"><pre><code class="hljs Python"><span class="hljs-keyword">for</span> root, _, files <span class="hljs-keyword">in</span> os.walk(directory):
     <span class="hljs-keyword">for</span> filename <span class="hljs-keyword">in</span> files:
         file_path = os.path.join(root, filename)
@@ -379,7 +398,8 @@
 <li>使用<code>os.walk</code>实现深度优先遍历</li>
 <li><code>os.path.relpath</code>生成相对路径保证校验文件可移植性</li>
 </ul>
-<h4 id="4-命令行接口"><a href="#4-命令行接口" class="headerlink" title="4. 命令行接口"></a>4. 命令行接口</h4><p><strong>子命令模式</strong>：</p>
+<h4 id="4-命令行接口">4. 命令行接口</h4>
+<p><strong>子命令模式</strong>：</p>
 <div class="code-wrapper"><pre><code class="hljs python">subparsers = parser.add_subparsers(dest=<span class="hljs-string">&#x27;command&#x27;</span>)
 calc_parser = subparsers.add_parser(<span class="hljs-string">&#x27;calc&#x27;</span>)
 verify_parser = subparsers.add_parser(<span class="hljs-string">&#x27;verify&#x27;</span>)</code></pre></div>
@@ -388,42 +408,55 @@ verify_parser = subparsers.add_parser(<span class="hljs-string">&#x27;verify&#x2
 <li>自动生成帮助信息（<code>-h</code>）</li>
 </ul>
 <hr>
-<h3 id="三、典型工作流程"><a href="#三、典型工作流程" class="headerlink" title="三、典型工作流程"></a>三、典型工作流程</h3><h4 id="场景1：单文件验证"><a href="#场景1：单文件验证" class="headerlink" title="场景1：单文件验证"></a>场景1：单文件验证</h4><p><img src="/images/verifier_1_20250712.png" srcset="/img/loading.gif" lazyload alt="单文件验证"></p>
-<h4 id="场景2：生成验证文件"><a href="#场景2：生成验证文件" class="headerlink" title="场景2：生成验证文件"></a>场景2：生成验证文件</h4><p><img src="/images/verifier_2_20250712.png" srcset="/img/loading.gif" lazyload alt="生成验证文件"></p>
-<h3 id="四、扩展设计思路"><a href="#四、扩展设计思路" class="headerlink" title="四、扩展设计思路"></a>四、扩展设计思路</h3><h4 id="1-算法扩展点"><a href="#1-算法扩展点" class="headerlink" title="1. 算法扩展点"></a>1. 算法扩展点</h4><div class="code-wrapper"><pre><code class="hljs Python"><span class="hljs-keyword">def</span> <span class="hljs-title function_">calculate_hash</span>(<span class="hljs-params">file_path, algorithm=<span class="hljs-string">&#x27;md5&#x27;</span>, block_size=<span class="hljs-number">65536</span></span>):
+<h3 id="三、典型工作流程">三、典型工作流程</h3>
+<h4 id="场景1：单文件验证">场景1：单文件验证</h4>
+<p><img src="/images/verifier_1_20250712.png" srcset="/img/loading.gif" lazyload alt="单文件验证"></p>
+<h4 id="场景2：生成验证文件">场景2：生成验证文件</h4>
+<p><img src="/images/verifier_2_20250712.png" srcset="/img/loading.gif" lazyload alt="生成验证文件"></p>
+<h3 id="四、扩展设计思路">四、扩展设计思路</h3>
+<h4 id="1-算法扩展点">1. 算法扩展点</h4>
+<div class="code-wrapper"><pre><code class="hljs Python"><span class="hljs-keyword">def</span> <span class="hljs-title function_">calculate_hash</span>(<span class="hljs-params">file_path, algorithm=<span class="hljs-string">&#x27;md5&#x27;</span>, block_size=<span class="hljs-number">65536</span></span>):
     hasher = hashlib.new(algorithm)  <span class="hljs-comment"># 动态选择算法</span>
     <span class="hljs-comment"># ...相同处理逻辑...</span></code></pre></div>
-<h4 id="2-性能优化方向"><a href="#2-性能优化方向" class="headerlink" title="2. 性能优化方向"></a>2. 性能优化方向</h4><ul>
+<h4 id="2-性能优化方向">2. 性能优化方向</h4>
+<ul>
 <li><strong>并行计算</strong>：使用<code>concurrent.futures</code>加速批量处理</li>
 <li><strong>进度显示</strong>：添加<code>tqdm</code>进度条</li>
 </ul>
-<h4 id="3-安全增强"><a href="#3-安全增强" class="headerlink" title="3. 安全增强"></a>3. 安全增强</h4><ul>
+<h4 id="3-安全增强">3. 安全增强</h4>
+<ul>
 <li><strong>签名校验</strong>：支持PGP签名验证</li>
 <li><strong>哈希链</strong>：实现类似<code>git</code>的对象哈希链</li>
 </ul>
-<h4 id="4-工程化改进"><a href="#4-工程化改进" class="headerlink" title="4. 工程化改进"></a>4. 工程化改进</h4><ul>
+<h4 id="4-工程化改进">4. 工程化改进</h4>
+<ul>
 <li><strong>单元测试</strong>：针对大文件/空文件/非法路径等边界条件</li>
 <li><strong>日志记录</strong>：添加<code>logging</code>模块记录操作</li>
 </ul>
 <hr>
-<h3 id="五、设计权衡考量"><a href="#五、设计权衡考量" class="headerlink" title="五、设计权衡考量"></a>五、设计权衡考量</h3><ol>
-<li><strong>内存 vs 速度</strong>：<ul>
+<h3 id="五、设计权衡考量">五、设计权衡考量</h3>
+<ol>
+<li><strong>内存 vs 速度</strong>：
+<ul>
 <li>选择64KB块大小而非一次性读取</li>
 <li>牺牲少量速度换取内存安全性</li>
 </ul>
 </li>
-<li><strong>灵活性 vs 复杂度</strong>：<ul>
+<li><strong>灵活性 vs 复杂度</strong>：
+<ul>
 <li>不默认支持多算法保持简单性</li>
 <li>但保留扩展接口</li>
 </ul>
 </li>
-<li><strong>严格模式可选</strong>：<ul>
+<li><strong>严格模式可选</strong>：
+<ul>
 <li>当前大小写不敏感验证</li>
 <li>可添加<code>--strict</code>参数启用严格匹配</li>
 </ul>
 </li>
 </ol>
-<h3 id="六、最终代码呈现"><a href="#六、最终代码呈现" class="headerlink" title="六、最终代码呈现"></a>六、最终代码呈现</h3><div class="code-wrapper"><pre><code class="hljs Python"><span class="hljs-comment">#!/usr/bin/env python3</span>
+<h3 id="六、最终代码呈现">六、最终代码呈现</h3>
+<div class="code-wrapper"><pre><code class="hljs Python"><span class="hljs-comment">#!/usr/bin/env python3</span>
 <span class="hljs-keyword">import</span> hashlib
 <span class="hljs-keyword">import</span> argparse
 <span class="hljs-keyword">import</span> os

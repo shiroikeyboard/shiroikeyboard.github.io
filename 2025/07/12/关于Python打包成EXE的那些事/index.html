@@ -19,15 +19,15 @@
   <meta name="author" content="fishcanf1y">
   <meta name="keywords" content="fishcanf1y">
   
-    <meta name="description" content="一、为咩要打包Python程序？设想下，你是一位Python开发者，而且你经常将你开发的各类工具分享给你的好朋友们使用，但是你的好朋友可能并不一定是学计算坤的，所以对方可能会没有Python环境也在情理之中，这时候就需要将.py文件打包成.exe可执行文件。常见的应用场景包括：  给非技术人员使用的小工具 需要保密的商业软件 方便分发的应用程序  于是在此我将介绍5种打包方式，具体选择哪一种可以根">
+    <meta name="description" content="一、为咩要打包Python程序？ 设想下，你是一位Python开发者，而且你经常将你开发的各类工具分享给你的好朋友们使用，但是你的好朋友可能并不一定是学计算坤的，所以对方可能会没有Python环境也在情理之中，这时候就需要将.py文件打包成.exe可执行文件。常见的应用场景包括：  给非技术人员使用的小工具 需要保密的商业软件 方便分发的应用程序  于是在此我将介绍5种打包方式，具体选择哪一种可以">
 <meta property="og:type" content="article">
 <meta property="og:title" content="关于Python打包成EXE的那些事">
 <meta property="og:url" content="https://fishcanf1y.github.io/2025/07/12/%E5%85%B3%E4%BA%8EPython%E6%89%93%E5%8C%85%E6%88%90EXE%E7%9A%84%E9%82%A3%E4%BA%9B%E4%BA%8B/index.html">
 <meta property="og:site_name" content="fishcanf1y">
-<meta property="og:description" content="一、为咩要打包Python程序？设想下，你是一位Python开发者，而且你经常将你开发的各类工具分享给你的好朋友们使用，但是你的好朋友可能并不一定是学计算坤的，所以对方可能会没有Python环境也在情理之中，这时候就需要将.py文件打包成.exe可执行文件。常见的应用场景包括：  给非技术人员使用的小工具 需要保密的商业软件 方便分发的应用程序  于是在此我将介绍5种打包方式，具体选择哪一种可以根">
+<meta property="og:description" content="一、为咩要打包Python程序？ 设想下，你是一位Python开发者，而且你经常将你开发的各类工具分享给你的好朋友们使用，但是你的好朋友可能并不一定是学计算坤的，所以对方可能会没有Python环境也在情理之中，这时候就需要将.py文件打包成.exe可执行文件。常见的应用场景包括：  给非技术人员使用的小工具 需要保密的商业软件 方便分发的应用程序  于是在此我将介绍5种打包方式，具体选择哪一种可以">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2025-07-12T13:25:11.000Z">
-<meta property="article:modified_time" content="2025-07-12T14:01:07.904Z">
+<meta property="article:modified_time" content="2025-07-12T14:03:33.865Z">
 <meta property="article:author" content="fishcanf1y">
 <meta property="article:tag" content="Coding">
 <meta name="twitter:card" content="summary_large_image">
@@ -298,14 +298,17 @@
             
               <div class="markdown-body">
                 
-                <h2 id="一、为咩要打包Python程序？"><a href="#一、为咩要打包Python程序？" class="headerlink" title="一、为咩要打包Python程序？"></a>一、为咩要打包Python程序？</h2><p>设想下，你是一位Python开发者，而且你经常将你开发的各类工具分享给你的好朋友们使用，但是你的好朋友可能并不一定是学计算坤的，所以对方可能会没有Python环境也在情理之中，这时候就需要将.py文件打包成.exe可执行文件。常见的应用场景包括：</p>
+                <h2 id="一、为咩要打包Python程序？">一、为咩要打包Python程序？</h2>
+<p>设想下，你是一位Python开发者，而且你经常将你开发的各类工具分享给你的好朋友们使用，但是你的好朋友可能并不一定是学计算坤的，所以对方可能会没有Python环境也在情理之中，这时候就需要将.py文件打包成.exe可执行文件。常见的应用场景包括：</p>
 <ul>
 <li>给非技术人员使用的小工具</li>
 <li>需要保密的商业软件</li>
 <li>方便分发的应用程序</li>
 </ul>
 <p>于是在此我将介绍5种打包方式，具体选择哪一种可以根据你的喜好。</p>
-<h2 id="各类打包方式过程和对比"><a href="#各类打包方式过程和对比" class="headerlink" title="各类打包方式过程和对比"></a>各类打包方式过程和对比</h2><h3 id="方法1：PyInstaller"><a href="#方法1：PyInstaller" class="headerlink" title="方法1：PyInstaller"></a>方法1：PyInstaller</h3><div class="code-wrapper"><pre><code class="hljs bash"><span class="hljs-comment"># 安装</span>
+<h2 id="各类打包方式过程和对比">各类打包方式过程和对比</h2>
+<h3 id="方法1：PyInstaller">方法1：PyInstaller</h3>
+<div class="code-wrapper"><pre><code class="hljs bash"><span class="hljs-comment"># 安装</span>
 pip install pyinstaller
 
 <span class="hljs-comment"># 打包命令（基础版）</span>
@@ -318,7 +321,8 @@ pyinstaller -F -w -i app.ico your-python-program.py</code></pre></div>
 <li><code>-w</code>：隐藏控制台窗口（GUI程序专用）</li>
 <li><code>-i</code>：设置程序图标</li>
 </ul>
-<h3 id="方法2：cx-Freeze"><a href="#方法2：cx-Freeze" class="headerlink" title="方法2：cx_Freeze"></a>方法2：cx_Freeze</h3><p>创建setup.py文件：</p>
+<h3 id="方法2：cx-Freeze">方法2：cx_Freeze</h3>
+<p>创建setup.py文件：</p>
 <div class="code-wrapper"><pre><code class="hljs Python"><span class="hljs-keyword">from</span> cx_Freeze <span class="hljs-keyword">import</span> setup, Executable
 
 setup(
@@ -329,16 +333,22 @@ setup(
 )</code></pre></div>
 <p>执行打包：</p>
 <div class="code-wrapper"><pre><code class="hljs bash">python setup.py build</code></pre></div>
-<h3 id="方法3：Nuitka（编译为原生二进制）"><a href="#方法3：Nuitka（编译为原生二进制）" class="headerlink" title="方法3：Nuitka（编译为原生二进制）"></a>方法3：Nuitka（编译为原生二进制）</h3><div class="code-wrapper"><pre><code class="hljs Python"><span class="hljs-comment"># 安装</span>
+<h3 id="方法3：Nuitka（编译为原生二进制）">方法3：Nuitka（编译为原生二进制）</h3>
+<div class="code-wrapper"><pre><code class="hljs Python"><span class="hljs-comment"># 安装</span>
 pip install nuitka
 
 <span class="hljs-comment"># 打包命令</span>
 nuitka --standalone --onefile --windows-disable-console code-summar-tool.py</code></pre></div>
-<h3 id="方法4：Py2exe（仅Windows）"><a href="#方法4：Py2exe（仅Windows）" class="headerlink" title="方法4：Py2exe（仅Windows）"></a>方法4：Py2exe（仅Windows）</h3><p>创建setup.py：<br><div class="code-wrapper"><pre><code class="hljs Python"><span class="hljs-keyword">from</span> distutils.core <span class="hljs-keyword">import</span> setup
+<h3 id="方法4：Py2exe（仅Windows）">方法4：Py2exe（仅Windows）</h3>
+<p><a target="_blank" rel="noopener" href="http://xn--setup-ll6hz28e.py">创建setup.py</a>：</p>
+<div class="code-wrapper"><pre><code class="hljs Python"><span class="hljs-keyword">from</span> distutils.core <span class="hljs-keyword">import</span> setup
 <span class="hljs-keyword">import</span> py2exe
 
-setup(windows=[<span class="hljs-string">&quot;your-python-program.py&quot;</span>])</code></pre></div><br>执行打包：<br><div class="code-wrapper"><pre><code class="hljs bash">python setup.py py2exe</code></pre></div></p>
-<h3 id="方法5：auto-py-to-exe（图形界面）"><a href="#方法5：auto-py-to-exe（图形界面）" class="headerlink" title="方法5：auto-py-to-exe（图形界面）"></a>方法5：auto-py-to-exe（图形界面）</h3><div class="code-wrapper"><pre><code class="hljs bash"><span class="hljs-comment"># 安装</span>
+setup(windows=[<span class="hljs-string">&quot;your-python-program.py&quot;</span>])</code></pre></div>
+<p>执行打包：</p>
+<div class="code-wrapper"><pre><code class="hljs bash">python setup.py py2exe</code></pre></div>
+<h3 id="方法5：auto-py-to-exe（图形界面）">方法5：auto-py-to-exe（图形界面）</h3>
+<div class="code-wrapper"><pre><code class="hljs bash"><span class="hljs-comment"># 安装</span>
 pip install auto-py-to-exe
 
 <span class="hljs-comment"># 启动图形界面</span>

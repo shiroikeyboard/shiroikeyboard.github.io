@@ -19,15 +19,15 @@
   <meta name="author" content="fishcanf1y">
   <meta name="keywords" content="fishcanf1y">
   
-    <meta name="description" content="后记：在MD5-Checker 项目开发中，我也遇到了很多知识面缺陷的问题，于是在开发过程中我选择使用了AI来辅助开发（学艺不精）在此，我根据AI的建议，梳理了一份思路——如何成为一名合格的Devloper 以下是针对MD5校验工具设计思路所涉及的软件工程原则（以MD5-Checker开发为例）、经典理论以及对应的学习吸收方法的系统化总结：  一、涉及的核心理论与原则1. 模块化设计 SOLID原">
+    <meta name="description" content="后记： 在MD5-Checker 项目开发中，我也遇到了很多知识面缺陷的问题，于是在开发过程中我选择使用了AI来辅助开发（学艺不精）在此，我根据AI的建议，梳理了一份思路——如何成为一名合格的Devloper 以下是针对MD5校验工具设计思路所涉及的软件工程原则（以MD5-Checker开发为例）、经典理论以及对应的学习吸收方法的系统化总结：  一、涉及的核心理论与原则 1. 模块化设计  SOL">
 <meta property="og:type" content="article">
 <meta property="og:title" content="How to design an MD5 verifier - 后记">
 <meta property="og:url" content="https://fishcanf1y.github.io/2025/07/12/verifier-talk/index.html">
 <meta property="og:site_name" content="fishcanf1y">
-<meta property="og:description" content="后记：在MD5-Checker 项目开发中，我也遇到了很多知识面缺陷的问题，于是在开发过程中我选择使用了AI来辅助开发（学艺不精）在此，我根据AI的建议，梳理了一份思路——如何成为一名合格的Devloper 以下是针对MD5校验工具设计思路所涉及的软件工程原则（以MD5-Checker开发为例）、经典理论以及对应的学习吸收方法的系统化总结：  一、涉及的核心理论与原则1. 模块化设计 SOLID原">
+<meta property="og:description" content="后记： 在MD5-Checker 项目开发中，我也遇到了很多知识面缺陷的问题，于是在开发过程中我选择使用了AI来辅助开发（学艺不精）在此，我根据AI的建议，梳理了一份思路——如何成为一名合格的Devloper 以下是针对MD5校验工具设计思路所涉及的软件工程原则（以MD5-Checker开发为例）、经典理论以及对应的学习吸收方法的系统化总结：  一、涉及的核心理论与原则 1. 模块化设计  SOL">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2025-07-12T13:16:23.000Z">
-<meta property="article:modified_time" content="2025-07-12T13:28:49.179Z">
+<meta property="article:modified_time" content="2025-07-12T14:03:31.525Z">
 <meta property="article:author" content="fishcanf1y">
 <meta property="article:tag" content="Coding">
 <meta name="twitter:card" content="summary_large_image">
@@ -245,7 +245,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          970 words
+          968 words
         
       </span>
     
@@ -298,130 +298,186 @@
             
               <div class="markdown-body">
                 
-                <h1 id="后记："><a href="#后记：" class="headerlink" title="后记："></a>后记：</h1><p>在<code>MD5-Checker</code> 项目开发中，我也遇到了很多知识面缺陷的问题，于是在开发过程中我选择使用了AI来辅助开发（学艺不精）在此，我根据AI的建议，梳理了一份思路——如何成为一名合格的Devloper</p>
+                <h1>后记：</h1>
+<p>在<code>MD5-Checker</code> 项目开发中，我也遇到了很多知识面缺陷的问题，于是在开发过程中我选择使用了AI来辅助开发（学艺不精）在此，我根据AI的建议，梳理了一份思路——如何成为一名合格的Devloper</p>
 <p>以下是针对MD5校验工具设计思路所涉及的软件工程原则（以MD5-Checker开发为例）、经典理论以及对应的学习吸收方法的系统化总结：</p>
 <hr>
-<h3 id="一、涉及的核心理论与原则"><a href="#一、涉及的核心理论与原则" class="headerlink" title="一、涉及的核心理论与原则"></a>一、涉及的核心理论与原则</h3><h4 id="1-模块化设计"><a href="#1-模块化设计" class="headerlink" title="1. 模块化设计"></a>1. <strong>模块化设计</strong></h4><ul>
-<li><strong>SOLID原则</strong>（尤其是单一职责原则）<ul>
+<h3 id="一、涉及的核心理论与原则">一、涉及的核心理论与原则</h3>
+<h4 id="1-模块化设计">1. <strong>模块化设计</strong></h4>
+<ul>
+<li><strong>SOLID原则</strong>（尤其是单一职责原则）
+<ul>
 <li>每个函数只做一件事（如<code>calculate_md5</code>仅负责计算）</li>
 <li>参考：《Clean Code》by Robert C. Martin</li>
 </ul>
 </li>
-<li><strong>关注点分离(SoC)</strong><ul>
+<li><strong>关注点分离(SoC)</strong>
+<ul>
 <li>CLI解析、业务逻辑、文件操作分层处理</li>
 </ul>
 </li>
 </ul>
-<h4 id="2-性能优化"><a href="#2-性能优化" class="headerlink" title="2. 性能优化"></a>2. <strong>性能优化</strong></h4><ul>
-<li><strong>I/O效率原则</strong><ul>
+<h4 id="2-性能优化">2. <strong>性能优化</strong></h4>
+<ul>
+<li><strong>I/O效率原则</strong>
+<ul>
 <li>分块大小选择（64KB）涉及《操作系统概念》中的磁盘预读策略</li>
 <li>参考：Linux内核的<code>readahead</code>机制</li>
 </ul>
 </li>
-<li><strong>时间/空间权衡</strong><ul>
+<li><strong>时间/空间权衡</strong>
+<ul>
 <li>内存分块 vs 计算速度的平衡（《算法导论》第17章平摊分析）</li>
 </ul>
 </li>
 </ul>
-<h4 id="3-错误处理"><a href="#3-错误处理" class="headerlink" title="3. 错误处理"></a>3. <strong>错误处理</strong></h4><ul>
-<li><strong>防御式编程</strong><ul>
+<h4 id="3-错误处理">3. <strong>错误处理</strong></h4>
+<ul>
+<li><strong>防御式编程</strong>
+<ul>
 <li><code>try/except</code>处理文件操作（《代码大全》第8章）</li>
 </ul>
 </li>
-<li><strong>契约设计</strong><ul>
+<li><strong>契约设计</strong>
+<ul>
 <li>函数输入/输出约定（如<code>verify_md5</code>返回布尔值）</li>
 </ul>
 </li>
 </ul>
-<h4 id="4-接口设计"><a href="#4-接口设计" class="headerlink" title="4. 接口设计"></a>4. <strong>接口设计</strong></h4><ul>
-<li><strong>Unix哲学</strong><ul>
+<h4 id="4-接口设计">4. <strong>接口设计</strong></h4>
+<ul>
+<li><strong>Unix哲学</strong>
+<ul>
 <li>“Do One Thing and Do It Well”（命令行工具设计）</li>
 <li>参考：《The Art of Unix Programming》</li>
 </ul>
 </li>
 </ul>
-<h4 id="5-可扩展性"><a href="#5-可扩展性" class="headerlink" title="5. 可扩展性"></a>5. <strong>可扩展性</strong></h4><ul>
-<li><strong>开放封闭原则(OCP)</strong><ul>
+<h4 id="5-可扩展性">5. <strong>可扩展性</strong></h4>
+<ul>
+<li><strong>开放封闭原则(OCP)</strong>
+<ul>
 <li>通过<code>hashlib.new()</code>预留多算法支持</li>
 <li>参考：《设计模式：可复用面向对象软件的基础》</li>
 </ul>
 </li>
 </ul>
 <hr>
-<h3 id="二、学习吸收方法论"><a href="#二、学习吸收方法论" class="headerlink" title="二、学习吸收方法论"></a>二、学习吸收方法论</h3><h4 id="1-理论-→-实践循环"><a href="#1-理论-→-实践循环" class="headerlink" title="1. 理论 → 实践循环"></a>1. <strong>理论 → 实践循环</strong></h4><ul>
-<li><strong>步骤</strong>：<ol>
+<h3 id="二、学习吸收方法论">二、学习吸收方法论</h3>
+<h4 id="1-理论-→-实践循环">1. <strong>理论 → 实践循环</strong></h4>
+<ul>
+<li><strong>步骤</strong>：
+<ol>
 <li>阅读《Clean Code》函数设计章节 → 重构自己的函数</li>
 <li>研究Linux文件系统预读机制 → 调整<code>block_size</code>测试性能</li>
 <li>学习SOLID原则 → 分析工具中哪些模块符合/违反原则</li>
 </ol>
 </li>
 </ul>
-<h4 id="2-代码考古学"><a href="#2-代码考古学" class="headerlink" title="2. 代码考古学"></a>2. <strong>代码考古学</strong></h4><ul>
-<li><p><strong>经典工具对比学习</strong>：</p>
+<h4 id="2-代码考古学">2. <strong>代码考古学</strong></h4>
+<ul>
+<li>
+<p><strong>经典工具对比学习</strong>：</p>
 <p>bash</p>
 <div class="code-wrapper"><pre><code class="hljs crmsh"><span class="hljs-comment"># 研究GNU coreutils的md5sum实现</span>
 git <span class="hljs-keyword">clone</span> <span class="hljs-title">git</span>://git.sv.gnu.org/coreutils
 grep -r <span class="hljs-string">&quot;BLOCKSIZE&quot;</span> src/</code></pre></div>
 </li>
-<li><p><strong>Python生态参考</strong>：</p>
+<li>
+<p><strong>Python生态参考</strong>：</p>
 <ul>
 <li>对比<code>hashlib</code>与<code>cryptography</code>库的设计差异</li>
 </ul>
 </li>
 </ul>
-<h4 id="3-量化分析实践"><a href="#3-量化分析实践" class="headerlink" title="3. 量化分析实践"></a>3. <strong>量化分析实践</strong></h4><ul>
-<li><p><strong>性能基准测试</strong>：</p>
+<h4 id="3-量化分析实践">3. <strong>量化分析实践</strong></h4>
+<ul>
+<li>
+<p><strong>性能基准测试</strong>：</p>
 <p>python</p>
 <div class="code-wrapper"><pre><code class="hljs apache"><span class="hljs-attribute">import</span> timeit
 <span class="hljs-attribute">timeit</span>.timeit(&#x27;calculate_md5(<span class="hljs-string">&quot;large_file.iso&quot;</span>, block_size=<span class="hljs-number">8192</span>)&#x27;, number=<span class="hljs-number">10</span>)</code></pre></div>
 </li>
-<li><p><strong>内存分析</strong>：</p>
+<li>
+<p><strong>内存分析</strong>：</p>
 <p>bash</p>
 <div class="code-wrapper"><pre><code class="hljs vim"><span class="hljs-keyword">python</span> -<span class="hljs-keyword">m</span> memory_profiler md5_tool.<span class="hljs-keyword">py</span></code></pre></div>
 </li>
 </ul>
-<h4 id="4-设计模式映射"><a href="#4-设计模式映射" class="headerlink" title="4. 设计模式映射"></a>4. <strong>设计模式映射</strong></h4><ul>
-<li><p><strong>识别模式应用</strong>：</p>
-<p>| 模式     | 本工具实例                    |<br>| :———- | :—————————————— |<br>| 模板方法 | <code>calculate_md5</code>的分块处理流程 |<br>| 工厂方法 | <code>hashlib.md5()</code>构造函数       |<br>| 命令模式 | argparse子命令实现            |</p>
+<h4 id="4-设计模式映射">4. <strong>设计模式映射</strong></h4>
+<ul>
+<li>
+<p><strong>识别模式应用</strong>：</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">模式</th>
+<th style="text-align:left">本工具实例</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">模板方法</td>
+<td style="text-align:left"><code>calculate_md5</code>的分块处理流程</td>
+</tr>
+<tr>
+<td style="text-align:left">工厂方法</td>
+<td style="text-align:left"><code>hashlib.md5()</code>构造函数</td>
+</tr>
+<tr>
+<td style="text-align:left">命令模式</td>
+<td style="text-align:left">argparse子命令实现</td>
+</tr>
+</tbody>
+</table>
 </li>
 </ul>
-<h4 id="5-刻意练习路线"><a href="#5-刻意练习路线" class="headerlink" title="5. 刻意练习路线"></a>5. <strong>刻意练习路线</strong></h4><ol>
-<li><strong>基础阶段</strong>：<ul>
+<h4 id="5-刻意练习路线">5. <strong>刻意练习路线</strong></h4>
+<ol>
+<li><strong>基础阶段</strong>：
+<ul>
 <li>实现单文件MD5计算（理解分块哈希）</li>
 <li>添加单元测试（文件不存在、空文件等case）</li>
 </ul>
 </li>
-<li><strong>进阶阶段</strong>：<ul>
+<li><strong>进阶阶段</strong>：
+<ul>
 <li>增加SHA-256支持（实践开放封闭原则）</li>
 <li>实现多线程批量计算（学习GIL限制）</li>
 </ul>
 </li>
-<li><strong>高级阶段</strong>：<ul>
+<li><strong>高级阶段</strong>：
+<ul>
 <li>开发VS Code插件调用该工具（接口设计实践）</li>
 <li>用Rust重写性能关键部分（FFI交互学习）</li>
 </ul>
 </li>
 </ol>
 <hr>
-<h3 id="三、推荐学习资源"><a href="#三、推荐学习资源" class="headerlink" title="三、推荐学习资源"></a>三、推荐学习资源</h3><h4 id="1-必读经典"><a href="#1-必读经典" class="headerlink" title="1. 必读经典"></a>1. <strong>必读经典</strong></h4><ul>
+<h3 id="三、推荐学习资源">三、推荐学习资源</h3>
+<h4 id="1-必读经典">1. <strong>必读经典</strong></h4>
+<ul>
 <li>《代码大全》第5章（设计）、第8章（防御式编程）</li>
 <li>《Unix编程艺术》第1章（模块化）、第7章（接口设计）</li>
 </ul>
-<h4 id="2-论文参考"><a href="#2-论文参考" class="headerlink" title="2. 论文参考"></a>2. <strong>论文参考</strong></h4><ul>
+<h4 id="2-论文参考">2. <strong>论文参考</strong></h4>
+<ul>
 <li><em>The MD5 Message-Digest Algorithm</em> (RFC 1321)</li>
 <li><em>A Quantitative Study of File Systems’ Block Size Selection</em> (FAST’13)</li>
 </ul>
-<h4 id="3-实践项目"><a href="#3-实践项目" class="headerlink" title="3. 实践项目"></a>3. <strong>实践项目</strong></h4><ul>
+<h4 id="3-实践项目">3. <strong>实践项目</strong></h4>
+<ul>
 <li>GNU coreutils源码（md5sum实现）</li>
 <li>Python标准库<code>hashlib</code>的C实现（<code>_hashlib.c</code>）</li>
 </ul>
-<h4 id="4-可视化学习"><a href="#4-可视化学习" class="headerlink" title="4. 可视化学习"></a>4. <strong>可视化学习</strong></h4><ul>
+<h4 id="4-可视化学习">4. <strong>可视化学习</strong></h4>
+<ul>
 <li>MD5算法可视化：<a target="_blank" rel="noopener" href="https://www.cs.usfca.edu/~galles/visualization/Algorithms.html">https://www.cs.usfca.edu/~galles/visualization/Algorithms.html</a></li>
 <li>I/O缓冲区交互演示：<a target="_blank" rel="noopener" href="https://www.linuxatemyram.com/">https://www.linuxatemyram.com/</a></li>
 </ul>
 <hr>
-<h3 id="四、知识吸收检查表"><a href="#四、知识吸收检查表" class="headerlink" title="四、知识吸收检查表"></a>四、知识吸收检查表</h3><p>当你认为自己已掌握某个概念时，尝试回答：</p>
-<div class="table-container">
+<h3 id="四、知识吸收检查表">四、知识吸收检查表</h3>
+<p>当你认为自己已掌握某个概念时，尝试回答：</p>
 <table>
 <thead>
 <tr>
@@ -453,7 +509,6 @@ grep -r <span class="hljs-string">&quot;BLOCKSIZE&quot;</span> src/</code></pre>
 </tr>
 </tbody>
 </table>
-</div>
 <hr>
 <p>通过这种结构化学习路径，你可以将工具开发经验转化为可迁移的软件工程能力，逐步构建自己的系统设计思维体系。</p>
 <p>上了个置顶，遍笔者和各位朋友慢慢消化吸收</p>
