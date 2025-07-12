@@ -19,12 +19,12 @@
   <meta name="author" content="fishcanf1y">
   <meta name="keywords" content="fishcanf1y">
   
-    <meta name="description" content="Description: 小王读了盖茨比深受震撼，于是摘录本书并效仿原作者为你加密留了一段言，但他忘记给你iv了，请问你可以恢复出来原文吗 (得到的flag内容用CatCTF{}包上提交) 附件内容为python源代码程序，对其进行分析： from Crypto.Cipher import AES   from Crypto.Util.strxor import strxor as xor   f">
+    <meta name="description" content="Description:小王读了盖茨比深受震撼，于是摘录本书并效仿原作者为你加密留了一段言，但他忘记给你iv了，请问你可以恢复出来原文吗(得到的flag内容用CatCTF{}包上提交) 附件内容为python源代码程序，对其进行分析：from Crypto.Cipher import AES   from Crypto.Util.strxor import strxor as xor   from">
 <meta property="og:type" content="article">
 <meta property="og:title" content="攻防世界Crypto-了不起的盖茨比">
 <meta property="og:url" content="https://fishcanf1y.github.io/2025/07/10/%E6%94%BB%E9%98%B2%E4%B8%96%E7%95%8CCrypto-%E4%BA%86%E4%B8%8D%E8%B5%B7%E7%9A%84%E7%9B%96%E8%8C%A8%E6%AF%94/index.html">
 <meta property="og:site_name" content="fishcanf1y">
-<meta property="og:description" content="Description: 小王读了盖茨比深受震撼，于是摘录本书并效仿原作者为你加密留了一段言，但他忘记给你iv了，请问你可以恢复出来原文吗 (得到的flag内容用CatCTF{}包上提交) 附件内容为python源代码程序，对其进行分析： from Crypto.Cipher import AES   from Crypto.Util.strxor import strxor as xor   f">
+<meta property="og:description" content="Description:小王读了盖茨比深受震撼，于是摘录本书并效仿原作者为你加密留了一段言，但他忘记给你iv了，请问你可以恢复出来原文吗(得到的flag内容用CatCTF{}包上提交) 附件内容为python源代码程序，对其进行分析：from Crypto.Cipher import AES   from Crypto.Util.strxor import strxor as xor   from">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2025-07-10T12:07:14.000Z">
 <meta property="article:modified_time" content="2025-07-10T12:09:44.538Z">
@@ -245,7 +245,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          775 words
+          770 words
         
       </span>
     
@@ -298,11 +298,8 @@
             
               <div class="markdown-body">
                 
-                <h3 id="Description">Description:</h3>
-<p>小王读了盖茨比深受震撼，于是摘录本书并效仿原作者为你加密留了一段言，但他忘记给你iv了，请问你可以恢复出来原文吗<br>
-(得到的flag内容用CatCTF{}包上提交)</p>
-<p>附件内容为python源代码程序，对其进行分析：</p>
-<div class="code-wrapper"><pre><code class="hljs Python"><span class="hljs-keyword">from</span> Crypto.Cipher <span class="hljs-keyword">import</span> AES  
+                <h3 id="Description"><a href="#Description" class="headerlink" title="Description:"></a>Description:</h3><p>小王读了盖茨比深受震撼，于是摘录本书并效仿原作者为你加密留了一段言，但他忘记给你iv了，请问你可以恢复出来原文吗<br>(得到的flag内容用CatCTF{}包上提交)</p>
+<p>附件内容为python源代码程序，对其进行分析：<br><div class="code-wrapper"><pre><code class="hljs Python"><span class="hljs-keyword">from</span> Crypto.Cipher <span class="hljs-keyword">import</span> AES  
 <span class="hljs-keyword">from</span> Crypto.Util.strxor <span class="hljs-keyword">import</span> strxor <span class="hljs-keyword">as</span> xor  
 <span class="hljs-keyword">from</span> Crypto.Util.Padding <span class="hljs-keyword">import</span> pad  
 <span class="hljs-keyword">from</span> random <span class="hljs-keyword">import</span> *  
@@ -334,13 +331,8 @@ c=b64encode(c)
 <span class="hljs-string">b&#x27;+0zkhmid1PFjVdxSP09zSw==&#x27;  </span>
 <span class="hljs-string">b&#x27;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&#x27;  </span>
 <span class="hljs-string">  </span>
-<span class="hljs-string">&quot;&quot;&quot;</span></code></pre></div>
-<p>这段代码实现了一个基于AES加密的自定义加密方案，结合了ECB模式和CBC模式的某些特性，明文按16字节分组进行加密，打印出key和密文，iv(偏移量)未知，需要还原明文。可以发现本题是多次使用同样的流密码。<br>
-所以本题其实是利用利用<a target="_blank" rel="noopener" href="https://so.csdn.net/so/search?q=MTP&amp;spm=1001.2101.3001.7020">MTP</a>攻击来求解，比较好的两篇文章可以参考<br>
-[参考一](<a target="_blank" rel="noopener" href="https://www.ruanx.net/many-time-pad/">Many-Time-Pad 攻击</a>)<br>
-<a href="%5BMTP%E6%94%BB%E5%87%BB%E8%A7%A3%E6%9E%90-CSDN%E5%8D%9A%E5%AE%A2%5D(https://blog.csdn.net/m0_63303407/article/details/127193042)">参考二</a></p>
-<p>exp:</p>
-<div class="code-wrapper"><pre><code class="hljs Python"><span class="hljs-comment"># Python3  </span>
+<span class="hljs-string">&quot;&quot;&quot;</span></code></pre></div><br>这段代码实现了一个基于AES加密的自定义加密方案，结合了ECB模式和CBC模式的某些特性，明文按16字节分组进行加密，打印出key和密文，iv(偏移量)未知，需要还原明文。可以发现本题是多次使用同样的流密码。<br>所以本题其实是利用利用<a target="_blank" rel="noopener" href="https://so.csdn.net/so/search?q=MTP&amp;spm=1001.2101.3001.7020">MTP</a>攻击来求解，比较好的两篇文章可以参考<br><a href="[Many-Time-Pad 攻击](https://www.ruanx.net/many-time-pad/">参考一</a>)<br><a href="[MTP攻击解析-CSDN博客](https://blog.csdn.net/m0_63303407/article/details/127193042">参考二</a>)</p>
+<p>exp:<br><div class="code-wrapper"><pre><code class="hljs Python"><span class="hljs-comment"># Python3  </span>
 <span class="hljs-keyword">import</span> base64  
 <span class="hljs-keyword">from</span> Crypto.Cipher <span class="hljs-keyword">import</span> AES  
 <span class="hljs-keyword">from</span> Crypto.Util.strxor <span class="hljs-keyword">import</span> strxor <span class="hljs-keyword">as</span> xor  
@@ -406,7 +398,8 @@ dat = <span class="hljs-built_in">sorted</span>(dat)[::-<span class="hljs-number
 <span class="hljs-keyword">for</span> w, index, pos <span class="hljs-keyword">in</span> dat:  
     infer(index, pos)  
   
-<span class="hljs-built_in">print</span>(<span class="hljs-string">&#x27;&#x27;</span>.join([<span class="hljs-string">&#x27;&#x27;</span>.join([<span class="hljs-built_in">chr</span>(c) <span class="hljs-keyword">for</span> c <span class="hljs-keyword">in</span> x]) <span class="hljs-keyword">for</span> x <span class="hljs-keyword">in</span> msg]))</code></pre></div>
+<span class="hljs-built_in">print</span>(<span class="hljs-string">&#x27;&#x27;</span>.join([<span class="hljs-string">&#x27;&#x27;</span>.join([<span class="hljs-built_in">chr</span>(c) <span class="hljs-keyword">for</span> c <span class="hljs-keyword">in</span> x]) <span class="hljs-keyword">for</span> x <span class="hljs-keyword">in</span> msg]))</code></pre></div></p>
+
                 
               </div>
             

