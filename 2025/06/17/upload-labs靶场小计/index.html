@@ -19,18 +19,21 @@
   <meta name="author" content="fishcanf1y">
   <meta name="keywords" content="fishcanf1y">
   
-    <meta name="description" content="Introduction：  Repo Address: https:&#x2F;&#x2F;github.com&#x2F;c0ny1&#x2F;upload-labs Description：upload-labs是一个使用php语言编写的，专门收集渗透测试和CTF中遇到的各种上传漏洞的靶场。旨在帮助大家对上传漏洞有一个全面的了解。目前一共20关，每一关都包含着不同上传方式。">
+    <meta name="description" content="Introduction：  Repo Address: https:&#x2F;&#x2F;github.com&#x2F;c0ny1&#x2F;upload-labs Description：upload-labs是一个使用php语言编写的，专门收集渗透测试和CTF中遇到的各种上传漏洞的靶场。旨在帮助大家对上传漏洞有一个全面的了解。目前一共20关，每一关都包含着不同上传方式。  正文开始 Pass-01 源码分析: function">
 <meta property="og:type" content="article">
 <meta property="og:title" content="upload-labs靶场小计">
 <meta property="og:url" content="https://fishcanf1y.github.io/2025/06/17/upload-labs%E9%9D%B6%E5%9C%BA%E5%B0%8F%E8%AE%A1/index.html">
 <meta property="og:site_name" content="fishcanf1y">
-<meta property="og:description" content="Introduction：  Repo Address: https:&#x2F;&#x2F;github.com&#x2F;c0ny1&#x2F;upload-labs Description：upload-labs是一个使用php语言编写的，专门收集渗透测试和CTF中遇到的各种上传漏洞的靶场。旨在帮助大家对上传漏洞有一个全面的了解。目前一共20关，每一关都包含着不同上传方式。">
+<meta property="og:description" content="Introduction：  Repo Address: https:&#x2F;&#x2F;github.com&#x2F;c0ny1&#x2F;upload-labs Description：upload-labs是一个使用php语言编写的，专门收集渗透测试和CTF中遇到的各种上传漏洞的靶场。旨在帮助大家对上传漏洞有一个全面的了解。目前一共20关，每一关都包含着不同上传方式。  正文开始 Pass-01 源码分析: function">
 <meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://fishcanf1y.github.io/images/upload-labs-1.PNG">
+<meta property="og:image" content="https://fishcanf1y.github.io/images/upload-labs-2.PNG">
 <meta property="article:published_time" content="2025-06-17T14:11:09.000Z">
-<meta property="article:modified_time" content="2025-06-27T12:29:51.372Z">
+<meta property="article:modified_time" content="2025-07-19T10:23:36.024Z">
 <meta property="article:author" content="fishcanf1y">
 <meta property="article:tag" content="Web安全">
 <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://fishcanf1y.github.io/images/upload-labs-1.PNG">
   
   
   
@@ -245,7 +248,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          2.1k words
+          2.8k words
         
       </span>
     
@@ -256,7 +259,7 @@
         
         
         
-          18 mins
+          24 mins
         
       </span>
     
@@ -303,7 +306,6 @@
 <li><strong>Repo Address</strong>: <a target="_blank" rel="noopener" href="https://github.com/c0ny1/upload-labs">https://github.com/c0ny1/upload-labs</a></li>
 <li><strong>Description</strong>：upload-labs是一个使用php语言编写的，专门收集渗透测试和CTF中遇到的各种上传漏洞的靶场。旨在帮助大家对上传漏洞有一个全面的了解。目前一共20关，每一关都包含着不同上传方式。</li>
 </ul>
-<span id="more"></span>
 <h1>正文开始</h1>
 <h2 id="Pass-01">Pass-01</h2>
 <p><strong>源码分析</strong>:</p>
@@ -534,7 +536,52 @@ Content-Disposition: form-data; name=<span class="hljs-string">&quot;submit&quot
 <p>这里我们乍一看跟上面第四关的源码好像是一摸一样的，但是其pass的思路不大相同，再看看提示<br>
 <strong>提示：上传目录存在php文件（readme.php）</strong><br>
 笔者的第一想法可能是设计&quot;文件包含(include)&quot;，有了大致思路我们可以再想想应该如何去include这个存在我们的一句话或者是phpinfo的文件并将其正常解析，以传统的经验来看我们可以尝试着上传<code>.htaccess</code>文件，以下笔者在此阐述什么是<code>.htaccess</code>文件以及为什么要这样去做</p>
+<p>首先看看ChatGPT给出的解释</p>
+<p><img src="/images/upload-labs-1.PNG" srcset="/img/loading.gif" lazyload alt="What is &quot;.htaccess&quot;"></p>
+<p>于是我们得知：<code>.htaccess</code>是运行 Apache（以及兼容服务器，如 LiteSpeed）的 Web 服务器使用的配置文件，用于控制服务器行为的各个方面</p>
+<p>既然它可以控制服务器，而上传点又未进行过滤，于是我们可以构造出内容为以下的<code>.htaccess</code>文件</p>
+<div class="code-wrapper"><pre><code class="hljs apache"><span class="hljs-section">&lt;FilesMatch <span class="hljs-string">&quot;test.jpg&quot;</span>&gt;</span>
+<span class="hljs-attribute">SetHandler</span> application/x-httpd-php
+<span class="hljs-section">&lt;/FilesMatch&gt;</span></code></pre></div>
+<p>这个文件的内容的意思是告诉<code>Apache</code>当检测到<code>test.jpg</code>文件时，将该文件按照<code>php</code>去解析，于是可以通过此方法getshell</p>
+<h2 id="Pass-06">Pass-06</h2>
+<p><strong>源码分析</strong></p>
+<div class="code-wrapper"><pre><code class="hljs php"><span class="hljs-variable">$is_upload</span> = <span class="hljs-literal">false</span>;
+<span class="hljs-variable">$msg</span> = <span class="hljs-literal">null</span>;
+<span class="hljs-keyword">if</span> (<span class="hljs-keyword">isset</span>(<span class="hljs-variable">$_POST</span>[<span class="hljs-string">&#x27;submit&#x27;</span>])) &#123;
+    <span class="hljs-keyword">if</span> (<span class="hljs-title function_ invoke__">file_exists</span>(UPLOAD_PATH)) &#123;
+        <span class="hljs-variable">$deny_ext</span> = <span class="hljs-keyword">array</span>(<span class="hljs-string">&quot;.php&quot;</span>,<span class="hljs-string">&quot;.php5&quot;</span>,<span class="hljs-string">&quot;.php4&quot;</span>,<span class="hljs-string">&quot;.php3&quot;</span>,<span class="hljs-string">&quot;.php2&quot;</span>,<span class="hljs-string">&quot;.html&quot;</span>,<span class="hljs-string">&quot;.htm&quot;</span>,<span class="hljs-string">&quot;.phtml&quot;</span>,<span class="hljs-string">&quot;.pht&quot;</span>,<span class="hljs-string">&quot;.pHp&quot;</span>,<span class="hljs-string">&quot;.pHp5&quot;</span>,<span class="hljs-string">&quot;.pHp4&quot;</span>,<span class="hljs-string">&quot;.pHp3&quot;</span>,<span class="hljs-string">&quot;.pHp2&quot;</span>,<span class="hljs-string">&quot;.Html&quot;</span>,<span class="hljs-string">&quot;.Htm&quot;</span>,<span class="hljs-string">&quot;.pHtml&quot;</span>,<span class="hljs-string">&quot;.jsp&quot;</span>,<span class="hljs-string">&quot;.jspa&quot;</span>,<span class="hljs-string">&quot;.jspx&quot;</span>,<span class="hljs-string">&quot;.jsw&quot;</span>,<span class="hljs-string">&quot;.jsv&quot;</span>,<span class="hljs-string">&quot;.jspf&quot;</span>,<span class="hljs-string">&quot;.jtml&quot;</span>,<span class="hljs-string">&quot;.jSp&quot;</span>,<span class="hljs-string">&quot;.jSpx&quot;</span>,<span class="hljs-string">&quot;.jSpa&quot;</span>,<span class="hljs-string">&quot;.jSw&quot;</span>,<span class="hljs-string">&quot;.jSv&quot;</span>,<span class="hljs-string">&quot;.jSpf&quot;</span>,<span class="hljs-string">&quot;.jHtml&quot;</span>,<span class="hljs-string">&quot;.asp&quot;</span>,<span class="hljs-string">&quot;.aspx&quot;</span>,<span class="hljs-string">&quot;.asa&quot;</span>,<span class="hljs-string">&quot;.asax&quot;</span>,<span class="hljs-string">&quot;.ascx&quot;</span>,<span class="hljs-string">&quot;.ashx&quot;</span>,<span class="hljs-string">&quot;.asmx&quot;</span>,<span class="hljs-string">&quot;.cer&quot;</span>,<span class="hljs-string">&quot;.aSp&quot;</span>,<span class="hljs-string">&quot;.aSpx&quot;</span>,<span class="hljs-string">&quot;.aSa&quot;</span>,<span class="hljs-string">&quot;.aSax&quot;</span>,<span class="hljs-string">&quot;.aScx&quot;</span>,<span class="hljs-string">&quot;.aShx&quot;</span>,<span class="hljs-string">&quot;.aSmx&quot;</span>,<span class="hljs-string">&quot;.cEr&quot;</span>,<span class="hljs-string">&quot;.sWf&quot;</span>,<span class="hljs-string">&quot;.swf&quot;</span>,<span class="hljs-string">&quot;.htaccess&quot;</span>,<span class="hljs-string">&quot;.ini&quot;</span>);
+        <span class="hljs-variable">$file_name</span> = <span class="hljs-title function_ invoke__">trim</span>(<span class="hljs-variable">$_FILES</span>[<span class="hljs-string">&#x27;upload_file&#x27;</span>][<span class="hljs-string">&#x27;name&#x27;</span>]);
+        <span class="hljs-variable">$file_name</span> = <span class="hljs-title function_ invoke__">deldot</span>(<span class="hljs-variable">$file_name</span>);<span class="hljs-comment">//删除文件名末尾的点</span>
+        <span class="hljs-variable">$file_ext</span> = <span class="hljs-title function_ invoke__">strrchr</span>(<span class="hljs-variable">$file_name</span>, <span class="hljs-string">&#x27;.&#x27;</span>);
+        <span class="hljs-variable">$file_ext</span> = <span class="hljs-title function_ invoke__">str_ireplace</span>(<span class="hljs-string">&#x27;::$DATA&#x27;</span>, <span class="hljs-string">&#x27;&#x27;</span>, <span class="hljs-variable">$file_ext</span>);<span class="hljs-comment">//去除字符串::$DATA</span>
+        <span class="hljs-variable">$file_ext</span> = <span class="hljs-title function_ invoke__">trim</span>(<span class="hljs-variable">$file_ext</span>); <span class="hljs-comment">//首尾去空</span>
 
+        <span class="hljs-keyword">if</span> (!<span class="hljs-title function_ invoke__">in_array</span>(<span class="hljs-variable">$file_ext</span>, <span class="hljs-variable">$deny_ext</span>)) &#123;
+            <span class="hljs-variable">$temp_file</span> = <span class="hljs-variable">$_FILES</span>[<span class="hljs-string">&#x27;upload_file&#x27;</span>][<span class="hljs-string">&#x27;tmp_name&#x27;</span>];
+            <span class="hljs-variable">$img_path</span> = UPLOAD_PATH.<span class="hljs-string">&#x27;/&#x27;</span>.<span class="hljs-title function_ invoke__">date</span>(<span class="hljs-string">&quot;YmdHis&quot;</span>).<span class="hljs-title function_ invoke__">rand</span>(<span class="hljs-number">1000</span>,<span class="hljs-number">9999</span>).<span class="hljs-variable">$file_ext</span>;
+            <span class="hljs-keyword">if</span> (<span class="hljs-title function_ invoke__">move_uploaded_file</span>(<span class="hljs-variable">$temp_file</span>, <span class="hljs-variable">$img_path</span>)) &#123;
+                <span class="hljs-variable">$is_upload</span> = <span class="hljs-literal">true</span>;
+            &#125; <span class="hljs-keyword">else</span> &#123;
+                <span class="hljs-variable">$msg</span> = <span class="hljs-string">&#x27;上传出错！&#x27;</span>;
+            &#125;
+        &#125; <span class="hljs-keyword">else</span> &#123;
+            <span class="hljs-variable">$msg</span> = <span class="hljs-string">&#x27;此文件类型不允许上传！&#x27;</span>;
+        &#125;
+    &#125; <span class="hljs-keyword">else</span> &#123;
+        <span class="hljs-variable">$msg</span> = UPLOAD_PATH . <span class="hljs-string">&#x27;文件夹不存在,请手工创建！&#x27;</span>;
+    &#125;
+&#125;
+</code></pre></div>
+<p>我们可以在里面发现其在第五关的基础上还过滤了<code>htaccess</code>文件，但是还是有方法解析，在此笔者介绍一个方法，使用<code>.user.ini</code></p>
+<p><img src="/images/upload-labs-2.PNG" srcset="/img/loading.gif" lazyload alt="What is &quot;.user.ini&quot;"></p>
+<p><code>.user.ini</code>文件是一个 PHP 配置文件，主要用于共享主机环境（例如基于 cPanel 的服务器），它允许按目录覆盖 PHP 配置，类似于 <code>.htaccess</code> 对 <code>Apache</code> 的工作方式</p>
+<p>因此我们的知<code>.user.ini</code>的功能大致和<code>.htaccess</code>的作用是一样的，都能够实现对服务器主机的一些操作，于是我们构造以下内容的<code>.user.ini</code>文件</p>
+<div class="code-wrapper"><pre><code class="hljs ini"><span class="hljs-attr">auto_prepend_file</span>=<span class="hljs-number">666</span>.jpg</code></pre></div>
+<p>这个文件的内容的意思是，所有的PHP都自动包含<code>666.jpg</code>文件，于是这样就构成了文件包含(file_include)漏洞，最终实现解析。</p>
+<p>这次小计的内容到此结束，通过以上和后面的剩余关卡，大致总结出的思路有：前端、多后缀/后缀混淆、大小写、上传配置文件和各类图片马制作以构造文件包含漏洞实现解析，进一步getshell</p>
+<script src="https://giscus.app/client.js" data-repo="fishcanf1y/fishcanf1y.github.io" data-repo-id="R_kgDONzaTTQ" data-category="Announcements" data-category-id="DIC_kwDONzaTTc4Cpqn7" data-mapping="pathname" data-strict="0" data-reactions-enabled="1" data-emit-metadata="0" data-input-position="top" data-theme="preferred_color_scheme" data-lang="zh-CN" crossorigin="anonymous" async>
+</script>
                 
               </div>
             

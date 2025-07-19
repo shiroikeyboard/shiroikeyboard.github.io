@@ -1,0 +1,953 @@
+
+
+<!DOCTYPE html>
+<html lang="en" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/avatar.jpg">
+  <link rel="icon" href="/img/avatar.jpg">
+  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="fishcanf1y">
+  <meta name="keywords" content="fishcanf1y">
+  
+    <meta name="description" content="Description 本文旨在使用PyTorch构建并训练一个最简单的神经网络，无需添加任何花哨的层或依赖包。 该模型将足够简单，大家都能使用CPU或GPU来构建和训练。 这个模型虽然简单，但包含了当前诸如LLM和Stable Diffusions等大型模型所拥有的所有基本元素。 准备数据 假设我们要训练一个具有四个权重并能输出一个数字结果的模型，如下所示： $y &#x3D; w_1 * x_1 + w">
+<meta property="og:type" content="article">
+<meta property="og:title" content="深度学习：从头构建神经网络">
+<meta property="og:url" content="https://fishcanf1y.github.io/2025/07/19/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0-%E4%BB%8E%E5%A4%B4%E6%9E%84%E5%BB%BA%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/index.html">
+<meta property="og:site_name" content="fishcanf1y">
+<meta property="og:description" content="Description 本文旨在使用PyTorch构建并训练一个最简单的神经网络，无需添加任何花哨的层或依赖包。 该模型将足够简单，大家都能使用CPU或GPU来构建和训练。 这个模型虽然简单，但包含了当前诸如LLM和Stable Diffusions等大型模型所拥有的所有基本元素。 准备数据 假设我们要训练一个具有四个权重并能输出一个数字结果的模型，如下所示： $y &#x3D; w_1 * x_1 + w">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2025-07-19T09:46:01.000Z">
+<meta property="article:modified_time" content="2025-07-19T11:28:51.443Z">
+<meta property="article:author" content="fishcanf1y">
+<meta property="article:tag" content="AI">
+<meta property="article:tag" content="Deep Learning">
+<meta name="twitter:card" content="summary_large_image">
+  
+  
+  
+  <title>深度学习：从头构建神经网络 - fishcanf1y</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1749284_5i9bdhy70f8.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1736178_k526ubmyhba.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+  
+<link rel="stylesheet" href="https://cdn.staticfile.org/lxgw-wenkai-screen-webfont/1.7.0/style.min.css">
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"fishcanf1y.github.io","root":"/","version":"1.9.8","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+  <script src="/js/sakura.js"></script>
+  <script src="/js/love.js"></script>
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 7.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>fishcanf1y&#39;s blog</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/" target="_self">
+                <i class="iconfont icon-home-fill"></i>
+                <span>Home</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/" target="_self">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>Archives</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/" target="_self">
+                <i class="iconfont icon-category-fill"></i>
+                <span>Categories</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/" target="_self">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>Tags</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/" target="_self">
+                <i class="iconfont icon-user-fill"></i>
+                <span>About</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/" target="_self">
+                <i class="iconfont icon-link-fill"></i>
+                <span>Links</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/background.PNG') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="深度学习：从头构建神经网络"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2025-07-19 17:46" pubdate>
+          July 19, 2025 pm
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          2.1k words
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          18 mins
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">深度学习：从头构建神经网络</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h2 id="Description">Description</h2>
+<p>本文旨在使用PyTorch构建并训练一个最简单的神经网络，无需添加任何花哨的层或依赖包。</p>
+<p>该模型将足够简单，大家都能使用CPU或GPU来构建和训练。</p>
+<p>这个模型虽然简单，但包含了当前诸如LLM和Stable Diffusions等大型模型所拥有的所有基本元素。</p>
+<h2 id="准备数据">准备数据</h2>
+<p>假设我们要训练一个具有四个权重并能输出一个数字结果的模型，如下所示：</p>
+<h3 id="y-w-1-x-1-w-2-x-2-w-2-x-3-w-4-x-4"><strong>$y = w_1 * x_1 + w_2 * x_2 + w_2 * x_3 + w_4 * x_4$</strong></h3>
+<p>我们先生成以下训练数据，假设权重值为 [2,3,4,7]</p>
+<div class="code-wrapper"><pre><code class="hljs python"><span class="hljs-keyword">import</span> numpy <span class="hljs-keyword">as</span> np
+w_list = np.array([<span class="hljs-number">2</span>,<span class="hljs-number">3</span>,<span class="hljs-number">4</span>,<span class="hljs-number">7</span>])</code></pre></div>
+<p>我们的模型将会用于预测权重列表，因此再生成一些训练数据后我们假装我们不知道这些权重的值</p>
+<p>之后我们创建10组输入样本数据——x_sample，每组x_sample是一个包含4个元素的数组，与权重的长度相同</p>
+<div class="code-wrapper"><pre><code class="hljs python"><span class="hljs-comment"># Generate 10 random input samples (each with same length as w_list)</span>
+<span class="hljs-keyword">import</span> random
+x_list = []
+<span class="hljs-keyword">for</span> _ <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-number">10</span>):
+    x_sample = np.array([random.randint(<span class="hljs-number">1</span>, <span class="hljs-number">100</span>) <span class="hljs-keyword">for</span> _ <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-built_in">len</span>(w_list))])
+    x_list.append(x_sample)</code></pre></div>
+<p>这里，我们使用numpy，因为我们想利用numpy的点积函数轻松生成输出——y</p>
+<p>说到y，我们来生成一个同样包含10个元素的y_list：</p>
+<div class="code-wrapper"><pre><code class="hljs python">y_list = []
+<span class="hljs-keyword">for</span> x_sample <span class="hljs-keyword">in</span> x_list:
+    y_temp = x_sample @ w_list 
+    y_list.append(y_temp)
+</code></pre></div>
+<p>我们的训练数据已准备就绪，无需下载任何内容，也无需使用DataLoader等，接下来，我们可以开始定义模型</p>
+<h2 id="定义模型">定义模型</h2>
+<p>我们的模型可能是世界上最简单的模型，即以下代码中定义的一个简单的线性点积：</p>
+<div class="code-wrapper"><pre><code class="hljs Python"><span class="hljs-keyword">import</span> torch 
+<span class="hljs-keyword">import</span> torch.nn <span class="hljs-keyword">as</span> nn
+<span class="hljs-keyword">class</span> <span class="hljs-title class_">MyLinear</span>(nn.Module):
+  <span class="hljs-keyword">def</span> <span class="hljs-title function_">__init__</span>(<span class="hljs-params">self</span>):
+​    <span class="hljs-built_in">super</span>().__init__()
+​    <span class="hljs-variable language_">self</span>.w = nn.Parameter(torch.randn(<span class="hljs-built_in">len</span>(w_list), dtype=torch.float32))
+​    <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;Initial weights:&quot;</span>, <span class="hljs-variable language_">self</span>.w)  <span class="hljs-comment"># Print initialized weights</span>
+  <span class="hljs-keyword">def</span> <span class="hljs-title function_">forward</span>(<span class="hljs-params">self, x: torch.Tensor</span>):
+​    <span class="hljs-keyword">return</span> <span class="hljs-variable language_">self</span>.w @ x</code></pre></div>
+<p>在上述代码中，使用self.w = nn.Parameter(torch.randn(len(w_list)))初始化了权重张量。</p>
+<p>无需其他代码，我们的神经网络模型现已准备就绪，命名为——MyLinear</p>
+<h2 id="准备训练模型">准备训练模型</h2>
+<p>我们需要像LLM那样初始化模型的随机权重</p>
+<div class="code-wrapper"><pre><code class="hljs abnf"><span class="hljs-attribute">model</span> <span class="hljs-operator">=</span> MyLinear()</code></pre></div>
+<p>几乎所有神经网络模型的训练都遵循以下步骤：</p>
+<ul>
+<li>前向传播以预测结果</li>
+<li>与真实值进行比较以获取损失值</li>
+<li>反向传播梯度损失值</li>
+<li>更新模型参数</li>
+</ul>
+<p>因此，在开始训练之前，我们需要定义一个<code>损失函数</code>和一个<code>优化器</code></p>
+<p>损失函数<code>loss_fn</code>将根据预测结果和真实结果计算损失值，优化器将用于更新权重</p>
+<div class="code-wrapper"><pre><code class="hljs python">loss_fn = nn.MSELoss()
+optimizer = torch.optim.SGD(model.parameters(), lr=<span class="hljs-number">0.00001</span>)</code></pre></div>
+<p>lr代表学习率，这是最难设置的超参数之一，确定最佳学习率（lr）通常需要根据模型、数据集和问题的特性进行反复试验。然不过有一些策略和技术可以帮助估计一个合理的学习率</p>
+<ul>
+<li>从较小的学习率开始：一种常见做法是从较小的学习率（如0.001）开始，并根据观察到的收敛行为逐渐增加或减少它</li>
+<li>学习率调度：可以使用学习率调度在训练过程中动态调整学习率。一种常见方法是阶梯衰减，即在固定数量的训练周期后降低学习率。另一种流行方法是指数衰减，即学习率随时间呈指数下降</li>
+</ul>
+<p>另外别忘了将输入和输出转换为torch张量对象</p>
+<div class="code-wrapper"><pre><code class="hljs python">x_input = torch.tensor(x_list, dtype=torch.float32)
+y_output = torch.tensor(y_list, dtype=torch.float32)</code></pre></div>
+<h2 id="训练模型">训练模型</h2>
+<p>我们将训练周期数设置为100，这意味着我们将遍历训练数据100次</p>
+<div class="code-wrapper"><pre><code class="hljs python"><span class="hljs-comment"># 开始训练模型</span>
+num_epochs = <span class="hljs-number">100</span>  <span class="hljs-comment"># 总训练周期</span>
+<span class="hljs-keyword">for</span> epoch <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(num_epochs):
+    <span class="hljs-keyword">for</span> i, x <span class="hljs-keyword">in</span> <span class="hljs-built_in">enumerate</span>(x_input):
+        <span class="hljs-comment"># 向前传播</span>
+        y_pred = model(x)  <span class="hljs-comment"># Get prediction from model</span>
+        
+        <span class="hljs-comment"># 计算损失值</span>
+        loss = loss_fn(y_pred, y_output[i])  <span class="hljs-comment"># Compare prediction with true value</span>
+        
+        <span class="hljs-comment"># 清除之前的缓存的梯度参数</span>
+        optimizer.zero_grad()  <span class="hljs-comment"># Clear previous gradient information</span>
+        
+        <span class="hljs-comment"># 反向传播计算梯度</span>
+        loss.backward()  <span class="hljs-comment"># Compute gradients for current parameters</span>
+        
+        <span class="hljs-comment"># 更新模型参数</span>
+        optimizer.step()  <span class="hljs-comment"># Update model parameters based on gradients</span>
+    
+    <span class="hljs-comment"># 每十个epoch打印一次训练进度</span>
+    <span class="hljs-keyword">if</span> (epoch+<span class="hljs-number">1</span>) % <span class="hljs-number">10</span> == <span class="hljs-number">0</span>:
+        <span class="hljs-built_in">print</span>(<span class="hljs-string">f&#x27;Epoch [<span class="hljs-subst">&#123;epoch+<span class="hljs-number">1</span>&#125;</span>/<span class="hljs-subst">&#123;num_epochs&#125;</span>], Loss: <span class="hljs-subst">&#123;loss.item():<span class="hljs-number">.4</span>f&#125;</span>&#x27;</span>)
+
+<span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;Training completed&quot;</span>)</code></pre></div>
+<p>在上述代码中，我们可以看到两层循环，外层循环用于训练周期，内层循环用于遍历10组样本数据</p>
+<p>我们有10组输入，每组输入有4个元素，即x_1, x_2, x_3, 和 x_4</p>
+<p>正如我们在准备阶段所讨论的，第一步是使用模型预测一个结果：y_pred，然后，调用loss_fn来计算损失值</p>
+<p>在将损失值反向传播之前，我们需要通过调用optimizer.zero_grad()来清除上一次的梯度值</p>
+<p>最后，调用backward和optimizer.step()来更新模型参数</p>
+<p>运行代码，我们将看到程序输出类似于以下内容：</p>
+<div class="code-wrapper"><pre><code class="hljs inform7">Epoch <span class="hljs-comment">[10/100]</span>, Loss: 218.3843
+Epoch <span class="hljs-comment">[20/100]</span>, Loss: 283.2002
+Epoch <span class="hljs-comment">[30/100]</span>, Loss: 116.5593
+Epoch <span class="hljs-comment">[40/100]</span>, Loss: 43.8340
+Epoch <span class="hljs-comment">[50/100]</span>, Loss: 16.3244
+Epoch <span class="hljs-comment">[60/100]</span>, Loss: 6.0721
+Epoch <span class="hljs-comment">[70/100]</span>, Loss: 2.2586
+Epoch <span class="hljs-comment">[80/100]</span>, Loss: 0.8400
+Epoch <span class="hljs-comment">[90/100]</span>, Loss: 0.3124
+Epoch <span class="hljs-comment">[100/100]</span>, Loss: 0.1162
+train done</code></pre></div>
+<p>随着时间的推移，损失值在下降，这看起来很不错，我们在代码中添加以下功能：</p>
+<ul>
+<li>
+<p>检查模型当前权重</p>
+</li>
+<li>
+<p>增加权重数量(上述案例中我们只用了4个权重)</p>
+</li>
+<li>
+<p>增加训练周期数和更新学习率——lr，</p>
+</li>
+</ul>
+<p>以下是整理出的完整代码(无CUDA版) 同时改动了权重数量和训练周期</p>
+<div class="code-wrapper"><pre><code class="hljs Python"><span class="hljs-comment"># ----------------------------------------------------------</span>
+<span class="hljs-comment"># 生成训练数据</span>
+<span class="hljs-comment"># ----------------------------------------------------------</span>
+<span class="hljs-keyword">import</span> numpy <span class="hljs-keyword">as</span> np
+<span class="hljs-keyword">import</span> random
+
+<span class="hljs-comment"># 定义真实的权重向量（训练目标）</span>
+w_list = np.array([<span class="hljs-number">2</span>, <span class="hljs-number">3</span>, <span class="hljs-number">4</span>, <span class="hljs-number">7</span>, <span class="hljs-number">11</span>, <span class="hljs-number">5</span>, <span class="hljs-number">13</span>])
+
+<span class="hljs-comment"># 生成10个随机输入样本（每个样本长度与w_list相同）</span>
+x_list = []
+<span class="hljs-keyword">for</span> _ <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-number">10</span>):
+    x_sample = np.array([random.randint(<span class="hljs-number">1</span>, <span class="hljs-number">100</span>) <span class="hljs-keyword">for</span> _ <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-built_in">len</span>(w_list))])
+    x_list.append(x_sample)
+
+<span class="hljs-comment"># 计算对应的目标输出（输入与真实权重的点积）</span>
+y_list = []
+<span class="hljs-keyword">for</span> x_sample <span class="hljs-keyword">in</span> x_list:
+    y_temp = x_sample @ w_list  <span class="hljs-comment"># 矩阵乘法计算预测值</span>
+    y_list.append(y_temp)
+
+<span class="hljs-comment"># -----------------------------------------------------------</span>
+<span class="hljs-comment"># 准备训练环境</span>
+<span class="hljs-comment"># -----------------------------------------------------------</span>
+<span class="hljs-keyword">import</span> torch 
+<span class="hljs-keyword">import</span> torch.nn <span class="hljs-keyword">as</span> nn
+
+<span class="hljs-comment"># 定义自定义线性模型</span>
+<span class="hljs-keyword">class</span> <span class="hljs-title class_">MyLinear</span>(nn.Module):
+    <span class="hljs-keyword">def</span> <span class="hljs-title function_">__init__</span>(<span class="hljs-params">self</span>):
+        <span class="hljs-built_in">super</span>().__init__()
+        <span class="hljs-comment"># 初始化可学习参数（长度与w_list相同）</span>
+        <span class="hljs-variable language_">self</span>.w = nn.Parameter(torch.randn(<span class="hljs-built_in">len</span>(w_list), dtype=torch.float32))
+        <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;初始权重:&quot;</span>, <span class="hljs-variable language_">self</span>.w)  <span class="hljs-comment"># 打印初始化的权重</span>
+    
+    <span class="hljs-keyword">def</span> <span class="hljs-title function_">forward</span>(<span class="hljs-params">self, x: torch.Tensor</span>):
+        <span class="hljs-comment"># 前向传播：权重向量与输入向量的点积</span>
+        <span class="hljs-keyword">return</span> <span class="hljs-variable language_">self</span>.w @ x
+
+<span class="hljs-comment"># 实例化模型（CPU模式）</span>
+model = MyLinear()  <span class="hljs-comment"># 不使用GPU</span>
+
+<span class="hljs-comment"># 定义损失函数（均方误差）</span>
+loss_fn = nn.MSELoss()
+
+<span class="hljs-comment"># 定义优化器（随机梯度下降，学习率0.00001）</span>
+optimizer = torch.optim.SGD(model.parameters(), lr=<span class="hljs-number">0.00001</span>)
+
+<span class="hljs-comment"># 数据预处理（CPU模式）</span>
+x_input = torch.tensor(x_list, dtype=torch.float32)  <span class="hljs-comment"># 输入数据转为张量</span>
+y_output = torch.tensor(y_list, dtype=torch.float32)  <span class="hljs-comment"># 目标数据转为张量</span>
+
+<span class="hljs-comment"># ------------------------------------------------------------</span>
+<span class="hljs-comment"># 开始模型训练</span>
+<span class="hljs-comment"># ------------------------------------------------------------</span>
+num_epochs = <span class="hljs-number">200</span>  <span class="hljs-comment"># 总训练轮数</span>
+
+<span class="hljs-keyword">for</span> epoch <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(num_epochs):
+    <span class="hljs-keyword">for</span> i, x <span class="hljs-keyword">in</span> <span class="hljs-built_in">enumerate</span>(x_input):
+        <span class="hljs-comment"># 前向传播</span>
+        y_pred = model(x)  <span class="hljs-comment"># 获取模型预测值</span>
+        
+        <span class="hljs-comment"># 计算损失</span>
+        loss = loss_fn(y_pred, y_output[i])  <span class="hljs-comment"># 比较预测值与真实值</span>
+        
+        <span class="hljs-comment"># 清除梯度缓存</span>
+        optimizer.zero_grad()  <span class="hljs-comment"># 清除之前的梯度信息</span>
+        
+        <span class="hljs-comment"># 反向传播</span>
+        loss.backward()  <span class="hljs-comment"># 计算当前参数的梯度</span>
+        
+        <span class="hljs-comment"># 参数更新</span>
+        optimizer.step()  <span class="hljs-comment"># 根据梯度更新模型参数</span>
+    
+    <span class="hljs-comment"># 每10轮打印一次训练进度</span>
+    <span class="hljs-keyword">if</span> (epoch+<span class="hljs-number">1</span>) % <span class="hljs-number">10</span> == <span class="hljs-number">0</span>:
+        <span class="hljs-built_in">print</span>(<span class="hljs-string">f&#x27;轮次 [<span class="hljs-subst">&#123;epoch+<span class="hljs-number">1</span>&#125;</span>/<span class="hljs-subst">&#123;num_epochs&#125;</span>], 损失: <span class="hljs-subst">&#123;loss.item():<span class="hljs-number">.4</span>f&#125;</span>&#x27;</span>)
+
+<span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;训练完成&quot;</span>)
+<span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;最终权重:&quot;</span>, model.w.detach().numpy())</code></pre></div>
+<p>输出如下：</p>
+<p>初始模型权重：</p>
+<div class="code-wrapper"><pre><code class="hljs subunit">初始权重: Parameter containing:
+tensor([<span class="hljs-string">-0</span>.3772, <span class="hljs-string">-1</span>.7161,  0.2819, <span class="hljs-string">-0</span>.4298, <span class="hljs-string">-0</span>.8599, <span class="hljs-string">-0</span>.2690, <span class="hljs-string">-0</span>.5375],</code></pre></div>
+<p>模型计算出的损失值和权重：</p>
+<div class="code-wrapper"><pre><code class="hljs inform7">轮次 <span class="hljs-comment">[10/200]</span>, 损失: 223.6982
+轮次 <span class="hljs-comment">[20/200]</span>, 损失: 3.3349
+轮次 <span class="hljs-comment">[30/200]</span>, 损失: 42.0250
+轮次 <span class="hljs-comment">[40/200]</span>, 损失: 41.3786
+轮次 <span class="hljs-comment">[50/200]</span>, 损失: 26.6852
+轮次 <span class="hljs-comment">[60/200]</span>, 损失: 14.8007
+轮次 <span class="hljs-comment">[70/200]</span>, 损失: 7.7069
+轮次 <span class="hljs-comment">[80/200]</span>, 损失: 3.9039
+轮次 <span class="hljs-comment">[90/200]</span>, 损失: 1.9543
+轮次 <span class="hljs-comment">[100/200]</span>, 损失: 0.9728
+轮次 <span class="hljs-comment">[110/200]</span>, 损失: 0.4838
+轮次 <span class="hljs-comment">[120/200]</span>, 损失: 0.2403
+轮次 <span class="hljs-comment">[130/200]</span>, 损失: 0.1195
+轮次 <span class="hljs-comment">[140/200]</span>, 损失: 0.0594
+轮次 <span class="hljs-comment">[150/200]</span>, 损失: 0.0295
+轮次 <span class="hljs-comment">[160/200]</span>, 损失: 0.0147
+轮次 <span class="hljs-comment">[170/200]</span>, 损失: 0.0073
+轮次 <span class="hljs-comment">[180/200]</span>, 损失: 0.0036
+轮次 <span class="hljs-comment">[190/200]</span>, 损失: 0.0018
+轮次 <span class="hljs-comment">[200/200]</span>, 损失: 0.0009
+训练完成
+最终权重: <span class="hljs-comment">[ 2.003787   3.0008602  3.9975853  6.9999294 10.997534   5.0006266</span>
+<span class="hljs-comment"> 12.999097 ]</span></code></pre></div>
+<p>我们代码中所定义的权重：</p>
+<div class="code-wrapper"><pre><code class="hljs apache"><span class="hljs-comment"># 定义真实的权重向量（训练目标）</span>
+<span class="hljs-attribute">w_list</span> = np.array([<span class="hljs-number">2</span>, <span class="hljs-number">3</span>, <span class="hljs-number">4</span>, <span class="hljs-number">7</span>, <span class="hljs-number">11</span>, <span class="hljs-number">5</span>, <span class="hljs-number">13</span>])</code></pre></div>
+<p>从中我们可以看到我们的模型最终计算出的权重值非常[2,3,4,7,11,5,13]，由此得出模型已成功训练并找到了正确的权重值！</p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/AI/" class="category-chain-item">AI</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/AI/" class="print-no-link">#AI</a>
+      
+        <a href="/tags/Deep-Learning/" class="print-no-link">#Deep Learning</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>深度学习：从头构建神经网络</div>
+      <div>https://fishcanf1y.github.io/2025/07/19/深度学习-从头构建神经网络/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>Author</div>
+          <div>fishcanf1y</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>Posted on</div>
+          <div>July 19, 2025</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>Licensed under</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - Attribution">
+                    <i class="iconfont icon-cc-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2025/07/19/What-is-Attention/" title="What is Attention?">
+                        <span class="hidden-mobile">What is Attention?</span>
+                        <span class="visible-mobile">Next</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+  
+  
+    <article id="comments" lazyload>
+      
+
+    </article>
+  
+
+
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>Table of Contents</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+  
+  
+
+
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">Keyword</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/5.0.0/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  
+      <script>
+        if (!window.MathJax) {
+          window.MathJax = {
+            tex    : {
+              inlineMath: { '[+]': [['$', '$']] }
+            },
+            loader : {
+              load: ['ui/lazy']
+            },
+            options: {
+              renderActions: {
+                insertedScript: [200, () => {
+                  document.querySelectorAll('mjx-container').forEach(node => {
+                    let target = node.parentNode;
+                    if (target.nodeName.toLowerCase() === 'li') {
+                      target.parentNode.classList.add('has-jax');
+                    }
+                  });
+                }, '', false]
+              }
+            }
+          };
+        } else {
+          MathJax.startup.document.state(0);
+          MathJax.texReset();
+          MathJax.typeset();
+          MathJax.typesetPromise();
+        }
+
+        Fluid.events.registerRefreshCallback(function() {
+          if ('MathJax' in window && MathJax.startup.document && typeof MathJax.startup.document.state === 'function') {
+            MathJax.startup.document.state(0);
+            MathJax.texReset();
+            MathJax.typeset();
+            MathJax.typesetPromise();
+          }
+        });
+      </script>
+    
+
+  <script  src="https://lib.baomitu.com/mathjax/3.2.2/es5/tex-mml-chtml.js" ></script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">Blog works best with JavaScript enabled</div>
+  </noscript>
+</body>
+</html>
